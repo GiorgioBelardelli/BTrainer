@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this -> call([
-            UserTableSeeder :: class,
             SpecializationTableSeeder :: class,
+            UserTableSeeder :: class,
         ]);
     }
 }

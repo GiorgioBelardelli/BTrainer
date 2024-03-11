@@ -19,15 +19,18 @@ class UserTableSeeder extends Seeder
     {
         // User:: factory()->count(10)->create();
 
+
+
         User :: factory()
-        -> count(10)
-        -> make()
+        -> count(20)
+        -> create()
         -> each(function($user) {
 
-            $specialization = Specialization :: inRandomOrder() -> first();
-            $user -> specializations() -> attach($specialization);
+            $specialization = Specialization::inRandomOrder()-> limit(rand(1,6)) ->first();
+            
+            $user -> specializations() -> attach($specialization->id);
     
-            $user -> save();
+            
         });
     }
 }
