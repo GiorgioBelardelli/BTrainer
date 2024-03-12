@@ -26,7 +26,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $users = User :: all();
+
+        return view('create', compact('users'));
     }
 
     /**
@@ -37,7 +39,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newUser = new User();
+
+        $newUser -> name = $data['name'];
+        $newUser -> surname = $data['surname'];
+        $newUser -> email = $data['email'];
+        $newUser -> work_address = $data['work_address'];
+        $newUser -> password = $data['password'];
+
+        $newUser ->save();
+
+        return redirect()->route('index');
     }
 
     /**
