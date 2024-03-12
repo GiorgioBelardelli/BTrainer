@@ -29,6 +29,7 @@
 
 header {
     position: fixed;
+    z-index: 100;
     width: 100%;
     background-color: rgba(0, 0, 0, .6);
     height: 120px;
