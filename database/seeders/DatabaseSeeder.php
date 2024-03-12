@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this -> call([
             SpecializationTableSeeder :: class,
             UserTableSeeder :: class,
+            ProfileTableSeeder :: class,
         ]);
     }
 }
