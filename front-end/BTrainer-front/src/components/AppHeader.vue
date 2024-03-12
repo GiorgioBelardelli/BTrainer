@@ -6,8 +6,8 @@
     
         <nav>
             <ul>
-                <a href=""><li>Home</li></a>
-                <a href=""><li>Test</li></a>
+                <router-link to="/"><li>Home</li></router-link>
+                <router-link to="/about"><li>About</li></router-link>
                 <a href=""><li>Test</li></a>
                 <a href=""><li>Test</li></a>
             </ul>
@@ -28,7 +28,9 @@
 @use '../styles/partials/variables' as *;
 
 header {
-    background-color: #000;
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .6);
     height: 120px;
     padding: 0 3rem;
     display: flex;
