@@ -7,63 +7,34 @@
         <div class="cards">
             <div class="card" id="double">
                 <img src="../assets/specializations/bb.png" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/bb.png" alt="">
-                </div>
+                <h2 class="slide-right">Bodybuilding</h2>
             </div>
             <div class="card">
                 <img src="../assets/specializations/crossfit.png" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/crossfit.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="../assets/specializations/cali.png" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/cali.png" alt="">
-                </div>
             </div>
             <div class="card" id="double">
                 <img src="../assets/specializations/hi-training.png" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/hi-training.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="https://picsum.photos/200/300?random=3" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/kick.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="https://picsum.photos/200/300?random=1" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/pd.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="https://picsum.photos/200/300?random=2" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/pilates.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="https://picsum.photos/200/300?random=3" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/pl.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="https://picsum.photos/200/300?random=2" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/post.png" alt="">
-                </div>
             </div>
             <div class="card">
                 <img src="https://picsum.photos/200/300?random=3" alt="">
-                <div class="logo">
-                    <img src="../assets/logos/specializations/yoga.png" alt="">
-                </div>
             </div>
         </div>
     </div>
@@ -83,6 +54,46 @@
         color: $yellow;
     }
 
+    h2 {
+        filter: grayscale(100%);
+        transition: filter 1s ease;
+        transition: transform 0.85s ease;
+        color: $yellow;
+        font-size: 2rem;
+        position: absolute;
+        bottom: 1rem;
+    }
+
+    @keyframes slide-right {
+        0% {
+            transform: translateX(-50%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+    @keyframes slide-right-exit {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .card {
+        &:hover {
+            h2 {
+                filter: grayscale(0%);
+                animation: slide-right 0.85s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            }
+        }
+
+        &:not(:hover) h2 {
+            animation: slide-right-exit 0.85s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+    }
+
     .cards {
         display: flex;
         flex-wrap: wrap;
@@ -98,33 +109,22 @@
             position: relative;
             width: calc((100% /3) - 2rem);
             margin: 0 1rem 2rem;
+            overflow: hidden;
 
             img {
                 width: 100%;
                 filter: grayscale(100%);
-                transition: filter 1s ease;
+                transition: filter 1s ease, transform 1s ease;
                 object-fit: cover;
-                border-radius: 10px;
             }
 
             &:hover {
                 cursor: pointer;
                 img {
                     filter: grayscale(0%);
+                    transform: scale(1.1);
                 }
             }
-            
-            .logo {
-                position: absolute;
-                border-radius: 50%;
-                z-index: 50;
-                bottom: 1rem;
-                left: 1rem;
-
-                img {
-                    width: 20%;
-                }
-            } 
         }
     }
 }
