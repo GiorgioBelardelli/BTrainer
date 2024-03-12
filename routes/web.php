@@ -14,7 +14,6 @@ Route :: post('/store', [UserController :: class, 'store']) -> name('user.store'
 
 Route::get('/users/{id}/edit', [UserController :: class, 'edit'])
 -> name('user.edit');
-
 Route::put('/users/{id}/edit', [UserController :: class, 'update'])
 -> name('user.update');
 
