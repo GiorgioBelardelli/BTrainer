@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('sponsorship_name');
-            $table->decimal('price');
+            $table->string('price');
             $table->string('duration');
 
             $table->timestamps();
