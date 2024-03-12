@@ -27,9 +27,9 @@ class UserTableSeeder extends Seeder
         -> each(function($user) {
 
             $specialization = Specialization::inRandomOrder()-> limit(rand(1,6)) ->first();
-            
+
             $user -> specializations() -> attach($specialization->id);
-      
+
         });
     }
 }
