@@ -1,10 +1,13 @@
 <script setup>
 import AppFooter from './components/AppFooter.vue';
 import AppHeader from './pages/AppHeader.vue';
+import AppTrainerGallery from './components/AppTrainerGallery.vue';
 </script>
 
 <template>
+    <AppTrainerGallery/>
     <AppFooter/>
+    
 </template>
 
 <style lang="scss">

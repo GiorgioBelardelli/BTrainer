@@ -1,18 +1,17 @@
 <script>
 
     export default {
-      name: "AppFooter",
+      name: "AppTrainerGallery",
     }
 </script>
 
 <template>
-  <h1>Sono AppFooter</h1>
+  <h1>Sono AppTrainerGallery</h1>
 </template>
 
 <style lang="scss" scoped>
     @use '../styles/partials/variables' as *;
-
     h1 {
-        color:$yellow
+        color:$grey
     };
 </style>
