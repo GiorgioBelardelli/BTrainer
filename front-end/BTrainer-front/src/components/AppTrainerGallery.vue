@@ -6,7 +6,9 @@
 </script>
 
 <template>
-  <h1>Sono AppTrainerGallery</h1>
+  <h2>
+    CHOOSE YOUR IDEAL PERSONAL TRAINER
+  </h2>
   <div class="container">
       <div class="row">
           <div class="col-gallery">
@@ -29,29 +31,95 @@
           </div>
           <div class="col-gallery">
               <div class="card-trainer">
-                  <img src="../assets/Trainer2.jpeg" alt="Trainer">
-              </div>
-          </div>
-          <div class="col-gallery">
-              <div class="card-trainer">
-                  <img src="../assets/Trainer 3.jpg" alt="Trainer">
-              </div>
-          </div>
-          <div class="col-gallery">
-              <div class="card-trainer">
+
                   <img src="../assets/Trainer 1.png" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
               </div>
           </div>
           <div class="col-gallery">
               <div class="card-trainer">
-                  <img src="../assets/Trainer2.jpeg" alt="Trainer">
+
+                  <img src="../assets/Trainer 1.png" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
               </div>
           </div>
           <div class="col-gallery">
               <div class="card-trainer">
-                  <img src="../assets/Trainer 3.jpg" alt="Trainer">
+
+                  <img src="../assets/Trainer 1.png" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
               </div>
           </div>
+          <div class="col-gallery">
+              <div class="card-trainer">
+
+                  <img src="../assets/Trainer 1.png" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-gallery">
+              <div class="card-trainer">
+
+                  <img src="../assets/Trainer 1.png" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+              </div>
+          </div>
+
       </div>
 
 
@@ -62,8 +130,12 @@
 <style lang="scss" scoped>
     @use '../styles/partials/variables' as *;
 
-    h1 {
-        color:$grey
+    h2 {
+        color:$grey;
+        font-size: 40px;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 25px;
     };
     .container {
       margin: auto;
