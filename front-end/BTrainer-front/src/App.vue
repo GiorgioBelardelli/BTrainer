@@ -6,6 +6,7 @@ import AppTrainerGallery from './components/AppTrainerGallery.vue';
 
 <template>
     <AppTrainerGallery/>
+    <AppHeader/>
     <AppFooter/>
     
 </template>
