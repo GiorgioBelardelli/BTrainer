@@ -4,6 +4,7 @@ import AppHeader from './pages/AppHeader.vue';
 </script>
 
 <template>
+    <AppHeader/>
     <AppFooter/>
 </template>
 
