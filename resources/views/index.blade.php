@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+<a href="{{route('user.create')}}">CREA USER</a>
+
 <ul>
         @foreach ($users as $user)
             <li>
