@@ -7,13 +7,16 @@ use App\Http\Controllers\UserController;
 Route::get('/', [UserController :: class, 'index'])
     -> name('index');
 
+Route::get('/users/{id}', [UserController :: class, 'show'])
+    -> name('user.show');
 Route :: get('/create', [UserController :: class, 'create']) -> name('user.create');
 Route :: post('/store', [UserController :: class, 'store']) -> name('user.store');
 
+Route::get('/users/{id}/edit', [UserController :: class, 'edit'])
+-> name('user.edit');
 
-
-
-
+Route::put('/users/{id}/edit', [UserController :: class, 'update'])
+-> name('user.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
