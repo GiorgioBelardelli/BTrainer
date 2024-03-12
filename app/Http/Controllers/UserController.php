@@ -48,7 +48,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User :: find($id);
+
+        return view('show', compact('user'));
     }
 
     /**
@@ -59,7 +61,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User :: find($id);
+
+        return view('edit', compact('user'));
     }
 
     /**
@@ -71,7 +75,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request -> all();
+
+        $user = User :: find($id);
+
+        $user -> name = $data['name'];
+        $user -> email = $data['email'];
+        $user -> work_address = $data['work_address'];
+
+        $user -> save();
+
+        return redirect() -> route('user.show', $user -> id);
     }
 
     /**
