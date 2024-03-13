@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::table('profile_specialization', function (Blueprint $table) {
 
-            $table -> foreignId('specialization_id') -> constrained();
             $table -> foreignId('profile_id') -> constrained();
+            $table -> foreignId('specialization_id') -> constrained();
         });
 
         Schema::table('profile_vote', function (Blueprint $table) {
 
-            $table -> foreignId('vote_id') -> constrained();
             $table -> foreignId('profile_id') -> constrained();
+            $table -> foreignId('vote_id') -> constrained();
         });
 
         Schema::table('profile_sponsorship', function (Blueprint $table) {
 
-            $table -> foreignId('sponsorship_id') -> constrained();
-            $table -> foreignId('profile_id') -> constrained();
+            $table -> foreignId('profile_id') -> constrained() ->nullable();
+            $table -> foreignId('sponsorship_id') -> constrained() ->nullable();
         });
 
         Schema::table('profiles', function (Blueprint $table) {
