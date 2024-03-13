@@ -25,7 +25,7 @@ class ProfileTableSeeder extends Seeder
 
                 if (rand(0, 1) == 1) { // Simulazione di probabilità del 50% di avere una sponsorship
                     $sponsorship = Sponsorship::inRandomOrder()->first();
-                    $profile->sponsorship()->associate($sponsorship->id);
+                    $profile->sponsorships()->attach($sponsorship->id);
                 }
 
                 $profile->save();
@@ -33,3 +33,16 @@ class ProfileTableSeeder extends Seeder
         });
     }
 }
+
+
+
+// User :: factory()
+//         -> count(20)
+//         -> create()
+//         -> each(function($user) {
+
+//             $specialization = Specialization::inRandomOrder()-> limit(rand(1,6)) ->first();
+
+//             $user -> specializations() -> attach($specialization->id);
+
+//         });

@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('specialization_user', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->id();
+
+            $table -> tinyInteger('value');
+
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specialization_user');
+        Schema::dropIfExists('votes');
     }
 };

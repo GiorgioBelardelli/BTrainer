@@ -21,6 +21,7 @@ class ProfileFactory extends Factory
             'photo' => 'https://picsum.photos/seed/picsum/200/300',
             'curriculum' => 'https://picsum.photos/seed/picsum/400/600',
             'plan_program' => fake() -> paragraph(2),
+            'work_address' => fake()-> streetAddress(),
         ];
     }
 }

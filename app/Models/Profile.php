@@ -17,11 +17,19 @@ class Profile extends Model
         return $this -> hasMany(Message::class);
     }
 
+    public function specializations(){
+        return $this -> belongsToMany(Specialization::class);
+    }
+
     public function reviews(){
         return $this -> hasMany(Review::class);
     }
 
-    public function sponsorship(){
-        return $this -> belongsTo(Sponsorship::class);
+    public function sponsorships(){
+        return $this -> belongsToMany(Sponsorship::class);
+    }
+
+    public function votes(){
+        return $this -> belongsToMany(Vote::class);
     }
 }

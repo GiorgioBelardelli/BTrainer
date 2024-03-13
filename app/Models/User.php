@@ -14,10 +14,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function specializations(){
-        return $this -> belongsToMany(Specialization::class);
-    }
-
     public function profile(){
         return $this -> hasOne(Profile::class);
     }
