@@ -32,7 +32,7 @@
           <div class="col-gallery">
               <div class="card-trainer">
 
-                  <img src="../assets/Trainer 1.png" alt="Trainer">
+                  <img src="../assets/Trainer2.jpeg" alt="Trainer">
 
                   <div class="caption">
                     <div class="name">King Arthur</div>
@@ -50,7 +50,7 @@
           <div class="col-gallery">
               <div class="card-trainer">
 
-                  <img src="../assets/Trainer 1.png" alt="Trainer">
+                  <img src="../assets/PTrainer3.webp" alt="Trainer">
 
                   <div class="caption">
                     <div class="name">King Arthur</div>
@@ -68,7 +68,7 @@
           <div class="col-gallery">
               <div class="card-trainer">
 
-                  <img src="../assets/Trainer 1.png" alt="Trainer">
+                  <img src="../assets/PTrainer4.webp" alt="Trainer">
 
                   <div class="caption">
                     <div class="name">King Arthur</div>
@@ -86,7 +86,7 @@
           <div class="col-gallery">
               <div class="card-trainer">
 
-                  <img src="../assets/Trainer 1.png" alt="Trainer">
+                  <img src="../assets/PTrainer5.jpeg" alt="Trainer">
 
                   <div class="caption">
                     <div class="name">King Arthur</div>
@@ -104,7 +104,7 @@
           <div class="col-gallery">
               <div class="card-trainer">
 
-                  <img src="../assets/Trainer 1.png" alt="Trainer">
+                  <img src="../assets/PTrainer6.webp" alt="Trainer">
 
                   <div class="caption">
                     <div class="name">King Arthur</div>
@@ -119,6 +119,79 @@
                   </div>
               </div>
           </div>
+          <div class="col-gallery">
+              <div class="card-trainer">
+
+                  <img src="../assets/PTrainer7.webp" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-gallery">
+              <div class="card-trainer">
+
+                  <img src="../assets/PTrainer8.webp" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-gallery">
+              <div class="card-trainer">
+
+                  <img src="../assets/PTrainer9.webp" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-gallery">
+              <div class="card-trainer">
+
+                  <img src="../assets/PTrainer10.jpeg" alt="Trainer">
+
+                  <div class="caption">
+                    <div class="name">King Arthur</div>
+                    <div class="title">Mundial Fight Champion</div>
+                    <div class="social">
+                      <i class="fa-brands fa-facebook"></i>
+                      <i class="fa-brands fa-instagram"></i>
+                      <i class="fa-brands fa-x-twitter"></i>
+                      <i class="fa-brands fa-tiktok"></i>
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+              </div>
+          </div>
+
 
       </div>
 
