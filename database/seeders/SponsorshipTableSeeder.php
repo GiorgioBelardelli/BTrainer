@@ -17,24 +17,21 @@ class SponsorshipTableSeeder extends Seeder
     {
         $sponsorshipList = [
             [
-                'sponsorship_name' =>'Lightning 24',
-                'price' => '$2,99',
-                'duration' => '24h',
-
+                'name' =>'Lightning 24',
+                'price' => 2.99,
+                'duration' => 24,
             ],
 
             [
-                'sponsorship_name' =>'72-Hour Marathon',
-                'price' =>'$5,99',
-                'duration' =>'72h',
-
+                'name' =>'72-Hour Marathon',
+                'price' =>5.99,
+                'duration' =>72,
             ],
 
             [
-                'sponsorship_name' =>'Epic 144',
-                'price' =>'$9,99',
-                'duration' =>'144h',
-
+                'name' =>'Epic 144',
+                'price' =>9.99,
+                'duration' =>144,
             ],
         ];
 

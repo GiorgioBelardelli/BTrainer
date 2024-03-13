@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('profile_vote', function (Blueprint $table) {
             $table->id();
-
-            $table->string('phone_number')->unique();
-            $table->string('photo');
-            $table->string('curriculum');
-            $table->string('plan_program');
-            $table->string('work_address');
-
             $table->timestamps();
         });
     }
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('profile_vote');
     }
 };

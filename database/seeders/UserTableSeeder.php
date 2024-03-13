@@ -17,19 +17,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // User:: factory()->count(10)->create();
-
-
-
-        User :: factory()
-        -> count(20)
-        -> create()
-        -> each(function($user) {
-
-            $specialization = Specialization::inRandomOrder()-> limit(rand(1,6)) ->first();
-
-            $user -> specializations() -> attach($specialization->id);
-
-        });
+        User:: factory()->count(10)->create();
     }
 }

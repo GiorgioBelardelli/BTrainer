@@ -18,34 +18,34 @@ class SpecializationTableSeeder extends Seeder
     {
         $specializationList = [
             [
-                'specialization_name'  => 'Bodybuilding'
+                'name'  => 'Bodybuilding'
             ],
             [
-                'specialization_name'  => 'Powerlifting'
+                'name'  => 'Powerlifting'
             ],
             [
-                'specialization_name'  => 'CrossFit'
+                'name'  => 'CrossFit'
             ],
             [
-                'specialization_name'  => 'Calistenica'
+                'name'  => 'Calistenica'
             ],
             [
-                'specialization_name'  => 'Yoga'
+                'name'  => 'Yoga'
             ],
             [
-                'specialization_name'  => 'Pilates'
+                'name'  => 'Pilates'
             ],
             [
-                'specialization_name'  => 'Kickboxing'
+                'name'  => 'Kickboxing'
             ],
             [
-                'specialization_name'  => 'High-Intensity Interval Training'
+                'name'  => 'High-Intensity Interval Training'
             ],
             [
-                'specialization_name'  => 'Recupero post-infortunio'
+                'name'  => 'Recupero post-infortunio'
             ],
             [
-                'specialization_name'  => 'Personal Defence'
+                'name'  => 'Personal Defence'
             ],
             
         ];
