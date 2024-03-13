@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sponsorships', function (Blueprint $table) {
             $table->id();
 
-            $table->string('sponsorship_name');
+            $table->string('name');
             $table->string('price');
             $table->string('duration');
 
