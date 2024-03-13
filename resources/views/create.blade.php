@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('user.store') }}" method="POST" class="container text-center">
+    <form action="{{ route('profile.store') }}" method="POST" class="container text-center">
 
         @csrf
         @method('POST')
@@ -9,21 +9,27 @@
         <div class="shadow-sm card w-50 mx-auto mt-4">
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="name" class="form-label"><strong>Nome Utente</strong></label>
-                    <input type="text" class="form-control" name="name" id="name"
-                        placeholder="Inserisci Nome User">
+                    <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
+                    <input type="text" class="form-control" name="phone_number" id="phone_number"
+                        placeholder="Inserisci phone_number">
                 </div>
 
                 <div class="mb-3">
-                    <label for="surname" class="form-label"><strong>Cognome Utente</strong></label>
-                    <input type="text" class="form-control" name="surname" id="surname"
-                        placeholder="Inserisci Cognome User">
+                    <label for="photo" class="form-label"><strong>Photo</strong></label>
+                    <input type="text" class="form-control" name="photo" id="photo"
+                        placeholder="Inserisci photo">
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label"><strong>Email Utente</strong></label>
-                    <input type="text" class="form-control" name="email" id="email"
-                        placeholder="Inserisci email User">
+                    <label for="curriculum" class="form-label"><strong>curriculum Utente</strong></label>
+                    <input type="text" class="form-control" name="curriculum" id="curriculum"
+                        placeholder="Inserisci curriculum">
+                </div>
+
+                <div class="mb-3">
+                    <label for="plan_program" class="form-label"><strong>plan_program</strong></label>
+                    <input type="text" class="form-control" name="plan_program" id="plan_program"
+                        placeholder="Inserisci plan_program User">
                 </div>
 
                 <div class="mb-3">
@@ -32,11 +38,6 @@
                         placeholder="Inserisci Work Address User">
                 </div>
 
-                <div class="mb-3">
-                    <label for="password" class="form-label"><strong>Password Utente</strong></label>
-                    <input type="text" class="form-control" name="password" id="password"
-                        placeholder="Inserisci password User">
-                </div>
             </div>
         </div>
 

@@ -2,17 +2,17 @@
 
 @section('content')
 
-<a href="{{route('user.create')}}">CREA USER</a>
+<a href="{{route('profile.create')}}">CREA PROFILE</a>
 
 <div class="container">
-    <h1>Users:</h1>
+    <h1>Profiles:</h1>
 <ul>
-        @foreach ($users as $user)
+        @foreach ($profiles as $profile)
             <li>
-                <a href="{{ route('user.show', $user -> id) }}">
-                {{ $user -> name}}
+                <a href="{{ route('profile.show', $profile -> id) }}">
+                {{ $profile ->user -> name}}
                 </a>
-                <a href="{{ route('user.edit', $user -> id) }}">Edit</a>
+                <a href="{{ route('profile.edit', $profile -> id) }}">Edit</a>
             </li>
         @endforeach
     </ul>
