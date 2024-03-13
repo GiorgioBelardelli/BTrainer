@@ -16,7 +16,7 @@ class MessageTableSeeder extends Seeder
      */
     public function run()
     {
-        Message :: factory() -> count(10) -> make()
+        Message :: factory() -> count(20) -> make()
         ->each(function($message){
             $profile = Profile :: inRandomOrder() -> first();
             $message -> profile() -> associate($profile -> id);

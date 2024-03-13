@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             SpecializationTableSeeder :: class,
             UserTableSeeder :: class,
             SponsorshipTableSeeder :: class,
+            VoteTableSeeder :: class,
             ProfileTableSeeder :: class,
             ReviewTableSeeder :: class,
             MessageTableSeeder :: class,

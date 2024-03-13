@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('profile_sponsorship', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('name');
-            $table->string('surname');
-            $table->dateTime('date');
-            $table->string('content');
-            $table->string('email');
 
+            $table->timestamp('expire_date')->nullable();
+            
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('profile_sponsorship');
     }
 };

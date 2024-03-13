@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('photo');
             $table->string('curriculum');
             $table->string('plan_program');
+            $table->string('work_address');
 
             $table->timestamps();
         });

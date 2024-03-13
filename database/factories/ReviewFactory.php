@@ -19,8 +19,8 @@ class ReviewFactory extends Factory
         return [
             'name' => fake() -> name(),
             'surname' => fake() -> name(), //da fixare con il cognome
-            'review_date' => fake() -> date(),
-            'review_content' => fake() -> sentence(),
+            'date' => fake() -> dateTime(),
+            'content' => fake() -> sentence(),
             'vote' => fake() -> numberBetween(1, 5),
         ];
     }

@@ -1,29 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Edit: </h1>
-    <form method="POST">
+    <div class="container">
+        <h1>Edit: </h1>
+        <form method="POST">
 
-        @csrf
-        @method("PUT")
+            @csrf
+            @method('PUT')
 
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name"
-        value="{{ $user -> name }}">
-        <br>
+            <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
+            <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{$profile -> phone_number}}">
+            <br>
 
-        <label for="name">Email</label>
-        <input type="text" name="email" id="email"
-        value="{{ $user -> email }}">
-        <br>
+            <label for="photo">photo</label>
+            <input type="text" name="photo" id="photo" value="{{ $profile->photo }}">
+            <br>
 
-        <label for="name">Work Address</label>
-        <input type="text" name="work_address" id="work_address"
-        value="{{ $user -> work_address }}">
-        <br>
+            <label for="curriculum">curriculum</label>
+            <input type="text" name="curriculum" id="curriculum" value="{{ $profile->curriculum }}">
+            <br>
 
-        <input type="submit" value="Update">
-    </form>
-</div>
+            <label for="plan_program">plan_program</label>
+            <input type="text" name="plan_program" id="plan_program" value="{{ $profile->plan_program }}">
+            <br>
+
+            <label for="work_address">Work Address</label>
+            <input type="text" name="work_address" id="work_address" value="{{ $profile->work_address }}">
+            <br>
+
+            <input type="submit" value="Update">
+        </form>
+    </div>
 @endsection

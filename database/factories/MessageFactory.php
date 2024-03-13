@@ -19,8 +19,8 @@ class MessageFactory extends Factory
         return [
         'name'=> fake()->name(),
         'surname'=> fake()->name(), // da fixare con cognome
-        'message_date'=> fake()-> date(),
-        'message_content'=> fake()-> paragraph(),
+        'date'=> fake()-> date(),
+        'content'=> fake()-> paragraph(),
         'email'=> fake()->email(),
         ];
     }

@@ -13,14 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('specialization_user', function (Blueprint $table) {
+        Schema::table('profile_specialization', function (Blueprint $table) {
 
+            $table -> foreignId('profile_id') -> constrained();
             $table -> foreignId('specialization_id') -> constrained();
-            $table -> foreignId('user_id') -> constrained();
+        });
+
+        Schema::table('profile_vote', function (Blueprint $table) {
+
+            $table -> foreignId('profile_id') -> constrained();
+            $table -> foreignId('vote_id') -> constrained();
+        });
+
+        Schema::table('profile_sponsorship', function (Blueprint $table) {
+
+            $table -> foreignId('profile_id') -> constrained() ->nullable();
+            $table -> foreignId('sponsorship_id') -> constrained() ->nullable();
         });
 
         Schema::table('profiles', function (Blueprint $table) {
-            $table->foreignId('sponsorship_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
         });
 
@@ -40,20 +51,36 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('specialization_user', function (Blueprint $table) {
+        Schema::table('profile_specialization', function (Blueprint $table) {
 
             $table->dropForeign(['specialization_id']);
             $table -> dropColumn(['specialization_id']);
 
-            $table -> dropForeign(['user_id']);
-            $table -> dropColumn(['user_id']);
+            $table -> dropForeign(['profile_id']);
+            $table -> dropColumn(['profile_id']);
+        });
+
+        Schema::table('profile_sponsorship', function (Blueprint $table) {
+
+            $table->dropForeign(['sponsorship_id']);
+            $table -> dropColumn(['sponsorship_id']);
+
+            $table -> dropForeign(['profile_id']);
+            $table -> dropColumn(['profile_id']);
+        });
+
+        Schema::table('profile_vote', function (Blueprint $table) {
+
+            $table->dropForeign(['vote_id']);
+            $table -> dropColumn(['vote_id']);
+
+            $table -> dropForeign(['profile_id']);
+            $table -> dropColumn(['profile_id']);
         });
 
         Schema::table('profiles', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn(['user_id']);
-            $table->dropForeign(['sponsorship_id']);
-            $table->dropColumn(['sponsorship_id']);
         });
 
         Schema::table('messages', function (Blueprint $table) {
