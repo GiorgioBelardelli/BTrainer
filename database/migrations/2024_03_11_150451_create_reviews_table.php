@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('surname');
-            $table->dateTime('review_date');
-            $table->string('review_content');
+            $table->dateTime('date');
+            $table->string('content');
             $table->tinyInteger('vote');
 
             $table->timestamps();
