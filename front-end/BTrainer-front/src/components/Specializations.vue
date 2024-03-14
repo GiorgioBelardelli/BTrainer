@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="container">
+    <section id="specializations">
         <h1>Specializations</h1>
         <div class="cards">
             <div class="card" id="double">
@@ -11,47 +11,59 @@
             </div>
             <div class="card">
                 <img src="../assets/specializations/crossfit.png" alt="">
+                <h2 class="slide-right">Calisthenics</h2>
             </div>
             <div class="card">
                 <img src="../assets/specializations/cali.png" alt="">
+                <h2 class="slide-right">CrossFit</h2>
             </div>
             <div class="card" id="double">
                 <img src="../assets/specializations/hi-training.png" alt="">
+                <h2 class="slide-right">High-Intensity Interval Training</h2>
+            </div>
+            <div class="card" id="double">
+                <img src="../assets/specializations/pl.png" alt="">
+                <h2 class="slide-right">PowerLifting</h2>
             </div>
             <div class="card">
-                <img src="https://picsum.photos/200/300?random=3" alt="">
+                <img src="../assets/specializations/yoga.png" alt="">
+                <h2 class="slide-right">Yoga</h2>
             </div>
             <div class="card">
-                <img src="https://picsum.photos/200/300?random=1" alt="">
+                <img src="../assets/specializations/post.png" alt="">
+                <h2 class="slide-right">Recupero post-infortunio</h2>
+            </div>
+            <div class="card" id="double">
+                <img src="../assets/specializations/kick.png" alt="">
+                <h2 class="slide-right">Kickboxing</h2>
+            </div>
+            <div class="card" id="double">
+                <img src="../assets/specializations/pilates.png" alt="">
+                <h2 class="slide-right">Pilates</h2>
             </div>
             <div class="card">
-                <img src="https://picsum.photos/200/300?random=2" alt="">
-            </div>
-            <div class="card">
-                <img src="https://picsum.photos/200/300?random=3" alt="">
-            </div>
-            <div class="card">
-                <img src="https://picsum.photos/200/300?random=2" alt="">
-            </div>
-            <div class="card">
-                <img src="https://picsum.photos/200/300?random=3" alt="">
+                <img src="../assets/specializations/personal.png" alt="">
+                <h2 class="slide-right">Personal Defence</h2>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
 @use '../styles/partials/mixins' as *;
 @use '../styles/partials/variables' as *;
 
-.container {
-    width: 80%;
-    margin: 0 auto;
+#specializations {
+    padding: 0 10%;
+    margin: 5rem auto 0;
+    background-color: rgb(37, 37, 37);
 
     h1 {
         text-align: center;
-        margin-bottom: 3rem;
+        padding-top: 5rem;
+        margin: 3rem;
         color: $yellow;
+        font-size: 40px;
     }
 
     h2 {

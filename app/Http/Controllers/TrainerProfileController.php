@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\TrainerProfileFormRequest;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
@@ -38,12 +40,14 @@ class TrainerProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TrainerProfileFormRequest $request)
     {
         $data = $request->all();
 
         $user = auth()->user();
         $newProfile = new Profile();
+
+        $user = Auth:: user()->id;
 
         $newProfile->phone_number = $data['phone_number'];
         $newProfile->photo = $data['photo'];
@@ -91,7 +95,7 @@ class TrainerProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TrainerProfileFormRequest $request, $id)
     {
         $data = $request->all();
 
@@ -116,6 +120,18 @@ class TrainerProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $profile = Profile :: find($id);
+
+        $profile ->messages() ->delete();
+        $profile ->reviews() ->delete();
+
+
+        $profile ->specializations() ->detach();
+        $profile ->sponsorships() ->detach();
+        $profile ->votes() ->detach();
+
+        $profile->delete();
+
+        return redirect()->route('index');
     }
 }
