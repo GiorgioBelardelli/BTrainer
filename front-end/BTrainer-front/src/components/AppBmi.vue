@@ -76,7 +76,7 @@ export default {
             h2 {
             font-size: 30px;
             text-align: center;
-            color: $yellow;
+            color: black;
         }
         }
 
