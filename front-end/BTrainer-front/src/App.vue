@@ -7,7 +7,6 @@ import AppBmi from './components/AppBmi.vue';
 <template>
     <AppHeader/>
     <router-view></router-view>
-    <AppBmi/>
     <AppFooter/>
 </template>
 
