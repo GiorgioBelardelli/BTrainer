@@ -116,6 +116,18 @@ class TrainerProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $profile = Profile :: find($id);
+
+        $profile ->messages() ->delete();
+        $profile ->reviews() ->delete();
+
+
+        $profile ->specializations() ->detach();
+        $profile ->sponsorships() ->detach();
+        $profile ->votes() ->detach();
+
+        $profile->delete();
+
+        return redirect()->route('index');
     }
 }
