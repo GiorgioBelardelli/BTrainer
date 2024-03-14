@@ -27,10 +27,10 @@ class ProfileTableSeeder extends Seeder
                 
                 $profile->save();
                 
-                if (rand(0, 1) == 1) { // Simulazione di probabilità del 50% di avere una sponsorship
-                    $sponsorship = Sponsorship::inRandomOrder()->first();
-                    $profile->sponsorships()->attach($sponsorship->id);
-                }
+                // if (rand(0, 1) == 1) { // Simulazione di probabilità del 50% di avere una sponsorship
+                //     $sponsorship = Sponsorship::inRandomOrder()->first();
+                //     $profile->sponsorships()->attach($sponsorship->id);
+                // }
 
                 $specializations = Specialization::inRandomOrder() -> take(rand(1, 4))->get();
                 foreach ($specializations as $specialization) {
