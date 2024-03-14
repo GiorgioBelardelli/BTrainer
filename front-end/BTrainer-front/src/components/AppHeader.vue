@@ -14,8 +14,14 @@
         </nav>
     
         <div class="header-icons">
-            <a href=""><i class="fa-regular fa-user"></i></a>
-            <a href=""><i class="fa-solid fa-plus"></i></a>
+            <a href="http://127.0.0.1:8000/login"><i class="fa-regular fa-user">
+
+            </i>
+            Login
+            </a>
+            <a href="http://127.0.0.1:8000/register"><i class="fa-solid fa-plus"></i>
+            Sign in
+            </a>
         </div>
     </header>
 </template>

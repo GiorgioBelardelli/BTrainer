@@ -89,3 +89,12 @@
     </div>
 </div>
 @endsection
+
+<style lang=scss scoped>
+
+    /* * {
+        background-color: black;
+        color: $grey;
+    } */
+
+</style>
