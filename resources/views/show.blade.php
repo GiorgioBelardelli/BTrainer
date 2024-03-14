@@ -5,7 +5,7 @@
         <h1>Name:
             {{ $profile->user->name }}
 
-            {{ $profile->user->surname }}
+            {{-- {{ $profile->user->surname }} --}}
         </h1>
         <p>
             Numero Cellulare:
@@ -17,7 +17,7 @@
         </p>
         <p>
             Foto:
-            {{ $profile->photo }}
+            <img src="/img/{{ $profile->photo }}" alt="" width="200px">
         </p>
         <p>
             Indirizzo di lavoro:
@@ -26,7 +26,7 @@
 
         <p>
             CV:
-            {{ $profile->curriculum }}
+            <img src="{{ $profile->curriculum }}" alt="" width="200px">
         </p>
     </div>
 @endsection
