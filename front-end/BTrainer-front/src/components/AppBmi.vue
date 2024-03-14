@@ -2,12 +2,27 @@
 export default {
     name: "AppBmi",
 
+    data() {
+        return {
+            height: '',
+            weight: '',
+            bmi: '', 
+            valutation: '',
+        };
+    },
+
     methods: {
-        calcBmi(height, weight) {
-            const bmi = weight / ((height / 100) * (height / 100));
-            console.log(bmi);
-            return bmi;
+        calcBmi() {
+            const height = parseFloat(this.height);
+            const weight = parseFloat(this.weight);
+            this.bmi = weight / ((height / 100) * (height / 100)); 
+            console.log(this.bmi);
         },
+        // calcValutation () {
+        //     if (this.bmi < 18.5 valutation = "SOTTOPESO"),
+        //     if else (this.bmi < 18.5 valutation = "NORMOPESO"),
+        //     if else
+        // },
     }, 
 }
 </script>
@@ -15,13 +30,17 @@ export default {
 <template>
     <section id="bmi">
         <h2>Calculate your BMI!</h2>
-        <form action="get">
-            <input type="number" name="heigth" id="heigth" placeholder="Enter your height (cm)" >
-            <input type="number" name="weight" id="weigth" placeholder="Enter your weight (Kg)">
+
+        <form @submit.prevent="calcBmi"> 
+            <input type="number" v-model="height" name="height" id="height" placeholder="Enter your height (cm)" >
+            <input type="number" v-model="weight" name="weight" id="weight" placeholder="Enter your weight (Kg)">
             <input type="submit" value="CALC">
         </form>
-        <span>Il tuo Bmi è: </span>
-        <span class="message"></span>
+        <div class="result">
+            <h5>Il tuo Bmi è: </h5>
+            <div class="message">{{ bmi }}</div> 
+        </div>
+
     </section>
 </template>
 
@@ -41,14 +60,31 @@ export default {
         }
         form {
             margin: auto;
+            padding: 30px;
             display: flex;
             justify-content: center;
 
 
             input {
-                flex-basis: 30%;
+                flex-basis: 15%;
             }
 
+        }
+        .result {
+            margin: auto;
+            padding-top: 50px;
+
+            h5 {
+                text-align: center;
+                font-size: 45px;
+            }   
+
+            .message {
+                font-size: 55px;
+                text-align: center;
+                font-style: bold;
+                padding-top: 15px;
+            }
         }
     }
 

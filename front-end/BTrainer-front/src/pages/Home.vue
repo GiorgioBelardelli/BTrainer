@@ -8,8 +8,8 @@ export default {
   components: {
     Jumbo,
     AppTrainerGallery,
+    Specializations,
     AppBmi,
-    Specializations
   }
 }
 </script>
@@ -17,6 +17,6 @@ export default {
 <template>
     <Jumbo/>
     <AppTrainerGallery/>
-    <AppBmi/>
     <Specializations/>
+    <AppBmi/>
 </template>
