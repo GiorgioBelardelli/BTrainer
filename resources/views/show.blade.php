@@ -5,7 +5,7 @@
         <h1>Name:
             {{ $profile->user->name }}
 
-            {{-- {{ $profile->user->surname }} --}}
+            {{ $profile->user->surname }}
         </h1>
         <p>
             Numero Cellulare:

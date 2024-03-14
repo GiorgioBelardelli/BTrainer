@@ -10,6 +10,7 @@
                 <li>
                     <a href="{{ route('profile.show', $profile->id) }}">
                         {{ $profile->user->name }}
+                        {{ $profile->user->surname }}
                     </a>
                     @auth
                         @if (Auth::user()->id === $profile->user_id)
