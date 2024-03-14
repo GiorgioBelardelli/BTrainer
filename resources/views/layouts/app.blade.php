@@ -23,7 +23,7 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
 
@@ -38,10 +38,12 @@
                     {{-- Sostituiamo il logo Laravel con quello di BTrainer --}}
 
                     <div class="logo">
-                        <a href="">
-                            <img src="" alt="Logo B-Trainer">
-                        </a>
+                        
+                        <img src="{{ asset('img/header.svg') }}" alt="">
+                            
                     </div>
+
+
 
 
                     {{-- config('app.name', 'Laravel') --}}
@@ -103,3 +105,26 @@
 </body>
 
 </html>
+
+<style lang=scss scoped>
+    * {
+        background-color: black;
+        color: white;
+        padding: 0;
+
+        .logo {
+            img {
+                width:100px;
+            }
+        }
+
+        .navbar {
+            color: white;
+            padding: 0;
+            margin: 0;
+        }
+        .card-header {
+            background-color: black;
+        }
+    }
+</style>
