@@ -54,13 +54,16 @@
 @use '../styles/partials/variables' as *;
 
 #specializations {
-    width: 80%;
+    padding: 0 10%;
     margin: 5rem auto 0;
+    background-color: rgb(37, 37, 37);
 
     h1 {
         text-align: center;
-        margin-bottom: 3rem;
+        padding-top: 5rem;
+        margin: 3rem;
         color: $yellow;
+        font-size: 40px;
     }
 
     h2 {
