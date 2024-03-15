@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('profile.create') }}" class="btn btn-primary mb-3">CREATE PROFILE</a>
+    <a href="{{ route('profile.create') }}" class="btn mb-3">CREA PROFILO</a>
 
     <h1>Profiles:</h1>
     <ul class="list-group">
@@ -30,3 +30,32 @@
     </ul>
 </div>
 @endsection
+
+<style lang=scss scoped>
+
+    .list-group {
+        .list-group-item {
+        background-color: black;
+        padding-bottom: 0;
+    }
+    }
+    .container {
+        margin-bottom: 50px;
+    }
+    .container .btn {
+            color:black;
+            background-color: yellow;
+            margin-top: 25px;
+        }
+
+    .container .btn:hover {
+        transform:scale(1.1);
+        color:black;
+        background-color: yellow;
+    }
+    ul li div a {
+        color: yellow;
+    }
+
+
+</style>
