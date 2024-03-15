@@ -11,6 +11,7 @@
     </ul>
 </div>
 @endif
+
 <form action="{{ route('profile.store') }}" method="POST" class="container text-center" enctype="multipart/form-data">
 
     @csrf
@@ -47,12 +48,10 @@
                 <b>Specializzazioni:</b>
                 <div class="row">
                     @foreach ($specializations as $specialization)
-                        <div class="col-md-6 text-start">
-                            <input type="checkbox"
-                                   name="specialization_id[]" 
-                                   value="{{ $specialization->id }}">
-                            <label class="checkbox-inline" id="spec-white"> {{ $specialization->name }} </label>
-                        </div>
+                    <div class="col-md-6 text-start">
+                        <input type="checkbox" name="specialization_id[]" value="{{ $specialization->id }}">
+                        <label class="checkbox-inline"> {{ $specialization->name }}</label>
+                    </div>
                     @endforeach
                 </div>
             </div>

@@ -74,7 +74,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="pad-zero">
                                 <a class="dropdown-item" href="{{ url('dashboard') }}">{{__('Dashboard')}}</a>
-                                <a class="dropdown-item" href="{{ url('profile') }}">{{__('Profilo')}}</a>
+                                <a class="dropdown-item" href="{{ url('profile') }}" onclick="event.preventDefault();">{{__('Il tuo profilo')}}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Esci') }}
@@ -101,19 +101,19 @@
 
 <style lang=scss scoped>
     * {
-        background-color: black;
+        background-color: grey;
         color: rgb(0, 0, 0);
         padding: 0;
 
         .logo {
             img {
-                width:100px;
-                margin-top:20px;
+                width: 100px;
+                margin-top: 20px;
             }
         }
 
         .navbar-nav li a {
-            color:white;
+            color: white;
         }
 
         .navbar {
@@ -121,6 +121,7 @@
             padding: 0;
             margin: 0;
         }
+
         .navbar-nav li a {
             background-color: black;
 

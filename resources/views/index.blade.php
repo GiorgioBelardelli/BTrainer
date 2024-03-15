@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('profile.create') }}" class="btn mb-3">CREA PROFILO</a>
+    {{-- <a href="{{ route('profile.create') }}" class="btn mb-3">CREA PROFILO</a> --}}
 
     <h1>Profiles:</h1>
     <ul class="list-group">
@@ -23,6 +23,7 @@
                     </form>
                 </div>
                 @endif
+
                 @endauth
             </div>
         </li>
