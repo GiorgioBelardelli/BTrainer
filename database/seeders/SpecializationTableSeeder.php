@@ -45,7 +45,7 @@ class SpecializationTableSeeder extends Seeder
                 'name'  => 'Recupero post-infortunio'
             ],
             [
-                'name'  => 'Personal Defence'
+                'name'  => 'Difesa Personale'
             ],
             
         ];

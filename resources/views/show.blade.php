@@ -8,7 +8,7 @@
                         @if(file_exists(public_path('/img/' . $profile->photo)))
                             <img src="/img/{{ $profile->photo }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
                         @else
-                            <img src="{{ asset('storage/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
+                            <img src="{{ asset('storage/app/public/images' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
                         @endif
                         <div class="card-body col-6 mx-auto">
                         <h1 class="card-title">
