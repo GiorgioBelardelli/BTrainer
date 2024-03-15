@@ -1,40 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('profile.create') }}">CREA PROFILE</a>
+<div class="container">
+    <a href="{{ route('profile.create') }}" class="btn btn-primary mb-3">CREATE PROFILE</a>
 
-    <div class="container">
-        <h1>Profiles:</h1>
-        <ul>
-            @foreach ($profiles as $profile)
-                <li>
-                    <a href="{{ route('profile.show', $profile->id) }}">
-                        {{ $profile->user->name }}
-                        {{ $profile->user->surname }}
-                    </a>
-                    @auth
-                        @if (Auth::user()->id === $profile->user_id)
-                                <form action="{{ route('profile.destroy', $profile->id) }}" method="POST">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <input type="submit" value="Cancella Profilo" class="btn btn-danger mt-2">
-                                </form>
-
-                                <a class="btn btn-warning mt-2" href="{{ route('profile.edit', $profile->id) }}">Modifica Profilo</a>
-                        @endif
-                    @endauth
-                    <!-- <a href="{{ route('profile.edit', $profile->id) }}">Edit</a>
-
+    <h1>Profiles:</h1>
+    <ul class="list-group">
+        @foreach ($profiles as $profile)
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ route('profile.show', $profile->id) }}">
+                    {{ $profile->user->name }} {{ $profile->user->surname }}
+                </a>
+                @auth
+                @if (Auth::user()->id === $profile->user_id)
+                <div class="btn-group" role="group">
+                    <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-warning me-3">Modifica Profilo</a>
                     <form action="{{ route('profile.destroy', $profile->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" value="DELETE">
-                    </form> -->
-
-                </li>
-            @endforeach
-        </ul>
-    </div>
+                        <button type="submit" class="btn btn-danger ">Cancella Profilo</button>
+                    </form>
+                </div>
+                @endif
+                @endauth
+            </div>
+        </li>
+        @endforeach
+    </ul>
+</div>
 @endsection

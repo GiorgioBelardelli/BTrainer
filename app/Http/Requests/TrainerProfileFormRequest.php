@@ -24,11 +24,11 @@ class TrainerProfileFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone_number' => 'required|string|min:9|max:16',
-            'photo' => 'required|string|min:2|max:32',
-            'curriculum' => 'required|string|min:2|max:32',
+            'phone_number' => 'required|min:8|max:32',
+            'photo' => 'required|min:1',
+            'curriculum' => 'required|min:1',
             'plan_program' => 'required|string|min:32|max:255',
-            'work_address' => 'required|string|min:8|max:32',
+            'work_address' => 'required|string|min:4|max:32',
         ];
     }
 
@@ -36,29 +36,26 @@ class TrainerProfileFormRequest extends FormRequest
     {
         return [
             'phone_number.required' => 'Il numero di telefono non può essere vuoto',
-            'phone_number.string' => 'Il numero di telefono  deve essere una stringa',
-            'phone_number.min' => 'Il numero di telefono  deve avere almeno 9 caratteri',
-            'phone_number.max' => 'Il numero di telefono deve avere massimo 16 caratteri',
+            'phone_number.min' => 'Il numero di telefono deve avere almeno 8 caratteri',
+            'phone_number.max' => 'Il numero di telefono deve avere massimo 32 caratteri',
 
-            'photo.required' => 'La foto non può essere vuota',
-            'photo.string' => 'La foto  deve essere una stringa',
-            'photo.min' => 'La foto  deve avere almeno 2 caratteri',
-            'photo.max' => 'La foto deve avere massimo 32 caratteri',
+            'photo.required' => 'Il campo foto non può essere vuoto',
+            'photo.string' => 'Il nome della foto caricata non può contenere solo numeri',
+            'photo.min' => 'Il nome della foto caricata deve avere almeno 1 caratteri',
 
-            'curriculum.required' => 'Il curriculum non può essere vuoto',
-            'curriculum.string' => 'Il curriculum deve essere una stringa',
-            'curriculum.min' => 'Il curriculum deve avere almeno 2 caratteri',
-            'curriculum.max' => 'Il curriculum deve avere massimo 32 caratteri',
+            'curriculum.required' => 'Il campo curriculum non può essere vuoto',
+            'curriculum.string' => 'Il nome del curriculum caricato non può contenere solo numeri',
+            'curriculum.min' => 'Il nome del curriculum caricato deve avere almeno 1 carattere',
 
-            'plan_program.required' => 'Il programma non può essere vuoto',
-            'plan_program.string' => 'Il programma deve essere una stringa',
+            'plan_program.required' => 'Il campo programma non può essere vuoto',
+            'plan_program.string' => 'Il programma non può contenere solo numeri',
             'plan_program.min' => 'Il programma deve avere almeno 32 caratteri',
             'plan_program.max' => 'Il programma deve avere massimo 255 caratteri',
 
-            'work_address.required' => "L' indirizzo non può essere vuoto",
-            'work_address.string' => "L' indirizzo deve essere una stringa",
-            'work_address.min' => "L' indirizzo deve avere almeno 8 caratteri",
-            'work_address.max' => "L' indirizzo deve avere massimo 32 caratteri",
+            'work_address.required' => "Il campo indirizzo non può essere vuoto",
+            'work_address.string' => "L'indirizzo non può contenere solo numeri",
+            'work_address.min' => "L'indirizzo deve avere almeno 4 caratteri",
+            'work_address.max' => "L'indirizzo deve avere massimo 32 caratteri",
         ];
     }
 }

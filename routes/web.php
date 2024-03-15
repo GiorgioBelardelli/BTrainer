@@ -23,13 +23,20 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/create', [TrainerProfileController::class, 'create'])->name('profile.create');
-    Route::post('/store', [TrainerProfileController::class, 'store'])->name('profile.store');
+    Route::get('/create', [TrainerProfileController::class, 'create'])
+        ->name('profile.create');
+
+    Route::post('/store', [TrainerProfileController::class, 'store'])
+        ->name('profile.store');
+
     Route::get('/profile/{id}/edit', [TrainerProfileController::class, 'edit'])
         ->name('profile.edit');
+
     Route::put('/profile/{id}/edit', [TrainerProfileController::class, 'update'])
         ->name('profile.update');
-    Route::delete('/profile/{id}', [TrainerProfileController::class, 'destroy'])->name('profile.destroy');
+        
+    Route::delete('/profile/{id}', [TrainerProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

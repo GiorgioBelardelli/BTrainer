@@ -12,34 +12,62 @@
         </ul>
     </div>
     @endif
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
 
+            <div class="shadow-sm card w-50 mx-auto mt-4">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
+                <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{$profile->phone_number}}">
+            </div>
 
+            <div class="mb-3">
+                <label for="photo" class="form-label"><strong>Photo</strong></label>
+                <input type="file" class="form-control" name="photo" id="photo" value="{{ $profile->photo }}" accept="image/*">
+            </div>
 
-        <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
-        <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{$profile->phone_number}}">
-        <br>
+            <div class="mb-3">
+                <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
+                <input type="file" class="form-control" name="curriculum" id="curriculum" value="{{ $profile->curriculum }}">
+            </div>
 
-        <label for="photo">photo</label>
-        <input type="text" name="photo" id="photo" value="{{ $profile->photo }}">
-        <br>
+            <div class="mb-3">
+                <label for="plan_program" class="form-label"><strong>Plan Program</strong></label>
+                <textarea class="form-control" name="plan_program" id="plan_program">{{ $profile->plan_program }}</textarea>
+            </div>                      
 
-        <label for="curriculum">curriculum</label>
-        <input type="text" name="curriculum" id="curriculum" value="{{ $profile->curriculum }}">
-        <br>
+            <div class="mb-3">
+                <label for="work_address" class="form-label"><strong>Work Address</strong></label>
+                <input type="text" class="form-control" name="work_address" id="work_address" value="{{ $profile->work_address }}">
+            </div>
 
-        <label for="plan_program">plan_program</label>
-        <input type="text" name="plan_program" id="plan_program" value="{{ $profile->plan_program }}">
-        <br>
+            <div class="techno mb-3">
+                <h5>Specializations:</h5>
+                <div class="row">
+                    @foreach ($specializations as $specialization)
+                        <div class="col-md-6">
+                            <input 
+                                type="checkbox" 
+                                name="specialization_id[]" 
+                                value="{{ $specialization->id }}"
+                                @foreach ($profile->specializations as $profile_specialization)
+                                    @if ($specialization->id == $profile_specialization->id)
+                                        checked
+                                    @endif
+                                @endforeach
+                            >
+                            <label class="checkbox-inline"> {{ $specialization->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <input class="my-1 btn btn-success mt-4 mx-auto" type="submit" value="Update">
+        </div>
+    </div>
 
-        <label for="work_address">Work Address</label>
-        <input type="text" name="work_address" id="work_address" value="{{ $profile->work_address }}">
-        <br>
-
-        <input type="submit" value="Update">
     </form>
 </div>
 @endsection

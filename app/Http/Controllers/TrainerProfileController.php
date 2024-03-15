@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\TrainerProfileFormRequest;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Specialization;
 
 class TrainerProfileController extends Controller
 {
@@ -30,8 +32,9 @@ class TrainerProfileController extends Controller
     public function create()
     {
         $user = User::all();
+        $specializations = Specialization::all();
 
-        return view('create', compact('user'));
+        return view('create', compact('user', 'specializations'));
     }
 
     /**
@@ -47,10 +50,10 @@ class TrainerProfileController extends Controller
         $user = auth()->user();
         $newProfile = new Profile();
 
-        $user = Auth:: user()->id;
+        $img_path = Storage::put('images', $data['photo']);
 
         $newProfile->phone_number = $data['phone_number'];
-        $newProfile->photo = $data['photo'];
+        $newProfile->photo = $img_path;
         $newProfile->curriculum = $data['curriculum'];
         $newProfile->plan_program = $data['plan_program'];
         $newProfile->work_address = $data['work_address'];
@@ -58,6 +61,8 @@ class TrainerProfileController extends Controller
         $newProfile->user()->associate($user);
 
         $newProfile->save();
+
+        $newProfile -> specializations() -> attach($data['specialization_id']);
 
         return redirect()->route('index', $newProfile->id);
     }
@@ -84,8 +89,9 @@ class TrainerProfileController extends Controller
     public function edit($id)
     {
         $profile = Profile::find($id);
+        $specializations = Specialization::all();
 
-        return view('edit', compact('profile'));
+        return view('edit', compact('profile', 'specializations'));
     }
 
     /**
@@ -100,6 +106,7 @@ class TrainerProfileController extends Controller
         $data = $request->all();
 
         $profile = Profile::find($id);
+        
 
         $profile->phone_number = $data['phone_number'];
         $profile->photo = $data['photo'];
@@ -108,6 +115,8 @@ class TrainerProfileController extends Controller
         $profile->work_address = $data['work_address'];
 
         $profile->save();
+
+        $profile -> specializations() -> sync($data['specialization_id']);
 
         return redirect()->route('profile.show', $profile->id);
     }
