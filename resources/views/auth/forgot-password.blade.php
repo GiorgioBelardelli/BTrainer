@@ -33,8 +33,8 @@
 
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                                <button type="submit" class="btn" id="yellow-btn">
+                                    {{ __('Richiedi link di reset') }}
                                 </button>
                             </div>
                         </div>
@@ -45,3 +45,20 @@
     </div>
 </div>
 @endsection
+
+<style lang=scss scoped>
+    label {
+        color:white;
+    }
+    #yellow-btn{
+        color:black;
+        background-color:yellow;
+    }
+
+
+    #yellow-btn:hover {
+        transform:scale(1.1);
+        color:black;
+        background-color:yellow;
+    }
+</style>

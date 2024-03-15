@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit: </h1>
+    <h1>Modifica il tuo Profilo: </h1>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -20,7 +20,7 @@
             <div class="shadow-sm card w-50 mx-auto mt-4">
         <div class="card-body">
             <div class="mb-3">
-                <label for="phone_number" class="form-label"><strong>Numero di Telefono Number</strong></label>
+                <label for="phone_number" class="form-label"><strong>Numero di Telefono</strong></label>
                 <input required type="text" class="form-control" name="phone_number" id="phone_number" value="{{$profile->phone_number}}">
             </div>
 
@@ -59,15 +59,60 @@
                                     @endif
                                 @endforeach
                             >
-                            <label class="checkbox-inline"> {{ $specialization->name }}</label>
+                            <label class="checkbox-inline" id="spec-white"> {{ $specialization->name }}</label>
                         </div>
                     @endforeach
                 </div>
             </div>
-            <input class="my-1 btn btn-success mt-4 mx-auto" type="submit" value="Update">
+            <input class="my-1 btn mt-4 mx-auto" type="submit" value="Update" id="yellow">
         </div>
     </div>
 
     </form>
 </div>
 @endsection
+
+<style lang=scss scoped>
+    .form-label strong{
+        color: white;
+        margin:auto;
+    }
+
+    .card-body {
+        .mb-3 {
+            margin: auto;
+        }
+    }
+    .techno {
+        h5 {
+            color:white;
+        }
+    }
+
+    #spec-white {
+        color:white;
+    }
+
+    .container h1 {
+        color:white;
+        font-size: 30px;
+    }
+
+    .card-body {
+        margin: auto;
+
+        input{
+            margin: auto;
+        }
+
+        #yellow{
+            color:black;
+            background-color: yellow;
+        }
+        #yellow:hover {
+            transform:scale(1.1);
+        }
+    
+    }
+
+</style>

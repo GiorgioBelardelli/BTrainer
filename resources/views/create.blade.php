@@ -20,27 +20,27 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="phone_number" class="form-label"><strong>Numero di Telefono</strong></label>
-                <input required type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Add phone number">
+                <input required type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Aggiungi numero di telefono">
             </div>
 
             <div class="mb-3">
                 <label for="photo" class="form-label"><strong>Foto</strong></label>
-                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*"> 
+                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Aggiungi foto" accept="image/*"> 
             </div>
 
             <div class="mb-3">
                 <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
-                <input required type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Add curriculum">
+                <input required type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Aggiungi curriculum">
             </div>
 
             <div class="mb-3">
                 <label for="plan_program" class="form-label"><strong>Programma</strong></label>
-                <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Add Plan Program"></textarea>
+                <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Aggiungi programma"></textarea>
             </div>            
 
             <div class="mb-3">
                 <label for="work_address" class="form-label"><strong>Indirizzo</strong></label>
-                <input required type="text" class="form-control" name="work_address" id="work_address" placeholder="Add Work Address">
+                <input required type="text" class="form-control" name="work_address" id="work_address" placeholder="Aggiungi indirizzo">
             </div>
 
             <div class="specializations mb-3">
@@ -48,17 +48,40 @@
                 <div class="row">
                     @foreach ($specializations as $specialization)
                         <div class="col-md-6 text-start">
-                            <input type="checkbox" 
+                            <input type="checkbox"
                                    name="specialization_id[]" 
                                    value="{{ $specialization->id }}">
-                            <label class="checkbox-inline"> {{ $specialization->name }}</label>
+                            <label class="checkbox-inline" id="spec-white"> {{ $specialization->name }} </label>
                         </div>
                     @endforeach
                 </div>
             </div>
-            <input required class="my-1 btn btn-success mt-4 mx-auto" type="submit" value="Create">
+            <input required class="my-1 btn mt-4 mx-auto" type="submit" value="Create" id="yellow">
         </div>
     </div>
 
 </form>
 @endsection
+
+<style lang=scss scoped>
+    .form-label strong{
+        color: white;
+    }
+
+    #spec-white {
+        color:white;
+    }
+
+    .card-body {
+        #yellow{
+            color:black;
+            background-color: yellow;
+        }
+        #yellow:hover {
+            transform:scale(1.1);
+        }
+    
+    }
+
+
+</style>

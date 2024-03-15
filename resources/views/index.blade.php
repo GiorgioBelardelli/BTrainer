@@ -14,8 +14,8 @@
                 </a>
                 @auth
                 @if (Auth::user()->id === $profile->user_id)
-                <div class="btn-group" role="group">
-                    <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-warning me-3">Modifica Profilo</a>
+                <div class="button-cont" role="group">
+                    <a href="{{ route('profile.edit', $profile->id) }}" class="me-3" id="yellow-button">Modifica</a>
                     <form action="{{ route('profile.destroy', $profile->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -55,6 +55,27 @@
     }
     ul li div a {
         color: yellow;
+    }
+
+    .button-cont {
+        display:flex;
+        justify-content: flex-end;
+        align-items: center;
+
+
+
+            #yellow-button {
+            color:black;
+            background-color: yellow;
+            text-decoration: none;
+            padding: 6px;
+            margin: 0;
+            border-radius: 5px;
+        }
+
+        #yellow-button:hover {
+            transform: scale(1.1);
+        }
     }
 
 
