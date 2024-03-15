@@ -17,11 +17,11 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'phone_number' => fake() -> phoneNumber(), 
-            'photo' => 'https://picsum.photos/seed/picsum/200/300',
-            'curriculum' => 'https://picsum.photos/seed/picsum/400/600',
-            'plan_program' => fake() -> paragraph(2),
-            'work_address' => fake()-> streetAddress(),
+            // 'phone_number' => fake() -> phoneNumber(),
+            // // 'photo' => 'https://picsum.photos/seed/picsum/200/300',
+            // 'curriculum' => 'https://picsum.photos/seed/picsum/400/600',
+            // 'plan_program' => fake() -> paragraph(2),
+            // 'work_address' => fake()-> streetAddress(),
         ];
     }
 }

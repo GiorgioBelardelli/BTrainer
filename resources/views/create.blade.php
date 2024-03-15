@@ -11,7 +11,7 @@
     </ul>
 </div>
 @endif
-<form action="{{ route('profile.store') }}" method="POST" class="container text-center">
+<form action="{{ route('profile.store') }}" method="POST" class="container text-center" enctype="multipart/form-data">
 
     @csrf
     @method('POST')
@@ -20,32 +20,45 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
-                <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Inserisci phone_number">
+                <input required type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Add phone number">
             </div>
 
             <div class="mb-3">
                 <label for="photo" class="form-label"><strong>Photo</strong></label>
-                <input type="text" class="form-control" name="photo" id="photo" placeholder="Inserisci photo">
+                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*"> 
             </div>
 
             <div class="mb-3">
-                <label for="curriculum" class="form-label"><strong>curriculum Utente</strong></label>
-                <input type="text" class="form-control" name="curriculum" id="curriculum" placeholder="Inserisci curriculum">
+                <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
+                <input required type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Add curriculum">
             </div>
 
             <div class="mb-3">
-                <label for="plan_program" class="form-label"><strong>plan_program</strong></label>
-                <input type="text" class="form-control" name="plan_program" id="plan_program" placeholder="Inserisci plan_program User">
-            </div>
+                <label for="plan_program" class="form-label"><strong>Plan Program</strong></label>
+                <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Add Plan Program"></textarea>
+            </div>            
 
             <div class="mb-3">
-                <label for="work_address" class="form-label"><strong>Work Address Utente</strong></label>
-                <input type="text" class="form-control" name="work_address" id="work_address" placeholder="Inserisci Work Address User">
+                <label for="work_address" class="form-label"><strong>Work Address</strong></label>
+                <input required type="text" class="form-control" name="work_address" id="work_address" placeholder="Add Work Address">
             </div>
 
+            <div class="specializations mb-3">
+                <b>Specializations:</b>
+                <div class="row">
+                    @foreach ($specializations as $specialization)
+                        <div class="col-md-6 text-start">
+                            <input type="checkbox" 
+                                   name="specialization_id[]" 
+                                   value="{{ $specialization->id }}">
+                            <label class="checkbox-inline"> {{ $specialization->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <input required class="my-1 btn btn-success mt-4 mx-auto" type="submit" value="Create">
         </div>
     </div>
 
-    <input class="my-1 btn btn-success mt-4" type="submit" value="Crea">
 </form>
 @endsection

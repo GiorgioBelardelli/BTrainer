@@ -38,9 +38,9 @@
                     {{-- Sostituiamo il logo Laravel con quello di BTrainer --}}
 
                     <div class="logo">
-                        
+
                         <img src="{{ asset('img/header.svg') }}" alt="">
-                            
+
                     </div>
 
 
@@ -108,8 +108,8 @@
 
 <style lang=scss scoped>
     * {
-        background-color: black;
-        color: white;
+        /* background-color: black; */
+        color: rgb(0, 0, 0);
         padding: 0;
 
         .logo {

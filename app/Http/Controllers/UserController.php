@@ -46,7 +46,6 @@ class UserController extends Controller
         $newUser -> name = $data['name'];
         $newUser -> surname = $data['surname'];
         $newUser -> email = $data['email'];
-        $newUser -> work_address = $data['work_address'];
         $newUser -> password = $data['password'];
 
         $newUser ->save();
