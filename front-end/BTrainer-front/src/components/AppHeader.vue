@@ -68,5 +68,9 @@ header {
             margin: 0 1.25rem;
         }
     }
+
+    a {
+        color: white;
+    }
 }
 </style>

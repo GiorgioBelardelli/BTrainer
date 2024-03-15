@@ -4,14 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <div class="card">
+                <div class="card" id="card-black">
                         @if(file_exists(public_path('/img/' . $profile->photo)))
                             <img src="/img/{{ $profile->photo }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
                         @else
                             <img src="{{ asset('storage/app/public/images' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
                         @endif
-                        <div class="card-body col-6 mx-auto">
-                        <h1 class="card-title">
+                        <div class="card-body col-6 mx-auto" id="sub-card">
+                        <h1 class="card-title" id="grey">
                             {{ $profile->user->name }}
                             {{ $profile->user->surname }}
                         </h1>
@@ -25,7 +25,7 @@
                             <p class="card-text">Indirizzo di lavoro: {{ $profile->work_address }}</p>
                         </div>
                         <div class="specialization my-3">
-                            <p class="card-text mb-0">Specialization:</p>
+                            <p class="card-text mb-0">Specializzazione:</p>
                             @foreach ($profile->specializations as $specialization)
                                 <span class="badge bg-secondary my-0">{{ $specialization->name }}</span>
                             @endforeach
@@ -43,3 +43,14 @@
         </div>
     </div>
 @endsection
+
+<style lang=scss scoped>
+    #card-black{
+        color: white;
+        background-color: black;
+    }
+
+    #sub-card *{
+        color: white;
+    }
+</style>

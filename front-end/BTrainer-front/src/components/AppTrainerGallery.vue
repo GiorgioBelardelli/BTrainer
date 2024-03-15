@@ -7,7 +7,7 @@
 
 <template>
 <h2>
-    CHOOSE YOUR IDEAL PERSONAL TRAINER
+    SCEGLI IL TUO PERSONAL TRAINER IDEALE
 </h2>
 <div id="trainer-gallery">
     <div class="container">

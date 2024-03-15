@@ -19,12 +19,12 @@
     <div class="shadow-sm card w-50 mx-auto mt-4">
         <div class="card-body">
             <div class="mb-3">
-                <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
+                <label for="phone_number" class="form-label"><strong>Numero di Telefono</strong></label>
                 <input required type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Add phone number">
             </div>
 
             <div class="mb-3">
-                <label for="photo" class="form-label"><strong>Photo</strong></label>
+                <label for="photo" class="form-label"><strong>Foto</strong></label>
                 <input required type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*"> 
             </div>
 
@@ -34,17 +34,17 @@
             </div>
 
             <div class="mb-3">
-                <label for="plan_program" class="form-label"><strong>Plan Program</strong></label>
+                <label for="plan_program" class="form-label"><strong>Programma</strong></label>
                 <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Add Plan Program"></textarea>
             </div>            
 
             <div class="mb-3">
-                <label for="work_address" class="form-label"><strong>Work Address</strong></label>
+                <label for="work_address" class="form-label"><strong>Indirizzo</strong></label>
                 <input required type="text" class="form-control" name="work_address" id="work_address" placeholder="Add Work Address">
             </div>
 
             <div class="specializations mb-3">
-                <b>Specializations:</b>
+                <b>Specializzazioni:</b>
                 <div class="row">
                     @foreach ($specializations as $specialization)
                         <div class="col-md-6 text-start">
