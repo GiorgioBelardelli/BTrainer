@@ -11,6 +11,7 @@
     </ul>
 </div>
 @endif
+
 <form action="{{ route('profile.store') }}" method="POST" class="container text-center" enctype="multipart/form-data">
 
     @csrf
@@ -59,4 +60,5 @@
     </div>
 
 </form>
+
 @endsection
