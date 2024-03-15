@@ -20,17 +20,17 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
-                <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Add phone number">
+                <input required type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Add phone number">
             </div>
 
             <div class="mb-3">
                 <label for="photo" class="form-label"><strong>Photo</strong></label>
-                <input type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*"> 
+                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*"> 
             </div>
 
             <div class="mb-3">
                 <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
-                <input type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Add curriculum">
+                <input required type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Add curriculum">
             </div>
 
             <div class="mb-3">
@@ -40,7 +40,7 @@
 
             <div class="mb-3">
                 <label for="work_address" class="form-label"><strong>Work Address</strong></label>
-                <input type="text" class="form-control" name="work_address" id="work_address" placeholder="Add Work Address">
+                <input required type="text" class="form-control" name="work_address" id="work_address" placeholder="Add Work Address">
             </div>
 
             <div class="specializations mb-3">
@@ -56,7 +56,7 @@
                     @endforeach
                 </div>
             </div>
-            <input class="my-1 btn btn-success mt-4 mx-auto" type="submit" value="Create">
+            <input required class="my-1 btn btn-success mt-4 mx-auto" type="submit" value="Create">
         </div>
     </div>
 

@@ -21,17 +21,17 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
-                <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{$profile->phone_number}}">
+                <input required type="text" class="form-control" name="phone_number" id="phone_number" value="{{$profile->phone_number}}">
             </div>
 
             <div class="mb-3">
                 <label for="photo" class="form-label"><strong>Photo</strong></label>
-                <input type="file" class="form-control" name="photo" id="photo" value="{{ $profile->photo }}" accept="image/*">
+                <input required type="file" class="form-control" name="photo" id="photo" value="{{ $profile->photo }}" accept="image/*">
             </div>
 
             <div class="mb-3">
                 <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
-                <input type="file" class="form-control" name="curriculum" id="curriculum" value="{{ $profile->curriculum }}">
+                <input required type="file" class="form-control" name="curriculum" id="curriculum" value="{{ $profile->curriculum }}">
             </div>
 
             <div class="mb-3">
@@ -41,7 +41,7 @@
 
             <div class="mb-3">
                 <label for="work_address" class="form-label"><strong>Work Address</strong></label>
-                <input type="text" class="form-control" name="work_address" id="work_address" value="{{ $profile->work_address }}">
+                <input required type="text" class="form-control" name="work_address" id="work_address" value="{{ $profile->work_address }}">
             </div>
 
             <div class="techno mb-3">
@@ -49,7 +49,7 @@
                 <div class="row">
                     @foreach ($specializations as $specialization)
                         <div class="col-md-6">
-                            <input 
+                            <input required 
                                 type="checkbox" 
                                 name="specialization_id[]" 
                                 value="{{ $specialization->id }}"
