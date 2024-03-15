@@ -62,7 +62,10 @@ class TrainerProfileController extends Controller
 
         $newProfile->save();
 
-        $newProfile -> specializations() -> attach($data['specialization_id']);
+        // Verifica se specialization_id è presente nell'array
+        if (isset($data['specialization_id'])) {
+            $newProfile->specializations()->attach($data['specialization_id']);
+        }
 
         return redirect()->route('index', $newProfile->id);
     }
@@ -107,9 +110,10 @@ class TrainerProfileController extends Controller
 
         $profile = Profile::find($id);
         
+        // $img_path = Storage :: put('images', $data['image']);
 
         $profile->phone_number = $data['phone_number'];
-        $profile->photo = $data['photo'];
+        // $profile -> image = $img_path;
         $profile->curriculum = $data['curriculum'];
         $profile->plan_program = $data['plan_program'];
         $profile->work_address = $data['work_address'];

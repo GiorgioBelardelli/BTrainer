@@ -18,6 +18,13 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    {{-- Verifica se l'utente ha un profilo --}}
+                    @if (!$userProfile)
+                    <h1>Vuoi crearti un profilo da Trainer?</h1>
+                    <button><a href="{{ route('profile.create') }}" class="btn mb-3">CREA PROFILO</a></button>
+                    @endif
+
                 </div>
             </div>
         </div>
