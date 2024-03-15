@@ -12,6 +12,10 @@
         </ul>
     </div>
     @endif
+
+
+    @auth
+    @if (Auth::user()->id === $profile->user_id){
     <form method="POST" enctype="multipart/form-data">
 
         @csrf
@@ -65,5 +69,17 @@
         </div>
 
     </form>
+    }
+    @else{
+    <h1>ERROREEEEEEE!!</h1>
+    }
+    @endif
+
+    @endauth
+
+
+
+
+
 </div>
 @endsection

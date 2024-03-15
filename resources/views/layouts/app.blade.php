@@ -122,6 +122,11 @@
             margin: 0;
         }
 
+        .navbar-nav li a {
+            background-color: black;
+
+        }
+
         .card-header {
             color: white;
             background-color: black;
@@ -131,5 +136,10 @@
     li .nav-link:hover {
         color: white;
         /* transform: scale(1.1); */
+    }
+
+    #dropdown-menu {
+        background-color: black;
+        color: white;
     }
 </style>
