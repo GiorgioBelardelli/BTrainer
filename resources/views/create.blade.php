@@ -25,18 +25,18 @@
 
             <div class="mb-3">
                 <label for="photo" class="form-label"><strong>Foto</strong></label>
-                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*"> 
+                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Add photo" accept="image/*">
             </div>
 
             <div class="mb-3">
                 <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
-                <input required type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Add curriculum">
+                <input required type="file" class="form-control" name="curriculum" id="curriculum" placeholder="Add curriculum" accept=".pdf, .png, .jpg, .jpeg">
             </div>
 
             <div class="mb-3">
                 <label for="plan_program" class="form-label"><strong>Programma</strong></label>
                 <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Add Plan Program"></textarea>
-            </div>            
+            </div>
 
             <div class="mb-3">
                 <label for="work_address" class="form-label"><strong>Indirizzo</strong></label>
@@ -47,12 +47,10 @@
                 <b>Specializzazioni:</b>
                 <div class="row">
                     @foreach ($specializations as $specialization)
-                        <div class="col-md-6 text-start">
-                            <input type="checkbox" 
-                                   name="specialization_id[]" 
-                                   value="{{ $specialization->id }}">
-                            <label class="checkbox-inline"> {{ $specialization->name }}</label>
-                        </div>
+                    <div class="col-md-6 text-start">
+                        <input type="checkbox" name="specialization_id[]" value="{{ $specialization->id }}">
+                        <label class="checkbox-inline"> {{ $specialization->name }}</label>
+                    </div>
                     @endforeach
                 </div>
             </div>

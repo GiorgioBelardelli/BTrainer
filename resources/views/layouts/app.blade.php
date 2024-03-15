@@ -101,19 +101,19 @@
 
 <style lang=scss scoped>
     * {
-        background-color: black;
+        background-color: grey;
         color: rgb(0, 0, 0);
         padding: 0;
 
         .logo {
             img {
-                width:100px;
-                margin-top:20px;
+                width: 100px;
+                margin-top: 20px;
             }
         }
 
         .navbar-nav li a {
-            color:white;
+            color: white;
         }
 
         .navbar {
@@ -121,6 +121,7 @@
             padding: 0;
             margin: 0;
         }
+
         .card-header {
             color: white;
             background-color: black;
