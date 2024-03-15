@@ -101,7 +101,7 @@
 
 <style lang=scss scoped>
     * {
-        background-color: grey;
+        background-color: black;
         color: rgb(0, 0, 0);
         padding: 0;
 

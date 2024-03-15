@@ -4,7 +4,7 @@
 <div class="container">
     {{-- <a href="{{ route('profile.create') }}" class="btn mb-3">CREA PROFILO</a> --}}
 
-    <h1>Profiles:</h1>
+    <h1>I nostri profili:</h1>
     <ul class="list-group">
         @foreach ($profiles as $profile)
         <li class="list-group-item">
@@ -34,6 +34,9 @@
 
 <style lang=scss scoped>
 
+    .container h1 {
+        color:white;
+    }
     .list-group {
         .list-group-item {
         background-color: black;
