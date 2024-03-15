@@ -115,7 +115,12 @@
         .logo {
             img {
                 width:100px;
+                margin-top:20px;
             }
+        }
+
+        .navbar-nav li a {
+            color:white;
         }
 
         .navbar {
@@ -124,6 +129,7 @@
             margin: 0;
         }
         .card-header {
+            color: white;
             background-color: black;
         }
     }

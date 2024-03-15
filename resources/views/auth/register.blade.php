@@ -77,7 +77,7 @@
 
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -96,5 +96,21 @@
         background-color: black;
         color: $grey;
     } */
+
+    .nav-item .nav-link:hover {
+            color: white;
+        }
+
+    form .btn {
+        color:black;
+        background-color: yellow;
+    }
+
+    form .btn:hover {
+        transform:scale(1.2);
+        color:black;
+        background-color: yellow;
+    }
+
 
 </style>
