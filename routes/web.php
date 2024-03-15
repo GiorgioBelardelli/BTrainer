@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -15,11 +16,13 @@ Route::get('/profiles/{id}', [TrainerProfileController::class, 'show'])
 
 
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'getProfile'])->name('dashboard');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -34,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/profile/{id}/edit', [TrainerProfileController::class, 'update'])
         ->name('profile.update');
-        
+
     Route::delete('/profile/{id}', [TrainerProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
