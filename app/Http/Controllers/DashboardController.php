@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -13,12 +14,18 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function getProfile()
     {
-        $profile = Profile :: all();
-        // dd($profile);
+        // Ottieni l'ID dell'utente loggato
+        $userId = Auth::id();
 
-        return view('dashboard', compact('profile'));
+        // Ottieni il profilo dell'utente loggato
+        $userProfile = Profile::where('user_id', $userId)->first();
+
+        // Passa $profiles e $userProfile alla vista
+        return view('dashboard', compact('userProfile'));
     }
 
     /**
