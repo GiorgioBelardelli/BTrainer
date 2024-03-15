@@ -75,7 +75,7 @@
                 </form>
             }
             @else{
-                <h1 style="color: white">ERROREEEEEEE!!</h1>
+                <h1>ERROREEEEEEE!!</h1>
             }
             @endif
 
