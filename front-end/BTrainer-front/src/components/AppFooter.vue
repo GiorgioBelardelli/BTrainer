@@ -43,10 +43,10 @@
                 </ul>
             </div>
             <div class="times">
-                <ul>Working hours:
-                    <li>Monday-Friday: 8:00 - 17:00</li>
-                    <li>Saturday: 9:00 - 13:00</li>
-                    <li>Sunday: CLOSED</li>
+                <ul>ORARI:
+                    <li>LUNEDI-VENERDI: 8:00 - 17:00</li>
+                    <li>SABATO: 9:00 - 13:00</li>
+                    <li>DOMENICA: CHIUSO</li>
                 </ul>
 
             </div>

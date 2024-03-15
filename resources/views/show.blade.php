@@ -11,7 +11,7 @@
                             <img src="{{ asset('storage/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
                         @endif
                         <div class="card-body col-6 mx-auto" id="sub-card">
-                        <h1 class="card-title">
+                        <h1 class="card-title" id="grey">
                             {{ $profile->user->name }}
                             {{ $profile->user->surname }}
                         </h1>
@@ -53,5 +53,4 @@
     #sub-card *{
         color: white;
     }
-
 </style>

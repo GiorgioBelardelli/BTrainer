@@ -3,7 +3,7 @@
 
 <template>
     <section id="specializations">
-        <h1>Specializations</h1>
+        <h1>SCEGLI UNA SPECIALIZZAZIONE</h1>
         <div class="cards">
             <div class="card" id="double">
                 <img src="../assets/specializations/bb.png" alt="">
@@ -43,7 +43,7 @@
             </div>
             <div class="card">
                 <img src="../assets/specializations/personal.png" alt="">
-                <h2 class="slide-right">Personal Defence</h2>
+                <h2 class="slide-right">Difesa Personale</h2>
             </div>
         </div>
     </section>

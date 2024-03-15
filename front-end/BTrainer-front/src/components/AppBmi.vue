@@ -39,12 +39,12 @@ export default {
 
 
         <div class="titlebmi">
-            <h2>Calculate your BMI!</h2>
+            <h2>Calcola il tuo BMI!</h2>
         </div>
 
         <form @submit.prevent="calcBmi"> 
-            <input type="number" v-model="height" name="height" id="height" placeholder="Enter your height (cm)" >
-            <input type="number" v-model="weight" name="weight" id="weight" placeholder="Enter your weight (Kg)">
+            <input type="number" v-model="height" name="height" id="height" placeholder="Inserisci la tua altezza (cm)" >
+            <input type="number" v-model="weight" name="weight" id="weight" placeholder="Inserisci il tuo peso (Kg)"">
             <input type="submit" value="CALC">
         </form>
 
