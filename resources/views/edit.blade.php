@@ -32,6 +32,9 @@
                     <label for="photo" class="form-label"><strong>Foto</strong></label>
                     <input required type="file" class="form-control" name="photo" id="photo" value="{{ $profile->photo }}" accept="image/*">
                 </div>
+                <div class="img">
+                    <img class="w-100" src="{{ asset('storage/' . $profile->photo) }}" alt="">
+                </div>
 
                 <div class="mb-3">
                     <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
@@ -40,7 +43,7 @@
 
                 <div class="mb-3">
                     <label for="plan_program" class="form-label"><strong>Programma</strong></label>
-                    <textarea class="form-control" name="plan_program" id="plan_program">{{ $profile->plan_program }}</textarea>
+                    <textarea required class="form-control" name="plan_program" id="plan_program">{{ $profile->plan_program }}</textarea>
                 </div>
 
                 <div class="mb-3">
@@ -53,7 +56,7 @@
                     <div class="row">
                         @foreach ($specializations as $specialization)
                         <div class="col-md-6">
-                            <input required type="checkbox" name="specialization_id[]" value="{{ $specialization->id }}" @foreach ($profile->specializations as $profile_specialization)
+                            <input type="checkbox" name="specialization_id[]" value="{{ $specialization->id }}" @foreach ($profile->specializations as $profile_specialization)
                             @if ($specialization->id == $profile_specialization->id)
                             checked
                             @endif

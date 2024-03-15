@@ -25,10 +25,10 @@ class TrainerProfileFormRequest extends FormRequest
     {
         return [
             'phone_number' => 'required|min:8|max:32',
-            'photo' => 'required|min:1',
-            'curriculum' => 'required|min:1',
+            'photo' => 'required',
+            'curriculum' => 'required',
             'plan_program' => 'required|string|min:32|max:255',
-            'work_address' => 'required|string|min:4|max:32',
+            'work_address' => 'required|string|min:4|max:64',
         ];
     }
 
@@ -41,11 +41,9 @@ class TrainerProfileFormRequest extends FormRequest
 
             'photo.required' => 'Il campo foto non può essere vuoto',
             'photo.string' => 'Il nome della foto caricata non può contenere solo numeri',
-            'photo.min' => 'Il nome della foto caricata deve avere almeno 1 caratteri',
 
             'curriculum.required' => 'Il campo curriculum non può essere vuoto',
             'curriculum.string' => 'Il nome del curriculum caricato non può contenere solo numeri',
-            'curriculum.min' => 'Il nome del curriculum caricato deve avere almeno 1 carattere',
 
             'plan_program.required' => 'Il campo programma non può essere vuoto',
             'plan_program.string' => 'Il programma non può contenere solo numeri',
@@ -55,7 +53,7 @@ class TrainerProfileFormRequest extends FormRequest
             'work_address.required' => "Il campo indirizzo non può essere vuoto",
             'work_address.string' => "L'indirizzo non può contenere solo numeri",
             'work_address.min' => "L'indirizzo deve avere almeno 4 caratteri",
-            'work_address.max' => "L'indirizzo deve avere massimo 32 caratteri",
+            'work_address.max' => "L'indirizzo deve avere massimo 64 caratteri",
         ];
     }
 }

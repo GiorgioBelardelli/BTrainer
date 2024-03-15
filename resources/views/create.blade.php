@@ -35,7 +35,7 @@
 
             <div class="mb-3">
                 <label for="plan_program" class="form-label"><strong>Programma</strong></label>
-                <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Add Plan Program"></textarea>
+                <textarea required class="form-control" name="plan_program" id="plan_program" placeholder="Add Plan Program"></textarea>
             </div>
 
             <div class="mb-3">
