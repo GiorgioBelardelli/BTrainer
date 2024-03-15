@@ -110,10 +110,10 @@ class TrainerProfileController extends Controller
 
         $profile = Profile::find($id);
         
-        $img_path = Storage :: put('images', $data['image']);
+        // $img_path = Storage :: put('images', $data['image']);
 
         $profile->phone_number = $data['phone_number'];
-        $profile -> image = $img_path;
+        // $profile -> image = $img_path;
         $profile->curriculum = $data['curriculum'];
         $profile->plan_program = $data['plan_program'];
         $profile->work_address = $data['work_address'];
