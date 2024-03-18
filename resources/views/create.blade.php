@@ -26,7 +26,7 @@
 
             <div class="mb-3">
                 <label for="photo" class="form-label"><strong>Foto</strong></label>
-                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Aggiungi foto" accept="image/*"> 
+                <input required type="file" class="form-control" name="photo" id="photo" placeholder="Aggiungi foto" accept="image/*">
             </div>
 
             <div class="mb-3">
@@ -37,7 +37,7 @@
             <div class="mb-3">
                 <label for="plan_program" class="form-label"><strong>Programma</strong></label>
                 <textarea class="form-control" name="plan_program" id="plan_program" placeholder="Aggiungi programma"></textarea>
-            </div>            
+            </div>
 
             <div class="mb-3">
                 <label for="work_address" class="form-label"><strong>Indirizzo</strong></label>
@@ -63,24 +63,27 @@
 @endsection
 
 <style lang=scss scoped>
-    .form-label strong{
+    .form-label strong {
+        color: white;
+    }
+
+    .checkbox-inline {
         color: white;
     }
 
     #spec-white {
-        color:white;
+        color: white;
     }
 
     .card-body {
-        #yellow{
-            color:black;
+        #yellow {
+            color: black;
             background-color: yellow;
         }
+
         #yellow:hover {
-            transform:scale(1.1);
+            transform: scale(1.1);
         }
-    
+
     }
-
-
 </style>
