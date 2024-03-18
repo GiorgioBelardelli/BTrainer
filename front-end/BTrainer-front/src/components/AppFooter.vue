@@ -12,7 +12,9 @@
             <!-- sezione contatti a sinistra  -->
             <div class="contacts">
                 <div class="logo">
+                    <router-link to="/">  
                     <img src="../assets/logos/header.svg" alt="logo">
+                     </router-link>
                     <p>
                         "Push yourself beyond limits, embrace the grind, and witness the transformation. In this arena of dedication, sweat, and perseverance, greatness is forged."
                     </p>
