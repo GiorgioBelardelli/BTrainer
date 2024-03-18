@@ -5,7 +5,7 @@ export default {
     name: "AppTrainerGallery",
     data() {
         return {
-            profiles: [],
+            users: [],
         };
     },
 
@@ -14,12 +14,13 @@ export default {
             .get("http://localhost:8000/api/v1/all")
             .then((res) => {
                 const data = res.data;
-                if (data.status === "success") this.profiles = data.profiles;
-
-                console.log("profiles: ", this.profiles);
+                if (data.status === "success") {
+                    this.users = data.data; // Cambiato da data.profiles a data.data
+                    console.log("users: ", this.users);
+                }
             })
             .catch((err) => {
-                console.err(err);
+                console.error(err);
             });
     },
 };
@@ -40,6 +41,18 @@ export default {
                     <div v-for="user in users" :key="user.id" class="caption">
                         <div class="name">
                             {{ user.name }} {{ user.surname }}
+                        </div>
+                        <div class="specializations">
+                            Specializzazioni:
+                            <ul>
+                                <li
+                                    v-for="specialization in user.profile
+                                        .specializations"
+                                    :key="specialization.id"
+                                >
+                                    {{ specialization }}
+                                </li>
+                            </ul>
                         </div>
                         <div class="social">
                             <i class="fa-brands fa-facebook"></i>
