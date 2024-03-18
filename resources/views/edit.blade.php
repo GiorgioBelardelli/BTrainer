@@ -2,21 +2,24 @@
 
 @section('content')
     <div class="container">
-        <h1>Modifica il tuo Profilo: </h1>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <form method="POST" enctype="multipart/form-data">
+        
 
 
             @auth
-                @if (Auth::user()->id === $profile->user_id)
+            @if (Auth::user()->id === $profile->user_id)
+
+                <h1>Modifica il tuo Profilo: </h1>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <form method="POST" enctype="multipart/form-data">
+
                     <form method="POST" enctype="multipart/form-data">
 
                         @csrf
@@ -36,13 +39,24 @@
                                         value="{{ $profile->photo }}" accept="image/*">
                                 </div>
                                 <div class="img">
-                                    <img class="w-100" src="{{ asset('storage/' . $profile->photo) }}" alt="">
+                                    <!-- <img class="w-100" src="{{ asset('storage/' . $profile->photo) }}" alt=""> -->
+                                    <img src="/img/{{ $profile->photo }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
                                     <input required type="file" class="form-control" name="curriculum" id="curriculum"
                                         accept=".pdf, .png, .jpg, .jpeg" value="{{ $profile->curriculum }}">
+
+                                        <!-- GESTIONE FORMATI DIVERSI PER CURRICULUM -->
+                                    @if (Str::endsWith($profile->curriculum, '.pdf'))
+                                        <embed src="{{ asset('img/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="900px" />
+                                    @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
+                                        <img src="{{ asset('img/' . $profile->curriculum) }}" alt="Curriculum" width="100%" height="900px" />
+                                    @else
+                                        <p>Formato del file non supportato</p>
+                                    @endif        
+                                    
                                 </div>
 
                                 <div class="mb-3">
@@ -78,6 +92,8 @@
                         </div>
 
                     </form>
+                @else
+                <h1>Ops! Si é verificato un errore, metti le manine apposto</h1>
                 @endif
             @endauth
     </div>

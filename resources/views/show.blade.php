@@ -34,10 +34,14 @@
                             <p class="card-text mb-0">Il mio programma:</p>
                             <p> {{ $profile->plan_program }}</p>
                         </div>
-                        {{-- <div class="cv">
-                            <h5 class="card-title">CV</h5>
-                            <p>{{ $profile->curriculum }}.pdf</p>
-                        </div> --}}
+                        <!-- GESTIONE FORMATI DIVERSI PER CURRICULUM -->
+                        @if (Str::endsWith($profile->curriculum, '.pdf'))
+                            <embed src="{{ asset('img/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="450px"/>
+                        @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
+                            <img src="{{ asset('img/' . $profile->curriculum) }}" alt="Curriculum" width="100%"  />
+                        @else
+                            <p>Formato del file non supportato</p>
+                        @endif  
                 </div>
             </div>
         </div>
