@@ -14,26 +14,34 @@ class ApiController extends Controller
 {
     public function getAll()
     {
-        // Ottieni l'ID dell'utente loggato
-        $userId = Auth::id();
-        $profileId = Auth::id();
+        // Recupera tutti gli utenti con i loro profili e specializzazioni
+        $users = User::with('profile', 'profile.specializations')->get();
 
-        // Ottieni il profilo dell'utente loggato
-        $userProfile = Profile::where('user_id', $userId)->first();
-        $userProfileSpecialization = Specialization::where('id', $profileId)->first();
-        dd($userProfileSpecialization);
+        // Costruisci un array per il risultato JSON
+        $data = [];
 
-        // $users = User::where('specializations')->get();
+        // Itera su ogni utente per creare una struttura dati per il risultato JSON
+        foreach ($users as $user) {
+            $userData = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'surname' => $user->surname,
+                'email' => $user->email,
+                'profile' => [
+                    'id' => $user->profile->id,
+                    'photo' => $user->profile->photo,
+                    'specializations' => $user->profile->specializations->pluck('name')->toArray(),
+                ],
+            ];
 
-        // $users = User::all();
-        // $profiles = Profile::all();
-        // $specializations = Specialization::all();
+            // Aggiungi i dati dell'utente all'array risultante
+            $data[] = $userData;
+        }
 
+        // Ritorna la risposta JSON con lo stato di successo e i dati recuperati
         return response()->json([
             'status' => 'success',
-            'users' => $userProfileSpecialization,
-            // 'profiles' => $profiles,
-            // 'specializations' => $specializations
+            'data' => $data,
         ]);
     }
 }
