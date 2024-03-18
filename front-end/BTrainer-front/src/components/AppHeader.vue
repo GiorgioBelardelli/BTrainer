@@ -10,7 +10,7 @@
             <ul>
                 <router-link to="/"><li>Home</li></router-link>
                 <!-- <router-link to="/about"><li>About</li></router-link> -->
-                <router-link to="/risultati"><li>Risultati</li></router-link>
+                <!-- <router-link to="/risultati"><li>Risultati</li></router-link> -->
                 <!-- <a href=""><li>Test</li></a> -->
             </ul>
         </nav>

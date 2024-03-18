@@ -1,173 +1,148 @@
 <script>
-import Jumbo from '../components/Jumbo.vue'
-import AppTrainerGallery from '../components/AppTrainerGallery.vue';
-import Specializations from '../components/Specializations.vue';
-import AppBmi from '../components/AppBmi.vue';
-
-
 export default {
-  components: {
-    Jumbo,
-    AppTrainerGallery,
-    Specializations,
-    AppBmi,
-  }
-}
+    name: "Risultati",
+    data() {
+        return {
+            arrayFilter: [],
+            specialization: null
+        };
+    },
+    created() {
+        this.specialization = this.$route.query.specialization;
+        this.arrayFilter = JSON.parse(this.$route.query.profiles);
+    },
+
+    methods: {
+        getImagePath: function (imgPath) {
+            return new URL(imgPath, import.meta.url).href;
+        },
+    }
+};
+
 </script>
 
 <template>
-
-    <section id="results">
+    <div id="trainer-gallery">
         <div class="container">
-            <h1> I tuoi risultati: </h1>
             <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <img src="../assets/trainers/PTrainer3.jpg" alt="img pt Trainer">
-                        <div class="name-surname">Ciccio Magrelli</div>
-                        <div class="specialization">Calisthenics</div>
-                        <p class="program">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat quo quidem adipisci eius unde consequuntur, eos, saepe incidunt tempore cumque nisi culpa autem magnam, officiis facilis soluta corrupti nesciunt ducimus!</p>
-                        <div class="e-mail">
-                            <i class="fa-regular fa-envelope"></i>
-                            ciccio.magrelli@gmail.com
-                        </div>
-                        <div class="phone">
-                            <i class="fa-solid fa-phone"></i>
-                            335 353569
-                        </div>
-                        <div class="social">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-x-twitter"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="../assets/trainers/PTrainer3.jpg" alt="img pt Trainer">
-                        <div class="name-surname">Ciccio Magrelli</div>
-                        <div class="specialization">Calisthenics</div>
-                        <p class="program">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat quo quidem adipisci eius unde consequuntur, eos, saepe incidunt tempore cumque nisi culpa autem magnam, officiis facilis soluta corrupti nesciunt ducimus!</p>
-                        <div class="e-mail">
-                            <i class="fa-regular fa-envelope"></i>
-                            ciccio.magrelli@gmail.com
-                        </div>
-                        <div class="phone">
-                            <i class="fa-solid fa-phone"></i>
-                            335 353569
-                        </div>
-                        <div class="social">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-x-twitter"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                            <i class="fa-regular fa-envelope"></i>
+                <div class="col-gallery">
+                    <div
+                        v-for="profile in arrayFilter"
+                        :key="profile.id"
+                        class="card-trainer"
+                    >
+                        <img
+                            :src="
+                                getImagePath(
+                                    `../assets/trainers/${profile.profile.photo}`
+                                )
+                            "
+                            :alt="profile.name + ' ' + profile.surname"
+                        />
+                        <div class="caption">
+                            <div class="name">
+                                {{ profile.name }} {{ profile.surname }}
+                            </div>
+                            <div
+                                v-for="specialization in profile.profile
+                                    .specializations"
+                                :key="specialization"
+                                class="specializations"
+                            >
+                                {{ specialization }}
+                            </div>
+                            <div class="social">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                                <i class="fa-brands fa-x-twitter"></i>
+                                <i class="fa-brands fa-tiktok"></i>
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="../assets/trainers/PTrainer3.jpg" alt="img pt Trainer">
-                        <div class="name-surname">Ciccio Magrelli</div>
-                        <div class="specialization">Calisthenics</div>
-                        <p class="program">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat quo quidem adipisci eius unde consequuntur, eos, saepe incidunt tempore cumque nisi culpa autem magnam, officiis facilis soluta corrupti nesciunt ducimus!</p>
-                        <div class="e-mail">
-                            <i class="fa-regular fa-envelope"></i>
-                            ciccio.magrelli@gmail.com
-                        </div>
-                        <div class="phone">
-                            <i class="fa-solid fa-phone"></i>
-                            335 353569
-                        </div>
-                        <div class="social">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-x-twitter"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </section>
-
+    </div>
 </template>
 
 <style lang="scss" scoped>
+@use "../styles/partials/variables" as *;
 
-    @use '../styles/partials/mixins' as *;
+h2 {
+    color: $grey;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
 
-    @use '../styles/partials/variables' as *;
+#trainer-gallery {
 
-    section {
-        background-color: black;
-        padding-top: 100px;
-    }
-    h1 {
-        font-size: 50px;
-        margin: 20px;
-        text-align: center;
-    }
+    padding-top: 160px;
+    width: 100%;
+    background-image: url(../assets/Lightgrey-Wallpaper.webp);
+    background-size: cover;
+    padding-bottom: 50px;
+
     .container {
-        width: 80%;
         margin: auto;
+        width: 80%;
 
         .row {
-            width: 100%;
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 50px;
+        }
 
-            .col {
-                flex-basis: 30%;
-                padding-bottom: 25px;
+        .col-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
 
-                .card {
-                    padding: 5px;
-                    padding-bottom: 25px;
-                    text-align: center;
-                    color: white;
-                .card * {
-                    padding-bottom: 5px;
+            .card-trainer {
+                position: relative;
+                margin: 1rem 0.5rem;
+                overflow: hidden;
+                width: 25%;
+
+                img {
+                    width: 100%;
+                    height: 400px;
+                    object-fit: cover;
+                    object-position: center;
+                    transition: filter 1s ease, transform 1s ease;
+                    display: block;
                 }
-                    img {
-                        width: 100%;
-                        border: 2px solid black;
-                        border-radius: 10px;
-                    }
-                    img:hover {
-                        border: 2 pixel solid black;
-                        transform: scale(1.01);
-                    }
-                    .name-surname ,.specialization ,.program ,.email ,.phone {
-                        padding-bottom: 10px;
-                    }
-                    .name-surname:hover {
-                        transform: scale(1.01);
-                        color: yellow;
-                    }
-                    .name-surname { 
-                        font-size: 25px;
-                        padding-top: 20px;
-                     }
-                    .specialization {
-                        font-style: italic;
-                        font-size: 18px;
-                    }
-                    i {
-                        font-size: 15px;
-                    }
-                    .e-mail, .phone {
-                        padding-bottom: 15px;
-                    }
+
+                // &:hover {
+                //     cursor: pointer;
+                //     img {
+                //         transform: scale(1.1);
+                //         display: block;
+                //     }
+                // }
+            }
+        }
+        .caption {
+            text-align: center;
+
+            .name {
+                transition: filter 0.25s ease, transform 0.25s ease;
+                &:hover {
+                    transform: scale(1.25);
+                    cursor: pointer;
+                }
+            }
+
+            .title {
+                margin: 0.5rem 0;
+                transition: filter 0.25s ease, transform 0.25s ease;
+                &:hover {
+                    transform: scale(1.25);
+                    cursor: pointer;
                 }
             }
         }
     }
+}
 </style>

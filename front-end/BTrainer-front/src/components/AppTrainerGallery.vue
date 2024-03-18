@@ -10,7 +10,6 @@ export default {
             selectedSpecialization: null,
             arrayFilter: [],
             profilesTemp:[],
-
         };
     },
 
@@ -19,23 +18,21 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        getSelectedSpecialization(profiles) {
+        getSelectedSpecialization() {
+            // Filtra i profili in base alla specializzazione selezionata
+            this.arrayFilter = this.profiles.filter(profile => {
+                return profile.profile.specializations.includes(this.selectedSpecialization);
+            });
 
-            for(let i=0; i<=this.profiles.length-1; i++){
-                this.profilesTemp = this.profiles[i];
-                profiles = this.profiles[i].profile.specializations;
-                if(profiles.includes(this.selectedSpecialization)){
-                    this.arrayFilter.push(this.profilesTemp);
+            // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
+            this.$router.push({
+                name: 'Risultati',
+                query: { 
+                    specialization: this.selectedSpecialization,
+                    profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
                 }
-            }
-
-
-            console.log(this.arrayFilter);
-            console.log(
-                "Specializzazione selezionata:",
-                this.selectedSpecialization
-            );
-        },
+            });
+        }
     },
 
     mounted() {
