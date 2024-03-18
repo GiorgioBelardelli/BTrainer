@@ -86,7 +86,6 @@
     @use '../styles/partials/variables' as *;
 
     footer {
-        padding-top: 100px;
         height: 300px;
         background-color: black;
 
