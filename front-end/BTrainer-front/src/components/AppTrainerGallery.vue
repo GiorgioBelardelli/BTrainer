@@ -6,47 +6,21 @@ export default {
     data() {
         return {
             users: [],
-            profiles: [],
-            specializations: [],
         };
     },
 
     mounted() {
         axios
-            .get("http://localhost:8000/api/v1/profile")
+            .get("http://localhost:8000/api/v1/all")
             .then((res) => {
                 const data = res.data;
-                if (data.status === "success") this.profiles = data.profiles;
-
-                console.log("profiles: ", this.profiles);
+                if (data.status === "success") {
+                    this.users = data.data; // Cambiato da data.profiles a data.data
+                    console.log("users: ", this.users);
+                }
             })
             .catch((err) => {
-                console.err(err);
-            });
-
-        axios
-            .get("http://localhost:8000/api/v1/user")
-            .then((res) => {
-                const data = res.data;
-                if (data.status === "success") this.users = data.users;
-
-                console.log("users: ", this.users);
-            })
-            .catch((err) => {
-                console.err(err);
-            });
-
-        axios
-            .get("http://localhost:8000/api/v1/specialization")
-            .then((res) => {
-                const data = res.data;
-                if (data.status === "success")
-                    this.specializations = data.specializations;
-
-                console.log("specializations: ", this.specializations);
-            })
-            .catch((err) => {
-                console.err(err);
+                console.error(err);
             });
     },
 };
@@ -68,15 +42,18 @@ export default {
                         <div class="name">
                             {{ user.name }} {{ user.surname }}
                         </div>
-                        <!-- <div class="title">
+                        <div class="specializations">
                             Specializzazioni:
-                            <span
-                                v-for="specialization in user.specializations"
-                                :key="specialization.id"
-                            >
-                                {{ specialization.name }}
-                            </span>
-                        </div> -->
+                            <ul>
+                                <li
+                                    v-for="specialization in user.profile
+                                        .specializations"
+                                    :key="specialization.id"
+                                >
+                                    {{ specialization }}
+                                </li>
+                            </ul>
+                        </div>
                         <div class="social">
                             <i class="fa-brands fa-facebook"></i>
                             <i class="fa-brands fa-instagram"></i>
