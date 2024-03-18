@@ -127,6 +127,7 @@ h2 {
             text-align: center;
 
             .name {
+                margin: .5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
@@ -141,6 +142,10 @@ h2 {
                     transform: scale(1.25);
                     cursor: pointer;
                 }
+            }
+
+            .social {
+                margin: 1rem 0;
             }
         }
     }
