@@ -33,13 +33,39 @@
                 </div>
             </div>
             <!-- Sezione centrale specializzazioni (qui verranno ciclate tutte le specialization) -->
+
+            <!-- BONUS: al link su una singola specializzazione inserire un link che mandi alle specifiche della specializzazione -->
+
             <div class="spec">
                 <ul>
-                    <li>Cyclette</li>
-                    <li>AcquaGym</li>
-                    <li>Calystenichs</li>
-                    <li>Power Lifting</li>
-                    <li>Running</li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Powerlifting</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Crossfit</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Calistenica</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Yoga</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Pilates</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Kickboxing</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">High Intensity Interval Training</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Recupero Post-Infortunio</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:5174/#specializations">Difesa Personale</a>
+                    </li>
+
                 </ul>
             </div>
             <div class="times">
@@ -71,43 +97,61 @@
 
             .contacts {
                 flex-basis: 30%;
+                .logo {
+                    margin-top: 30px;
+                }
                 img {
                     width: 100px;
                 }
                 p {
-                    font-size: 15px;
+                    font-size: 12px;
                     color: $lightgrey;
                     margin-bottom: 10px;
                     margin-top: 10px;
                 }
+
+
                 .social-bottom {
                     display: flex;
-                    justify-content: center;
-                    gap: 20px;
+                    justify-content: flex-start;
+                    gap: 10px;
 
                     i {
                         width: 20px;
                         color: $grey;
-                        margin-right: 10px;
+                        margin-right: 5px;
                     }
                     i:hover {
                           color: $yellow;
                           transform: scale(1.5); 
                         }
+                    p {
+                        font-size: 10px;
+                    }
                 }
 
             }
             .spec {
                 flex-basis: 30%;
                 text-align: center;
+                ul {
 
-                li {
+                    margin-top: 30px;
+
+                    li {
                     padding-top: 5px;
                     color: $lightgrey;
-                    font-size: 15px;
+                    font-size: 12px;
                 }
+
+                    li:hover {
+                        color: $yellow;
+                    }
+                }
+
             }
             .times {
+                margin-top: 30px;
                 text-align: center;
                 flex-basis: 30%;
                 font-size: 15px;

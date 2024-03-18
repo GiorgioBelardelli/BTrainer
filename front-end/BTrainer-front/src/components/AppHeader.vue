@@ -8,15 +8,14 @@
             <ul>
                 <router-link to="/"><li>Home</li></router-link>
                 <router-link to="/about"><li>About</li></router-link>
-                <a href=""><li>Test</li></a>
+                <router-link to="/risultati"><li>Risultati</li></router-link>
                 <a href=""><li>Test</li></a>
             </ul>
         </nav>
     
         <div class="header-icons">
-            <a href="http://127.0.0.1:8000/login"><i class="fa-regular fa-user">
-
-            </i>
+            <a href="http://127.0.0.1:8000/login">
+                <i class="fa-regular fa-user"></i>
             Login
             </a>
             <a href="http://127.0.0.1:8000/register"><i class="fa-solid fa-plus"></i>
@@ -46,6 +45,7 @@ header {
 
     .logo {
         height: 100%;
+        margin-top: 30px;
         img {
             height: 100%;
         }
@@ -71,6 +71,9 @@ header {
 
     a {
         color: white;
+    }
+    a:hover {
+        color: $yellow;
     }
 }
 </style>

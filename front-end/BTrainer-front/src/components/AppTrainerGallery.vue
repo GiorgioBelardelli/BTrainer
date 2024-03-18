@@ -1,187 +1,72 @@
 <script>
+import axios from "axios";
 
-    export default {
-      name: "AppTrainerGallery",
-    }
+export default {
+    name: "AppTrainerGallery",
+    data() {
+        return {
+            profiles: [],
+        };
+    },
+
+    methods: {
+        getImagePath: function(imgPath) {
+            return new URL(imgPath, import.meta.url).href;
+        }
+    },
+
+    mounted() {
+        axios
+            .get("http://localhost:8000/api/v1/all")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") this.profiles = data.data;
+
+                console.log("profiles: ", this.profiles);
+            })
+            .catch((err) => {
+                console.err(err);
+            });
+    },
+};
 </script>
 
 <template>
-<h2>
-    SCEGLI IL TUO PERSONAL TRAINER IDEALE
-</h2>
-<div id="trainer-gallery">
-    <div class="container">
-        <div class="row">
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer1.png" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer2.jpeg" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer3.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer4.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer5.jpeg" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer6.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer7.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer8.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer9.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer10.jpeg" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
+    <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
+    <div id="trainer-gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-gallery">
+                    <div v-for="profile in profiles" :key="profile.id" class="card-trainer">
+                        <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)" :alt="profile.name + ' ' + profile.surname"
+                        />
+                        <div class="caption">
+                            <div class="name">
+                                {{ profile.name }} {{ profile.surname }}
+                            </div>
+                            <div v-for="specialization in profile.profile.specializations" :key="specialization" class="specializations">
+                                {{ specialization }}
+                            </div>
+                            <div class="social">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                                <i class="fa-brands fa-x-twitter"></i>
+                                <i class="fa-brands fa-tiktok"></i>
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <style lang="scss" scoped>
-@use '../styles/partials/variables' as *;
+@use "../styles/partials/variables" as *;
 
 h2 {
-    color:$grey;
+    color: $grey;
     font-size: 40px;
     text-align: center;
     margin-top: 25px;
@@ -197,53 +82,55 @@ h2 {
     .container {
         margin: auto;
         width: 80%;
-    
+
         .row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
         }
-    
+
         .col-gallery {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: space-evenly;
-            width: calc(25%);
-    
+
             .card-trainer {
                 position: relative;
-                margin: 1rem .5rem;
+                margin: 1rem 0.5rem;
                 overflow: hidden;
-                
+                width: 25%;
+
                 img {
                     width: 100%;
+                    height: 400px;
+                    object-fit: cover;
+                    object-position: center;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
                 }
-    
-                &:hover {
-                cursor: pointer;
-                    img {
-                        transform: scale(1.1);
-                        display: block;
-                    }
-                }
+
+                // &:hover {
+                //     cursor: pointer;
+                //     img {
+                //         transform: scale(1.1);
+                //         display: block;
+                //     }
+                // }
             }
         }
         .caption {
-        text-align: center;
-            
+            text-align: center;
+
             .name {
-                transition: filter .25s ease, transform .25s ease;
+                transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
                 }
             }
-        
+
             .title {
-                margin: .5rem 0;
-                transition: filter .25s ease, transform .25s ease;
+                margin: 0.5rem 0;
+                transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
