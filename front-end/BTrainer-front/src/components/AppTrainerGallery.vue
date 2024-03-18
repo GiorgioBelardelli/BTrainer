@@ -6,13 +6,36 @@ export default {
     data() {
         return {
             profiles: [],
+            specializations: [],
+            selectedSpecialization: null,
+            arrayFilter: [],
+            profilesTemp:[],
+
         };
     },
 
     methods: {
-        getImagePath: function(imgPath) {
+        getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
-        }
+        },
+
+        getSelectedSpecialization(profiles) {
+
+            for(let i=0; i<=this.profiles.length-1; i++){
+                this.profilesTemp = this.profiles[i];
+                profiles = this.profiles[i].profile.specializations;
+                if(profiles.includes(this.selectedSpecialization)){
+                    this.arrayFilter.push(this.profilesTemp);
+                }
+            }
+
+
+            console.log(this.arrayFilter);
+            console.log(
+                "Specializzazione selezionata:",
+                this.selectedSpecialization
+            );
+        },
     },
 
     mounted() {
@@ -22,7 +45,22 @@ export default {
                 const data = res.data;
                 if (data.status === "success") this.profiles = data.data;
 
-                console.log("profiles: ", this.profiles);
+                // console.log("profiles: ", this.profiles);
+            })
+            .catch((err) => {
+                console.err(err);
+            });
+
+        axios
+            .get("http://localhost:8000/api/v1/specializations")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") {
+                    for (let i = 0; i <= data.specializations.length-1; i++) {
+                        this.specializations[i] = data.specializations[i].name;
+                    }
+                    // console.log(this.specializations);
+                }
             })
             .catch((err) => {
                 console.err(err);
@@ -33,18 +71,52 @@ export default {
 
 <template>
     <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
+
+    <div>
+        <label for="specialization">Scegli la specializzazione:</label>
+        <select
+            v-model="selectedSpecialization"
+            name="specialization"
+            id="specialization"
+        >
+            <option
+                v-for="specialization in specializations"
+                :key="specialization.id"
+                :value="specialization"
+            >
+                {{ specialization }}
+            </option>
+        </select>
+        <button @click="getSelectedSpecialization" type="button">Filtra</button>
+    </div>
+
     <div id="trainer-gallery">
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
-                    <div v-for="profile in profiles" :key="profile.id" class="card-trainer">
-                        <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)" :alt="profile.name + ' ' + profile.surname"
+                    <div
+                        v-for="profile in profiles"
+                        :key="profile.id"
+                        class="card-trainer"
+                    >
+                        <img
+                            :src="
+                                getImagePath(
+                                    `../assets/trainers/${profile.profile.photo}`
+                                )
+                            "
+                            :alt="profile.name + ' ' + profile.surname"
                         />
                         <div class="caption">
                             <div class="name">
                                 {{ profile.name }} {{ profile.surname }}
                             </div>
-                            <div v-for="specialization in profile.profile.specializations" :key="specialization" class="specializations">
+                            <div
+                                v-for="specialization in profile.profile
+                                    .specializations"
+                                :key="specialization"
+                                class="specializations"
+                            >
                                 {{ specialization }}
                             </div>
                             <div class="social">

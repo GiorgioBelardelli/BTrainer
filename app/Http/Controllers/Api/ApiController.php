@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Specialization;
+use PhpParser\Node\Expr\FuncCall;
 
 class ApiController extends Controller
 {
@@ -43,5 +44,16 @@ class ApiController extends Controller
             'status' => 'success',
             'data' => $data,
         ]);
+    }
+
+    public function getSpecialization(){
+        $specializations = Specialization :: all();
+
+        return response()->json([
+            'status' => 'success',
+            'specializations' => $specializations,
+        ]);
+
+
     }
 }
