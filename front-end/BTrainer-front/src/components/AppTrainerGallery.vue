@@ -5,8 +5,14 @@ export default {
     name: "AppTrainerGallery",
     data() {
         return {
-            users: [],
+            profiles: [],
         };
+    },
+
+    methods: {
+        getImagePath: function(imgPath) {
+            return new URL(imgPath, import.meta.url).href;
+        }
     },
 
     mounted() {
@@ -14,13 +20,12 @@ export default {
             .get("http://localhost:8000/api/v1/all")
             .then((res) => {
                 const data = res.data;
-                if (data.status === "success") {
-                    this.users = data.data; // Cambiato da data.profiles a data.data
-                    console.log("users: ", this.users);
-                }
+                if (data.status === "success") this.profiles = data.data;
+
+                console.log("profiles: ", this.profiles);
             })
             .catch((err) => {
-                console.error(err);
+                console.err(err);
             });
     },
 };
@@ -32,34 +37,23 @@ export default {
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
-                    <div class="card-trainer">
-                        <img
-                            src="../assets/trainers/PTrainer1.png"
-                            alt="Trainer"
+                    <div v-for="profile in profiles" :key="profile.id" class="card-trainer">
+                        <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)" :alt="profile.name + ' ' + profile.surname"
                         />
-                    </div>
-                    <div v-for="user in users" :key="user.id" class="caption">
-                        <div class="name">
-                            {{ user.name }} {{ user.surname }}
-                        </div>
-                        <div class="specializations">
-                            Specializzazioni:
-                            <ul>
-                                <li
-                                    v-for="specialization in user.profile
-                                        .specializations"
-                                    :key="specialization.id"
-                                >
-                                    {{ specialization }}
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="social">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-x-twitter"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                            <i class="fa-regular fa-envelope"></i>
+                        <div class="caption">
+                            <div class="name">
+                                {{ profile.name }} {{ profile.surname }}
+                            </div>
+                            <div v-for="specialization in profile.profile.specializations" :key="specialization" class="specializations">
+                                {{ specialization }}
+                            </div>
+                            <div class="social">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                                <i class="fa-brands fa-x-twitter"></i>
+                                <i class="fa-brands fa-tiktok"></i>
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,33 +86,35 @@ h2 {
         .row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
         }
 
         .col-gallery {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: space-evenly;
-            width: calc(25%);
 
             .card-trainer {
                 position: relative;
                 margin: 1rem 0.5rem;
                 overflow: hidden;
+                width: 25%;
 
                 img {
                     width: 100%;
+                    height: 400px;
+                    object-fit: cover;
+                    object-position: center;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
                 }
 
-                &:hover {
-                    cursor: pointer;
-                    img {
-                        transform: scale(1.1);
-                        display: block;
-                    }
-                }
+                // &:hover {
+                //     cursor: pointer;
+                //     img {
+                //         transform: scale(1.1);
+                //         display: block;
+                //     }
+                // }
             }
         }
         .caption {
