@@ -1,187 +1,101 @@
 <script>
+import axios from "axios";
 
-    export default {
-      name: "AppTrainerGallery",
-    }
+export default {
+    name: "AppTrainerGallery",
+    data() {
+        return {
+            users: [],
+            profiles: [],
+            specializations: [],
+        };
+    },
+
+    mounted() {
+        axios
+            .get("http://localhost:8000/api/v1/profile")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") this.profiles = data.profiles;
+
+                console.log("profiles: ", this.profiles);
+            })
+            .catch((err) => {
+                console.err(err);
+            });
+
+        axios
+            .get("http://localhost:8000/api/v1/user")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") this.users = data.users;
+
+                console.log("users: ", this.users);
+            })
+            .catch((err) => {
+                console.err(err);
+            });
+
+        axios
+            .get("http://localhost:8000/api/v1/specialization")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success")
+                    this.specializations = data.specializations;
+
+                console.log("specializations: ", this.specializations);
+            })
+            .catch((err) => {
+                console.err(err);
+            });
+    },
+};
 </script>
 
 <template>
-<h2>
-    SCEGLI IL TUO PERSONAL TRAINER IDEALE
-</h2>
-<div id="trainer-gallery">
-    <div class="container">
-        <div class="row">
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer1.png" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
+    <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
+    <div id="trainer-gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-gallery">
+                    <div class="card-trainer">
+                        <img
+                            src="../assets/trainers/PTrainer1.png"
+                            alt="Trainer"
+                        />
                     </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer2.jpeg" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer3.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer4.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer5.jpeg" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer6.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer7.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer8.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer9.webp" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-gallery">
-                <div class="card-trainer">
-                    <img src="../assets/trainers/PTrainer10.jpeg" alt="Trainer">
-                </div>
-                <div class="caption">
-                    <div class="name">King Arthur</div>
-                    <div class="title">Mundial Fight Champion</div>
-                    <div class="social">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-regular fa-envelope"></i>
+                    <div v-for="user in users" :key="user.id" class="caption">
+                        <div class="name">
+                            {{ user.name }} {{ user.surname }}
+                        </div>
+                        <!-- <div class="title">
+                            Specializzazioni:
+                            <span
+                                v-for="specialization in user.specializations"
+                                :key="specialization.id"
+                            >
+                                {{ specialization.name }}
+                            </span>
+                        </div> -->
+                        <div class="social">
+                            <i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-instagram"></i>
+                            <i class="fa-brands fa-x-twitter"></i>
+                            <i class="fa-brands fa-tiktok"></i>
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <style lang="scss" scoped>
-@use '../styles/partials/variables' as *;
+@use "../styles/partials/variables" as *;
 
 h2 {
-    color:$grey;
+    color: $grey;
     font-size: 40px;
     text-align: center;
     margin-top: 25px;
@@ -197,32 +111,32 @@ h2 {
     .container {
         margin: auto;
         width: 80%;
-    
+
         .row {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
-    
+
         .col-gallery {
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
             width: calc(25%);
-    
+
             .card-trainer {
                 position: relative;
-                margin: 1rem .5rem;
+                margin: 1rem 0.5rem;
                 overflow: hidden;
-                
+
                 img {
                     width: 100%;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
                 }
-    
+
                 &:hover {
-                cursor: pointer;
+                    cursor: pointer;
                     img {
                         transform: scale(1.1);
                         display: block;
@@ -231,19 +145,19 @@ h2 {
             }
         }
         .caption {
-        text-align: center;
-            
+            text-align: center;
+
             .name {
-                transition: filter .25s ease, transform .25s ease;
+                transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
                 }
             }
-        
+
             .title {
-                margin: .5rem 0;
-                transition: filter .25s ease, transform .25s ease;
+                margin: 0.5rem 0;
+                transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
