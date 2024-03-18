@@ -69,7 +69,7 @@ export default {
 <template>
     <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
 
-    <div>
+    <div class="selection">
         <label for="specialization">Scegli la specializzazione:</label>
         <select
             v-model="selectedSpecialization"
@@ -142,6 +142,25 @@ h2 {
     margin-bottom: 25px;
 }
 
+button {
+    padding: 8px;
+    background-color: yellow;
+    color: black;
+    border-radius: 8px;
+}
+.selection {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+
+    label , select , button {
+        margin-left: 15px;
+    }
+}
+
 #trainer-gallery {
     width: 100%;
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
@@ -175,6 +194,8 @@ h2 {
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
+                    border-radius: 10px;
+                    border: 2px solid black;
                 }
 
                 // &:hover {

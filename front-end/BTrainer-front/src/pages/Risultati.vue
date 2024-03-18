@@ -103,6 +103,7 @@ h2 {
                 position: relative;
                 margin: 1rem 0.5rem;
                 overflow: hidden;
+                border: 1 px solid black;
                 width: 25%;
 
                 img {
@@ -112,6 +113,8 @@ h2 {
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
+                    border-radius: 10px;
+                    border: 2px solid black;
                 }
 
                 // &:hover {
@@ -125,6 +128,12 @@ h2 {
         }
         .caption {
             text-align: center;
+            padding-bottom: 25px;
+            padding-top: 10px;
+
+        .name, .specializations, .social {
+            margin-bottom: 5px;
+        }
 
             .name {
                 transition: filter 0.25s ease, transform 0.25s ease;
