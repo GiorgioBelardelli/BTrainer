@@ -2,14 +2,14 @@
 import Jumbo from '../components/Jumbo.vue'
 import AppTrainerGallery from '../components/AppTrainerGallery.vue';
 import Specializations from '../components/Specializations.vue';
-import AppBmi from '../components/AppBmi.vue';
+// import AppBmi from '../components/AppBmi.vue';
 
 export default {
   components: {
     Jumbo,
     AppTrainerGallery,
     Specializations,
-    AppBmi,
+    // AppBmi,
   }
 }
 </script>
@@ -18,5 +18,5 @@ export default {
     <Jumbo/>
     <AppTrainerGallery/>
     <Specializations/>
-    <AppBmi/>
+    <!-- <AppBmi/> -->
 </template>

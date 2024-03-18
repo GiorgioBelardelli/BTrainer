@@ -1,7 +1,6 @@
 <script setup>
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
-import AppBmi from './components/AppBmi.vue';
 </script>
 
 <template>
