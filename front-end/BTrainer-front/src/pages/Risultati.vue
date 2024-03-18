@@ -97,13 +97,15 @@ export default {
 
 </template>
 
-<style>
+<style lang="scss" scoped>
 
-    /* @use '../styles/partials/mixins' as *;
-    @use '../styles/partials/variables' as *; */
+    @use '../styles/partials/mixins' as *;
+
+    @use '../styles/partials/variables' as *;
 
     section {
         background-color: black;
+        padding-top: 100px;
     }
     h1 {
         font-size: 50px;
@@ -152,6 +154,7 @@ export default {
                     }
                     .name-surname { 
                         font-size: 25px;
+                        padding-top: 20px;
                      }
                     .specialization {
                         font-style: italic;
@@ -159,6 +162,9 @@ export default {
                     }
                     i {
                         font-size: 15px;
+                    }
+                    .e-mail, .phone {
+                        padding-bottom: 15px;
                     }
                 }
             }
