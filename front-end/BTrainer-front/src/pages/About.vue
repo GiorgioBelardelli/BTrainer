@@ -5,7 +5,9 @@ export default {
     name: "About",
     data() {
         return {
-            profile: null
+            profile: null,
+            votes: [],
+            totalvotes: 0,
         };
     },
     created() {
@@ -13,33 +15,43 @@ export default {
         const profileId = this.$route.params.id;
 
         // Ottieni i dettagli del profilo utilizzando l'ID
-        axios
-    .get(`http://localhost:8000/api/v1/all`)
-    .then((res) => {
-        const data = res.data;
-        if (data.status === "success") {
-            // Trova il profilo dell'utente con l'ID corrispondente
-            const userProfile = data.data.find(profile => profile.id === parseInt(profileId));
-            if (userProfile) {
-                this.profile = userProfile;
-                console.log("Dettagli del profilo:", this.profile);
-            } else {
-                console.log("Nessun profilo trovato con l'ID:", profileId);
+        axios.get(`http://localhost:8000/api/v1/all`).then((res) => {
+            const data = res.data;
+            if (data.status === "success") {
+                // Trova il profilo dell'utente con l'ID corrispondente
+                const userProfile = data.data.find(
+                    (profile) => profile.id === parseInt(profileId)
+                );
+                if (userProfile) {
+                    // Ordina le recensioni dalla più recente alla più vecchia
+                    userProfile.profile.reviews.sort(
+                        (a, b) => new Date(b.date) - new Date(a.date)
+                    );
+                    this.profile = userProfile;
+                    console.log("Dettagli del profilo:", this.profile);
+                } else {
+                    console.log("Nessun profilo trovato con l'ID:", profileId);
+                }
             }
-        }
-    })
-
+        });
     },
+    mounted() {
+        this.getMediaVoti();
+    },
+
     methods: {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
-        }
-    }
-}
+        },
+
+        getMediaVoti: function () {
+            // let temp = profile.profile.votes;
+        },
+    },
+};
 </script>
 
 <template>
-
     <div id="trainer-gallery">
         <h2>Info Personal Trainer</h2>
         <div class="container">
@@ -48,7 +60,11 @@ export default {
                     <div class="card-trainer">
                         <img
                             v-if="profile"
-                            :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
+                            :src="
+                                getImagePath(
+                                    `../assets/trainers/${profile.profile.photo}`
+                                )
+                            "
                             :alt="profile.name + ' ' + profile.surname"
                         />
                         <div class="caption" v-if="profile">
@@ -56,7 +72,8 @@ export default {
                                 <b>{{ profile.name }} {{ profile.surname }}</b>
                             </div>
                             <div
-                                v-for="specialization in profile.profile.specializations"
+                                v-for="specialization in profile.profile
+                                    .specializations"
                                 :key="specialization"
                                 class="specializations"
                             >
@@ -71,6 +88,29 @@ export default {
                             </div>
                             <div class="description">
                                 <p>{{ profile.profile.plan_program }}</p>
+                            </div>
+                            <div class="reviews">
+                                <h1>
+                                    Recensioni:
+                                    {{ profile.profile.reviews.length }}
+                                </h1>
+                                <div
+                                    v-for="review in profile.profile.reviews"
+                                    :key="review.id"
+                                >
+                                    <h3>Singola recensione:</h3>
+                                    <p>Nome: {{ review.name }}</p>
+                                    <p>Data: {{ review.date }}</p>
+                                    <p>Contenuto: {{ review.content }}</p>
+                                    <br />
+                                </div>
+                            </div>
+
+                            <div class="votes">
+                                <h1>Voti Ricevuti:</h1>
+                                <div>
+                                    <p>Media voti: {{ totalvotes }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +173,7 @@ h2 {
             margin-left: 2rem;
 
             .name {
-                margin: .5rem 0;
+                margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
                 // &:hover {
                 //     transform: scale(1.25);
