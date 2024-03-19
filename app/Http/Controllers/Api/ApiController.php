@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Specialization;
+use App\Models\Review;
+use App\Models\Vote;
 use PhpParser\Node\Expr\FuncCall;
 
 class ApiController extends Controller
@@ -33,6 +35,23 @@ class ApiController extends Controller
                     'photo' => $user->profile->photo,
                     'plan_program' => $user->profile->plan_program,
                     'specializations' => $user->profile->specializations->pluck('name')->toArray(),
+                    'reviews' => $user->profile->reviews->map(function ($review) {
+                        return [
+                            'id' => $review->id,
+                            'name' => $review->name,
+                            'surname' => $review->surname,
+                            'date' => $review->date,
+                            'content' => $review->content,
+                        ];
+                    }),
+                    'votes' => $user->profile->votes->map(
+                        function ($votes) {
+                            return [
+                                'value' => $votes->value,
+                            ];
+                        }
+                    ),
+
                 ],
             ];
 
@@ -47,14 +66,13 @@ class ApiController extends Controller
         ]);
     }
 
-    public function getSpecialization(){
-        $specializations = Specialization :: all();
+    public function getSpecialization()
+    {
+        $specializations = Specialization::all();
 
         return response()->json([
             'status' => 'success',
             'specializations' => $specializations,
         ]);
-
-
     }
 }

@@ -16,12 +16,12 @@ class ReviewTableSeeder extends Seeder
      */
     public function run()
     {
-        Review :: factory() -> count(20) -> make()
-        ->each(function($review){
-            $profile = Profile :: inRandomOrder() -> first();
-            $review -> profile() -> associate($profile -> id);
+        Review::factory()->count(100)->make()
+            ->each(function ($review) {
+                $profile = Profile::inRandomOrder()->first();
+                $review->profile()->associate($profile->id);
 
-            $review -> save();
-        });
+                $review->save();
+            });
     }
 }

@@ -101,6 +101,7 @@
 </html>
 
 <style lang=scss scoped>
+@import "resources/scss/app.scss";    
     * { 
         background-color: #5a5a5a;
         color: rgb(0, 0, 0);
