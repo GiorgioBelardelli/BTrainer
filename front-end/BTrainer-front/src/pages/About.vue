@@ -1,11 +1,14 @@
 <script>
+
 import axios from "axios";
 
 export default {
     name: "About",
     data() {
         return {
-            profile: null
+            profile: null,
+            message:'',
+            rece:'',
         };
     },
     created() {
@@ -33,10 +36,27 @@ export default {
     methods: {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
+        },
+
+        handleSubmit() {
+        // Convalida dei dati del form
+        if (this.message.trim() === '') {
+
+            // Mostra un messaggio di errore se il campo del messaggio è vuoto
+
+            alert('Il campo del messaggio non può essere vuoto.');
+
+        // else...chiamata axios in post 
+
+            return; 
         }
-    }
-}
+        },
+
+    }};
+
+
 </script>
+
 
 <template>
 
@@ -78,6 +98,24 @@ export default {
             </div>
         </div>
     </div>
+
+    <form @submit.prevent="handleSubmit">
+    
+         <!-- Qui l'utente invia il messaggio  --> 
+        <div class="msg">
+            <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio">
+            <button type="submit">Invia Messaggio</button>
+            <div> prova:{{message}} </div>
+        </div>
+
+        <!-- Qui l'utente inserisce una recensione -->
+
+        <div class="rece">
+            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer">
+            <button type="submit">Invia Recensione</button>
+        </div>
+
+    </form>
 </template>
 
 <style lang="scss" scoped>
@@ -155,5 +193,25 @@ h2 {
             }
         }
     }
+}
+
+form {
+    width: 80%;
+    margin: auto;
+
+    #message , #rece {
+        width: 30%;
+        min-height: 50px;
+        border: 1px solid black;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+    }
+    button {
+        padding: 8px;
+    }
+    input::placeholder {
+        margin: auto;
+}
 }
 </style>
