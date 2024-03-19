@@ -1,15 +1,17 @@
 <script>
 import axios from "axios";
+import { store } from "../store";
 
 export default {
     name: "AppTrainerGallery",
     data() {
         return {
+            store,
             profiles: [],
             specializations: [],
-            selectedSpecialization: null,
-            arrayFilter: [],
-            profilesTemp:[],
+            selectedSpecializations: [],
+            // arrayFilter: [],
+            profilesTemp: [],
         };
     },
 
@@ -18,29 +20,32 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        getSelectedSpecialization() {
-            // Filtra i profili in base alla specializzazione selezionata
-            this.arrayFilter = this.profiles.filter(profile => {
-                return profile.profile.specializations.includes(this.selectedSpecialization);
+        getSelectedSpecializations() {
+            // Modifica: Rinomina il metodo per eliminare la "s" alla fine
+            // Filtra i profili in base alle specializzazioni selezionate
+            store.arrayFilter = this.profiles.filter((profile) => {
+                return profile.profile.specializations.some((spec) =>
+                    this.selectedSpecializations.includes(spec)
+                );
             });
 
             // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
             this.$router.push({
-                name: 'Risultati',
-                query: { 
-                    specialization: this.selectedSpecialization,
-                    profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
-                }
+                name: "Risultati",
+                // query: {
+                //     specialization: this.selectedSpecialization,
+                //     profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
+                // }
             });
         },
 
         showDetails(id) {
-            console.log('ID Profilo:', id);
+            console.log("ID Profilo:", id);
             this.$router.push({
-                name: 'About',
-                params: { id: id }
+                name: "About",
+                params: { id: id },
             });
-        }
+        },
     },
 
     mounted() {
@@ -53,7 +58,7 @@ export default {
                 // console.log("profiles: ", this.profiles);
             })
             .catch((err) => {
-                console.err(err);
+                console.error(err);
             });
 
         axios
@@ -61,14 +66,14 @@ export default {
             .then((res) => {
                 const data = res.data;
                 if (data.status === "success") {
-                    for (let i = 0; i <= data.specializations.length-1; i++) {
-                        this.specializations[i] = data.specializations[i].name;
-                    }
+                    this.specializations = data.specializations.map(
+                        (spec) => spec.name
+                    );
                     // console.log(this.specializations);
                 }
             })
             .catch((err) => {
-                console.err(err);
+                console.error(err);
             });
     },
 };
@@ -76,32 +81,33 @@ export default {
 
 <template>
     <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
-    
+
     <div id="trainer-gallery">
         <div class="selection">
-            <label for="specialization">Scegli la specializzazione:</label>
-            <select
-                v-model="selectedSpecialization"
-                name="specialization"
-                id="specialization"
+            <label>Scegli la specializzazione:</label>
+            <div
+                v-for="specialization in specializations"
+                :key="specialization"
             >
-                <option
-                    v-for="specialization in specializations"
-                    :key="specialization.id"
+                <input
+                    type="checkbox"
+                    :id="specialization"
                     :value="specialization"
-                >
-                    {{ specialization }}
-                </option>
-            </select>
-            <button @click="getSelectedSpecialization" type="button">Filtra</button>
+                    v-model="selectedSpecializations"
+                    @change="getSelectedSpecializations"
+                />
+                <label :for="specialization">{{ specialization }}</label>
+            </div>
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
                     <div
                         v-for="profile in profiles"
                         :key="profile.id"
-                        class="card-trainer" @click="showDetails(profile.id)"
+                        class="card-trainer"
+                        @click="showDetails(profile.id)"
                     >
                         <img
                             :src="
@@ -163,7 +169,9 @@ button {
     align-items: center;
     margin-bottom: 50px;
 
-    label , select , button {
+    label,
+    select,
+    button {
         margin-left: 15px;
     }
 }
@@ -218,7 +226,7 @@ button {
             text-align: center;
 
             .name {
-                margin: .5rem 0;
+                margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);

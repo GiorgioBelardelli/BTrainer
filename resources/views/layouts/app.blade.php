@@ -160,5 +160,11 @@
     #navbarDropdown:hover {
             color:white;
         }
+    
+    a {
+        text-decoration: none;
+        font-weight: 500;
+    }
+
 
 </style>
