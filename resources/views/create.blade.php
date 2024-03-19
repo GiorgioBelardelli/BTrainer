@@ -109,7 +109,11 @@
     .alert-danger  {
         margin: auto;
         width: 50%;
+<<<<<<< HEAD
+        background-color: #5a5a5a;
+=======
         background-color: gray;
+>>>>>>> 28976db233b20dcfee1e77a8e06b44b9d5608be6
         border: none;
         padding: 0;
 
@@ -117,7 +121,7 @@
             ul {
                 padding:0;
                 list-style:none;
-                background-color:black;
+                background-color:#5a5a5a;
 
                 li {
                     background-color: white;

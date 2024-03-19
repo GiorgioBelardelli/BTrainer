@@ -18,10 +18,10 @@
         <div class="header-icons">
             <a href="http://127.0.0.1:8000/login">
                 <i class="fa-regular fa-user"></i>
-            Login
+            Accedi
             </a>
             <a href="http://127.0.0.1:8000/register"><i class="fa-solid fa-plus"></i>
-            Sign in
+            Registrati
             </a>
         </div>
     </header>

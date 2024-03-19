@@ -39,7 +39,7 @@
     }
     .list-group {
         .list-group-item {
-        background-color: black;
+        background-color: #5a5a5a;
         padding-bottom: 0;
     }
     }
