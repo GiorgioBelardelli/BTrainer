@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-    
+
     <div id="trainer-gallery">
         <h2>Info Personal Trainer</h2>
         <div class="container">
