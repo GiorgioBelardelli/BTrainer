@@ -16,7 +16,16 @@ export default {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
         },
+
+        showDetails(id) {
+            console.log('ID Profilo:', id);
+            this.$router.push({
+                name: 'About',
+                params: { id: id }
+            });
+        }
     }
+
 };
 
 </script>
@@ -29,14 +38,9 @@ export default {
                     <div
                         v-for="profile in arrayFilter"
                         :key="profile.id"
-                        class="card-trainer"
+                        class="card-trainer" @click="showDetails(profile.id)"
                     >
-                        <img
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
+                        <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
                             :alt="profile.name + ' ' + profile.surname"
                         />
                         <div class="caption">
@@ -103,6 +107,7 @@ h2 {
                 position: relative;
                 margin: 1rem 0.5rem;
                 overflow: hidden;
+                border: 1 px solid black;
                 width: 25%;
 
                 img {
@@ -112,21 +117,30 @@ h2 {
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
+                    border-radius: 10px;
+                    border: 2px solid black;
                 }
 
-                // &:hover {
-                //     cursor: pointer;
-                //     img {
-                //         transform: scale(1.1);
-                //         display: block;
-                //     }
-                // }
+                &:hover {
+                    cursor: pointer;
+                    // img {
+                    //     transform: scale(1.1);
+                    //     display: block;
+                    // }
+                }
             }
         }
         .caption {
             text-align: center;
+            padding-bottom: 25px;
+            padding-top: 10px;
+
+        .name, .specializations, .social {
+            margin-bottom: 5px;
+        }
 
             .name {
+                margin: .5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
@@ -141,6 +155,10 @@ h2 {
                     transform: scale(1.25);
                     cursor: pointer;
                 }
+            }
+
+            .social {
+                margin: 1rem 0;
             }
         }
     }

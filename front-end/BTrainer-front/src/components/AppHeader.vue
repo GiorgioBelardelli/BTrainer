@@ -49,7 +49,7 @@ header {
         height: 100%;
         margin-top: 30px;
         img {
-            height: 100%;
+            height: 80%;
         }
     }
 

@@ -32,6 +32,14 @@ export default {
                     profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
                 }
             });
+        },
+
+        showDetails(id) {
+            console.log('ID Profilo:', id);
+            this.$router.push({
+                name: 'About',
+                params: { id: id }
+            });
         }
     },
 
@@ -68,33 +76,32 @@ export default {
 
 <template>
     <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
-
-    <div>
-        <label for="specialization">Scegli la specializzazione:</label>
-        <select
-            v-model="selectedSpecialization"
-            name="specialization"
-            id="specialization"
-        >
-            <option
-                v-for="specialization in specializations"
-                :key="specialization.id"
-                :value="specialization"
-            >
-                {{ specialization }}
-            </option>
-        </select>
-        <button @click="getSelectedSpecialization" type="button">Filtra</button>
-    </div>
-
+    
     <div id="trainer-gallery">
+        <div class="selection">
+            <label for="specialization">Scegli la specializzazione:</label>
+            <select
+                v-model="selectedSpecialization"
+                name="specialization"
+                id="specialization"
+            >
+                <option
+                    v-for="specialization in specializations"
+                    :key="specialization.id"
+                    :value="specialization"
+                >
+                    {{ specialization }}
+                </option>
+            </select>
+            <button @click="getSelectedSpecialization" type="button">Filtra</button>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
                     <div
                         v-for="profile in profiles"
                         :key="profile.id"
-                        class="card-trainer"
+                        class="card-trainer" @click="showDetails(profile.id)"
                     >
                         <img
                             :src="
@@ -106,7 +113,7 @@ export default {
                         />
                         <div class="caption">
                             <div class="name">
-                                {{ profile.name }} {{ profile.surname }}
+                                <b>{{ profile.name }} {{ profile.surname }}</b>
                             </div>
                             <div
                                 v-for="specialization in profile.profile
@@ -142,6 +149,25 @@ h2 {
     margin-bottom: 25px;
 }
 
+button {
+    padding: 8px;
+    background-color: yellow;
+    color: black;
+    border-radius: 8px;
+}
+.selection {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+
+    label , select , button {
+        margin-left: 15px;
+    }
+}
+
 #trainer-gallery {
     width: 100%;
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
@@ -175,21 +201,24 @@ h2 {
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
                     display: block;
+                    border-radius: 10px;
+                    border: 2px solid black;
                 }
 
-                // &:hover {
-                //     cursor: pointer;
-                //     img {
-                //         transform: scale(1.1);
-                //         display: block;
-                //     }
-                // }
+                &:hover {
+                    cursor: pointer;
+                    // img {
+                    //     transform: scale(1.1);
+                    //     display: block;
+                    // }
+                }
             }
         }
         .caption {
             text-align: center;
 
             .name {
+                margin: .5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
                 &:hover {
                     transform: scale(1.25);
@@ -204,6 +233,10 @@ h2 {
                     transform: scale(1.25);
                     cursor: pointer;
                 }
+            }
+
+            .social {
+                margin: 1rem 0;
             }
         }
     }

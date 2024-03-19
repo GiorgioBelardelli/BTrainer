@@ -168,4 +168,25 @@
         }
 
     }
+
+    .alert-danger  {
+        margin: auto;
+        width: 50%;
+        background-color: black;
+        border: none;
+        padding: 0;
+
+
+            ul {
+                padding:0;
+                list-style:none;
+                background-color:black;
+
+                li {
+                    background-color: white;
+                    font-size: 25px;
+                    color: black;
+                }
+            }
+    }
 </style>
