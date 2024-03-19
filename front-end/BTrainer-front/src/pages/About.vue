@@ -19,7 +19,8 @@ export default {
         const data = res.data;
         if (data.status === "success") {
             // Trova il profilo dell'utente con l'ID corrispondente
-            const userProfile = data.data.find(profile => profile.id === parseInt(profileId));
+            // const userProfile = data.data.find(profile => profile.id === parseInt(profileId));
+            const userProfile = data.data.find(profile => profile.name);
             if (userProfile) {
                 this.profile = userProfile;
                 console.log("Dettagli del profilo:", this.profile);
@@ -39,7 +40,7 @@ export default {
 </script>
 
 <template>
-    
+
     <div id="trainer-gallery">
         <h2>Info Personal Trainer</h2>
         <div class="container">

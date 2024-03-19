@@ -1,15 +1,19 @@
 <script>
+import { store } from '../store';
+
 export default {
     name: "Risultati",
     data() {
         return {
+            store,
             arrayFilter: [],
             specialization: null
         };
     },
     created() {
         this.specialization = this.$route.query.specialization;
-        this.arrayFilter = JSON.parse(this.$route.query.profiles);
+        // this.arrayFilter = JSON.parse(this.$route.query.profiles);
+        this.arrayFilter = store.arrayFilter;
     },
 
     methods: {

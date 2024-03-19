@@ -1,14 +1,17 @@
 <script>
 import axios from "axios";
+import { store } from '../store';
+
 
 export default {
     name: "AppTrainerGallery",
     data() {
         return {
+            store,
             profiles: [],
             specializations: [],
             selectedSpecialization: null,
-            arrayFilter: [],
+            // arrayFilter: [],
             profilesTemp:[],
         };
     },
@@ -20,17 +23,17 @@ export default {
 
         getSelectedSpecialization() {
             // Filtra i profili in base alla specializzazione selezionata
-            this.arrayFilter = this.profiles.filter(profile => {
+            store.arrayFilter = this.profiles.filter(profile => {
                 return profile.profile.specializations.includes(this.selectedSpecialization);
             });
 
             // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
             this.$router.push({
                 name: 'Risultati',
-                query: { 
-                    specialization: this.selectedSpecialization,
-                    profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
-                }
+                // query: {
+                //     specialization: this.selectedSpecialization,
+                //     profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
+                // }
             });
         },
 
@@ -76,7 +79,7 @@ export default {
 
 <template>
     <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
-    
+
     <div id="trainer-gallery">
         <div class="selection">
             <label for="specialization">Scegli la specializzazione:</label>
