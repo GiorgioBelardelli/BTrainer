@@ -16,7 +16,16 @@ export default {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
         },
+
+        showDetails(id) {
+            console.log('ID Profilo:', id);
+            this.$router.push({
+                name: 'About',
+                params: { id: id }
+            });
+        }
     }
+
 };
 
 </script>
@@ -29,14 +38,9 @@ export default {
                     <div
                         v-for="profile in arrayFilter"
                         :key="profile.id"
-                        class="card-trainer"
+                        class="card-trainer" @click="showDetails(profile.id)"
                     >
-                        <img
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
+                        <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
                             :alt="profile.name + ' ' + profile.surname"
                         />
                         <div class="caption">
@@ -117,13 +121,13 @@ h2 {
                     border: 2px solid black;
                 }
 
-                // &:hover {
-                //     cursor: pointer;
-                //     img {
-                //         transform: scale(1.1);
-                //         display: block;
-                //     }
-                // }
+                &:hover {
+                    cursor: pointer;
+                    // img {
+                    //     transform: scale(1.1);
+                    //     display: block;
+                    // }
+                }
             }
         }
         .caption {

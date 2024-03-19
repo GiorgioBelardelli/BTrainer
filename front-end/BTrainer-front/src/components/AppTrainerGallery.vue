@@ -38,6 +38,7 @@ export default {
             console.log('ID Profilo:', id);
             this.$router.push({
                 name: 'About',
+                params: { id: id }
             });
         }
     },

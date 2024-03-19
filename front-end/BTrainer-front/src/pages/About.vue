@@ -5,67 +5,58 @@ export default {
     name: "About",
     data() {
         return {
-            profiles: [],
+            profile: null
         };
     },
+    created() {
+        // Ottieni l'ID del profilo dalla route
+        const profileId = this.$route.params.id;
 
+        // Ottieni i dettagli del profilo utilizzando l'ID
+        axios
+    .get(`http://localhost:8000/api/v1/all`)
+    .then((res) => {
+        const data = res.data;
+        if (data.status === "success") {
+            // Trova il profilo dell'utente con l'ID corrispondente
+            const userProfile = data.data.find(profile => profile.id === parseInt(profileId));
+            if (userProfile) {
+                this.profile = userProfile;
+                console.log("Dettagli del profilo:", this.profile);
+            } else {
+                console.log("Nessun profilo trovato con l'ID:", profileId);
+            }
+        }
+    })
+
+    },
     methods: {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
-        },
-
-        showDetails(id) {
-            console.log('ID Profilo:', id);
-            this.$router.push({
-                name: 'About',
-            });
         }
-    },
-
-    mounted() {
-        axios
-            .get("http://localhost:8000/api/v1/all")
-            .then((res) => {
-                const data = res.data;
-                if (data.status === "success") this.profiles = data.data;
-
-                // console.log("profiles: ", this.profiles);
-            })
-            .catch((err) => {
-                console.err(err);
-            });
-    },
-};
+    }
+}
 </script>
 
-
 <template>
-    <h2>Info Personal Trainer</h2>
     
     <div id="trainer-gallery">
+        <h2>Info Personal Trainer</h2>
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
-                    <div
-                        v-for="profile in profiles"
-                        :key="profile.id"
-                        class="card-trainer" @click="showDetails(profile.id)"
-                    >
+                    <div class="card-trainer">
                         <img
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
+                            v-if="profile"
+                            :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
                             :alt="profile.name + ' ' + profile.surname"
                         />
-                        <div class="caption">
+                        <div class="caption" v-if="profile">
                             <div class="name">
                                 <b>{{ profile.name }} {{ profile.surname }}</b>
                             </div>
                             <div
-                                v-for="specialization in profile.profile
-                                    .specializations"
+                                v-for="specialization in profile.profile.specializations"
                                 :key="specialization"
                                 class="specializations"
                             >
@@ -77,6 +68,9 @@ export default {
                                 <i class="fa-brands fa-x-twitter"></i>
                                 <i class="fa-brands fa-tiktok"></i>
                                 <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div class="description">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quibusdam quaerat error dolores enim. Itaque harum quasi sint, modi deleniti iure velit dolorem maiores, sapiente accusantium ullam enim facilis illum.</p>
                             </div>
                         </div>
                     </div>
@@ -101,30 +95,24 @@ h2 {
     width: 100%;
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
     background-size: cover;
-    padding-bottom: 50px;
+    padding-top: 120px;
 
     .container {
         margin: auto;
         width: 80%;
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
         .col-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
+            padding: 1rem;
 
             .card-trainer {
+                display: flex;
                 position: relative;
-                margin: 1rem 0.5rem;
+                margin: 1rem 0.5rem 0;
                 overflow: hidden;
-                width: 25%;
+                width: 75%;
 
                 img {
-                    width: 100%;
+                    width: 400px;
                     height: 400px;
                     object-fit: cover;
                     object-position: center;
@@ -142,15 +130,15 @@ h2 {
             }
         }
         .caption {
-            text-align: center;
+            margin-left: 2rem;
 
             .name {
                 margin: .5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
-                &:hover {
-                    transform: scale(1.25);
-                    cursor: pointer;
-                }
+                // &:hover {
+                //     transform: scale(1.25);
+                //     cursor: pointer;
+                // }
             }
 
             .title {
