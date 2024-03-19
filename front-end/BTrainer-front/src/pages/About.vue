@@ -70,7 +70,7 @@ export default {
                                 <i class="fa-regular fa-envelope"></i>
                             </div>
                             <div class="description">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quibusdam quaerat error dolores enim. Itaque harum quasi sint, modi deleniti iure velit dolorem maiores, sapiente accusantium ullam enim facilis illum.</p>
+                                <p>{{ profile.profile.plan_program }}</p>
                             </div>
                         </div>
                     </div>

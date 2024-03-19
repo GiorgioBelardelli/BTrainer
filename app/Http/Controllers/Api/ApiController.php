@@ -31,6 +31,7 @@ class ApiController extends Controller
                 'profile' => [
                     'id' => $user->profile->id,
                     'photo' => $user->profile->photo,
+                    'plan_program' => $user->profile->plan_program,
                     'specializations' => $user->profile->specializations->pluck('name')->toArray(),
                 ],
             ];
