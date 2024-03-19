@@ -1,7 +1,6 @@
 <script>
 import axios from "axios";
-import { store } from '../store';
-
+import { store } from "../store";
 
 export default {
     name: "AppTrainerGallery",
@@ -10,9 +9,9 @@ export default {
             store,
             profiles: [],
             specializations: [],
-            selectedSpecialization: null,
+            selectedSpecializations: [],
             // arrayFilter: [],
-            profilesTemp:[],
+            profilesTemp: [],
         };
     },
 
@@ -21,15 +20,18 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        getSelectedSpecialization() {
-            // Filtra i profili in base alla specializzazione selezionata
-            store.arrayFilter = this.profiles.filter(profile => {
-                return profile.profile.specializations.includes(this.selectedSpecialization);
+        getSelectedSpecializations() {
+            // Modifica: Rinomina il metodo per eliminare la "s" alla fine
+            // Filtra i profili in base alle specializzazioni selezionate
+            store.arrayFilter = this.profiles.filter((profile) => {
+                return profile.profile.specializations.some((spec) =>
+                    this.selectedSpecializations.includes(spec)
+                );
             });
 
             // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
             this.$router.push({
-                name: 'Risultati',
+                name: "Risultati",
                 // query: {
                 //     specialization: this.selectedSpecialization,
                 //     profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
