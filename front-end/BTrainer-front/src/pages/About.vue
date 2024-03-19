@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import { forEach } from "lodash";
 
 export default {
     name: "About",
@@ -7,7 +8,8 @@ export default {
         return {
             profile: null,
             votes: [],
-            totalvotes: 0,
+
+            mediaVotes: 0,
         };
     },
     created() {
@@ -28,16 +30,16 @@ export default {
                         (a, b) => new Date(b.date) - new Date(a.date)
                     );
                     this.profile = userProfile;
-                    console.log("Dettagli del profilo:", this.profile);
+                    // console.log("Dettagli del profilo:", this.profile);
                 } else {
                     console.log("Nessun profilo trovato con l'ID:", profileId);
                 }
             }
+            this.getMediaVoti();
         });
     },
-    mounted() {
-        this.getMediaVoti();
-    },
+    // mounted() {
+    // },
 
     methods: {
         getImagePath: function (imgPath) {
@@ -45,7 +47,15 @@ export default {
         },
 
         getMediaVoti: function () {
-            // let temp = profile.profile.votes;
+            const votes = this.profile.profile.votes;
+            let tempTot = 0;
+            votes.forEach(vote => {
+                console.log(vote.value);
+                tempTot += vote.value;
+            });
+            console.log(tempTot);
+
+            this.mediaVotes =  tempTot / votes.length;
         },
     },
 };
@@ -109,7 +119,7 @@ export default {
                             <div class="votes">
                                 <h1>Voti Ricevuti:</h1>
                                 <div>
-                                    <p>Media voti: {{ totalvotes }}</p>
+                                    <p>Media voti: {{ mediaVotes }}</p>
                                 </div>
                             </div>
                         </div>
