@@ -47,18 +47,20 @@
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong style="color: white">{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" required class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <span id="password-length-error" class="invalid-feedback" role="alert" style="display: none;">
+                                    <strong style="color: white;">La password deve essere lunga almeno 8 caratteri.</strong>
+                                </span>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -68,13 +70,16 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
-
+                            <label for="password-confirm" required class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                        
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <span id="password-confirm-error" class="invalid-feedback" role="alert" style="display: none;">
+                                    <strong style="color: white;">La conferma della password deve essere lunga almeno 8 caratteri.</strong>
+                                </span>
                             </div>
                         </div>
-
+                        
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn">
@@ -89,6 +94,36 @@
     </div>
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('password').addEventListener('input', function() {
+            var password = this.value;
+            var passwordLengthError = document.getElementById('password-length-error');
+
+            if (password.length < 8) {
+                passwordLengthError.style.display = 'block';
+            } else {
+                passwordLengthError.style.display = 'none';
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('password-confirm').addEventListener('input', function() {
+            var passwordConfirm = this.value;
+            var passwordConfirmError = document.getElementById('password-confirm-error');
+
+            if (passwordConfirm.length < 8) {
+                passwordConfirmError.style.display = 'block';
+            } else {
+                passwordConfirmError.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</script>
 
 <style lang=scss scoped>
 

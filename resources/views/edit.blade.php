@@ -75,7 +75,7 @@
                                     <div class="row">
                                         @foreach ($specializations as $specialization)
                                             <div class="col-md-6">
-                                                <input required type="checkbox" name="specialization_id[]"
+                                                <input type="checkbox" name="specialization_id[]"
                                                     value="{{ $specialization->id }}"
                                                     @foreach ($profile->specializations as $profile_specialization)
                                     @if ($specialization->id == $profile_specialization->id)
@@ -142,5 +142,26 @@
             transform: scale(1.1);
         }
 
+    }
+
+    .alert-danger  {
+        margin: auto;
+        width: 50%;
+        background-color: black;
+        border: none;
+        padding: 0;
+
+
+            ul {
+                padding:0;
+                list-style:none;
+                background-color:black;
+
+                li {
+                    background-color: white;
+                    font-size: 25px;
+                    color: black;
+                }
+            }
     }
 </style>
