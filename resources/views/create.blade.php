@@ -12,7 +12,12 @@
 </div>
 @endif
 
-<form action="{{ route('profile.store') }}" method="POST" class="container text-center" enctype="multipart/form-data">
+<form 
+    action="{{ route('profile.store') }}" 
+    method="POST" 
+    class="container text-center" 
+    enctype="multipart/form-data"
+    id="createProfileForm">
 
     @csrf
     @method('POST')
@@ -45,7 +50,7 @@
             </div>
 
             <div class="specializations mb-3">
-                <b>Specializzazioni:</b>
+                <b style="color: white;">Specializzazioni:</b>
                 <div class="row">
                     @foreach ($specializations as $specialization)
                     <div class="col-md-6 text-start">
@@ -54,6 +59,7 @@
                     </div>
                     @endforeach
                 </div>
+                <p id="specializationError" style="color: red; display: none;">Seleziona almeno una specializzazione.</p>
             </div>
             <input required class="my-1 btn mt-4 mx-auto" type="submit" value="Create" id="yellow">
         </div>
@@ -61,6 +67,19 @@
 
 </form>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#createProfileForm').submit(function(e){
+
+                if ($('input[name="specialization_id[]"]:checked').length === 0) {
+                    $('#specializationError').show();
+                    e.preventDefault();
+                }
+            });
+        });
+</script>
 
 <style lang=scss scoped>
     .form-label strong {
@@ -90,7 +109,7 @@
     .alert-danger  {
         margin: auto;
         width: 50%;
-        background-color: black;
+        background-color: gray;
         border: none;
         padding: 0;
 

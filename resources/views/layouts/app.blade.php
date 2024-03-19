@@ -102,7 +102,7 @@
 
 <style lang=scss scoped>
     * { 
-        background-color: gray;
+        background-color: black;
         color: rgb(0, 0, 0);
         padding: 0;
 
@@ -160,5 +160,11 @@
     #navbarDropdown:hover {
             color:white;
         }
+    
+    a {
+        text-decoration: none;
+        font-weight: 500;
+    }
+
 
 </style>
