@@ -70,7 +70,7 @@
 <style lang=scss scoped>
     #card-black{
         color: white;
-        background-color: black;
+        background-color: #5a5a5a;
     }
 
     #sub-card *{

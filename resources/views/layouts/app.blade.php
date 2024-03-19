@@ -102,7 +102,7 @@
 
 <style lang=scss scoped>
     * { 
-        background-color: gray;
+        background-color: #5a5a5a;
         color: rgb(0, 0, 0);
         padding: 0;
 
@@ -124,13 +124,13 @@
         }
 
         .navbar-nav li a {
-            background-color: black;
+            background-color: #5a5a5a;
 
         }
 
         .card-header {
             color: white;
-            background-color: black;
+            background-color: #5a5a5a;
         }
     }
 
@@ -140,7 +140,7 @@
     }
 
     #dropdown-menu {
-        background-color: black;
+        background-color: #5a5a5a;
         color: white;
         padding: 0;
 
@@ -152,7 +152,7 @@
             padding: 0;
 
             a:hover {
-                background-color:black;
+                background-color:#5a5a5a;
                 color:yellow;
             }
         }
@@ -160,5 +160,11 @@
     #navbarDropdown:hover {
             color:white;
         }
+    
+    a {
+        text-decoration: none;
+        font-weight: 500;
+    }
+
 
 </style>

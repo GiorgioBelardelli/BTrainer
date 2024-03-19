@@ -21,7 +21,9 @@
                     <form 
                     action="{{ route('profile.update', $profile->id) }}"
                     enctype="multipart/form-data"
-                    method="POST" >
+                    method="POST" 
+                    id="updateProfileForm"
+                    >
 
                         @csrf
                         @method('PUT')
@@ -111,6 +113,7 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                    <p id="specializationError" style="color: red; display: none;">Seleziona almeno una specializzazione.</p>
                                 </div>
                                 <input class="my-1 btn mt-4 mx-auto" type="submit" value="Update" id="yellow">
                             </div>
@@ -118,11 +121,26 @@
 
                     </form>
             @else
-                <h1>Ops! Si é verificato un errore, metti le manine apposto</h1>
+                <h1>Non puoi modificare gli altri profili!</h1>
+                <h1>Ops! Si é verificato un errore!</h1>
             @endif
             @endauth
     </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#updateProfileForm').submit(function(e){
+
+                if ($('input[name="specialization_id[]"]:checked').length === 0) {
+                    $('#specializationError').show();
+                    e.preventDefault();
+                }
+            });
+        });
+</script>
+
 
 <style lang=scss scoped>
     .form-label strong {
@@ -172,7 +190,7 @@
     .alert-danger  {
         margin: auto;
         width: 50%;
-        background-color: black;
+        background-color: #5a5a5a;
         border: none;
         padding: 0;
 
@@ -180,7 +198,7 @@
             ul {
                 padding:0;
                 list-style:none;
-                background-color:black;
+                background-color:#5a5a5a;
 
                 li {
                     background-color: white;
