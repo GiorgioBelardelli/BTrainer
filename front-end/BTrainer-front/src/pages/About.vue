@@ -19,8 +19,7 @@ export default {
         const data = res.data;
         if (data.status === "success") {
             // Trova il profilo dell'utente con l'ID corrispondente
-            // const userProfile = data.data.find(profile => profile.id === parseInt(profileId));
-            const userProfile = data.data.find(profile => profile.name);
+            const userProfile = data.data.find(profile => profile.id === parseInt(profileId));
             if (userProfile) {
                 this.profile = userProfile;
                 console.log("Dettagli del profilo:", this.profile);
