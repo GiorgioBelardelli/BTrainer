@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="card" id="card-black">
-                        @if(file_exists(public_path('/img/' . $profile->photo)))
-                            <img src="/img/{{ $profile->photo }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
-                        @else
-                            <img src="{{ asset('storage/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
-                        @endif
+                @if(file_exists(storage_path('app/public/' . $profile->photo)))
+                    <img src="{{ asset('storage/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
+                @else
+                    <img src="{{ asset('img/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo 2">
+                @endif   
                         <div class="card-body col-6 mx-auto" id="sub-card">
                         <h1 class="card-title" id="grey">
                             {{ $profile->user->name }}
@@ -35,13 +35,32 @@
                             <p> {{ $profile->plan_program }}</p>
                         </div>
                         <!-- GESTIONE FORMATI DIVERSI PER CURRICULUM -->
-                        @if (Str::endsWith($profile->curriculum, '.pdf'))
-                            <embed src="{{ asset('img/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="450px"/>
-                        @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
-                            <img src="{{ asset('img/' . $profile->curriculum) }}" alt="Curriculum" width="100%"  />
+                        @if(file_exists(storage_path('app/public/' . $profile->curriculum)))
+                            @if (Str::endsWith($profile->curriculum, '.pdf'))
+                                <embed src="{{ asset('storage/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="450px"/>
+                            @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
+                                <img src="{{ asset('storage/' . $profile->curriculum) }}" alt="Curriculum" width="100%"  />
+                            @else
+                                <p>Formato del file non supportato</p>
+                            @endif
                         @else
-                            <p>Formato del file non supportato</p>
-                        @endif  
+                            @if (Str::endsWith($profile->curriculum, '.pdf'))
+                                <embed src="{{ asset('img/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="450px"/>
+                            @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
+                                <img src="{{ asset('img/' . $profile->curriculum) }}" alt="Curriculum" width="100%"  />
+                            @else
+                                <p>Formato del file non supportato</p>
+                            @endif  
+                        @endif
+
+
+
+
+
+
+
+
+                        
                 </div>
             </div>
         </div>

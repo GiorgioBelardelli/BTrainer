@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\TrainerProfileFormRequest;
+use App\Http\Requests\TrainerProfileFormRequestEdit;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -51,22 +52,20 @@ class TrainerProfileController extends Controller
         $newProfile = new Profile();
 
         $img_path = Storage::put('images', $data['photo']);
+        $curriculum_path = Storage::put('documents', $data['curriculum']);
+            
 
         $newProfile->phone_number = $data['phone_number'];
         $newProfile->photo = $img_path;
-        $newProfile->curriculum = $data['curriculum'];
+        $newProfile->curriculum = $curriculum_path;
         $newProfile->plan_program = $data['plan_program'];
         $newProfile->work_address = $data['work_address'];
-
+        
         $newProfile->user()->associate($user);
-
+        
         $newProfile->save();
-
-        // Verifica se specialization_id è presente nell'array
-        if (isset($data['specialization_id'])) {
-            $newProfile->specializations()->attach($data['specialization_id']);
-        }
-
+        
+        $newProfile -> specializations() -> attach($data['specialization_id']);
         return redirect()->route('index', $newProfile->id);
     }
 
@@ -104,23 +103,30 @@ class TrainerProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TrainerProfileFormRequest $request, $id)
+    public function update(TrainerProfileFormRequestEdit $request, $id)
     {
         $data = $request->all();
 
         $profile = Profile::find($id);
         
-        // $img_path = Storage :: put('images', $data['image']);
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('/images');
+            $profile->photo = $photoPath;
+        }
+    
+        if ($request->hasFile('curriculum')) {
+            $curriculumPath = $request->file('curriculum')->store('/documents');
+            $profile->curriculum = $curriculumPath;
+        }
 
         $profile->phone_number = $data['phone_number'];
-        // $profile -> image = $img_path;
-        $profile->curriculum = $data['curriculum'];
         $profile->plan_program = $data['plan_program'];
         $profile->work_address = $data['work_address'];
 
+        $profile -> specializations() -> sync($data['specialization_id']);
+
         $profile->save();
 
-        $profile -> specializations() -> sync($data['specialization_id']);
 
         return redirect()->route('profile.show', $profile->id);
     }

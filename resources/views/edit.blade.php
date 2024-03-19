@@ -4,11 +4,6 @@
     <div class="container">
         
 
-
-            @auth
-            @if (Auth::user()->id === $profile->user_id)
-
-                <h1>Modifica il tuo Profilo: </h1>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -18,9 +13,15 @@
                             </ul>
                         </div>
                     @endif
-                <form method="POST" enctype="multipart/form-data">
+            @auth
+            @if (Auth::user()->id === $profile->user_id)
 
-                    <form method="POST" enctype="multipart/form-data">
+                <h1>Modifica il tuo Profilo: </h1>
+
+                    <form 
+                    action="{{ route('profile.update', $profile->id) }}"
+                    enctype="multipart/form-data"
+                    method="POST" >
 
                         @csrf
                         @method('PUT')
@@ -35,27 +36,40 @@
 
                                 <div class="mb-3">
                                     <label for="photo" class="form-label"><strong>Foto</strong></label>
-                                    <input required type="file" class="form-control" name="photo" id="photo"
+                                    <input type="file" class="form-control" name="photo" id="photo"
                                         value="{{ $profile->photo }}" accept="image/*">
                                 </div>
                                 <div class="img">
-                                    <!-- <img class="w-100" src="{{ asset('storage/' . $profile->photo) }}" alt=""> -->
-                                    <img src="/img/{{ $profile->photo }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
+                                @if(file_exists(storage_path('app/public/' . $profile->photo)))
+                                    <img src="{{ asset('storage/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo">
+                                @else
+                                    <img src="{{ asset('img/' . $profile->photo) }}" class="card-img-top w-50 mx-auto" alt="Profile Photo 2">
+                                @endif   
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="curriculum" class="form-label"><strong>Curriculum</strong></label>
-                                    <input required type="file" class="form-control" name="curriculum" id="curriculum"
+                                    <input type="file" class="form-control" name="curriculum" id="curriculum"
                                         accept=".pdf, .png, .jpg, .jpeg" value="{{ $profile->curriculum }}">
 
                                         <!-- GESTIONE FORMATI DIVERSI PER CURRICULUM -->
-                                    @if (Str::endsWith($profile->curriculum, '.pdf'))
-                                        <embed src="{{ asset('img/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="900px" />
-                                    @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
-                                        <img src="{{ asset('img/' . $profile->curriculum) }}" alt="Curriculum" width="100%" height="900px" />
-                                    @else
-                                        <p>Formato del file non supportato</p>
-                                    @endif        
+                                        @if(file_exists(storage_path('app/public/' . $profile->curriculum)))
+                                            @if (Str::endsWith($profile->curriculum, '.pdf'))
+                                                <embed src="{{ asset('storage/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="450px"/>
+                                            @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
+                                                <img src="{{ asset('storage/' . $profile->curriculum) }}" alt="Curriculum" width="100%"  />
+                                            @else
+                                                <p>Formato del file non supportato</p>
+                                            @endif
+                                        @else
+                                            @if (Str::endsWith($profile->curriculum, '.pdf'))
+                                                <embed src="{{ asset('img/' . $profile->curriculum) }}" type="application/pdf" width="100%" height="450px"/>
+                                            @elseif (Str::endsWith($profile->curriculum, ['.png', '.jpg', '.jpeg']))
+                                                <img src="{{ asset('img/' . $profile->curriculum) }}" alt="Curriculum" width="100%"  />
+                                            @else
+                                                <p>Formato del file non supportato</p>
+                                            @endif  
+                                        @endif        
                                     
                                 </div>
 
@@ -75,14 +89,25 @@
                                     <div class="row">
                                         @foreach ($specializations as $specialization)
                                             <div class="col-md-6">
-                                                <input required type="checkbox" name="specialization_id[]"
+                                                <input 
+                                                    type="checkbox" 
+                                                    name="specialization_id[]"
                                                     value="{{ $specialization->id }}"
+                                                    id="{{ 'specialization-' . $specialization -> id }}"
                                                     @foreach ($profile->specializations as $profile_specialization)
-                                    @if ($specialization->id == $profile_specialization->id)
-                                        checked
-                                    @endif @endforeach>
-                                                <label class="checkbox-inline" id="spec-white">
-                                                    {{ $specialization->name }}</label>
+                                                    
+                                                    @if ($specialization->id == $profile_specialization->id)
+                                                    checked                                                
+                                                    @endif 
+
+                                                    @endforeach>
+                                                
+                                                <label 
+                                                    for="{{ 'specialization-' . $specialization -> id }}"
+                                                    class="checkbox-inline" 
+                                                    id="spec-white">
+                                                    {{ $specialization->name }}
+                                                </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -92,9 +117,9 @@
                         </div>
 
                     </form>
-                @else
+            @else
                 <h1>Ops! Si é verificato un errore, metti le manine apposto</h1>
-                @endif
+            @endif
             @endauth
     </div>
 @endsection

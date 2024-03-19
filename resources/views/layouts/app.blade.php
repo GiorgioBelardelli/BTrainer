@@ -100,8 +100,8 @@
 </html>
 
 <style lang=scss scoped>
-    * {
-        background-color: black;
+    * { 
+        background-color: gray;
         color: rgb(0, 0, 0);
         padding: 0;
 
