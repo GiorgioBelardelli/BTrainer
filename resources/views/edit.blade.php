@@ -118,7 +118,7 @@
 
                     </form>
             @else
-                <h1>Ops! Si é verificato un errore, metti le manine apposto</h1>
+                <h1>Non puoi modificare gli altri profili!</h1>
             @endif
             @endauth
     </div>
@@ -172,7 +172,7 @@
     .alert-danger  {
         margin: auto;
         width: 50%;
-        background-color: black;
+        background-color: #5a5a5a;
         border: none;
         padding: 0;
 
@@ -180,7 +180,7 @@
             ul {
                 padding:0;
                 list-style:none;
-                background-color:black;
+                background-color:#5a5a5a;
 
                 li {
                     background-color: white;

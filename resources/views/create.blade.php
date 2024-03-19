@@ -90,7 +90,7 @@
     .alert-danger  {
         margin: auto;
         width: 50%;
-        background-color: black;
+        background-color: #5a5a5a;
         border: none;
         padding: 0;
 
@@ -98,7 +98,7 @@
             ul {
                 padding:0;
                 list-style:none;
-                background-color:black;
+                background-color:#5a5a5a;
 
                 li {
                     background-color: white;
