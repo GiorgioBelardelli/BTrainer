@@ -101,10 +101,8 @@
 </html>
 
 <style lang=scss scoped>
+@import "resources/scss/app.scss";    
     * { 
-        background-color: black;
-        color: rgb(0, 0, 0);
-        padding: 0;
 
         .logo {
             img {
