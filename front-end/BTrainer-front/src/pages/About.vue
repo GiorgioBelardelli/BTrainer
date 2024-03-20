@@ -1,5 +1,4 @@
 <script>
-
 import axios from "axios";
 import { forEach } from "lodash";
 
@@ -8,8 +7,8 @@ export default {
     data() {
         return {
             profile: null,
-            message:'',
-            rece:'',
+            message: "",
+            rece: "",
             votes: [],
             mediaVotes: 0,
             selectedStar: -1, // Nessuna stella selezionata inizialmente
@@ -53,12 +52,12 @@ export default {
 
         handleSubmitMsg() {
             // Convalida dei dati del form
-            if (this.message.trim() === '') {
-
+            if (this.message.trim() === "") {
                 // Mostra un messaggio di errore se il campo del messaggio è vuoto
 
-                alert('Il campo del messaggio non può essere vuoto.');
+                alert("Il campo del messaggio non può essere vuoto.");
 
+<<<<<<< HEAD
                 return; 
             }
         },
@@ -72,8 +71,11 @@ export default {
                 // Mostra un messaggio di errore se il campo della recensione è vuota
 
                 alert('La recensione non può essere vuota.');
+=======
+                // else...chiamata axios in post
+>>>>>>> a1f85f0ab267590088755e7407594bb93edac72f
 
-                return; 
+                return;
             }
         },
 
@@ -94,13 +96,13 @@ export default {
         getMediaVoti: function () {
             const votes = this.profile.profile.votes;
             let tempTot = 0;
-            votes.forEach(vote => {
+            votes.forEach((vote) => {
                 console.log(vote.value);
                 tempTot += vote.value;
             });
             console.log(tempTot);
 
-            this.mediaVotes =  tempTot / votes.length;
+            this.mediaVotes = tempTot / votes.length;
         },
 
         // Questo metodo resetta la selezione delle stelline del voto se
@@ -116,7 +118,6 @@ export default {
     },
 };
 </script>
-
 
 <template>
     <div id="trainer-gallery">
@@ -161,16 +162,6 @@ export default {
                                     Recensioni:
                                     {{ profile.profile.reviews.length }}
                                 </h1>
-                                <div
-                                    v-for="review in profile.profile.reviews"
-                                    :key="review.id"
-                                >
-                                    <h3>Singola recensione:</h3>
-                                    <p>Nome: {{ review.name }}</p>
-                                    <p>Data: {{ review.date }}</p>
-                                    <p>Contenuto: {{ review.content }}</p>
-                                    <br />
-                                </div>
                             </div>
 
                             <div class="votes">
@@ -186,13 +177,24 @@ export default {
         </div>
     </div>
 
+<<<<<<< HEAD
     <form @submit.prevent="handleSubmitMsg">
     
          <!-- Qui l'utente invia il messaggio  --> 
+=======
+    <form @submit.prevent="handleSubmit">
+        <!-- Qui l'utente invia il messaggio  -->
+>>>>>>> a1f85f0ab267590088755e7407594bb93edac72f
         <div class="msg">
-            <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio">
+            <input
+                type="text"
+                name="message"
+                id="message"
+                v-model="message"
+                placeholder="Invia un messaggio"
+            />
             <button type="submit">Invia Messaggio</button>
-            <div> prova:{{message}} </div>
+            <div>prova:{{ message }}</div>
         </div>
     </form>
 
@@ -200,7 +202,13 @@ export default {
 
     <form @submit.prevent="handleSubmitRece">
         <div class="rece">
-            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer">
+            <input
+                type="text"
+                name="rece"
+                id="rece"
+                v-model="rece"
+                placeholder="Lascia una recensione su questo Personal Trainer"
+            />
             <button type="submit">Invia Recensione</button>
         </div>
     </form>
@@ -309,7 +317,8 @@ form {
     width: 80%;
     margin: auto;
 
-    #message , #rece {
+    #message,
+    #rece {
         width: 30%;
         min-height: 50px;
         border: 1px solid black;
@@ -322,6 +331,7 @@ form {
     }
     input::placeholder {
         margin: auto;
+<<<<<<< HEAD
 } }
     .vote {
         display: flex;
@@ -345,4 +355,8 @@ form {
         }
 
 
+=======
+    }
+}
+>>>>>>> a1f85f0ab267590088755e7407594bb93edac72f
 </style>
