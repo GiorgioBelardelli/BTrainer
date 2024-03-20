@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import { store } from '../store';
 
 export default {
@@ -6,14 +7,32 @@ export default {
     data() {
         return {
             store,
+            profile: null,
             arrayFilter: [],
-            specialization: null
+            votes: [],
+            specialization: null,
+            voteSelect: 0,
+            arrayMediaVoti: [{'idProfile': '', 'mediaVoti': 0}]
         };
     },
     created() {
         this.specialization = this.$route.query.specialization;
-        // this.arrayFilter = JSON.parse(this.$route.query.profiles);
         this.arrayFilter = store.arrayFilter;
+    },
+
+    mounted() {
+        axios
+            .get("http://localhost:8000/api/v1/votes")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") {
+                    this.votes = data.votes;
+                    // console.log(this.votes);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     },
 
     methods: {
@@ -22,20 +41,48 @@ export default {
         },
 
         showDetails(id) {
-            console.log('ID Profilo:', id);
+            // console.log('ID Profilo:', id);
             this.$router.push({
                 name: 'About',
                 params: { id: id }
             });
+        },
+
+        filterVote() {
+            let filteredArray = [];
+            // store.mediaVotes >= this.voteSelect;
+            // console.log('array filter: ' + this.arrayFilter[2].profile.votes[0].value);
+            for (let i = 0; i < this.arrayFilter.length; i++) {
+                let voti = this.arrayFilter[i].profile.votes;
+                // console.log('voti: ' + voti.value);
+                let tempTot = 0;
+                voti.forEach(vote => {
+                    // console.log(vote.value);
+                    tempTot += vote.value;
+                });
+                // console.log(tempTot);
+                let mediaVoti =  tempTot / voti.length;
+                if (mediaVoti >= this.voteSelect) {
+                    filteredArray.push(this.arrayFilter[i]);
+                }
+                console.log('media voti: ' + mediaVoti);
+            }
+            this.arrayFilter = filteredArray;
+            console.log('voto select: ' + this.voteSelect);
         }
     }
-
 };
 
 </script>
 
 <template>
     <div id="trainer-gallery">
+        <form style="text-align: center;">
+            <select name="vote" id="vote" v-model="voteSelect" @change="filterVote">
+                <option disabled selected>Scegli un voto</option>
+                <option v-for="vote in votes" :key="vote.id" :value="vote.value">{{ vote.value }}</option>
+            </select>
+        </form>
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
@@ -52,8 +99,7 @@ export default {
                                 {{ profile.name }} {{ profile.surname }}
                             </div>
                             <div
-                                v-for="specialization in profile.profile
-                                    .specializations"
+                                v-for="specialization in profile.profile.specializations"
                                 :key="specialization"
                                 class="specializations"
                             >
@@ -89,6 +135,7 @@ h2 {
 
     padding-top: 160px;
     width: 100%;
+    min-height: calc(100vh - 300px);
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
     background-size: cover;
     padding-bottom: 50px;

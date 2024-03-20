@@ -10,7 +10,6 @@ export default {
             profiles: [],
             specializations: [],
             selectedSpecializations: [],
-            // arrayFilter: [],
             profilesTemp: [],
         };
     },
@@ -32,10 +31,6 @@ export default {
             // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
             this.$router.push({
                 name: "Risultati",
-                // query: {
-                //     specialization: this.selectedSpecialization,
-                //     profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
-                // }
             });
         },
 
@@ -84,18 +79,12 @@ export default {
 
     <div id="trainer-gallery">
         <div class="selection">
-            <label>Scegli la specializzazione:</label>
-            <div
-                v-for="specialization in specializations"
-                :key="specialization"
-            >
-                <input
-                    type="checkbox"
-                    :id="specialization"
-                    :value="specialization"
-                    v-model="selectedSpecializations"
-                    @change="getSelectedSpecializations"
-                />
+            <div class="spec-label">
+                <label>Scegli la specializzazione:</label>
+            </div>
+            <div v-for="specialization in specializations" :key="specialization">
+                <input type="checkbox" :id="specialization" :value="specialization" v-model="selectedSpecializations"
+                    @change="getSelectedSpecializations" />
                 <label :for="specialization">{{ specialization }}</label>
             </div>
         </div>
@@ -103,30 +92,18 @@ export default {
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
-                    <div
-                        v-for="profile in profiles"
-                        :key="profile.id"
-                        class="card-trainer"
-                        @click="showDetails(profile.id)"
-                    >
-                        <img
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
-                            :alt="profile.name + ' ' + profile.surname"
-                        />
+                    <div v-for="profile in profiles" :key="profile.id" class="card-trainer"
+                        @click="showDetails(profile.id)">
+                        <img :src="getImagePath(
+                `../assets/trainers/${profile.profile.photo}`
+            )
+                " :alt="profile.name + ' ' + profile.surname" />
                         <div class="caption">
                             <div class="name">
                                 <b>{{ profile.name }} {{ profile.surname }}</b>
                             </div>
-                            <div
-                                v-for="specialization in profile.profile
-                                    .specializations"
-                                :key="specialization"
-                                class="specializations"
-                            >
+                            <div v-for="specialization in profile.profile
+                .specializations" :key="specialization" class="specializations">
                                 {{ specialization }}
                             </div>
                             <div class="social">
@@ -161,15 +138,15 @@ button {
     color: black;
     border-radius: 8px;
 }
-.selection {
-    margin: auto;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
 
-    label,
+.selection {
+    margin: 0 auto 3rem;
+    width: 20%;
+
+    .spec-label {
+        margin-bottom: .5rem;
+    }
+
     select,
     button {
         margin-left: 15px;
@@ -222,12 +199,14 @@ button {
                 }
             }
         }
+
         .caption {
             text-align: center;
 
             .name {
                 margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
+
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
@@ -237,6 +216,7 @@ button {
             .title {
                 margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
+
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
