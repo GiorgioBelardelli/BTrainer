@@ -13,7 +13,6 @@ export default {
             message:'',
             rece:'',
             votes: [],
-            // mediaVotes: 0,
         };
     },
     created() {

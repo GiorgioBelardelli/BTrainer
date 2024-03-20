@@ -11,14 +11,12 @@ export default {
             arrayFilter: [],
             votes: [],
             specialization: null,
-            // mediaVotes: 0,
             voteSelect: 0,
             arrayMediaVoti: [{'idProfile': '', 'mediaVoti': 0}]
         };
     },
     created() {
         this.specialization = this.$route.query.specialization;
-        // this.arrayFilter = JSON.parse(this.$route.query.profiles);
         this.arrayFilter = store.arrayFilter;
     },
 
@@ -43,7 +41,7 @@ export default {
         },
 
         showDetails(id) {
-            console.log('ID Profilo:', id);
+            // console.log('ID Profilo:', id);
             this.$router.push({
                 name: 'About',
                 params: { id: id }
@@ -68,8 +66,6 @@ export default {
                     filteredArray.push(this.arrayFilter[i]);
                 }
                 console.log('media voti: ' + mediaVoti);
-                // this.arrayMediaVoti[i].mediaVoti = mediaVoti;
-                // this.arrayMediaVoti[i].idProfile = this.arrayFilter[i].id;
             }
             this.arrayFilter = filteredArray;
             console.log('voto select: ' + this.voteSelect);

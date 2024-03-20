@@ -10,7 +10,6 @@ export default {
             profiles: [],
             specializations: [],
             selectedSpecializations: [],
-            // arrayFilter: [],
             profilesTemp: [],
         };
     },
