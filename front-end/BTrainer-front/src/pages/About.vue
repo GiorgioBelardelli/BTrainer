@@ -56,9 +56,9 @@ export default {
 
             alert('Il campo del messaggio non può essere vuoto.');
 
-        // else...chiamata axios in post 
+        // else...chiamata axios in post
 
-            return; 
+            return;
         }
         },
 
@@ -79,7 +79,6 @@ export default {
     },
 };
 </script>
-
 
 <template>
     <div id="trainer-gallery">
@@ -124,16 +123,6 @@ export default {
                                     Recensioni:
                                     {{ profile.profile.reviews.length }}
                                 </h1>
-                                <div
-                                    v-for="review in profile.profile.reviews"
-                                    :key="review.id"
-                                >
-                                    <h3>Singola recensione:</h3>
-                                    <p>Nome: {{ review.name }}</p>
-                                    <p>Data: {{ review.date }}</p>
-                                    <p>Contenuto: {{ review.content }}</p>
-                                    <br />
-                                </div>
                             </div>
 
                             <div class="votes">
@@ -150,21 +139,31 @@ export default {
     </div>
 
     <form @submit.prevent="handleSubmit">
-    
-         <!-- Qui l'utente invia il messaggio  --> 
+        <!-- Qui l'utente invia il messaggio  -->
         <div class="msg">
-            <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio">
+            <input
+                type="text"
+                name="message"
+                id="message"
+                v-model="message"
+                placeholder="Invia un messaggio"
+            />
             <button type="submit">Invia Messaggio</button>
-            <div> prova:{{message}} </div>
+            <div>prova:{{ message }}</div>
         </div>
 
         <!-- Qui l'utente inserisce una recensione -->
 
         <div class="rece">
-            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer">
+            <input
+                type="text"
+                name="rece"
+                id="rece"
+                v-model="rece"
+                placeholder="Lascia una recensione su questo Personal Trainer"
+            />
             <button type="submit">Invia Recensione</button>
         </div>
-
     </form>
 </template>
 
@@ -249,7 +248,8 @@ form {
     width: 80%;
     margin: auto;
 
-    #message , #rece {
+    #message,
+    #rece {
         width: 30%;
         min-height: 50px;
         border: 1px solid black;
@@ -262,6 +262,6 @@ form {
     }
     input::placeholder {
         margin: auto;
-}
+    }
 }
 </style>

@@ -16,12 +16,12 @@ class MessageTableSeeder extends Seeder
      */
     public function run()
     {
-        Message :: factory() -> count(20) -> make()
-        ->each(function($message){
-            $profile = Profile :: inRandomOrder() -> first();
-            $message -> profile() -> associate($profile -> id);
+        Message::factory()->count(100)->make()
+            ->each(function ($message) {
+                $profile = Profile::inRandomOrder()->first();
+                $message->profile()->associate($profile->id);
 
-            $message -> save();
-        });
+                $message->save();
+            });
     }
 }
