@@ -29,7 +29,10 @@
                     @if (Auth::user()->id === $userProfile->user_id)
                     <div class="reviews">
                         <h1>Recensioni: </h1>
-                        @foreach ($userProfile->reviews as $review)
+                        @php
+                        $sortedReviews = $userProfile->reviews->sortByDesc('date');
+                        @endphp
+                        @foreach ($sortedReviews as $review)
                         <h3>Nome: {{ $review->name }}</h3>
                         <span>Data: {{ $review->date }}</span>
                         <br>
@@ -44,7 +47,10 @@
                     @if (Auth::user()->id === $userProfile->user_id)
                     <div class="messages">
                         <h1>Messaggi ricevuti: </h1>
-                        @foreach ($userProfile->messages as $message)
+                        @php
+                        $sortedMessages = $userProfile->messages->sortByDesc('date');
+                        @endphp
+                        @foreach ($sortedMessages as $message)
                         <h3>Nome: {{ $message->name }}</h3>
                         <span>E-mail: {{ $message->email }}</span>
                         <br>
