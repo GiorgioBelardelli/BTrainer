@@ -13,6 +13,8 @@ export default {
             rece: "",
             votes: [],
             mediaVotes: 0,
+            selectedStar: -1, // Nessuna stella selezionata inizialmente
+            stars: [1, 2, 3, 4, 5]
         };
     },
     created() {
@@ -100,6 +102,16 @@ export default {
             console.log(tempTot);
 
             store.mediaVotes = tempTot / votes.length;
+        },
+
+        // Questo metodo resetta la selezione delle stelline del voto se
+        // si clicca col mouse al di fuori di una stellina
+        handleOutsideClick(event) {
+            // Controlla se l'evento di clic è avvenuto all'interno del componente
+            if (!this.$el.contains(event.target)) {
+                // L'utente ha cliccato fuori dall'area delle stelle, reimposta selectedStar
+                this.selectedStar = -1;
+            }
         },
     },
 };

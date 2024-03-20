@@ -12,7 +12,7 @@ export default {
             votes: [],
             specialization: null,
             voteSelect: 0,
-            arrayMediaVoti: [{'idProfile': '', 'mediaVoti': 0}]
+            arrayMediaVoti: [{ 'idProfile': '', 'mediaVoti': 0 }]
         };
     },
     created() {
@@ -61,7 +61,7 @@ export default {
                     tempTot += vote.value;
                 });
                 // console.log(tempTot);
-                let mediaVoti =  tempTot / voti.length;
+                let mediaVoti = tempTot / voti.length;
                 if (mediaVoti >= this.voteSelect) {
                     filteredArray.push(this.arrayFilter[i]);
                 }
@@ -86,23 +86,16 @@ export default {
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
-                    <div
-                        v-for="profile in arrayFilter"
-                        :key="profile.id"
-                        class="card-trainer" @click="showDetails(profile.id)"
-                    >
+                    <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
+                        @click="showDetails(profile.id)">
                         <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
-                            :alt="profile.name + ' ' + profile.surname"
-                        />
+                            :alt="profile.name + ' ' + profile.surname" />
                         <div class="caption">
                             <div class="name">
                                 {{ profile.name }} {{ profile.surname }}
                             </div>
-                            <div
-                                v-for="specialization in profile.profile.specializations"
-                                :key="specialization"
-                                class="specializations"
-                            >
+                            <div v-for="specialization in profile.profile.specializations" :key="specialization"
+                                class="specializations">
                                 {{ specialization }}
                             </div>
                             <div class="social">
@@ -181,18 +174,22 @@ h2 {
                 }
             }
         }
+
         .caption {
             text-align: center;
             padding-bottom: 25px;
             padding-top: 10px;
 
-        .name, .specializations, .social {
-            margin-bottom: 5px;
-        }
+            .name,
+            .specializations,
+            .social {
+                margin-bottom: 5px;
+            }
 
             .name {
                 margin: .5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
+
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
@@ -202,6 +199,7 @@ h2 {
             .title {
                 margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
+
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
