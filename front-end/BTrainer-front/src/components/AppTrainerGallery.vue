@@ -32,10 +32,6 @@ export default {
             // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
             this.$router.push({
                 name: "Risultati",
-                // query: {
-                //     specialization: this.selectedSpecialization,
-                //     profiles: JSON.stringify(this.arrayFilter) // Converti l'array in una stringa JSON
-                // }
             });
         },
 

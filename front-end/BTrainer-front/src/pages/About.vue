@@ -1,17 +1,19 @@
 <script>
 
 import axios from "axios";
+import { store } from '../store';
 import { forEach } from "lodash";
 
 export default {
     name: "About",
     data() {
         return {
+            store,
             profile: null,
             message:'',
             rece:'',
             votes: [],
-            mediaVotes: 0,
+            // mediaVotes: 0,
         };
     },
     created() {
@@ -71,7 +73,7 @@ export default {
             });
             console.log(tempTot);
 
-            this.mediaVotes =  tempTot / votes.length;
+            store.mediaVotes =  tempTot / votes.length;
         },
     },
 };
@@ -136,7 +138,7 @@ export default {
                             <div class="votes">
                                 <h1>Voti Ricevuti:</h1>
                                 <div>
-                                    <p>Media voti: {{ mediaVotes }}</p>
+                                    <p>Media voti: {{ store.mediaVotes }}</p>
                                 </div>
                             </div>
                         </div>
@@ -178,6 +180,7 @@ h2 {
 
 #trainer-gallery {
     width: 100%;
+    min-height: calc(100vh - 300px);
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
     background-size: cover;
     padding-top: 120px;
