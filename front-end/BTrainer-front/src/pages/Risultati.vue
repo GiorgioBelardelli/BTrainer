@@ -78,9 +78,30 @@ export default {
         },
 
         filterReview() {
-            console.log(this.reviewSelect);
-            console.log(this.arrayFilter[0].profile.reviews.length);
-            //risolvere con la logica di "filterVote()"
+            let filteredArray = [];
+            console.log('value della select: ' + this.reviewSelect);
+            // console.log(this.arrayFilter[0].profile.reviews.length);
+            for (let i = 0; i < this.arrayFilter.length; i++) {
+                let recensioni = this.arrayFilter[i].profile.reviews.length;
+                console.log('n° recensioni: ' + recensioni);
+                if (this.reviewSelect === 1 || recensioni <= 3) {
+                    filteredArray.push(this.arrayFilter[i])
+                    console.log('sono dentro if 0-3');
+                    // console.log('arrayfilter: ' + filteredArray);
+                }
+                if (this.reviewSelect === 2 || recensioni > 3 && recensioni <= 7) {
+                    filteredArray.push(this.arrayFilter[i])
+                    console.log('sono dentro if 3-7');
+                    // console.log('arrayfilter: ' + filteredArray);
+                }
+                if (this.reviewSelect === 3 || recensioni > 3 && recensioni > 7) {
+                    filteredArray.push(this.arrayFilter[i])
+                    console.log('sono dentro if 8');
+                    // console.log('arrayfilter: ' + filteredArray);
+                }
+            }
+            // console.log('filtered array: ' + filteredArray);
+            this.arrayFilter = filteredArray;
         }
     }
 };
@@ -96,10 +117,10 @@ export default {
             </select>
 
             <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview">
-                <option :value='reviewSelect'  disabled> Scegli numero Recensioni </option>
-                <option value=1> 0-5 </option>
-                <option value=2> 5-10 </option>
-                <option value=3> 10+</option>
+                <option :value='reviewSelect' disabled> Scegli numero Recensioni </option>
+                <option value=1> 0-3 </option>
+                <option value=2> 4-7 </option>
+                <option value=3> 8+</option>
             </select>
         </form>
         <div class="container">
@@ -135,7 +156,7 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
 
-select{
+select {
     margin: 0 10px;
 }
 
