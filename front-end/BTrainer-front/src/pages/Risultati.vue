@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { store } from '../store';
+import { store } from "../store";
 
 export default {
     name: "Risultati",
@@ -18,7 +18,7 @@ export default {
             voteSelect: 0,
             reviewSelect: 0,
 
-            arrayMediaVoti: [{ 'idProfile': '', 'mediaVoti': 0 }]
+            arrayMediaVoti: [{ idProfile: "", mediaVoti: 0 }],
         };
     },
     created() {
@@ -49,8 +49,8 @@ export default {
         showDetails(id) {
             // console.log('ID Profilo:', id);
             this.$router.push({
-                name: 'About',
-                params: { id: id }
+                name: "About",
+                params: { id: id },
             });
         },
 
@@ -62,7 +62,7 @@ export default {
                 let voti = this.arrayFilter[i].profile.votes;
                 // console.log('voti: ' + voti.value);
                 let tempTot = 0;
-                voti.forEach(vote => {
+                voti.forEach((vote) => {
                     // console.log(vote.value);
                     tempTot += vote.value;
                 });
@@ -71,71 +71,116 @@ export default {
                 if (mediaVoti >= this.voteSelect) {
                     filteredArray.push(this.arrayFilter[i]);
                 }
-                console.log('media voti: ' + mediaVoti);
+                console.log("media voti: " + mediaVoti);
             }
             this.arrayFilter = filteredArray;
-            console.log('voto select: ' + this.voteSelect);
+            console.log("voto select: " + this.voteSelect);
         },
 
         filterReview() {
             let filteredArray = [];
-            console.log('value della select: ' + this.reviewSelect);
-            // console.log(this.arrayFilter[0].profile.reviews.length);
-            for (let i = 0; i < this.arrayFilter.length; i++) {
-                let recensioni = this.arrayFilter[i].profile.reviews.length;
-                console.log('n° recensioni: ' + recensioni);
-                if (this.reviewSelect === 1 || recensioni <= 3) {
-                    filteredArray.push(this.arrayFilter[i])
-                    console.log('sono dentro if 0-3');
-                    // console.log('arrayfilter: ' + filteredArray);
-                }
-                if (this.reviewSelect === 2 || recensioni > 3 && recensioni <= 7) {
-                    filteredArray.push(this.arrayFilter[i])
-                    console.log('sono dentro if 3-7');
-                    // console.log('arrayfilter: ' + filteredArray);
-                }
-                if (this.reviewSelect === 3 || recensioni > 3 && recensioni > 7) {
-                    filteredArray.push(this.arrayFilter[i])
-                    console.log('sono dentro if 8');
-                    // console.log('arrayfilter: ' + filteredArray);
+            console.log("value della select: " + this.reviewSelect);
+            if (this.reviewSelect == 1) {
+                console.log("sono dentro if value 1");
+                for (let i = 0; i < this.arrayFilter.length; i++) {
+                    let recensioni = this.arrayFilter[i].profile.reviews.length;
+                    console.log("n° recensioni: " + recensioni);
+                    if (recensioni >= 0 && recensioni <= 3) {
+                        console.log('dentro recensioni');
+                        filteredArray.push(this.arrayFilter[i]);
+                    }
                 }
             }
-            // console.log('filtered array: ' + filteredArray);
-            this.arrayFilter = filteredArray;
-        }
-    }
-};
+            if (this.reviewSelect == 2) {
+                console.log("sono dentro if value 2");
+                for (let i = 0; i < this.arrayFilter.length; i++) {
+                    let recensioni = this.arrayFilter[i].profile.reviews.length;
+                    console.log("n° recensioni: " + recensioni);
+                    if (recensioni > 3 && recensioni <= 8) {
+                        console.log('dentro recensioni');
+                        filteredArray.push(this.arrayFilter[i]);
+                    }
+                }
+            }
+            if (this.reviewSelect == 3) {
+                console.log("sono dentro if value 3");
+                for (let i = 0; i < this.arrayFilter.length; i++) {
+                    let recensioni = this.arrayFilter[i].profile.reviews.length;
+                    console.log("n° recensioni: " + recensioni);
+                    if (recensioni > 8) {
+                        console.log('dentro recensioni');
+                        filteredArray.push(this.arrayFilter[i]);
+                    }
+                }
+            }
 
+            console.log("filtered array: " + filteredArray);
+            this.arrayFilter = filteredArray;
+        },
+    },
+};
 </script>
 
 <template>
     <div id="trainer-gallery">
-        <form style="text-align: center;">
-            <select name="vote" id="vote" v-model="voteSelect" @change="filterVote">
-                <option :value='voteSelect' disabled> Scegli un voto </option>
-                <option v-for="vote in votes" :key="vote.id" :value="vote.value">{{ vote.value }}</option>
+        <form style="text-align: center">
+            <select
+                name="vote"
+                id="vote"
+                v-model="voteSelect"
+                @change="filterVote"
+            >
+                <option :value="voteSelect" disabled>Scegli un voto</option>
+                <option
+                    v-for="vote in votes"
+                    :key="vote.id"
+                    :value="vote.value"
+                >
+                    {{ vote.value }}
+                </option>
             </select>
 
-            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview">
-                <option :value='reviewSelect' disabled> Scegli numero Recensioni </option>
-                <option value=1> 0-3 </option>
-                <option value=2> 4-7 </option>
-                <option value=3> 8+</option>
+            <select
+                name="vote"
+                id="vote"
+                v-model="reviewSelect"
+                @change="filterReview"
+            >
+                <option :value="reviewSelect" disabled>
+                    Scegli numero Recensioni
+                </option>
+                <option value="1">0-3</option>
+                <option value="2">4-7</option>
+                <option value="3">8+</option>
             </select>
         </form>
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
-                    <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
-                        @click="showDetails(profile.id)">
-                        <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
-                            :alt="profile.name + ' ' + profile.surname" />
+                    <div
+                        v-for="profile in arrayFilter"
+                        :key="profile.id"
+                        class="card-trainer"
+                        @click="showDetails(profile.id)"
+                    >
+                        <img
+                            :src="
+                                getImagePath(
+                                    `../assets/trainers/${profile.profile.photo}`
+                                )
+                            "
+                            :alt="profile.name + ' ' + profile.surname"
+                        />
                         <div class="caption">
                             <div class="name">
                                 {{ profile.name }} {{ profile.surname }}
                             </div>
-                            <div v-for="specialization in profile.profile.specializations" :key="specialization"
-                                class="specializations">
+                            <div
+                                v-for="specialization in profile.profile
+                                    .specializations"
+                                :key="specialization"
+                                class="specializations"
+                            >
                                 {{ specialization }}
                             </div>
                             <div class="social">
@@ -169,7 +214,6 @@ h2 {
 }
 
 #trainer-gallery {
-
     padding-top: 160px;
     width: 100%;
     min-height: calc(100vh - 300px);
@@ -231,7 +275,7 @@ h2 {
             }
 
             .name {
-                margin: .5rem 0;
+                margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
 
                 &:hover {
