@@ -57,7 +57,6 @@ export default {
 
                 alert("Il campo del messaggio non può essere vuoto.");
 
-<<<<<<< HEAD
                 return; 
             }
         },
@@ -71,9 +70,7 @@ export default {
                 // Mostra un messaggio di errore se il campo della recensione è vuota
 
                 alert('La recensione non può essere vuota.');
-=======
                 // else...chiamata axios in post
->>>>>>> a1f85f0ab267590088755e7407594bb93edac72f
 
                 return;
             }
@@ -177,14 +174,11 @@ export default {
         </div>
     </div>
 
-<<<<<<< HEAD
-    <form @submit.prevent="handleSubmitMsg">
+    <!-- <form @submit.prevent="handleSubmitMsg"> -->
     
          <!-- Qui l'utente invia il messaggio  --> 
-=======
     <form @submit.prevent="handleSubmit">
         <!-- Qui l'utente invia il messaggio  -->
->>>>>>> a1f85f0ab267590088755e7407594bb93edac72f
         <div class="msg">
             <input
                 type="text"
@@ -331,7 +325,7 @@ form {
     }
     input::placeholder {
         margin: auto;
-<<<<<<< HEAD
+
 } }
     .vote {
         display: flex;
@@ -352,11 +346,6 @@ form {
     }
     #vote-button {
             padding: 8px;
-        }
-
-
-=======
     }
-}
->>>>>>> a1f85f0ab267590088755e7407594bb93edac72f
+
 </style>
