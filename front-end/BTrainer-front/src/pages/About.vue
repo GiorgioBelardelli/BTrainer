@@ -12,6 +12,8 @@ export default {
             rece:'',
             votes: [],
             mediaVotes: 0,
+            selectedStar: -1, // Nessuna stella selezionata inizialmente
+            stars: [1, 2, 3, 4, 5]
         };
     },
     created() {
@@ -40,15 +42,16 @@ export default {
             this.getMediaVoti();
         });
     },
-    // mounted() {
-    // },
+    
 
     methods: {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        handleSubmit() {
+        // Metodo di validazione dei msg 
+
+        handleSubmitMsg() {
             // Convalida dei dati del form
             if (this.message.trim() === '') {
 
@@ -56,10 +59,36 @@ export default {
 
                 alert('Il campo del messaggio non può essere vuoto.');
 
-            // else...chiamata axios in post 
+                return; 
+            }
+        },
+
+        // Metodo di validazione delle recensioni 
+
+        handleSubmitRece() {
+            // Convalida dei dati del form
+            if (this.rece.trim() === '') {
+
+                // Mostra un messaggio di errore se il campo della recensione è vuota
+
+                alert('La recensione non può essere vuota.');
 
                 return; 
             }
+        },
+
+        handleSubmitVote() {
+        // Convalida dei dati del form
+        if (this.selectedStar === -1) {
+            // Se l'utente non ha selezionato nemmeno una stellina: 
+            alert('Seleziona un voto');
+            return;
+        }
+        },
+
+        // Questo metodo Imposta selectedStar come l'indice dell'icona stella cliccata
+        selectStar(index) {
+        this.selectedStar = index;
         },
 
         getMediaVoti: function () {
@@ -73,6 +102,17 @@ export default {
 
             this.mediaVotes =  tempTot / votes.length;
         },
+
+        // Questo metodo resetta la selezione delle stelline del voto se
+        // si clicca col mouse al di fuori di una stellina
+
+        handleOutsideClick(event) {
+        // Controlla se l'evento di clic è avvenuto all'interno del componente
+        if (!this.$el.contains(event.target)) {
+            // L'utente ha cliccato fuori dall'area delle stelle, reimposta selectedStar
+            this.selectedStar = -1;
+        }
+        },   
     },
 };
 </script>
@@ -146,7 +186,7 @@ export default {
         </div>
     </div>
 
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmitMsg">
     
          <!-- Qui l'utente invia il messaggio  --> 
         <div class="msg">
@@ -154,15 +194,38 @@ export default {
             <button type="submit">Invia Messaggio</button>
             <div> prova:{{message}} </div>
         </div>
+    </form>
 
         <!-- Qui l'utente inserisce una recensione -->
 
+    <form @submit.prevent="handleSubmitRece">
         <div class="rece">
             <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer">
             <button type="submit">Invia Recensione</button>
         </div>
-
     </form>
+
+    <!-- Qui l'utente inserisce un voto al PTrainer -->
+
+    <div class="vote-container">
+        <div class="vote">
+        <div 
+            v-for="(star, index) in stars" 
+            :key="index" 
+            class="icon-container"
+            @click="selectStar(index)"
+            >
+            <i 
+                class="fas fa-star" 
+                :class="{ 'active': index <= selectedStar }"
+            ></i>
+        </div>
+        </div>
+        <button id="vote-button" @click="handleSubmitVote">Invia Voto</button>
+    </div>
+
+
+    
 </template>
 
 <style lang="scss" scoped>
@@ -259,6 +322,27 @@ form {
     }
     input::placeholder {
         margin: auto;
-}
-}
+} }
+    .vote {
+        display: flex;
+        width: 200px;
+        justify-content: space-between;
+        align-items: center;
+
+        .icon-container {
+
+            .icon-star {
+                color: grey;
+            }
+
+            .active {
+                color: rgba(255, 255, 0, 0.692); /* Colore giallo quando attiva */
+            }
+        }
+    }
+    #vote-button {
+            padding: 8px;
+        }
+
+
 </style>
