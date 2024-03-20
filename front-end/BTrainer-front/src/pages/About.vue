@@ -1,5 +1,4 @@
 <script>
-
 import axios from "axios";
 import { forEach } from "lodash";
 
@@ -8,8 +7,8 @@ export default {
     data() {
         return {
             profile: null,
-            message:'',
-            rece:'',
+            message: "",
+            rece: "",
             votes: [],
             mediaVotes: 0,
         };
@@ -49,32 +48,28 @@ export default {
         },
 
         handleSubmit() {
-        // Convalida dei dati del form
-        if (this.message.trim() === '') {
+            // Convalida dei dati del form
+            if (this.message.trim() === "") {
+                // Mostra un messaggio di errore se il campo del messaggio è vuoto
 
-            // Mostra un messaggio di errore se il campo del messaggio è vuoto
+                alert("Il campo del messaggio non può essere vuoto.");
 
-            alert('Il campo del messaggio non può essere vuoto.');
+                // else...chiamata axios in post
 
-        // else...chiamata axios in post
-
-            return;
-        }
+                return;
+            }
         },
-
-    }};
-
 
         getMediaVoti: function () {
             const votes = this.profile.profile.votes;
             let tempTot = 0;
-            votes.forEach(vote => {
+            votes.forEach((vote) => {
                 console.log(vote.value);
                 tempTot += vote.value;
             });
             console.log(tempTot);
 
-            this.mediaVotes =  tempTot / votes.length;
+            this.mediaVotes = tempTot / votes.length;
         },
     },
 };
