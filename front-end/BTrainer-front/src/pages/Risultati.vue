@@ -9,9 +9,15 @@ export default {
             store,
             profile: null,
             arrayFilter: [],
+
+            numReview: [],
             votes: [],
+
             specialization: null,
+
             voteSelect: 0,
+            reviewSelect: 0,
+
             arrayMediaVoti: [{ 'idProfile': '', 'mediaVoti': 0 }]
         };
     },
@@ -69,6 +75,12 @@ export default {
             }
             this.arrayFilter = filteredArray;
             console.log('voto select: ' + this.voteSelect);
+        },
+
+        filterReview() {
+            console.log(this.reviewSelect);
+            console.log(this.arrayFilter[0].profile.reviews.length);
+            //risolvere con la logica di "filterVote()"
         }
     }
 };
@@ -79,8 +91,15 @@ export default {
     <div id="trainer-gallery">
         <form style="text-align: center;">
             <select name="vote" id="vote" v-model="voteSelect" @change="filterVote">
-                <option disabled selected>Scegli un voto</option>
+                <option :value='voteSelect' disabled> Scegli un voto </option>
                 <option v-for="vote in votes" :key="vote.id" :value="vote.value">{{ vote.value }}</option>
+            </select>
+
+            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview">
+                <option :value='reviewSelect'  disabled> Scegli numero Recensioni </option>
+                <option value=1> 0-5 </option>
+                <option value=2> 5-10 </option>
+                <option value=3> 10+</option>
             </select>
         </form>
         <div class="container">
@@ -115,6 +134,10 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
+
+select{
+    margin: 0 10px;
+}
 
 h2 {
     color: $grey;

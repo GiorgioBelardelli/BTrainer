@@ -50,7 +50,7 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        // Metodo di validazione dei msg 
+        // Metodo di validazione dei msg
 
         handleSubmitMsg() {
             // Convalida dei dati del form
@@ -63,7 +63,7 @@ export default {
             }
         },
 
-        // Metodo di validazione delle recensioni 
+        // Metodo di validazione delle recensioni
 
         handleSubmitRece() {
             // Convalida dei dati del form
@@ -81,7 +81,7 @@ export default {
         handleSubmitVote() {
             // Convalida dei dati del form
             if (this.selectedStar === -1) {
-                // Se l'utente non ha selezionato nemmeno una stellina: 
+                // Se l'utente non ha selezionato nemmeno una stellina:
                 alert('Seleziona un voto');
                 return;
             }
@@ -103,6 +103,9 @@ export default {
 
             store.mediaVotes = tempTot / votes.length;
         },
+
+
+
 
         // Questo metodo resetta la selezione delle stelline del voto se
         // si clicca col mouse al di fuori di una stellina
