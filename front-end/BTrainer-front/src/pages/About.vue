@@ -49,21 +49,18 @@ export default {
         },
 
         handleSubmit() {
-        // Convalida dei dati del form
-        if (this.message.trim() === '') {
+            // Convalida dei dati del form
+            if (this.message.trim() === '') {
 
-            // Mostra un messaggio di errore se il campo del messaggio è vuoto
+                // Mostra un messaggio di errore se il campo del messaggio è vuoto
 
-            alert('Il campo del messaggio non può essere vuoto.');
+                alert('Il campo del messaggio non può essere vuoto.');
 
-        // else...chiamata axios in post 
+            // else...chiamata axios in post 
 
-            return; 
-        }
+                return; 
+            }
         },
-
-    }};
-
 
         getMediaVoti: function () {
             const votes = this.profile.profile.votes;
