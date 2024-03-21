@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Specialization;
 use App\Models\Review;
+use App\Models\Message;
 use App\Models\Sponsorship;
 use App\Models\Vote;
 use Braintree\Gateway;
@@ -131,5 +132,47 @@ class ApiController extends Controller
 
             return response()->json($data, 401);
         }
+    }
+
+    public function createReview(Request $request) {
+
+        $data = $request -> all();
+
+        $review = new Review;
+
+        $review -> name = $data['name'];
+        $review -> surname = $data['surname'];
+        $review -> date = $data['date'];
+        $review -> content = $data['content'];
+        $review -> vote = $data['vote'];
+        $review -> profile_id = $data['profile_id'];
+
+        $review -> save();
+
+        return response()->json([
+            'success' => true,
+            'review' => $review
+        ]);
+    }
+
+    public function createMessage(Request $request) {
+
+        $data = $request -> all();
+
+        $message = new Message;
+
+        $message -> name = $data['name'];
+        $message -> surname = $data['surname'];
+        $message -> date = $data['date'];
+        $message -> content = $data['content'];
+        $message -> email = $data['email'];
+        $message -> profile_id = $data['profile_id'];
+
+        $message -> save();
+
+        return response()->json([
+            'success' => true,
+            'message' => $message
+        ]);
     }
 }
