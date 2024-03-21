@@ -22,7 +22,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/make/payment', [ApiController::class, 'makePayment']);
 
 
-
+    Route::get('/votes', [ApiController::class, 'getVotes']);
 
     // Route::get('/profile', [ApiController::class, 'getProfile'])
     //     ->name('api.profile');

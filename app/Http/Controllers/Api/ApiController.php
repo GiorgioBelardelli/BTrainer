@@ -79,6 +79,16 @@ class ApiController extends Controller
         ]);
     }
 
+    public function getVotes()
+    {
+        $votes = Vote::all();
+
+        return response()->json([
+            'status' => 'success',
+            'votes' => $votes,
+        ]);
+    }
+
     public function generate(Request $request,Gateway $gateway){
         
         $token = $gateway->clientToken()->generate();
