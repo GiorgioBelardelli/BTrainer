@@ -89,13 +89,10 @@ export default {
                 if (data.status === "success") this.profiles = data.data;
                 // console.log("profili: ", this.profiles);
                 for (let i = 0; i < this.profiles.length; i++) {
-                    if (this.profiles[i].id === this.profile.id) {
-                        this.id = this.profiles[i].id;
-                        // console.log('id: ' + this.reviewId);
-                        this.newReview.profile_id = this.id;
-                        this.newMessage.profile_id = this.id;
-                        break;
-                    }
+                    this.id = this.profiles[i].id;
+                    // console.log('id: ' + this.reviewId);
+                    this.newReview.profile_id = this.id;
+                    this.newMessage.profile_id = this.id;
                 }
             })
             .catch((err) => {
@@ -221,7 +218,7 @@ export default {
                         <div class="img-card">
                             <img v-if="profile" :src="getImagePath(
                                 `../assets/trainers/${profile.profile.photo}`
-                                    )" :alt="profile.name + ' ' + profile.surname" />
+                            )" :alt="profile.name + ' ' + profile.surname" />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
@@ -307,7 +304,7 @@ export default {
                             <div class="form">
                                 <!-- Qui l'utente inserisce un voto al PTrainer -->
 
-                                <!-- <div class="vote-container">
+                                <div class="vote-container">
                                     <div class="vote">
                                         <div v-for="(star, index) in stars" :key="index" class="icon-container"
                                             @click="selectStar(index)">
@@ -315,26 +312,7 @@ export default {
                                         </div>
                                     </div>
                                     <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
-                                </div> -->
-
-                                <!-- Qui l'utente invia il messaggio  -->
-                                <form @submit.prevent="handleSubmitMsg" class="form-container">
-                                    <!-- Qui l'utente invia il messaggio  -->
-                                    <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
-                                    <button class="submit-button" type="submit">Invia Messaggio</button>
-                                </form>
-
-                                <!-- Qui l'utente inserisce una recensione -->
-
-                                <form @submit.prevent="handleSubmitRece" class="form-container">
-                                    <div class="rece">
-                                        <div class="input-container">
-                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname" placeholder="Inserisci Nome e Cognome" />
-                                            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer" />
-                                        </div>
-                                        <button class="submit-button" type="submit">Invia Recensione</button>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -480,8 +458,8 @@ form>div {
                         justify-content: space-between;
                         align-items: center;
 
-                            .input-container {
-                                flex-basis: 70%;
+                        .input-container {
+                            flex-basis: 70%;
 
                             #rece,
                             #nameSurname {
