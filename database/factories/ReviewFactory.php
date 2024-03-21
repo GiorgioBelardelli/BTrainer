@@ -17,8 +17,8 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'surname' => fake()->name(), //da fixare con il cognome
+            'name' => fake()->firstName(),
+            'surname' => fake()->lastName(), //da fixare con il cognome
             'date' => fake()->dateTimeBetween('-1 year', 'now'),
             'content' => fake()->sentence(),
             'vote' => fake()->numberBetween(1, 5),
