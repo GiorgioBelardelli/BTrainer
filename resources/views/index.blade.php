@@ -19,7 +19,7 @@
                     <form action="{{ route('profile.destroy', $profile->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger ">Cancella Profilo</button> 
+                        {{-- <button type="submit" class="btn btn-danger ">Cancella Profilo</button>  --}}
                     </form>
                 </div>
                 @endif
