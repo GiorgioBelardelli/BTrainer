@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import { store } from '../store';
+import { store } from "../store";
 import { forEach } from "lodash";
 
 export default {
@@ -28,25 +28,25 @@ export default {
             reviews: [],
             id: null,
             newReview: {
-                name: '',
-                surname: '',
-                date: '',
-                content: '',
+                name: "",
+                surname: "",
+                date: "",
+                content: "",
                 vote: 0,
-                profile_id: null
+                profile_id: null,
             },
 
             // Message
             messages: [],
             id: null,
             newMessage: {
-                name: '',
-                surname: '',
-                date: '',
-                content: '',
-                email: '',
-                profile_id: null
-            }
+                name: "",
+                surname: "",
+                date: "",
+                content: "",
+                email: "",
+                profile_id: null,
+            },
         };
     },
 
@@ -107,7 +107,7 @@ export default {
         // Data Formattata (ANNO/MM/GG)
         generateFormattedDate() {
             const currentDate = new Date();
-            return currentDate.toISOString().split('T')[0];
+            return currentDate.toISOString().split("T")[0];
         },
 
         getImagePath: function (imgPath) {
@@ -133,16 +133,18 @@ export default {
 
         handleSubmitRece() {
             // Convalida dei dati del form
-            if (this.rece.trim() === '') {
-                alert('La recensione non può essere vuota.');
-            } else if (this.nameSurname.trim() === '') {
-                alert('Non puoi lasciare una recensione anonima');
+            if (this.rece.trim() === "") {
+                alert("La recensione non può essere vuota.");
+            } else if (this.nameSurname.trim() === "") {
+                alert("Non puoi lasciare una recensione anonima");
             } else if (this.nameSurname.trim().length < 30) {
-                alert('Il tuo nome e cognome devono essere almeno di 30 caratteri.');
+                alert(
+                    "Il tuo nome e cognome devono essere almeno di 30 caratteri."
+                );
             } else {
                 // Chiamata Axios in post
                 // axios.post(...)
-                console.log("La recensione che hai inserito è: " + this.rece)
+                console.log("La recensione che hai inserito è: " + this.rece);
             }
             return;
         },
@@ -151,7 +153,7 @@ export default {
             // Convalida dei dati del div.vote
             if (this.selectedStar === -1) {
                 // Se l'utente non ha selezionato nemmeno una stellina:
-                alert('Seleziona un voto');
+                alert("Seleziona un voto");
             } else {
                 this.vote = this.selectedStar + 1;
                 console.log("Il voto che hai inserito è:" + this.vote);
@@ -187,24 +189,38 @@ export default {
         },
 
         createNewReview() {
-            axios.post('http://127.0.0.1:8000/api/v1/reviews', this.newReview)
-                .then(response => {
-                    console.log('Recensione creata con successo:', response.data);
+            axios
+                .post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
+                .then((response) => {
+                    console.log(
+                        "Recensione creata con successo:",
+                        response.data
+                    );
                 })
-                .catch(error => {
-                    console.error('Si è verificato un errore durante la creazione della recensione:', error);
+                .catch((error) => {
+                    console.error(
+                        "Si è verificato un errore durante la creazione della recensione:",
+                        error
+                    );
                 });
         },
 
         createNewMessage() {
-            axios.post('http://127.0.0.1:8000/api/v1/messages', this.newMessage)
-                .then(response => {
-                    console.log('Messaggio creato con successo:', response.data);
+            axios
+                .post("http://127.0.0.1:8000/api/v1/messages", this.newMessage)
+                .then((response) => {
+                    console.log(
+                        "Messaggio creato con successo:",
+                        response.data
+                    );
                 })
-                .catch(error => {
-                    console.error('Si è verificato un errore durante la creazione della messaggio:', error);
+                .catch((error) => {
+                    console.error(
+                        "Si è verificato un errore durante la creazione della messaggio:",
+                        error
+                    );
                 });
-        }
+        },
     },
 };
 </script>
@@ -216,20 +232,31 @@ export default {
             <div class="row">
                 <div class="col-gallery">
                     <div class="card-trainer">
-
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img v-if="profile" :src="getImagePath(
-                                `../assets/trainers/${profile.profile.photo}`
-                            )
-                                " :alt="profile.name + ' ' + profile.surname" />
+                            <img
+                                v-if="profile"
+                                :src="
+                                    getImagePath(
+                                        `../assets/trainers/${profile.profile.photo}`
+                                    )
+                                "
+                                :alt="profile.name + ' ' + profile.surname"
+                            />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
-                                    <b>{{ profile.name }} {{ profile.surname }}</b>
+                                    <b
+                                        >{{ profile.name }}
+                                        {{ profile.surname }}</b
+                                    >
                                 </div>
-                                <div v-for="specialization in profile.profile
-                                .specializations" :key="specialization" class="specializations">
+                                <div
+                                    v-for="specialization in profile.profile
+                                        .specializations"
+                                    :key="specialization"
+                                    class="specializations"
+                                >
                                     {{ specialization }}
                                 </div>
                                 <div class="social">
@@ -239,36 +266,55 @@ export default {
                                     <i class="fa-brands fa-tiktok"></i>
                                     <i class="fa-regular fa-envelope"></i>
                                 </div>
-
                             </div>
                         </div>
 
                         <div class="info">
                             <div class="description">
-                                <p> "{{ profile.profile.plan_program }}"</p>
+                                <p>"{{ profile.profile.plan_program }}"</p>
                             </div>
 
                             <div class="votes">
-                                <div>
-                                    Media voti: {{ store.mediaVotes }}
-                                </div>
+                                <div>Media voti: {{ store.mediaVotes }}</div>
                             </div>
 
                             <h3>Scrivi una recensione:</h3>
                             <form @submit.prevent="createNewReview">
                                 <div class="name">
-                                    <input v-model="newReview.name" type="text" required placeholder="Nome">
+                                    <input
+                                        v-model="newReview.name"
+                                        type="text"
+                                        required
+                                        placeholder="Nome"
+                                    />
                                 </div>
                                 <div class="surname">
-                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome">
+                                    <input
+                                        v-model="newReview.surname"
+                                        type="text"
+                                        required
+                                        placeholder="Cognome"
+                                    />
                                 </div>
                                 <div class="content">
-                                    <textarea v-model="newReview.content" type="text" required placeholder="Contenuto"
-                                        rows="5"></textarea>
+                                    <textarea
+                                        v-model="newReview.content"
+                                        type="text"
+                                        required
+                                        placeholder="Contenuto"
+                                        rows="5"
+                                    ></textarea>
                                 </div>
                                 <div class="vote">
-                                    <input v-model="newReview.vote" type="number" min="1" max="5" required
-                                        placeholder="Voto">
+                                    Dai un voto:
+                                    <input
+                                        v-model="newReview.vote"
+                                        type="number"
+                                        min="1"
+                                        max="5"
+                                        required
+                                        placeholder="Voto"
+                                    />
                                 </div>
                                 <button type="submit">Invia recensione</button>
                             </form>
@@ -283,27 +329,40 @@ export default {
                             <h3>Invia un messaggio:</h3>
                             <form @submit.prevent="createNewMessage">
                                 <div class="name">
-                                    <input v-model="newMessage.name" type="text" required placeholder="Nome">
+                                    <input
+                                        v-model="newMessage.name"
+                                        type="text"
+                                        required
+                                        placeholder="Nome"
+                                    />
                                 </div>
                                 <div class="surname">
-                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome">
+                                    <input
+                                        v-model="newMessage.surname"
+                                        type="text"
+                                        required
+                                        placeholder="Cognome"
+                                    />
                                 </div>
                                 <div class="content">
-                                    <textarea v-model="newMessage.content" type="text" required placeholder="Contenuto"
-                                        rows="5"></textarea>
+                                    <textarea
+                                        v-model="newMessage.content"
+                                        type="text"
+                                        required
+                                        placeholder="Contenuto"
+                                        rows="5"
+                                    ></textarea>
                                 </div>
                                 <div class="email">
-                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail">
+                                    <input
+                                        v-model="newMessage.email"
+                                        type="email"
+                                        required
+                                        placeholder="E-Mail"
+                                    />
                                 </div>
-                                <button type="submit">Invia recensione</button>
+                                <button type="submit">Invia messaggio</button>
                             </form>
-
-                            <div class="reviews">
-                                <div>
-                                    Recensito da
-                                    {{ profile.profile.reviews.length }} persone
-                                </div>
-                            </div>
 
                             <div class="form">
                                 <!-- Qui l'utente inserisce un voto al PTrainer -->
@@ -357,8 +416,8 @@ h3 {
     margin-top: 1rem;
 }
 
-form>div {
-    margin: .5rem 0;
+form > div {
+    margin: 0.5rem 0;
 }
 
 #trainer-gallery {
@@ -389,7 +448,6 @@ form>div {
 
                 // Parte sinistra con l'immagine nome cognome ecc..
                 .img-card {
-
                     flex-basis: 25%;
 
                     img {
@@ -466,14 +524,12 @@ form>div {
 
                             input::placeholder {
                                 margin: auto;
-
                             }
                         }
                     }
                 }
 
                 #form-review {
-
                     min-height: 200px;
 
                     .rece {
@@ -512,12 +568,10 @@ form>div {
         }
 
         .caption {
-
             margin: auto;
             margin-top: 12px;
 
             .name {
-
                 transition: filter 0.25s ease, transform 0.25s ease;
                 text-align: center;
                 font-size: 22px;
@@ -529,7 +583,6 @@ form>div {
             }
 
             .title {
-
                 transition: filter 0.25s ease, transform 0.25s ease;
 
                 &:hover {
@@ -547,7 +600,6 @@ form>div {
                 margin: auto;
                 margin-top: 10px;
                 text-align: center;
-
             }
         }
     }
