@@ -264,12 +264,6 @@ export default {
                             </div>
 
                             <div class="votes">
-<<<<<<< HEAD
-                                <div>
-                                    Media voti: {{ store.mediaVotes }}
-                                </div>
-                                <div class="reviews">
-=======
                                 <div>Media voti: {{ store.mediaVotes }}</div>
                             </div>
 
@@ -294,7 +288,6 @@ export default {
                             </form>
 
                             <div class="reviews">
->>>>>>> 11062c734a43fb4521e27edf8f483e8a94547c15
                                 <div>
                                     Recensito da
                                     {{ profile.profile.reviews.length }} persone
@@ -302,7 +295,6 @@ export default {
                             </div>
                             </div>
 
-<<<<<<< HEAD
                             <div class="form-container">
 
                                 <!-- Lato Sinistro -->
@@ -351,26 +343,6 @@ export default {
                             </div>
 
 
-=======
-                            <h3>Invia un messaggio:</h3>
-                            <form @submit.prevent="createNewMessage">
-                                <div class="name">
-                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
-                                </div>
-                                <div class="surname">
-                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
-                                </div>
-                                <div class="content">
-                                    <textarea v-model="newMessage.content" type="text" required placeholder="Contenuto"
-                                        rows="5"></textarea>
-                                </div>
-                                <div class="email">
-                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
-                                </div>
-                                <button type="submit">Invia messaggio</button>
-                            </form>
-
->>>>>>> 11062c734a43fb4521e27edf8f483e8a94547c15
                             <div class="form">
                                 <!-- Qui l'utente inserisce un voto al PTrainer -->
 
@@ -382,37 +354,13 @@ export default {
                                         </div>
                                     </div>
                                     <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
-<<<<<<< HEAD
-                                </div> -->
-
-                                <!-- Qui l'utente invia il messaggio  -->
-
-                                <!-- <form @submit.prevent="handleSubmitMsg" class="form-container">
-                                    <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
-                                    <button class="submit-button" type="submit">Invia Messaggio</button>
-                                </form> -->
-
-                                <!-- Qui l'utente inserisce una recensione -->
-
-                                <!-- <form @submit.prevent="handleSubmitRece" class="form-container">
-                                    <div class="rece">
-                                        <div class="input-container">
-                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname" placeholder="Inserisci Nome e Cognome" />
-                                            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer" />
-                                        </div>
-                                        <button class="submit-button" type="submit">Invia Recensione</button>
-                                    </div>
-                                </form> -->
-=======
                                 </div>
->>>>>>> 11062c734a43fb4521e27edf8f483e8a94547c15
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -486,7 +434,7 @@ form>div {
                         margin: auto;
                         display: flex;
                         justify-content: space-between;
-                        
+
                         .form-right, .form-left {
                             flex-basis: 50%;
                             margin: auto;
