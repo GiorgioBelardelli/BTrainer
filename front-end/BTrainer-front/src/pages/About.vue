@@ -267,93 +267,54 @@ export default {
                                 <div>Media voti: {{ store.mediaVotes }}</div>
                             </div>
 
-                            <h3>Scrivi una recensione:</h3>
-                            <form @submit.prevent="createNewReview">
-                                <div class="name">
-                                    <input v-model="newReview.name" type="text" required placeholder="Nome" />
+                            <div class="form-container">
+
+                                <!-- Lato Sinistro -->
+
+                                <div class="form-right">
+                                    <h3>Scrivi una recensione:</h3>
+                                    <form @submit.prevent="createNewReview">
+                                        <div class="name">
+                                            <input v-model="newReview.name" type="text" required placeholder="Nome">
+                                        </div>
+                                        <div class="surname">
+                                            <input v-model="newReview.surname" type="text" required
+                                                placeholder="Cognome">
+                                        </div>
+                                        <div class="content">
+                                            <textarea v-model="newReview.content" type="text" required
+                                                placeholder="Contenuto" rows="5"></textarea>
+                                        </div>
+                                        <div class="vote">
+                                            <input v-model="newReview.vote" type="number" min="1" max="5" required
+                                                placeholder="Voto">
+                                        </div>
+                                        <button type="submit">Invia recensione</button>
+                                    </form>
                                 </div>
-                                <div class="surname">
-                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome" />
+
+                                <!-- Lato Destro  -->
+                                <div class="form-left">
+                                    <h3>Invia un messaggio:</h3>
+                                    <form @submit.prevent="createNewMessage">
+                                        <div class="name">
+                                            <input v-model="newMessage.name" type="text" required placeholder="Nome">
+                                        </div>
+                                        <div class="surname">
+                                            <input v-model="newMessage.surname" type="text" required
+                                                placeholder="Cognome">
+                                        </div>
+                                        <div class="content">
+                                            <textarea v-model="newMessage.content" type="text" required
+                                                placeholder="Contenuto" rows="5"></textarea>
+                                        </div>
+                                        <div class="email">
+                                            <input v-model="newMessage.email" type="email" required
+                                                placeholder="E-Mail">
+                                        </div>
+                                        <button type="submit">Invia messaggio</button>
+                                    </form>
                                 </div>
-                                <div class="content">
-                                    <textarea v-model="newReview.content" type="text" required placeholder="Contenuto"
-                                        rows="5"></textarea>
-                                </div>
-                                <div class="vote">
-                                    Dai un voto:
-                                    <input v-model="newReview.vote" type="number" min="1" max="5" required
-                                        placeholder="Voto" />
-                                </div>
-                                <button type="submit">Invia recensione</button>
-                            </form>
-
-                            <div class="reviews">
-                                <div>
-                                    Recensito da
-                                    {{ profile.profile.reviews.length }} persone
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-container">
-
-                            <!-- Lato Sinistro -->
-
-                            <div class="form-right">
-                                <h3>Scrivi una recensione:</h3>
-                                <form @submit.prevent="createNewReview">
-                                    <div class="name">
-                                        <input v-model="newReview.name" type="text" required placeholder="Nome">
-                                    </div>
-                                    <div class="surname">
-                                        <input v-model="newReview.surname" type="text" required placeholder="Cognome">
-                                    </div>
-                                    <div class="content">
-                                        <textarea v-model="newReview.content" type="text" required
-                                            placeholder="Contenuto" rows="5"></textarea>
-                                    </div>
-                                    <div class="vote">
-                                        <input v-model="newReview.vote" type="number" min="1" max="5" required
-                                            placeholder="Voto">
-                                    </div>
-                                    <button type="submit">Invia recensione</button>
-                                </form>
-                            </div>
-
-                            <!-- Lato Destro  -->
-                            <div class="form-left">
-                                <h3>Invia un messaggio:</h3>
-                                <form @submit.prevent="createNewMessage">
-                                    <div class="name">
-                                        <input v-model="newMessage.name" type="text" required placeholder="Nome">
-                                    </div>
-                                    <div class="surname">
-                                        <input v-model="newMessage.surname" type="text" required placeholder="Cognome">
-                                    </div>
-                                    <div class="content">
-                                        <textarea v-model="newMessage.content" type="text" required
-                                            placeholder="Contenuto" rows="5"></textarea>
-                                    </div>
-                                    <div class="email">
-                                        <input v-model="newMessage.email" type="email" required placeholder="E-Mail">
-                                    </div>
-                                    <button type="submit">Invia messaggio</button>
-                                </form>
-                            </div>
-                        </div>
-
-
-                        <div class="form">
-                            <!-- Qui l'utente inserisce un voto al PTrainer -->
-
-                            <div class="vote-container">
-                                <div class="vote">
-                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
-                                        @click="selectStar(index)">
-                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
-                                    </div>
-                                </div>
-                                <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
                             </div>
                         </div>
                     </div>
@@ -437,176 +398,172 @@ form>div {
 
                         .form-right,
                         .form-left {
+                            flex-basis: 50%;
+                            margin: auto;
 
-                            .form-right,
-                            .form-left {
-                                flex-basis: 50%;
-                                margin: auto;
-
-                                button {
-                                    padding: 8px;
-                                }
+                            button {
+                                padding: 8px;
                             }
                         }
+                    }
 
-                        p {
-                            font-style: italic;
-                            width: 70%;
-                            margin: auto;
-                        }
+                    p {
+                        font-style: italic;
+                        width: 70%;
+                        margin: auto;
+                    }
 
-                        .votes,
+                    .votes,
+                    .reviews {
+                        width: 70%;
+                        margin: auto;
+                    }
+
+                    .votes {
+                        margin-top: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10%;
+
                         .reviews {
-                            width: 70%;
-                            margin: auto;
-                        }
-
-                        .votes {
-                            margin-top: 10px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            gap: 10%;
-
-                            .reviews {
-                                text-decoration: underline;
-                                flex-basis: 50%;
-                                text-align: center;
-                            }
-                        }
-
-
-
-                        .form {
-                            width: 70%;
-                            padding-top: 12px;
-                            margin: auto;
-
-                            .vote-container {
-                                display: flex;
-                                justify-content: space-between;
-                                margin-bottom: 25px;
-                            }
-
-                            // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi
-
-                            form {
-                                margin: auto;
-
-                                #message {
-                                    width: 100%;
-                                    min-height: 50px;
-                                    border: 1px solid black;
-                                    border-radius: 3px;
-                                    margin-bottom: 20px;
-                                    margin-right: 20px;
-                                }
-
-                                button {
-                                    padding: 8px;
-                                }
-
-                                input::placeholder {
-                                    margin: auto;
-                                }
-                            }
+                            text-decoration: underline;
+                            flex-basis: 50%;
+                            text-align: center;
                         }
                     }
 
-                    .form-container {
-                        min-height: 200px;
 
-                        .rece {
+
+                    .form {
+                        width: 70%;
+                        padding-top: 12px;
+                        margin: auto;
+
+                        .vote-container {
                             display: flex;
-                            margin: auto;
                             justify-content: space-between;
-                            align-items: center;
+                            margin-bottom: 25px;
+                        }
 
-                            .input-container {
-                                flex-basis: 70%;
+                        // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi
 
-                                #rece,
-                                #nameSurname {
-                                    width: 100%;
-                                    border: 1px solid black;
-                                    border-radius: 3px;
-                                    margin-bottom: 20px;
-                                    margin-right: 20px;
-                                }
+                        form {
+                            margin: auto;
 
-                                #rece {
-                                    min-height: 120px;
-                                    max-height: 200px;
-                                }
+                            #message {
+                                width: 100%;
+                                min-height: 50px;
+                                border: 1px solid black;
+                                border-radius: 3px;
+                                margin-bottom: 20px;
+                                margin-right: 20px;
+                            }
+
+                            button {
+                                padding: 8px;
+                            }
+
+                            input::placeholder {
+                                margin: auto;
                             }
                         }
                     }
+                }
 
-                    &:hover {
-                        // img {
-                        //     transform: scale(1.1);
-                        //     display: block;
-                        // }
+                .form-container {
+                    min-height: 200px;
+
+                    .rece {
+                        display: flex;
+                        margin: auto;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .input-container {
+                            flex-basis: 70%;
+
+                            #rece,
+                            #nameSurname {
+                                width: 100%;
+                                border: 1px solid black;
+                                border-radius: 3px;
+                                margin-bottom: 20px;
+                                margin-right: 20px;
+                            }
+
+                            #rece {
+                                min-height: 120px;
+                                max-height: 200px;
+                            }
+                        }
                     }
+                }
+
+                &:hover {
+                    // img {
+                    //     transform: scale(1.1);
+                    //     display: block;
+                    // }
+                }
+            }
+        }
+
+        .caption {
+            margin: auto;
+            margin-top: 12px;
+
+            .name {
+                transition: filter 0.25s ease, transform 0.25s ease;
+                text-align: center;
+                font-size: 22px;
+
+                // &:hover {
+                //     transform: scale(1.25);
+                //     cursor: pointer;
+                // }
+            }
+
+            .title {
+                transition: filter 0.25s ease, transform 0.25s ease;
+
+                &:hover {
+                    transform: scale(1.25);
+                    cursor: pointer;
                 }
             }
 
-            .caption {
+            .specializations {
+                text-align: center;
+            }
+
+            .social {
+                // margin: 1rem 0;
                 margin: auto;
-                margin-top: 12px;
-
-                .name {
-                    transition: filter 0.25s ease, transform 0.25s ease;
-                    text-align: center;
-                    font-size: 22px;
-
-                    // &:hover {
-                    //     transform: scale(1.25);
-                    //     cursor: pointer;
-                    // }
-                }
-
-                .title {
-                    transition: filter 0.25s ease, transform 0.25s ease;
-
-                    &:hover {
-                        transform: scale(1.25);
-                        cursor: pointer;
-                    }
-                }
-
-                .specializations {
-                    text-align: center;
-                }
-
-                .social {
-                    // margin: 1rem 0;
-                    margin: auto;
-                    margin-top: 10px;
-                    text-align: center;
-                }
+                margin-top: 10px;
+                text-align: center;
             }
         }
     }
+}
 
-    .vote {
-        display: flex;
-        width: 200px;
-        justify-content: space-between;
-        align-items: center;
+.vote {
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
 
-        .icon-star {
-            color: black;
-        }
+    .icon-star {
+        color: black;
+    }
 
-        .icon-star {
-            color: grey;
-        }
+    .icon-star {
+        color: grey;
+    }
 
-        .active {
-            color: rgba(255, 255, 0, 0.692);
-            /* Colore giallo quando attiva */
-        }
+    .active {
+        color: rgba(255, 255, 0, 0.692);
+        /* Colore giallo quando attiva */
     }
 }
 </style>
