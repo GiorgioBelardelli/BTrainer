@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 
     <style lang=scss scoped>
         #card-black {

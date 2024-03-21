@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentRequest;
+use App\Http\Resources\SponsorshipResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,7 @@ class ApiController extends Controller
     {
         // Recupera tutti gli utenti con i loro profili e specializzazioni
         $users = User::with('profile', 'profile.specializations')->get();
-
+        
         // Costruisci un array per il risultato JSON
         $data = [];
 
@@ -67,6 +68,7 @@ class ApiController extends Controller
             'status' => 'success',
             'data' => $data,
         ]);
+        
     }
 
     public function getSpecialization()
@@ -132,4 +134,6 @@ class ApiController extends Controller
             return response()->json($data, 401);
         }
     }
+
+
 }

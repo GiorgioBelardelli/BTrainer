@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\Sponsorship;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,11 +22,15 @@ class DashboardController extends Controller
         // Ottieni l'ID dell'utente loggato
         $userId = Auth::id();
 
+        $sponsorships = Sponsorship::all();
+    
+        
+
         // Ottieni il profilo dell'utente loggato
         $userProfile = Profile::where('user_id', $userId)->first();
 
         // Passa $profiles e $userProfile alla vista
-        return view('dashboard', compact('userProfile'));
+        return view('dashboard', compact('userProfile', 'sponsorships'));
     }
 
     /**

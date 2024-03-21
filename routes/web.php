@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TrainerProfileController;
@@ -10,6 +11,10 @@ Route::get('/', [TrainerProfileController::class, 'index'])
     ->name('index');
 Route::get('/profiles/{id}', [TrainerProfileController::class, 'show'])
     ->name('profile.show');
+Route::get('/sponsorship/{id}', [SponsorshipController::class, 'checkout'])
+    ->name('sponsorship.checkout');
+
+
 
 
 

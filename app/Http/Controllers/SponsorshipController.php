@@ -15,4 +15,11 @@ class SponsorshipController extends Controller
        return SponsorshipResource::collection($sponsorships);
        //return response()->json($sponsorships, 200);
     }
+
+    public function checkout($id)
+    {
+        $sponsorship = Sponsorship::find($id);
+
+        return view('checkout', compact('sponsorship'));
+    }
 }

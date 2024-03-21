@@ -49,6 +49,32 @@
                                         @endforeach
                                     </div>
                                     {{-- Verifica se l'utente ha un profilo --}}
+                                    
+                                    <div class="sponsorships">
+                                        <h1>Vuoi essere nostro partner? ecco le Sponsorships che offriamo:</h1>
+                                        <div class="card-container">
+                                            @foreach ($sponsorships as $sponsorship)
+                                            <div class="sponsorship-card">
+                                                <div class="card-title">
+                                                    <h4> {{ $sponsorship->name }} </h4>
+                                                </div>
+                                                <div class="card-info">
+                                                    <strong>Durata: {{ $sponsorship->duration }} </strong>
+                                                    <br>
+                                                    <strong> A soli: {{ $sponsorship->price }} €</strong>
+                                                </div>
+                                                <div class="card-button text-center">
+                                                    <button>
+                                                        <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
+                                                            ACQUISTA
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
                                 @endif
                             @endauth
                         @else
@@ -63,7 +89,7 @@
     @endsection
 
 
-    <style lang=scss scoped>
+<style lang=scss scoped>
         .card-header {
             color: white;
         }
@@ -93,4 +119,35 @@
         button {
             background-color: yellow;
         }
-    </style>
+
+        .card{
+
+            .sponsorships{
+                .card-container{
+
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    .sponsorship-card{
+                        border: 1px solid yellow;
+                        border-radius: 10px;
+                        height: 200px;
+                        width: 300px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+                        gap: 10px;
+
+                        .card-title{
+                            
+                            border-bottom: 1px solid yellow;       
+                        }
+                    }
+                        
+                }
+            }
+        }
+    
+</style>
