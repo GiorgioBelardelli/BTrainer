@@ -129,22 +129,26 @@ export default {
 
         // Metodo di validazione delle recensioni
 
-        // C?E DA INSERIRE NOME E COGNOME
-
         handleSubmitRece() {
             // Convalida dei dati del form
             if (this.rece.trim() === "") {
                 alert("La recensione non può essere vuota.");
             } else if (this.nameSurname.trim() === "") {
                 alert("Non puoi lasciare una recensione anonima");
-            } else if (this.nameSurname.trim().length < 30) {
+            } else if (this.nameSurname.trim().length < 4) {
                 alert(
-                    "Il tuo nome e cognome devono essere almeno di 30 caratteri."
+                    "Il tuo nome e cognome devono essere almeno di 4 caratteri."
                 );
             } else {
                 // Chiamata Axios in post
                 // axios.post(...)
-                console.log("La recensione che hai inserito è: " + this.rece);
+                console.log(
+                    this.nameSurname +
+                        "ha recensito questo Trainer:" +
+                        " '" +
+                        this.rece +
+                        "'"
+                );
             }
             return;
         },
@@ -227,7 +231,6 @@ export default {
 
 <template>
     <div id="trainer-gallery">
-        <h2>Info Personal Trainer</h2>
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
@@ -378,20 +381,54 @@ export default {
                                 </div> -->
 
                                 <!-- Qui l'utente invia il messaggio  -->
-                                <!-- <form @submit.prevent="handleSubmitMsg" id="msg-form"> -->
-                                <!-- Qui l'utente invia il messaggio  -->
-                                <!-- <div class="msg">
-                                        <input type="text" name="name" id="name" v-model="name"
-                                            placeholder="Inserisci Nome" />
-                                        <input type="text" name="surname" id="surname" v-model="surname"
-                                            placeholder="Inserisci Cognome" />
-                                        <input type="text" name="message" id="message" v-model="message"
-                                            placeholder="Inserisci Messaggio" />
-                                        <input type="text" name="email" id="email" v-model="email"
-                                            placeholder="Inserisci E-mail" />
-                                        <button class="submit-button" type="submit ">Invia</button>
+                                <form
+                                    @submit.prevent="handleSubmitMsg"
+                                    class="form-container"
+                                >
+                                    <!-- Qui l'utente invia il messaggio  -->
+                                    <input
+                                        type="text"
+                                        name="message"
+                                        id="message"
+                                        v-model="message"
+                                        placeholder="Invia un messaggio"
+                                    />
+                                    <button class="submit-button" type="submit">
+                                        Invia Messaggio
+                                    </button>
+                                </form>
+
+                                <!-- Qui l'utente inserisce una recensione -->
+
+                                <form
+                                    @submit.prevent="handleSubmitRece"
+                                    class="form-container"
+                                >
+                                    <div class="rece">
+                                        <div class="input-container">
+                                            <input
+                                                type="text"
+                                                name="nameSurname"
+                                                id="nameSurname"
+                                                v-model="nameSurname"
+                                                placeholder="Inserisci Nome e Cognome"
+                                            />
+                                            <input
+                                                type="text"
+                                                name="rece"
+                                                id="rece"
+                                                v-model="rece"
+                                                placeholder="Lascia una recensione su questo Personal Trainer"
+                                            />
+                                        </div>
+                                        <button
+                                            class="submit-button"
+                                            type="submit"
+                                        >
+                                            Invia Recensione
+                                        </button>
                                     </div>
-                                </form> -->
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -499,18 +536,11 @@ form > div {
 
                         // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi
 
-                        .msg {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            margin-bottom: 12px;
-                        }
-
                         form {
                             margin: auto;
 
                             #message {
-                                width: 50%;
+                                width: 100%;
                                 min-height: 50px;
                                 border: 1px solid black;
                                 border-radius: 3px;
@@ -529,7 +559,7 @@ form > div {
                     }
                 }
 
-                #form-review {
+                .form-container {
                     min-height: 200px;
 
                     .rece {
@@ -538,7 +568,7 @@ form > div {
                         justify-content: space-between;
                         align-items: center;
 
-                        .input-review {
+                        .input-container {
                             flex-basis: 70%;
 
                             #rece,
