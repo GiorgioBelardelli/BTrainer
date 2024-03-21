@@ -96,7 +96,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni > 3 && recensioni <= 8) {
+                    if (recensioni > 3 && recensioni <= 7) {
                         console.log('dentro recensioni');
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -107,7 +107,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni > 8) {
+                    if (recensioni > 7) {
                         console.log('dentro recensioni');
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -124,28 +124,14 @@ export default {
 <template>
     <div id="trainer-gallery">
         <form style="text-align: center">
-            <select
-                name="vote"
-                id="vote"
-                v-model="voteSelect"
-                @change="filterVote"
-            >
+            <select name="vote" id="vote" v-model="voteSelect" @change="filterVote">
                 <option :value="voteSelect" disabled>Scegli un voto</option>
-                <option
-                    v-for="vote in votes"
-                    :key="vote.id"
-                    :value="vote.value"
-                >
+                <option v-for="vote in votes" :key="vote.id" :value="vote.value">
                     {{ vote.value }}
                 </option>
             </select>
 
-            <select
-                name="vote"
-                id="vote"
-                v-model="reviewSelect"
-                @change="filterReview"
-            >
+            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview">
                 <option :value="reviewSelect" disabled>
                     Scegli numero Recensioni
                 </option>
@@ -155,41 +141,27 @@ export default {
             </select>
         </form>
         <div class="container">
-            <div class="row">
-                <div class="col-gallery">
-                    <div
-                        v-for="profile in arrayFilter"
-                        :key="profile.id"
-                        class="card-trainer"
-                        @click="showDetails(profile.id)"
-                    >
-                        <img
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
-                            :alt="profile.name + ' ' + profile.surname"
-                        />
-                        <div class="caption">
-                            <div class="name">
-                                {{ profile.name }} {{ profile.surname }}
-                            </div>
-                            <div
-                                v-for="specialization in profile.profile
-                                    .specializations"
-                                :key="specialization"
-                                class="specializations"
-                            >
-                                {{ specialization }}
-                            </div>
-                            <div class="social">
-                                <i class="fa-brands fa-facebook"></i>
-                                <i class="fa-brands fa-instagram"></i>
-                                <i class="fa-brands fa-x-twitter"></i>
-                                <i class="fa-brands fa-tiktok"></i>
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
+            <div class="col-gallery">
+                <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
+                    @click="showDetails(profile.id)">
+                    <img :src="getImagePath(
+                `../assets/trainers/${profile.profile.photo}`
+            )
+                " :alt="profile.name + ' ' + profile.surname" />
+                    <div class="caption">
+                        <div class="name">
+                            {{ profile.name }} {{ profile.surname }}
+                        </div>
+                        <div v-for="specialization in profile.profile
+                .specializations" :key="specialization" class="specializations">
+                            {{ specialization }}
+                        </div>
+                        <div class="social">
+                            <i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-instagram"></i>
+                            <i class="fa-brands fa-x-twitter"></i>
+                            <i class="fa-brands fa-tiktok"></i>
+                            <i class="fa-regular fa-envelope"></i>
                         </div>
                     </div>
                 </div>
@@ -225,26 +197,21 @@ h2 {
         margin: auto;
         width: 80%;
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
         .col-gallery {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-evenly;
+            justify-content: center;
 
             .card-trainer {
+                display: flex;
+                flex-direction: column;
                 position: relative;
-                margin: 1rem 0.5rem;
+                margin: 1rem .5rem;
                 overflow: hidden;
-                border: 1 px solid black;
-                width: 25%;
+                width: calc((100% / 3) - 1rem);
 
                 img {
-                    width: 100%;
-                    height: 400px;
+                    height: 500px;
                     object-fit: cover;
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;

@@ -12,7 +12,7 @@ export default {
             message: "",
             rece: "",
             votes: [],
-            vote: null, 
+            vote: null,
             mediaVotes: 0,
             nameSurname: "",
             // index: -1,
@@ -63,7 +63,7 @@ export default {
             } else {
                 console.log("Il messaggio che hai inviato è: " + this.message);
             }
-            return; 
+            return;
         },
 
         // Metodo di validazione delle recensioni
@@ -85,22 +85,22 @@ export default {
             }
             return;
         },
-        
+
         handleSubmitVote() {
             // Convalida dei dati del div.vote
             if (this.selectedStar === -1) {
                 // Se l'utente non ha selezionato nemmeno una stellina: 
                 alert('Seleziona un voto');
             } else {
-                this.vote = this.selectedStar +1 ; 
-                console.log( "Il voto che hai inserito è:" + this.vote);
+                this.vote = this.selectedStar + 1;
+                console.log("Il voto che hai inserito è:" + this.vote);
             }
-            return; 
+            return;
         },
 
         // Questo metodo Imposta selectedStar come l'indice dell'icona stella cliccata
         selectStar(index) {
-        this.selectedStar = index ;
+            this.selectedStar = index;
         },
 
         getMediaVoti: function () {
@@ -181,18 +181,12 @@ export default {
     </div>
 
     <!-- <form @submit.prevent="handleSubmitMsg"> -->
-    
-         <!-- Qui l'utente invia il messaggio  --> 
+
+    <!-- Qui l'utente invia il messaggio  -->
     <form @submit.prevent="handleSubmitMsg">
         <!-- Qui l'utente invia il messaggio  -->
         <div class="msg">
-            <input
-                type="text"
-                name="message"
-                id="message"
-                v-model="message"
-                placeholder="Invia un messaggio"
-            />
+            <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
             <button type="submit ">Invia Messaggio</button>
         </div>
     </form>
@@ -201,13 +195,8 @@ export default {
 
     <form @submit.prevent="handleSubmitRece">
         <div class="rece">
-            <input
-                type="text"
-                name="nameSurname"
-                id="nameSurname"
-                v-model="nameSurname"
-                placeholder="Inserisci Nome e Cognome"
-            />
+            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname"
+                placeholder="Inserisci Nome e Cognome" />
 
             <input type="text" name="rece" id="rece" v-model="rece"
                 placeholder="Lascia una recensione su questo Personal Trainer" />
@@ -223,7 +212,7 @@ export default {
                 <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
             </div>
         </div>
-        <button id="vote-button"  @click.prevent="handleSubmitVote">Invia Voto</button>
+        <button id="vote-button" @click.prevent="handleSubmitVote">Invia Voto</button>
 
     </div>
 
@@ -341,18 +330,17 @@ form {
     justify-content: space-between;
     align-items: center;
 
-            .icon-star {
-                color: black;
-            }
+    .icon-star {
+        color: black;
+    }
 
-        .icon-star {
-            color: grey;
-        }
+    .icon-star {
+        color: grey;
+    }
 
-        .active {
-            color: rgba(255, 255, 0, 0.692);
-            /* Colore giallo quando attiva */
-        }
+    .active {
+        color: rgba(255, 255, 0, 0.692);
+        /* Colore giallo quando attiva */
     }
 }
 

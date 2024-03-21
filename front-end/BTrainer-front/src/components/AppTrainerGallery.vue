@@ -90,29 +90,27 @@ export default {
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-gallery">
-                    <div v-for="profile in profiles" :key="profile.id" class="card-trainer"
-                        @click="showDetails(profile.id)">
-                        <img :src="getImagePath(
+            <div class="col-gallery">
+                <div v-for="profile in profiles" :key="profile.id" class="card-trainer"
+                    @click="showDetails(profile.id)">
+                    <img :src="getImagePath(
                 `../assets/trainers/${profile.profile.photo}`
             )
                 " :alt="profile.name + ' ' + profile.surname" />
-                        <div class="caption">
-                            <div class="name">
-                                <b>{{ profile.name }} {{ profile.surname }}</b>
-                            </div>
-                            <div v-for="specialization in profile.profile
+                    <div class="caption">
+                        <div class="name">
+                            <b>{{ profile.name }} {{ profile.surname }}</b>
+                        </div>
+                        <div v-for="specialization in profile.profile
                 .specializations" :key="specialization" class="specializations">
-                                {{ specialization }}
-                            </div>
-                            <div class="social">
-                                <i class="fa-brands fa-facebook"></i>
-                                <i class="fa-brands fa-instagram"></i>
-                                <i class="fa-brands fa-x-twitter"></i>
-                                <i class="fa-brands fa-tiktok"></i>
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
+                            {{ specialization }}
+                        </div>
+                        <div class="social">
+                            <i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-instagram"></i>
+                            <i class="fa-brands fa-x-twitter"></i>
+                            <i class="fa-brands fa-tiktok"></i>
+                            <i class="fa-regular fa-envelope"></i>
                         </div>
                     </div>
                 </div>
@@ -141,7 +139,7 @@ button {
 
 .selection {
     margin: 0 auto 3rem;
-    width: 20%;
+    width: 25%;
 
     .spec-label {
         margin-bottom: .5rem;
@@ -163,25 +161,21 @@ button {
         margin: auto;
         width: 80%;
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
         .col-gallery {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-evenly;
+            justify-content: center;
 
             .card-trainer {
+                display: flex;
+                flex-direction: column;
                 position: relative;
-                margin: 1rem 0.5rem;
+                margin: 1rem .5rem;
                 overflow: hidden;
-                width: 25%;
+                width: calc((100% / 3) - 1rem);
 
                 img {
-                    width: 100%;
-                    height: 400px;
+                    height: 500px;
                     object-fit: cover;
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
