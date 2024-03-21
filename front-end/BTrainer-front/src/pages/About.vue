@@ -68,7 +68,6 @@ export default {
 
         // Metodo di validazione delle recensioni
 
-        // C?E DA INSERIRE NOME E COGNOME 
 
         handleSubmitRece() {
             // Convalida dei dati del form
@@ -76,12 +75,12 @@ export default {
                 alert('La recensione non può essere vuota.');
             } else if (this.nameSurname.trim() === '') {
                 alert('Non puoi lasciare una recensione anonima');
-            } else if (this.nameSurname.trim().length < 30) {
-                alert('Il tuo nome e cognome devono essere almeno di 30 caratteri.');
+            } else if (this.nameSurname.trim().length < 4) {
+                alert('Il tuo nome e cognome devono essere almeno di 4 caratteri.');
             } else {
                 // Chiamata Axios in post
                 // axios.post(...)
-                console.log("La recensione che hai inserito è: " + this.rece)
+                console.log(this.nameSurname + "ha recensito questo Trainer:" + " '" + this.rece + "'")
             }
             return;
         },
@@ -132,8 +131,9 @@ export default {
 </script>
 
 <template>
+
     <div id="trainer-gallery">
-        <h2>Info Personal Trainer</h2>
+
         <div class="container">
             <div class="row">
                 <div class="col-gallery">
@@ -143,15 +143,14 @@ export default {
                         <div class="img-card">
                             <img v-if="profile" :src="getImagePath(
                             `../assets/trainers/${profile.profile.photo}`
-                        )
-                            " :alt="profile.name + ' ' + profile.surname" />
+                            )" :alt="profile.name + ' ' + profile.surname" />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
-                            <div class="name">
-                                <b>{{ profile.name }} {{ profile.surname }}</b>
+                                <div class="name">
+                                    <b>{{ profile.name }} {{ profile.surname }}</b>
+                                </div>
                             </div>
-                            <div v-for="specialization in profile.profile
-                            .specializations" :key="specialization" class="specializations">
+                            <div v-for="specialization in profile.profile.specializations" :key="specialization" class="specializations">
                                 {{ specialization }}
                             </div>
                             <div class="social">
@@ -161,10 +160,8 @@ export default {
                                 <i class="fa-brands fa-tiktok"></i>
                                 <i class="fa-regular fa-envelope"></i>
                             </div>
+                        </div>
 
-                        </div>
-                        </div>
-                        
                         <div class="info">
                             <div class="description">
                                 <p> "{{ profile.profile.plan_program }}"</p>
@@ -172,7 +169,7 @@ export default {
 
                             <div class="votes">
                                 <div>
-                                Media voti: {{ store.mediaVotes }}
+                                    Media voti: {{ store.mediaVotes }}
                                 </div>
                             </div>
 
@@ -194,54 +191,36 @@ export default {
                                         </div>
                                     </div>
                                     <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
-
                                 </div>
 
                                 <!-- Qui l'utente invia il messaggio  -->
-                                <form @submit.prevent="handleSubmitMsg" id="msg-form">
+                                <form @submit.prevent="handleSubmitMsg" class="form-container">
                                     <!-- Qui l'utente invia il messaggio  -->
-                                    <div class="msg">
-                                        <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
-                                        <button class="submit-button" type="submit ">Invia Messaggio</button>
-                                    </div>
+                                    <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
+                                    <button class="submit-button" type="submit">Invia Messaggio</button>
                                 </form>
 
                                 <!-- Qui l'utente inserisce una recensione -->
 
-                                <form @submit.prevent="handleSubmitRece" id="form-review">
+                                <form @submit.prevent="handleSubmitRece" class="form-container">
                                     <div class="rece">
-
-                                        <div class="input-review">
-
-                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname"
-                                            placeholder="Inserisci Nome e Cognome" />
-
-                                            <input type="text" name="rece" id="rece" v-model="rece"
-                                            placeholder="Lascia una recensione su questo Personal Trainer" />
-
+                                        <div class="input-container">
+                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname" placeholder="Inserisci Nome e Cognome" />
+                                            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer" />
                                         </div>
-
                                         <button class="submit-button" type="submit">Invia Recensione</button>
-
                                     </div>
                                 </form>
-
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-
 </template>
+
 
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
@@ -331,18 +310,12 @@ h2 {
 
                         // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi 
                         
-                        .msg {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            margin-bottom: 12px;
-                        }
 
                         form {
                             margin: auto;
 
                             #message {
-                                width: 50%;
+                                width: 100%;
                                 min-height: 50px;
                                 border: 1px solid black;
                                 border-radius: 3px;
@@ -362,7 +335,7 @@ h2 {
                     }
                 }
 
-                #form-review {
+                .form-container {
 
                     min-height: 200px;
 
@@ -372,7 +345,7 @@ h2 {
                             justify-content: space-between;
                             align-items: center;
 
-                            .input-review {
+                            .input-container {
                                 flex-basis: 70%;
 
                                 #rece, #nameSurname { 
