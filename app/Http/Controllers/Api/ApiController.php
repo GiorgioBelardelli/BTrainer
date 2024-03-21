@@ -132,4 +132,25 @@ class ApiController extends Controller
             return response()->json($data, 401);
         }
     }
+
+    public function createReview(Request $request) {
+
+        $data = $request -> all();
+
+        $review = new Review;
+
+        $review -> name = $data['name'];
+        $review -> surname = $data['surname'];
+        $review -> date = $data['date'];
+        $review -> content = $data['content'];
+        $review -> vote = $data['vote'];
+        $review -> profile_id = $data['profile_id'];
+
+        $review -> save();
+
+        return response()->json([
+            'success' => true,
+            'review' => $review
+        ]);
+    }
 }

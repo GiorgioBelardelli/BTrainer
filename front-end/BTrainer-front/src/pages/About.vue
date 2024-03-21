@@ -17,9 +17,21 @@ export default {
             nameSurname: "",
             // index: -1,
             selectedStar: -1, // Nessuna stella selezionata inizialmente
-            stars: [1, 2, 3, 4, 5]
+            stars: [1, 2, 3, 4, 5],
+            profiles: [],
+            reviews: [],
+            reviewId: null,
+            newReview: {
+                name: '',
+                surname: '',
+                date: '',
+                content: '',
+                vote: 0,
+                profile_id: null
+            }
         };
     },
+
     created() {
         // Ottieni l'ID del profilo dalla route
         const profileId = this.$route.params.id;
@@ -47,6 +59,26 @@ export default {
         });
     },
 
+    mounted() {
+        axios
+            .get("http://localhost:8000/api/v1/all")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") this.profiles = data.data;
+                console.log("profili: ", this.profiles);
+                for (let i = 0; i < this.profiles.length; i++) {
+                    if (this.profiles[i].id === this.profile.id) {
+                        this.reviewId = this.profiles[i].id;
+                        console.log('id: ' + this.reviewId);
+                        this.newReview.profile_id = this.reviewId;
+                        break;
+                    }
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    },
 
     methods: {
         getImagePath: function (imgPath) {
@@ -103,6 +135,16 @@ export default {
             this.selectedStar = index;
         },
 
+        // Questo metodo resetta la selezione delle stelline del voto se
+        // si clicca col mouse al di fuori di una stellina
+        handleOutsideClick(event) {
+            // Controlla se l'evento di clic è avvenuto all'interno del componente
+            if (!this.$el.contains(event.target)) {
+                // L'utente ha cliccato fuori dall'area delle stelle, reimposta selectedStar
+                this.selectedStar = -1;
+            }
+        },
+
         getMediaVoti: function () {
             const votes = this.profile.profile.votes;
             let tempTot = 0;
@@ -115,18 +157,15 @@ export default {
             store.mediaVotes = tempTot / votes.length;
         },
 
-
-
-
-        // Questo metodo resetta la selezione delle stelline del voto se
-        // si clicca col mouse al di fuori di una stellina
-        handleOutsideClick(event) {
-            // Controlla se l'evento di clic è avvenuto all'interno del componente
-            if (!this.$el.contains(event.target)) {
-                // L'utente ha cliccato fuori dall'area delle stelle, reimposta selectedStar
-                this.selectedStar = -1;
-            }
-        },
+        createNewReview() {
+            axios.post('http://127.0.0.1:8000/api/v1/reviews', this.newReview)
+                .then(response => {
+                    console.log('Recensione creata con successo:', response.data);
+                })
+                .catch(error => {
+                    console.error('Si è verificato un errore durante la creazione della recensione:', error);
+                });
+        }
     },
 };
 </script>
@@ -173,6 +212,27 @@ export default {
                                     <p>Media voti: {{ store.mediaVotes }}</p>
                                 </div>
                             </div>
+
+                            <h3>PROFILE ID: {{ profile.id }}</h3>
+                            <form @submit.prevent="createNewReview">
+                                <div class="name">
+                                    <input v-model="newReview.name" type="text" placeholder="Nome">
+                                </div>
+                                <div class="surname">
+                                    <input v-model="newReview.surname" type="text" placeholder="Cognome">
+                                </div>
+                                <div class="content">
+                                    <input v-model="newReview.date" type="date" placeholder="Data">
+                                </div>
+                                <div class="content">
+                                    <textarea v-model="newReview.content" type="text" placeholder="Contenuto"
+                                        rows="5"></textarea>
+                                </div>
+                                <div class="vote">
+                                    <input v-model="newReview.vote" type="number" min="1" max="5" placeholder="Voto">
+                                </div>
+                                <button type="submit">Invia recensione</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -229,6 +289,10 @@ h2 {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+form>div {
+    margin: .5rem 0;
 }
 
 #trainer-gallery {
