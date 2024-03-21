@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaymentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,7 +11,9 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Specialization;
 use App\Models\Review;
+use App\Models\Sponsorship;
 use App\Models\Vote;
+use Braintree\Gateway;
 use PhpParser\Node\Expr\FuncCall;
 
 class ApiController extends Controller
@@ -74,5 +77,49 @@ class ApiController extends Controller
             'status' => 'success',
             'specializations' => $specializations,
         ]);
+    }
+
+    public function generate(Request $request,Gateway $gateway){
+        
+        $token = $gateway->clientToken()->generate();
+        $data = [
+            'success' => true,
+            'token' => $token
+        ];  
+
+        return response()->json($data, 200);
+
+        //return 'generate';
+    }
+    
+    public function makePayment(PaymentRequest $request,Gateway $gateway){
+
+        $sponsorship = Sponsorship::find($request->sponsorship);
+
+        $result = $gateway->transaction()->sale([
+
+            'amount' => $sponsorship->price,
+            'paymentMethodNonce' => $request->token,
+            'options' => [
+                'submitForSettlement' => true
+            ]
+        ]);
+        
+        if($result->success){
+            $data = [
+                'success' => 'true',
+                'message' => 'Transazione eseguita con successo!',
+            ];
+
+            return response()->json($data);
+
+        }else{
+            $data = [
+                'success' => 'false',
+                'message' => 'Transazione fallita',
+            ];
+
+            return response()->json($data, 401);
+        }
     }
 }
