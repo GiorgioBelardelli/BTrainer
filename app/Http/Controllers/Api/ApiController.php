@@ -24,7 +24,7 @@ class ApiController extends Controller
     {
         // Recupera tutti gli utenti con i loro profili e specializzazioni
         $users = User::with('profile', 'profile.specializations')->get();
-        
+
         // Costruisci un array per il risultato JSON
         $data = [];
 
@@ -69,7 +69,7 @@ class ApiController extends Controller
             'status' => 'success',
             'data' => $data,
         ]);
-        
+
     }
 
     public function getSpecialization()
@@ -93,18 +93,18 @@ class ApiController extends Controller
     }
 
     public function generate(Request $request,Gateway $gateway){
-        
+
         $token = $gateway->clientToken()->generate();
         $data = [
             'success' => true,
             'token' => $token
-        ];  
+        ];
 
         return response()->json($data, 200);
 
         //return 'generate';
     }
-    
+
     public function makePayment(PaymentRequest $request,Gateway $gateway){
 
         $sponsorship = Sponsorship::find($request->sponsorship);
@@ -117,7 +117,7 @@ class ApiController extends Controller
                 'submitForSettlement' => true
             ]
         ]);
-        
+
         if($result->success){
             $data = [
                 'success' => 'true',
