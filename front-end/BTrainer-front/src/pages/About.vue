@@ -10,7 +10,10 @@ export default {
             message: "",
             rece: "",
             votes: [],
+            vote: null, 
             mediaVotes: 0,
+            nameSurname: "",
+            // index: -1,
             selectedStar: -1, // Nessuna stella selezionata inizialmente
             stars: [1, 2, 3, 4, 5]
         };
@@ -54,40 +57,48 @@ export default {
             // Convalida dei dati del form
             if (this.message.trim() === "") {
                 // Mostra un messaggio di errore se il campo del messaggio è vuoto
-
                 alert("Il campo del messaggio non può essere vuoto.");
-
-                return; 
+            } else {
+                console.log("Il messaggio che hai inviato è: " + this.message);
             }
+            return; 
         },
 
         // Metodo di validazione delle recensioni 
 
+        // C?E DA INSERIRE NOME E COGNOME 
+
         handleSubmitRece() {
             // Convalida dei dati del form
             if (this.rece.trim() === '') {
-
-                // Mostra un messaggio di errore se il campo della recensione è vuota
-
                 alert('La recensione non può essere vuota.');
-                // else...chiamata axios in post
-
-                return;
+            } else if (this.nameSurname.trim() === '') {
+                alert('Non puoi lasciare una recensione anonima');
+            } else if (this.nameSurname.trim().length < 30) {
+                alert('Il tuo nome e cognome devono essere almeno di 30 caratteri.');
+            } else {
+                // Chiamata Axios in post
+                // axios.post(...)
+                console.log("La recensione che hai inserito è: " + this.rece)
             }
-        },
-
-        handleSubmitVote() {
-        // Convalida dei dati del form
-        if (this.selectedStar === -1) {
-            // Se l'utente non ha selezionato nemmeno una stellina: 
-            alert('Seleziona un voto');
             return;
-        }
+        },
+        
+        handleSubmitVote() {
+            // Convalida dei dati del div.vote
+            if (this.selectedStar === -1) {
+                // Se l'utente non ha selezionato nemmeno una stellina: 
+                alert('Seleziona un voto');
+            } else {
+                this.vote = this.selectedStar +1 ; 
+                console.log( "Il voto che hai inserito è:" + this.vote);
+            }
+            return; 
         },
 
         // Questo metodo Imposta selectedStar come l'indice dell'icona stella cliccata
         selectStar(index) {
-        this.selectedStar = index;
+        this.selectedStar = index ;
         },
 
         getMediaVoti: function () {
@@ -177,7 +188,7 @@ export default {
     <!-- <form @submit.prevent="handleSubmitMsg"> -->
     
          <!-- Qui l'utente invia il messaggio  --> 
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmitMsg">
         <!-- Qui l'utente invia il messaggio  -->
         <div class="msg">
             <input
@@ -187,8 +198,7 @@ export default {
                 v-model="message"
                 placeholder="Invia un messaggio"
             />
-            <button type="submit">Invia Messaggio</button>
-            <div>prova:{{ message }}</div>
+            <button type="submit ">Invia Messaggio</button>
         </div>
     </form>
 
@@ -196,6 +206,14 @@ export default {
 
     <form @submit.prevent="handleSubmitRece">
         <div class="rece">
+            <input
+                type="text"
+                name="nameSurname"
+                id="nameSurname"
+                v-model="nameSurname"
+                placeholder="Inserisci Nome e Cognome"
+            />
+
             <input
                 type="text"
                 name="rece"
@@ -223,7 +241,8 @@ export default {
             ></i>
         </div>
         </div>
-        <button id="vote-button" @click="handleSubmitVote">Invia Voto</button>
+        <button id="vote-button"  @click.prevent="handleSubmitVote">Invia Voto</button>
+
     </div>
 
 
@@ -336,7 +355,7 @@ form {
         .icon-container {
 
             .icon-star {
-                color: grey;
+                color: black;
             }
 
             .active {
