@@ -264,45 +264,9 @@ export default {
                             </div>
 
                             <div class="votes">
-<<<<<<< HEAD
-                                <div>
-                                    Media voti: {{ store.mediaVotes }}
-                                </div>
-                                <div class="reviews">
-=======
                                 <div>Media voti: {{ store.mediaVotes }}</div>
                             </div>
 
-                            <h3>Scrivi una recensione:</h3>
-                            <form @submit.prevent="createNewReview">
-                                <div class="name">
-                                    <input v-model="newReview.name" type="text" required placeholder="Nome" />
-                                </div>
-                                <div class="surname">
-                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome" />
-                                </div>
-                                <div class="content">
-                                    <textarea v-model="newReview.content" type="text" required placeholder="Contenuto"
-                                        rows="5"></textarea>
-                                </div>
-                                <div class="vote">
-                                    Dai un voto:
-                                    <input v-model="newReview.vote" type="number" min="1" max="5" required
-                                        placeholder="Voto" />
-                                </div>
-                                <button type="submit">Invia recensione</button>
-                            </form>
-
-                            <div class="reviews">
->>>>>>> 11062c734a43fb4521e27edf8f483e8a94547c15
-                                <div>
-                                    Recensito da
-                                    {{ profile.profile.reviews.length }} persone
-                                </div>
-                            </div>
-                            </div>
-
-<<<<<<< HEAD
                             <div class="form-container">
 
                                 <!-- Lato Sinistro -->
@@ -314,11 +278,12 @@ export default {
                                             <input v-model="newReview.name" type="text" required placeholder="Nome">
                                         </div>
                                         <div class="surname">
-                                            <input v-model="newReview.surname" type="text" required placeholder="Cognome">
+                                            <input v-model="newReview.surname" type="text" required
+                                                placeholder="Cognome">
                                         </div>
                                         <div class="content">
-                                            <textarea v-model="newReview.content" type="text" required placeholder="Contenuto"
-                                                rows="5"></textarea>
+                                            <textarea v-model="newReview.content" type="text" required
+                                                placeholder="Contenuto" rows="5"></textarea>
                                         </div>
                                         <div class="vote">
                                             <input v-model="newReview.vote" type="number" min="1" max="5" required
@@ -331,81 +296,25 @@ export default {
                                 <!-- Lato Destro  -->
                                 <div class="form-left">
                                     <h3>Invia un messaggio:</h3>
-                                <form @submit.prevent="createNewMessage">
-                                    <div class="name">
-                                        <input v-model="newMessage.name" type="text" required placeholder="Nome">
-                                    </div>
-                                    <div class="surname">
-                                        <input v-model="newMessage.surname" type="text" required placeholder="Cognome">
-                                    </div>
-                                    <div class="content">
-                                        <textarea v-model="newMessage.content" type="text" required placeholder="Contenuto"
-                                            rows="5"></textarea>
-                                    </div>
-                                    <div class="email">
-                                        <input v-model="newMessage.email" type="email" required placeholder="E-Mail">
-                                    </div>
-                                    <button type="submit">Invia messaggio</button>
-                                </form>
-                                </div>
-                            </div>
-
-
-=======
-                            <h3>Invia un messaggio:</h3>
-                            <form @submit.prevent="createNewMessage">
-                                <div class="name">
-                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
-                                </div>
-                                <div class="surname">
-                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
-                                </div>
-                                <div class="content">
-                                    <textarea v-model="newMessage.content" type="text" required placeholder="Contenuto"
-                                        rows="5"></textarea>
-                                </div>
-                                <div class="email">
-                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
-                                </div>
-                                <button type="submit">Invia messaggio</button>
-                            </form>
-
->>>>>>> 11062c734a43fb4521e27edf8f483e8a94547c15
-                            <div class="form">
-                                <!-- Qui l'utente inserisce un voto al PTrainer -->
-
-                                <div class="vote-container">
-                                    <div class="vote">
-                                        <div v-for="(star, index) in stars" :key="index" class="icon-container"
-                                            @click="selectStar(index)">
-                                            <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                                    <form @submit.prevent="createNewMessage">
+                                        <div class="name">
+                                            <input v-model="newMessage.name" type="text" required placeholder="Nome">
                                         </div>
-                                    </div>
-                                    <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
-<<<<<<< HEAD
-                                </div> -->
-
-                                <!-- Qui l'utente invia il messaggio  -->
-
-                                <!-- <form @submit.prevent="handleSubmitMsg" class="form-container">
-                                    <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
-                                    <button class="submit-button" type="submit">Invia Messaggio</button>
-                                </form> -->
-
-                                <!-- Qui l'utente inserisce una recensione -->
-
-                                <!-- <form @submit.prevent="handleSubmitRece" class="form-container">
-                                    <div class="rece">
-                                        <div class="input-container">
-                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname" placeholder="Inserisci Nome e Cognome" />
-                                            <input type="text" name="rece" id="rece" v-model="rece" placeholder="Lascia una recensione su questo Personal Trainer" />
+                                        <div class="surname">
+                                            <input v-model="newMessage.surname" type="text" required
+                                                placeholder="Cognome">
                                         </div>
-                                        <button class="submit-button" type="submit">Invia Recensione</button>
-                                    </div>
-                                </form> -->
-=======
+                                        <div class="content">
+                                            <textarea v-model="newMessage.content" type="text" required
+                                                placeholder="Contenuto" rows="5"></textarea>
+                                        </div>
+                                        <div class="email">
+                                            <input v-model="newMessage.email" type="email" required
+                                                placeholder="E-Mail">
+                                        </div>
+                                        <button type="submit">Invia messaggio</button>
+                                    </form>
                                 </div>
->>>>>>> 11062c734a43fb4521e27edf8f483e8a94547c15
                             </div>
                         </div>
                     </div>
@@ -486,8 +395,9 @@ form>div {
                         margin: auto;
                         display: flex;
                         justify-content: space-between;
-                        
-                        .form-right, .form-left {
+
+                        .form-right,
+                        .form-left {
                             flex-basis: 50%;
                             margin: auto;
 
@@ -520,7 +430,7 @@ form>div {
                             text-decoration: underline;
                             flex-basis: 50%;
                             text-align: center;
-                    }
+                        }
                     }
 
 
@@ -656,5 +566,4 @@ form>div {
         /* Colore giallo quando attiva */
     }
 }
-
 </style>
