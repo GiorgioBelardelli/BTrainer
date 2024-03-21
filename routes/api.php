@@ -26,6 +26,8 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::post('/reviews', [ApiController::class, 'createReview']);
 
+    Route::post('/messages', [ApiController::class, 'createMessage']);
+
     // Route::get('/profile', [ApiController::class, 'getProfile'])
     //     ->name('api.profile');
     // Route::get('/specialization', [ApiController::class, 'getSpecialization'])

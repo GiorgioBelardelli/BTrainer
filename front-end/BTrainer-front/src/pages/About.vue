@@ -11,22 +11,40 @@ export default {
             profile: null,
             message: "",
             rece: "",
+
+            // Votes
             votes: [],
             vote: null,
             mediaVotes: 0,
+
             nameSurname: "",
             // index: -1,
             selectedStar: -1, // Nessuna stella selezionata inizialmente
             stars: [1, 2, 3, 4, 5],
+
             profiles: [],
+
+            // Review
             reviews: [],
-            reviewId: null,
+            id: null,
             newReview: {
                 name: '',
                 surname: '',
                 date: '',
                 content: '',
                 vote: 0,
+                profile_id: null
+            },
+
+            // Message
+            messages: [],
+            id: null,
+            newMessage: {
+                name: '',
+                surname: '',
+                date: '',
+                content: '',
+                email: '',
                 profile_id: null
             }
         };
@@ -60,17 +78,22 @@ export default {
     },
 
     mounted() {
+        // Data Formattata (Invio Recensione / Voto)
+        this.newReview.date = this.generateFormattedDate();
+        this.newMessage.date = this.generateFormattedDate();
+
         axios
             .get("http://localhost:8000/api/v1/all")
             .then((res) => {
                 const data = res.data;
                 if (data.status === "success") this.profiles = data.data;
-                console.log("profili: ", this.profiles);
+                // console.log("profili: ", this.profiles);
                 for (let i = 0; i < this.profiles.length; i++) {
                     if (this.profiles[i].id === this.profile.id) {
-                        this.reviewId = this.profiles[i].id;
-                        console.log('id: ' + this.reviewId);
-                        this.newReview.profile_id = this.reviewId;
+                        this.id = this.profiles[i].id;
+                        // console.log('id: ' + this.reviewId);
+                        this.newReview.profile_id = this.id;
+                        this.newMessage.profile_id = this.id;
                         break;
                     }
                 }
@@ -81,6 +104,12 @@ export default {
     },
 
     methods: {
+        // Data Formattata (ANNO/MM/GG)
+        generateFormattedDate() {
+            const currentDate = new Date();
+            return currentDate.toISOString().split('T')[0];
+        },
+
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
         },
@@ -149,10 +178,10 @@ export default {
             const votes = this.profile.profile.votes;
             let tempTot = 0;
             votes.forEach((vote) => {
-                console.log(vote.value);
+                // console.log(vote.value);
                 tempTot += vote.value;
             });
-            console.log(tempTot);
+            // console.log(tempTot);
 
             store.mediaVotes = tempTot / votes.length;
         },
@@ -164,6 +193,16 @@ export default {
                 })
                 .catch(error => {
                     console.error('Si è verificato un errore durante la creazione della recensione:', error);
+                });
+        },
+
+        createNewMessage() {
+            axios.post('http://127.0.0.1:8000/api/v1/messages', this.newMessage)
+                .then(response => {
+                    console.log('Messaggio creato con successo:', response.data);
+                })
+                .catch(error => {
+                    console.error('Si è verificato un errore durante la creazione della messaggio:', error);
                 });
         }
     },
@@ -215,23 +254,46 @@ export default {
                                 </div>
                             </div>
 
-                            <h3>PROFILE ID: {{ profile.id }}</h3>
+                            <h3>Scrivi una recensione:</h3>
                             <form @submit.prevent="createNewReview">
                                 <div class="name">
-                                    <input v-model="newReview.name" type="text" placeholder="Nome">
+                                    <input v-model="newReview.name" type="text" required placeholder="Nome">
                                 </div>
                                 <div class="surname">
-                                    <input v-model="newReview.surname" type="text" placeholder="Cognome">
+                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome">
                                 </div>
                                 <div class="content">
-                                    <input v-model="newReview.date" type="date" placeholder="Data">
-                                </div>
-                                <div class="content">
-                                    <textarea v-model="newReview.content" type="text" placeholder="Contenuto"
+                                    <textarea v-model="newReview.content" type="text" required placeholder="Contenuto"
                                         rows="5"></textarea>
                                 </div>
                                 <div class="vote">
-                                    <input v-model="newReview.vote" type="number" min="1" max="5" placeholder="Voto">
+                                    <input v-model="newReview.vote" type="number" min="1" max="5" required
+                                        placeholder="Voto">
+                                </div>
+                                <button type="submit">Invia recensione</button>
+                            </form>
+
+                            <div class="reviews">
+                                <div>
+                                    Recensito da
+                                    {{ profile.profile.reviews.length }} persone
+                                </div>
+                            </div>
+
+                            <h3>Invia un messaggio:</h3>
+                            <form @submit.prevent="createNewMessage">
+                                <div class="name">
+                                    <input v-model="newMessage.name" type="text" required placeholder="Nome">
+                                </div>
+                                <div class="surname">
+                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome">
+                                </div>
+                                <div class="content">
+                                    <textarea v-model="newMessage.content" type="text" required placeholder="Contenuto"
+                                        rows="5"></textarea>
+                                </div>
+                                <div class="email">
+                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail">
                                 </div>
                                 <button type="submit">Invia recensione</button>
                             </form>
@@ -244,10 +306,9 @@ export default {
                             </div>
 
                             <div class="form">
-
                                 <!-- Qui l'utente inserisce un voto al PTrainer -->
 
-                                <div class="vote-container">
+                                <!-- <div class="vote-container">
                                     <div class="vote">
                                         <div v-for="(star, index) in stars" :key="index" class="icon-container"
                                             @click="selectStar(index)">
@@ -255,13 +316,12 @@ export default {
                                         </div>
                                     </div>
                                     <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
-
-                                </div>
+                                </div> -->
 
                                 <!-- Qui l'utente invia il messaggio  -->
-                                <form @submit.prevent="handleSubmitMsg" id="msg-form">
-                                    <!-- Qui l'utente invia il messaggio  -->
-                                    <div class="msg">
+                                <!-- <form @submit.prevent="handleSubmitMsg" id="msg-form"> -->
+                                <!-- Qui l'utente invia il messaggio  -->
+                                <!-- <div class="msg">
                                         <input type="text" name="name" id="name" v-model="name"
                                             placeholder="Inserisci Nome" />
                                         <input type="text" name="surname" id="surname" v-model="surname"
@@ -272,43 +332,14 @@ export default {
                                             placeholder="Inserisci E-mail" />
                                         <button class="submit-button" type="submit ">Invia</button>
                                     </div>
-                                </form>
-
-                                <!-- Qui l'utente inserisce una recensione -->
-
-                                <form @submit.prevent="handleSubmitRece" id="form-review">
-                                    <div class="rece">
-
-                                        <div class="input-review">
-
-                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname"
-                                                placeholder="Inserisci Nome e Cognome" />
-
-                                            <input type="text" name="rece" id="rece" v-model="rece"
-                                                placeholder="Lascia una recensione su questo Personal Trainer" />
-
-                                        </div>
-
-                                        <button class="submit-button" type="submit">Invia Recensione</button>
-
-                                    </div>
-                                </form>
-
+                                </form> -->
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
 </template>
 
 <style lang="scss" scoped>
@@ -320,6 +351,10 @@ h2 {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+h3 {
+    margin-top: 1rem;
 }
 
 form>div {
@@ -468,7 +503,6 @@ form>div {
                 }
 
                 &:hover {
-                    cursor: pointer;
                     // img {
                     //     transform: scale(1.1);
                     //     display: block;
