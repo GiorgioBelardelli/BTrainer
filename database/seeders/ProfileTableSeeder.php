@@ -80,7 +80,7 @@ class ProfileTableSeeder extends Seeder
         [
             'photo' => 'PTrainer9.webp',
             'phone_number' => '(901) 234-5678',
-            'plan_program' => "a mia missione è aiutarti a raggiungere e mantenere un peso corporeo sano. Con un approccio personalizzato che include sia l'allenamento che la consulenza nutrizionale, ti aiuterò a trasformare il tuo stile di vita.",
+            'plan_program' => "La mia missione è aiutarti a raggiungere e mantenere un peso corporeo sano. Con un approccio personalizzato che include sia l'allenamento che la consulenza nutrizionale, ti aiuterò a trasformare il tuo stile di vita.",
             'work_address' => '345 Maple Avenue, Pinecrest, GA 86420',
             'curriculum' => 'CVprofile.pdf'
         ],
