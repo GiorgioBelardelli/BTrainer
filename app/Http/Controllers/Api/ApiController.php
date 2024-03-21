@@ -137,7 +137,6 @@ class ApiController extends Controller
     public function createReview(Request $request) {
 
         $data = $request -> all();
-
         $review = new Review;
 
         $review -> name = $data['name'];
@@ -158,7 +157,6 @@ class ApiController extends Controller
     public function createMessage(Request $request) {
 
         $data = $request -> all();
-
         $message = new Message;
 
         $message -> name = $data['name'];
@@ -173,6 +171,21 @@ class ApiController extends Controller
         return response()->json([
             'success' => true,
             'message' => $message
+        ]);
+    }
+
+    public function createVote(Request $request) {
+
+        $data = $request -> all();
+        $vote = new Vote;
+
+        $vote -> value = $data['value'];
+
+        $vote -> save();
+
+        return response()->json([
+            'success' => true,
+            'vote' => $vote
         ]);
     }
 }
