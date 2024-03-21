@@ -100,7 +100,7 @@ export default {
 
         // Metodo di validazione delle recensioni
 
-        // C?E DA INSERIRE NOME E COGNOME 
+        // C?E DA INSERIRE NOME E COGNOME
 
         handleSubmitRece() {
             // Convalida dei dati del form
@@ -121,7 +121,7 @@ export default {
         handleSubmitVote() {
             // Convalida dei dati del div.vote
             if (this.selectedStar === -1) {
-                // Se l'utente non ha selezionato nemmeno una stellina: 
+                // Se l'utente non ha selezionato nemmeno una stellina:
                 alert('Seleziona un voto');
             } else {
                 this.vote = this.selectedStar + 1;
@@ -177,39 +177,41 @@ export default {
             <div class="row">
                 <div class="col-gallery">
                     <div class="card-trainer">
-                        <img v-if="profile" :src="getImagePath(
-                            `../assets/trainers/${profile.profile.photo}`
-                        )
-                            " :alt="profile.name + ' ' + profile.surname" />
-                        <div class="caption" v-if="profile">
-                            <div class="name">
-                                <b>{{ profile.name }} {{ profile.surname }}</b>
+
+                        <!-- Card che contiene l'img -->
+                        <div class="img-card">
+                            <img v-if="profile" :src="getImagePath(
+                                `../assets/trainers/${profile.profile.photo}`
+                            )
+                                " :alt="profile.name + ' ' + profile.surname" />
+                            <div class="caption" v-if="profile">
+                                <!-- NOME COGNOME SPEC -->
+                                <div class="name">
+                                    <b>{{ profile.name }} {{ profile.surname }}</b>
+                                </div>
+                                <div v-for="specialization in profile.profile
+                                .specializations" :key="specialization" class="specializations">
+                                    {{ specialization }}
+                                </div>
+                                <div class="social">
+                                    <i class="fa-brands fa-facebook"></i>
+                                    <i class="fa-brands fa-instagram"></i>
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                    <i class="fa-brands fa-tiktok"></i>
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+
                             </div>
-                            <div v-for="specialization in profile.profile
-                            .specializations" :key="specialization" class="specializations">
-                                {{ specialization }}
-                            </div>
-                            <div class="social">
-                                <i class="fa-brands fa-facebook"></i>
-                                <i class="fa-brands fa-instagram"></i>
-                                <i class="fa-brands fa-x-twitter"></i>
-                                <i class="fa-brands fa-tiktok"></i>
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
+                        </div>
+
+                        <div class="info">
                             <div class="description">
-                                <p>{{ profile.profile.plan_program }}</p>
-                            </div>
-                            <div class="reviews">
-                                <h1>
-                                    Recensioni:
-                                    {{ profile.profile.reviews.length }}
-                                </h1>
+                                <p> "{{ profile.profile.plan_program }}"</p>
                             </div>
 
                             <div class="votes">
-                                <h1>Voti Ricevuti:</h1>
                                 <div>
-                                    <p>Media voti: {{ store.mediaVotes }}</p>
+                                    Media voti: {{ store.mediaVotes }}
                                 </div>
                             </div>
 
@@ -233,48 +235,77 @@ export default {
                                 </div>
                                 <button type="submit">Invia recensione</button>
                             </form>
+
+                            <div class="reviews">
+                                <div>
+                                    Recensito da
+                                    {{ profile.profile.reviews.length }} persone
+                                </div>
+                            </div>
+
+                            <div class="form">
+
+                                <!-- Qui l'utente inserisce un voto al PTrainer -->
+
+                                <div class="vote-container">
+                                    <div class="vote">
+                                        <div v-for="(star, index) in stars" :key="index" class="icon-container"
+                                            @click="selectStar(index)">
+                                            <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                                        </div>
+                                    </div>
+                                    <button class="submit-button" @click.prevent="handleSubmitVote">Invia Voto</button>
+
+                                </div>
+
+                                <!-- Qui l'utente invia il messaggio  -->
+                                <form @submit.prevent="handleSubmitMsg" id="msg-form">
+                                    <!-- Qui l'utente invia il messaggio  -->
+                                    <div class="msg">
+                                        <input type="text" name="name" id="name" v-model="name"
+                                            placeholder="Inserisci Nome" />
+                                        <input type="text" name="surname" id="surname" v-model="surname"
+                                            placeholder="Inserisci Cognome" />
+                                        <input type="text" name="message" id="message" v-model="message"
+                                            placeholder="Inserisci Messaggio" />
+                                        <input type="text" name="email" id="email" v-model="email"
+                                            placeholder="Inserisci E-mail" />
+                                        <button class="submit-button" type="submit ">Invia</button>
+                                    </div>
+                                </form>
+
+                                <!-- Qui l'utente inserisce una recensione -->
+
+                                <form @submit.prevent="handleSubmitRece" id="form-review">
+                                    <div class="rece">
+
+                                        <div class="input-review">
+
+                                            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname"
+                                                placeholder="Inserisci Nome e Cognome" />
+
+                                            <input type="text" name="rece" id="rece" v-model="rece"
+                                                placeholder="Lascia una recensione su questo Personal Trainer" />
+
+                                        </div>
+
+                                        <button class="submit-button" type="submit">Invia Recensione</button>
+
+                                    </div>
+                                </form>
+
+                            </div>
+
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- <form @submit.prevent="handleSubmitMsg"> -->
 
-    <!-- Qui l'utente invia il messaggio  -->
-    <form @submit.prevent="handleSubmitMsg">
-        <!-- Qui l'utente invia il messaggio  -->
-        <div class="msg">
-            <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
-            <button type="submit ">Invia Messaggio</button>
-        </div>
-    </form>
-
-    <!-- Qui l'utente inserisce una recensione -->
-
-    <form @submit.prevent="handleSubmitRece">
-        <div class="rece">
-            <input type="text" name="nameSurname" id="nameSurname" v-model="nameSurname"
-                placeholder="Inserisci Nome e Cognome" />
-
-            <input type="text" name="rece" id="rece" v-model="rece"
-                placeholder="Lascia una recensione su questo Personal Trainer" />
-            <button type="submit">Invia Recensione</button>
-        </div>
-    </form>
-
-    <!-- Qui l'utente inserisce un voto al PTrainer -->
-
-    <div class="vote-container">
-        <div class="vote">
-            <div v-for="(star, index) in stars" :key="index" class="icon-container" @click="selectStar(index)">
-                <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
-            </div>
-        </div>
-        <button id="vote-button" @click.prevent="handleSubmitVote">Invia Voto</button>
-
-    </div>
 
 
 
@@ -302,9 +333,13 @@ form>div {
     background-size: cover;
     padding-top: 120px;
 
+    .row {
+        margin: auto;
+    }
+
     .container {
         margin: auto;
-        width: 80%;
+        width: 100%;
 
         .col-gallery {
             padding: 1rem;
@@ -314,15 +349,122 @@ form>div {
                 position: relative;
                 margin: 1rem 0.5rem 0;
                 overflow: hidden;
-                width: 75%;
+                width: 85%;
+                margin: auto;
 
-                img {
-                    width: 400px;
-                    height: 400px;
-                    object-fit: cover;
-                    object-position: center;
-                    transition: filter 1s ease, transform 1s ease;
-                    display: block;
+                // Parte sinistra con l'immagine nome cognome ecc..
+                .img-card {
+
+                    flex-basis: 25%;
+
+                    img {
+                        width: 400px;
+                        height: 400px;
+                        border-radius: 15px;
+                        border: 1px solid black;
+                        object-fit: cover;
+                        object-position: center;
+                        transition: filter 1s ease, transform 1s ease;
+                        display: block;
+                    }
+                }
+
+                // Parte centrale con la descrizione del programma
+                .info {
+                    padding: 20px;
+
+                    p {
+                        font-style: italic;
+                        width: 70%;
+                        margin: auto;
+                    }
+
+                    .votes,
+                    .reviews {
+                        width: 70%;
+                        margin: auto;
+                    }
+
+                    .votes {
+                        margin-top: 10px;
+                    }
+
+                    .reviews {
+                        margin-top: 10px;
+                    }
+
+                    .form {
+                        width: 70%;
+                        padding-top: 12px;
+                        margin: auto;
+
+                        .vote-container {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 25px;
+                        }
+
+                        // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi
+
+                        .msg {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 12px;
+                        }
+
+                        form {
+                            margin: auto;
+
+                            #message {
+                                width: 50%;
+                                min-height: 50px;
+                                border: 1px solid black;
+                                border-radius: 3px;
+                                margin-bottom: 20px;
+                                margin-right: 20px;
+                            }
+
+                            button {
+                                padding: 8px;
+                            }
+
+                            input::placeholder {
+                                margin: auto;
+
+                            }
+                        }
+                    }
+                }
+
+                #form-review {
+
+                    min-height: 200px;
+
+                    .rece {
+                        display: flex;
+                        margin: auto;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .input-review {
+                            flex-basis: 70%;
+
+                            #rece,
+                            #nameSurname {
+                                width: 100%;
+                                border: 1px solid black;
+                                border-radius: 3px;
+                                margin-bottom: 20px;
+                                margin-right: 20px;
+                            }
+
+                            #rece {
+                                min-height: 120px;
+                                max-height: 200px;
+                            }
+                        }
+                    }
                 }
 
                 &:hover {
@@ -336,11 +478,16 @@ form>div {
         }
 
         .caption {
-            margin-left: 2rem;
+
+            margin: auto;
+            margin-top: 12px;
 
             .name {
-                margin: 0.5rem 0;
+
                 transition: filter 0.25s ease, transform 0.25s ease;
+                text-align: center;
+                font-size: 22px;
+
                 // &:hover {
                 //     transform: scale(1.25);
                 //     cursor: pointer;
@@ -348,7 +495,7 @@ form>div {
             }
 
             .title {
-                margin: 0.5rem 0;
+
                 transition: filter 0.25s ease, transform 0.25s ease;
 
                 &:hover {
@@ -357,34 +504,18 @@ form>div {
                 }
             }
 
+            .specializations {
+                text-align: center;
+            }
+
             .social {
-                margin: 1rem 0;
+                // margin: 1rem 0;
+                margin: auto;
+                margin-top: 10px;
+                text-align: center;
+
             }
         }
-    }
-}
-
-form {
-    width: 80%;
-    margin: auto;
-
-    #message,
-    #rece {
-        width: 30%;
-        min-height: 50px;
-        border: 1px solid black;
-        border-radius: 15px;
-        margin-bottom: 20px;
-        margin-right: 20px;
-    }
-
-    button {
-        padding: 8px;
-    }
-
-    input::placeholder {
-        margin: auto;
-
     }
 }
 
@@ -408,7 +539,9 @@ form {
     }
 }
 
-#vote-button {
+// Stile per tutti i button della pagina
+
+.submit-button {
     padding: 8px;
 }
 </style>
