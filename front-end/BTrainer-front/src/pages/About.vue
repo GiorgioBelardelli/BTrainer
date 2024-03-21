@@ -68,7 +68,7 @@ export default {
 
         // Metodo di validazione delle recensioni
 
-        // C?E DA INSERIRE NOME E COGNOME 
+        // C?E DA INSERIRE NOME E COGNOME
 
         handleSubmitRece() {
             // Convalida dei dati del form
@@ -89,7 +89,7 @@ export default {
         handleSubmitVote() {
             // Convalida dei dati del div.vote
             if (this.selectedStar === -1) {
-                // Se l'utente non ha selezionato nemmeno una stellina: 
+                // Se l'utente non ha selezionato nemmeno una stellina:
                 alert('Seleziona un voto');
             } else {
                 this.vote = this.selectedStar + 1;
@@ -164,7 +164,7 @@ export default {
 
                         </div>
                         </div>
-                        
+
                         <div class="info">
                             <div class="description">
                                 <p> "{{ profile.profile.plan_program }}"</p>
@@ -178,7 +178,7 @@ export default {
 
                             <div class="reviews">
                                 <div>
-                                    Recensito da 
+                                    Recensito da
                                     {{ profile.profile.reviews.length }} persone
                                 </div>
                             </div>
@@ -201,8 +201,11 @@ export default {
                                 <form @submit.prevent="handleSubmitMsg" id="msg-form">
                                     <!-- Qui l'utente invia il messaggio  -->
                                     <div class="msg">
-                                        <input type="text" name="message" id="message" v-model="message" placeholder="Invia un messaggio" />
-                                        <button class="submit-button" type="submit ">Invia Messaggio</button>
+                                        <input type="text" name="name" id="name" v-model="name" placeholder="Inserisci Nome" />
+                                        <input type="text" name="surname" id="surname" v-model="surname" placeholder="Inserisci Cognome" />
+                                        <input type="text" name="message" id="message" v-model="message" placeholder="Inserisci Messaggio" />
+                                        <input type="text" name="email" id="email" v-model="email" placeholder="Inserisci E-mail" />
+                                        <button class="submit-button" type="submit ">Invia</button>
                                     </div>
                                 </form>
 
@@ -297,7 +300,7 @@ h2 {
                 }
                 }
 
-                // Parte centrale con la descrizione del programma 
+                // Parte centrale con la descrizione del programma
                 .info {
                     padding: 20px;
 
@@ -329,8 +332,8 @@ h2 {
                                 margin-bottom: 25px;
                             }
 
-                        // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi 
-                        
+                        // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi
+
                         .msg {
                             display: flex;
                             justify-content: space-between;
@@ -375,7 +378,7 @@ h2 {
                             .input-review {
                                 flex-basis: 70%;
 
-                                #rece, #nameSurname { 
+                                #rece, #nameSurname {
                                     width: 100%;
                                     border: 1px solid black;
                                     border-radius: 3px;
@@ -388,7 +391,7 @@ h2 {
                                 }
                             }
                             }
-                } 
+                }
 
                 &:hover {
                     cursor: pointer;
@@ -401,16 +404,16 @@ h2 {
         }
 
         .caption {
-            
+
             margin: auto;
             margin-top: 12px;
 
             .name {
-                
+
                 transition: filter 0.25s ease, transform 0.25s ease;
                 text-align: center;
                 font-size: 22px;
-                
+
                 // &:hover {
                 //     transform: scale(1.25);
                 //     cursor: pointer;
@@ -462,7 +465,7 @@ h2 {
     }
 }
 
-// Stile per tutti i button della pagina 
+// Stile per tutti i button della pagina
 
 .submit-button {
     padding: 8px;
