@@ -15,7 +15,7 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::get('/specializations', [ApiController::class, 'getSpecialization']);
 
-
+    Route::get('/votes', [ApiController::class, 'getVotes']);
 
     // Route::get('/profile', [ApiController::class, 'getProfile'])
     //     ->name('api.profile');

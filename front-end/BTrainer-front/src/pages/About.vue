@@ -1,11 +1,13 @@
 <script>
 import axios from "axios";
+import { store } from '../store';
 import { forEach } from "lodash";
 
 export default {
     name: "About",
     data() {
         return {
+            store,
             profile: null,
             message: "",
             rece: "",
@@ -44,14 +46,14 @@ export default {
             this.getMediaVoti();
         });
     },
-    
+
 
     methods: {
         getImagePath: function (imgPath) {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        // Metodo di validazione dei msg 
+        // Metodo di validazione dei msg
 
         handleSubmitMsg() {
             // Convalida dei dati del form
@@ -64,7 +66,7 @@ export default {
             return; 
         },
 
-        // Metodo di validazione delle recensioni 
+        // Metodo di validazione delle recensioni
 
         // C?E DA INSERIRE NOME E COGNOME 
 
@@ -110,19 +112,21 @@ export default {
             });
             console.log(tempTot);
 
-            this.mediaVotes = tempTot / votes.length;
+            store.mediaVotes = tempTot / votes.length;
         },
+
+
+
 
         // Questo metodo resetta la selezione delle stelline del voto se
         // si clicca col mouse al di fuori di una stellina
-
         handleOutsideClick(event) {
-        // Controlla se l'evento di clic è avvenuto all'interno del componente
-        if (!this.$el.contains(event.target)) {
-            // L'utente ha cliccato fuori dall'area delle stelle, reimposta selectedStar
-            this.selectedStar = -1;
-        }
-        },   
+            // Controlla se l'evento di clic è avvenuto all'interno del componente
+            if (!this.$el.contains(event.target)) {
+                // L'utente ha cliccato fuori dall'area delle stelle, reimposta selectedStar
+                this.selectedStar = -1;
+            }
+        },
     },
 };
 </script>
@@ -134,25 +138,16 @@ export default {
             <div class="row">
                 <div class="col-gallery">
                     <div class="card-trainer">
-                        <img
-                            v-if="profile"
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
-                            :alt="profile.name + ' ' + profile.surname"
-                        />
+                        <img v-if="profile" :src="getImagePath(
+                            `../assets/trainers/${profile.profile.photo}`
+                        )
+                            " :alt="profile.name + ' ' + profile.surname" />
                         <div class="caption" v-if="profile">
                             <div class="name">
                                 <b>{{ profile.name }} {{ profile.surname }}</b>
                             </div>
-                            <div
-                                v-for="specialization in profile.profile
-                                    .specializations"
-                                :key="specialization"
-                                class="specializations"
-                            >
+                            <div v-for="specialization in profile.profile
+                            .specializations" :key="specialization" class="specializations">
                                 {{ specialization }}
                             </div>
                             <div class="social">
@@ -175,7 +170,7 @@ export default {
                             <div class="votes">
                                 <h1>Voti Ricevuti:</h1>
                                 <div>
-                                    <p>Media voti: {{ mediaVotes }}</p>
+                                    <p>Media voti: {{ store.mediaVotes }}</p>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +197,7 @@ export default {
         </div>
     </form>
 
-        <!-- Qui l'utente inserisce una recensione -->
+    <!-- Qui l'utente inserisce una recensione -->
 
     <form @submit.prevent="handleSubmitRece">
         <div class="rece">
@@ -221,6 +216,8 @@ export default {
                 v-model="rece"
                 placeholder="Lascia una recensione su questo Personal Trainer"
             />
+            <input type="text" name="rece" id="rece" v-model="rece"
+                placeholder="Lascia una recensione su questo Personal Trainer" />
             <button type="submit">Invia Recensione</button>
         </div>
     </form>
@@ -229,24 +226,16 @@ export default {
 
     <div class="vote-container">
         <div class="vote">
-        <div 
-            v-for="(star, index) in stars" 
-            :key="index" 
-            class="icon-container"
-            @click="selectStar(index)"
-            >
-            <i 
-                class="fas fa-star" 
-                :class="{ 'active': index <= selectedStar }"
-            ></i>
-        </div>
+            <div v-for="(star, index) in stars" :key="index" class="icon-container" @click="selectStar(index)">
+                <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+            </div>
         </div>
         <button id="vote-button"  @click.prevent="handleSubmitVote">Invia Voto</button>
 
     </div>
 
 
-    
+
 </template>
 
 <style lang="scss" scoped>
@@ -262,6 +251,7 @@ h2 {
 
 #trainer-gallery {
     width: 100%;
+    min-height: calc(100vh - 300px);
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
     background-size: cover;
     padding-top: 120px;
@@ -298,6 +288,7 @@ h2 {
                 }
             }
         }
+
         .caption {
             margin-left: 2rem;
 
@@ -313,6 +304,7 @@ h2 {
             .title {
                 margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
+
                 &:hover {
                     transform: scale(1.25);
                     cursor: pointer;
@@ -339,32 +331,39 @@ form {
         margin-bottom: 20px;
         margin-right: 20px;
     }
+
     button {
         padding: 8px;
     }
+
     input::placeholder {
         margin: auto;
 
-} }
-    .vote {
-        display: flex;
-        width: 200px;
-        justify-content: space-between;
-        align-items: center;
+    }
+}
 
-        .icon-container {
+.vote {
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
 
             .icon-star {
                 color: black;
             }
 
-            .active {
-                color: rgba(255, 255, 0, 0.692); /* Colore giallo quando attiva */
-            }
+        .icon-star {
+            color: grey;
+        }
+
+        .active {
+            color: rgba(255, 255, 0, 0.692);
+            /* Colore giallo quando attiva */
         }
     }
-    #vote-button {
-            padding: 8px;
-    }
+}
 
+#vote-button {
+    padding: 8px;
+}
 </style>

@@ -75,4 +75,14 @@ class ApiController extends Controller
             'specializations' => $specializations,
         ]);
     }
+
+    public function getVotes()
+    {
+        $votes = Vote::all();
+
+        return response()->json([
+            'status' => 'success',
+            'votes' => $votes,
+        ]);
+    }
 }
