@@ -209,13 +209,6 @@ export default {
                 placeholder="Inserisci Nome e Cognome"
             />
 
-            <input
-                type="text"
-                name="rece"
-                id="rece"
-                v-model="rece"
-                placeholder="Lascia una recensione su questo Personal Trainer"
-            />
             <input type="text" name="rece" id="rece" v-model="rece"
                 placeholder="Lascia una recensione su questo Personal Trainer" />
             <button type="submit">Invia Recensione</button>
