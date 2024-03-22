@@ -111,3 +111,33 @@ console.log(sponsorshipId)
 
   
 </script>
+
+<style lang=scss scoped>
+    .text-center {
+      color: white;
+      margin-bottom: 50px;
+    }
+    #dropin-wrapper {
+      color: black;
+      background-color: white;
+    
+    #checkout-message {
+      color: white;
+      p {
+        color:white;
+      }
+    }
+      #dropin-container * {
+        background-color: white;
+        color:black;
+      }
+    
+    #submit-button {
+      background-color: black;
+      color: white;
+      padding: 8px;
+      border-radius:8px;
+      margin-bottom: 10px;
+    }
+    }
+</style>
