@@ -64,11 +64,11 @@
                                                     <strong> A soli: {{ $sponsorship->price }} €</strong>
                                                 </div>
                                                 <div class="card-button text-center">
-                                                    <button>
-                                                        <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
-                                                            ACQUISTA
-                                                        </a>
-                                                    </button>
+                                                    
+                                                    <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
+                                                        ACQUISTA
+                                                    </a>
+                                                    
                                                 </div>
                                             </div>
                                             @endforeach
@@ -123,6 +123,8 @@
         .card{
 
             .sponsorships{
+
+                color: white;
                 .card-container{
 
                     display: flex;
@@ -131,6 +133,7 @@
 
                     .sponsorship-card{
                         border: 1px solid yellow;
+                        background-color:white;
                         border-radius: 10px;
                         height: 200px;
                         width: 300px;
@@ -141,8 +144,26 @@
                         gap: 10px;
 
                         .card-title{
-                            
+                            background-color: white;
                             border-bottom: 1px solid yellow;       
+                        }
+                        .card-info {
+                            background-color: white;
+                        }
+                        .card-button  {
+
+                                a {
+                                    color: black;
+                                    background-color:yellow;
+                                    padding: 8px;
+                                    border: 1px solid black;
+                                    border-radius: 5px;
+
+                                }
+                                a:hover {
+                                    transform:translate(1.1);
+                                }
+                            
                         }
                     }
                         
