@@ -33,7 +33,7 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::get('/sponsored/profiles', [ApiController::class, 'getSponsoredProfiles']);
 
-    Route::post('/profiles/{profile}/vote', [VoteController::class, 'store'])
+    Route::post('/rate', [VoteController::class, 'rateProfile'])
     ->name('profiles.vote');
 
     // Route::get('/profile', [ApiController::class, 'getProfile'])

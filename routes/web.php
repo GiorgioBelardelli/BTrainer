@@ -9,10 +9,14 @@ use App\Http\Controllers\TrainerProfileController;
 
 Route::get('/', [TrainerProfileController::class, 'index'])
     ->name('index');
+
 Route::get('/profiles/{id}', [TrainerProfileController::class, 'show'])
     ->name('profile.show');
+
 Route::get('/sponsorship/{id}', [SponsorshipController::class, 'checkout'])
     ->name('sponsorship.checkout');
+
+Route::post('/sponsorship/link', [SponsorshipController::class, 'linkToProfile']);
 
 
 

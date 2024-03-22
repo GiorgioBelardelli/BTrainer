@@ -8,21 +8,25 @@ use Illuminate\Http\Request;
 
 class VoteController extends Controller
 {
-    public function store(Profile $profile, Request $request)
+    public function rateProfile(Request $request)
     {
         $request->validate([
             'vote' => 'required|integer|min:1|max:5',
         ]);
 
-        // Creazione del voto
-        $vote = new Vote();
-        $vote->vote = $request->vote;
-        $vote->save();
+        $voteId = $request->input('vote');
+        $profileId = $request->input('id');
 
-        // Associare il voto al profilo
-        $profile->votes()->attach($vote->id);
 
-        return redirect()->route('profiles.show', $profile)->with('success', 'Voto inviato con successo!');
+    // Trova il voto corrispondente all'ID fornito
+    $vote = Vote::find($voteId);
+    $profile = Profile::find($profileId);
+
+
+    // Associare il voto al profilo tramite la tabella pivot
+    $profile->votes()->attach($vote->id);
+
+        return response()->json(['message' => 'Voto inviato con successo'], 200);
     }
     
 }
