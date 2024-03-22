@@ -63,7 +63,7 @@ console.log(sponsorshipId)
     const token = response.data.token;
 
     braintree.dropin.create({
-    // Insert your tokenization key here
+    // TOKENIZATION KEY
     authorization: token,
     container: '#dropin-container'
   }, 
@@ -78,29 +78,37 @@ console.log(sponsorshipId)
           url: 'http://127.0.0.1:8000/api/v1/make/payment',
           data: {
 
-            // 'paymentMethodNonce': payload.nonce
-            "token" : "fake-valid-nonce",
+            "token": payload.nonce,
             "sponsorship" : sponsorshipId
         }
         }).done(function(result) {
-          // Tear down the Drop-in UI
-          instance.teardown(function (teardownErr) {
-            if (teardownErr) {
-              console.error('Could not tear down Drop-in UI!');
-            } else {
-              console.info('Drop-in UI has been torn down!');
-              // Remove the 'Submit payment' button
-              $('#submit-button').remove();
+    if (result.success) {
+        // Collega la sponsorizzazione al profilo dell'utente
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:8000/sponsorship/link',
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                "sponsorship_id": sponsorshipId
             }
-          });
-
-          if (result.success) {
-            $('#checkout-message').html('<h1>Success</h1><p>Ti ringraziamo per il tuo acquisto!🥳</p>');
-          } else {
-            console.log(result);
-            $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
-          }
+        }).done(function(linkResult) {
+            if (linkResult.success) {
+                $('#checkout-message').html('<h1>Success</h1><p>Ti ringraziamo per il tuo acquisto!🥳</p>');
+            } else {
+                console.log(linkResult);
+                $('#checkout-message').html('<h1>Error</h1><p>Errore nel collegare la sponsorizzazione al profilo.</p>');
+            }
         });
+        
+        // Rimuovi il pulsante "Submit payment"
+        $('#submit-button').remove();
+    } else {
+        console.log(result);
+        $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
+    }
+});
       });
     });
   });

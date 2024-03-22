@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('surname');
-            $table->date('date');
-            $table->string('content');
+            $table->dateTime('date');
+            $table->text('content');
             $table->string('email');
 
             $table->timestamps();

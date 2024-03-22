@@ -11,6 +11,7 @@ export default {
             profile: null,
             message: "",
             rece: "",
+            newVoto: 0,
 
             // Votes
             votes: [],
@@ -235,7 +236,30 @@ export default {
                     );
                 });
         },
+
+        createNewVote() {
+            //console.log('Il voto è:' + this.newVoto);
+            axios
+                .post("http://127.0.0.1:8000/api/v1/rate", {
+                    "vote" : this.newVoto,
+                    "id": this.$route.params.id
+                })
+                .then((response) => {
+                    console.log(
+                        "Voto creato con successo:",
+                        response.data
+                    );
+                })
+                .catch((error) => {
+                    console.error(
+                        "Si è verificato un errore durante la creazione del Voto:",
+                        console.log(this.newVoto)
+                    );
+                });
+        },
     },
+
+    props: ['profileId'], // Ricevi l'ID del profilo come prop
 };
 </script>
 
@@ -295,7 +319,6 @@ export default {
                                 </div>
                             </div>
                             <div class="form-container">
-
                                 <!-- Lato Destro  -->
                                 <div class="form-right">
                                     <h3>Scrivi una recensione:</h3>
@@ -384,8 +407,8 @@ export default {
                                     </form>
                                 </div>
                                 <div class="votes">
-                                    <form>
-                                        <input type="number" min="1" max="5" name="vote" id="vote">
+                                    <form @submit.prevent="createNewVote">
+                                        <input v-model="newVoto" type="number" min="1" max="5" name="newVoto" id="newVoto">
                                         <button type="submit">
                                             Invia Voto
                                         </button>

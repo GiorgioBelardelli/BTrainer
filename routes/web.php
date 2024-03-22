@@ -5,14 +5,19 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\TrainerProfileController;
 
 Route::get('/', [TrainerProfileController::class, 'index'])
     ->name('index');
+
 Route::get('/profiles/{id}', [TrainerProfileController::class, 'show'])
     ->name('profile.show');
+
 Route::get('/sponsorship/{id}', [SponsorshipController::class, 'checkout'])
     ->name('sponsorship.checkout');
+
+Route::post('/sponsorship/link', [SponsorshipController::class, 'linkToProfile']);
 
 
 
@@ -27,7 +32,13 @@ Route::get('/sponsorship/{id}', [SponsorshipController::class, 'checkout'])
 
 Route::get('/dashboard', [DashboardController::class, 'getProfile'])->name('dashboard');
 
+Route::get('/usermessages', [DashboardController::class, 'getUserMessages'])->name('usermessages');
 
+Route::get('/userreviews', [DashboardController::class, 'getUserReviews'])->name('userreviews');
+
+Route::get('/sponsorship', [DashboardController::class, 'getSponsorship'])->name('sponsorship');
+
+Route::get('/userstatistics', [DashboardController::class, 'getStatistics'])->name('statistics');
 
 Route::middleware('auth')->group(function () {
 
