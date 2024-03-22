@@ -55,13 +55,13 @@
 
 #specializations {
     padding: 0 10%;
-    margin: 5rem auto 0;
+    margin: 0 auto 0;
     background-color: rgb(37, 37, 37);
 
     h1 {
         text-align: center;
         padding-top: 5rem;
-        margin: 3rem;
+        margin-bottom: 3rem;
         color: $yellow;
         font-size: 40px;
     }
@@ -80,14 +80,17 @@
         0% {
             transform: translateX(-50%);
         }
+
         100% {
             transform: translateX(0);
         }
     }
+
     @keyframes slide-right-exit {
         0% {
             transform: translateX(0);
         }
+
         100% {
             transform: translateX(-50%);
         }
@@ -132,6 +135,7 @@
 
             &:hover {
                 cursor: pointer;
+
                 img {
                     filter: grayscale(0%);
                     transform: scale(1.1);

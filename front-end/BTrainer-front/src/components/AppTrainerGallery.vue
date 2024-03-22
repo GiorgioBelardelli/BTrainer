@@ -88,9 +88,9 @@ export default {
 </script>
 
 <template>
-    <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
 
     <div id="trainer-gallery">
+        <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
         <div class="selection">
             <div class="spec-label">
                 <label>Scegli la specializzazione:</label>
@@ -103,6 +103,7 @@ export default {
         </div>
 
         <div class="container">
+            <h2>Profili Sponsorizzati:</h2>
             <div class="col-gallery">
                 <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
@@ -139,7 +140,7 @@ h2 {
     color: $grey;
     font-size: 40px;
     text-align: center;
-    margin-top: 25px;
+    padding-top: 1.5rem;
     margin-bottom: 25px;
 }
 
@@ -151,7 +152,7 @@ button {
 }
 
 .selection {
-    margin: 0 auto 3rem;
+    margin: 0 auto .5rem;
     width: 25%;
 
     .spec-label {
@@ -168,6 +169,7 @@ button {
     width: 100%;
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
     background-size: cover;
+    display: block;
     padding-bottom: 50px;
 
     .container {
