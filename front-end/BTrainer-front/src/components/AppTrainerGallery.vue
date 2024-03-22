@@ -8,6 +8,7 @@ export default {
         return {
             store,
             profiles: [],
+            filteredProfiles: [],
             specializations: [],
             selectedSpecializations: [],
             profilesTemp: [],
@@ -57,6 +58,18 @@ export default {
             });
 
         axios
+            .get("http://localhost:8000/api/v1/sponsored/profiles")
+            .then((res) => {
+                const data = res.data;
+                if (data.status === "success") this.filteredProfiles = data.data;
+
+                // console.log("profiles: ", this.profiles);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+        axios
             .get("http://localhost:8000/api/v1/specializations")
             .then((res) => {
                 const data = res.data;
@@ -91,7 +104,7 @@ export default {
 
         <div class="container">
             <div class="col-gallery">
-                <div v-for="profile in profiles" :key="profile.id" class="card-trainer"
+                <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
                     <img :src="getImagePath(
                 `../assets/trainers/${profile.profile.photo}`

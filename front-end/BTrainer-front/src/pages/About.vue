@@ -271,8 +271,8 @@ export default {
                             </div>
 
                             <div class="form-container">
-                                <!-- Lato Sinistro -->
 
+                                <!-- Lato Destro  -->
                                 <div class="form-right">
                                     <h3>Scrivi una recensione:</h3>
                                     <form @submit.prevent="createNewReview">
@@ -297,7 +297,7 @@ export default {
                                     </form>
                                 </div>
 
-                                <!-- Lato Destro  -->
+                                <!-- Lato Sinistro -->
                                 <div class="form-left">
                                     <h3>Invia un messaggio:</h3>
                                     <form @submit.prevent="createNewMessage">
@@ -318,6 +318,14 @@ export default {
                                         </div>
                                         <button type="submit">
                                             Invia messaggio
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="votes">
+                                    <form>
+                                        <input type="number" min="1" max="5" name="vote" id="vote">
+                                        <button type="submit">
+                                            Invia Voto
                                         </button>
                                     </form>
                                 </div>
