@@ -16,14 +16,14 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    {{ __('Sei Loggato!') }}
+                    {{-- {{ __('Sei Loggato!') }} --}}
 
 
                     @if ($userProfile)
                     @auth
                     @if (Auth::user()->id === $userProfile->user_id)
                     <div class="reviews">
-                        <h1>Recensioni: </h1>
+                        <h4>Le tue Recensioni: </h4>
                         @php
                         $sortedReviews = $userProfile->reviews->sortByDesc('date');
                         @endphp
@@ -35,7 +35,7 @@
                         @endforeach
                     </div>
                     <div class="messages">
-                        <h1>Messaggi ricevuti: </h1>
+                        <h4>I tuoi Messaggi: </h4>
                         @php
                         $sortedMessages = $userProfile->messages->sortByDesc('date');
                         @endphp
@@ -51,7 +51,7 @@
                     {{-- Verifica se l'utente ha un profilo --}}
                                     
                                     <div class="sponsorships">
-                                        <h1>Vuoi essere nostro partner? ecco le Sponsorships che offriamo:</h1>
+                                        <h4>Accedi alle nostre Sponsorships:</h4>
                                         <div class="card-container">
                                             @foreach ($sponsorships as $sponsorship)
                                             <div class="sponsorship-card">
@@ -59,7 +59,7 @@
                                                     <h4> {{ $sponsorship->name }} </h4>
                                                 </div>
                                                 <div class="card-info">
-                                                    <strong>Durata: {{ $sponsorship->duration }} </strong>
+                                                    <strong>Durata: {{ $sponsorship->duration }}h</strong>
                                                     <br>
                                                     <strong> A soli: {{ $sponsorship->price }} €</strong>
                                                 </div>
@@ -97,6 +97,10 @@
         .card {
             .card-body {
                 color: white;
+
+                .reviews, .messages, .sponsorship {
+                    margin-bottom: 20px;
+                }
             }
         }
 
@@ -130,6 +134,7 @@
                     display: flex;
                     justify-content: space-around;
                     align-items: center;
+                    margin-top: 50px;
 
                     .sponsorship-card{
                         border: 1px solid yellow;
@@ -143,25 +148,39 @@
                         align-items: center;
                         gap: 10px;
 
+                    .sponsorship-card:hover {
+                        transform:scale(1.1);
+                    }
+
                         .card-title{
                             background-color: white;
-                            border-bottom: 1px solid yellow;       
+                            font-style: italic;
+                            border-bottom: 1px solid black;
+                            
+                            h4 {
+                                background-color:white;
+                            }
                         }
                         .card-info {
                             background-color: white;
+
+                            strong { 
+                                background-color: white;
+                            }
                         }
                         .card-button  {
 
                                 a {
-                                    color: black;
-                                    background-color:yellow;
+                                    color: white;
+                                    background-color: black;
                                     padding: 8px;
                                     border: 1px solid black;
                                     border-radius: 5px;
 
                                 }
                                 a:hover {
-                                    transform:translate(1.1);
+                                    filter: opacity(0.8);
+                                
                                 }
                             
                         }
