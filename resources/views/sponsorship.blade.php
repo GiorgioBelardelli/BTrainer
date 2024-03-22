@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <h2 class="fs-4 text-secondary my-4">
-        {{ __('Dashboard') }}
+        {{ __('Sponsorship') }}
     </h2>
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('La tua Dashboard') }}</div>
+               
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,64 +16,37 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    {{-- {{ __('Sei Loggato!') }} --}}
+                    
 
 
                     @if ($userProfile)
                     @auth
                     @if (Auth::user()->id === $userProfile->user_id)
-                    <div class="reviews">
-                        <h4>Le tue Recensioni: </h4>
-                        @php
-                        $sortedReviews = $userProfile->reviews->sortByDesc('date');
-                        @endphp
-                        @foreach ($sortedReviews as $review)
-                        <h3>Nome: {{ $review->name }} {{ $review->surname }}</h3>
-                        <span>Data: {{ $review->date }}</span>
-                        <br>
-                        <span>Contenuto: {{ $review->content }}</span>
-                        @endforeach
-                    </div>
-                    <div class="messages">
-                        <h4>I tuoi Messaggi: </h4>
-                        @php
-                        $sortedMessages = $userProfile->messages->sortByDesc('date');
-                        @endphp
-                        @foreach ($sortedMessages as $message)
-                        <h3>Nome: {{ $message->name }} {{ $message->surname }}</h3>
-                        <span>E-mail: {{ $message->email }}</span>
-                        <br>
-                        <span>Data: {{ $message->date }}</span>
-                        <br>
-                        <span>Contenuto: {{ $message->content }}</span>
-                        @endforeach
-                    </div>
-                    {{-- Verifica se l'utente ha un profilo --}}
                                     
-                                    <div class="sponsorships">
-                                        <h4>Accedi alle nostre Sponsorships:</h4>
-                                        <div class="card-container">
-                                            @foreach ($sponsorships as $sponsorship)
-                                            <div class="sponsorship-card">
-                                                <div class="card-title">
+                    <div class="sponsorships">
+                        <h4>Accedi alle nostre Sponsorships:</h4>
+                        <div class="card-container">
+                            @foreach ($sponsorships as $sponsorship)
+                            <div class="sponsorship-card">
+                                <div class="card-title">
                                                     <h4> {{ $sponsorship->name }} </h4>
-                                                </div>
-                                                <div class="card-info">
+                                </div>
+                                <div class="card-info">
                                                     <strong>Durata: {{ $sponsorship->duration }}h</strong>
                                                     <br>
                                                     <strong> A soli: {{ $sponsorship->price }} €</strong>
-                                                </div>
-                                                <div class="card-button text-center">
+                                </div>
+                                <div class="card-button text-center">
                                                     
-                                                    <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
+                                    <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
                                                         ACQUISTA
-                                                    </a>
+                                    </a>
                                                     
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
 
                     @endif
                     @endauth
@@ -127,6 +100,10 @@
         .card{
 
             .sponsorships{
+
+                h4 {
+                    text-align: center;
+                }
 
                 color: white;
                 .card-container{

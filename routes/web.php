@@ -32,6 +32,8 @@ Route::get('/usermessages', [DashboardController::class, 'getUserMessages'])->na
 
 Route::get('/userreviews', [DashboardController::class, 'getUserReviews'])->name('userreviews');
 
+Route::get('/sponsorship', [DashboardController::class, 'getSponsorship'])->name('sponsorship');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/create', [TrainerProfileController::class, 'create'])
