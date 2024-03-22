@@ -34,52 +34,10 @@
                         <span>Contenuto: {{ $review->content }}</span>
                         @endforeach
                     </div>
-                    <div class="messages">
-                        <h4>I tuoi Messaggi: </h4>
-                        @php
-                        $sortedMessages = $userProfile->messages->sortByDesc('date');
-                        @endphp
-                        @foreach ($sortedMessages as $message)
-                        <h3>Nome: {{ $message->name }} {{ $message->surname }}</h3>
-                        <span>E-mail: {{ $message->email }}</span>
-                        <br>
-                        <span>Data: {{ $message->date }}</span>
-                        <br>
-                        <span>Contenuto: {{ $message->content }}</span>
-                        @endforeach
-                    </div>
-                    {{-- Verifica se l'utente ha un profilo --}}
-                                    
-                                    <div class="sponsorships">
-                                        <h4>Accedi alle nostre Sponsorships:</h4>
-                                        <div class="card-container">
-                                            @foreach ($sponsorships as $sponsorship)
-                                            <div class="sponsorship-card">
-                                                <div class="card-title">
-                                                    <h4> {{ $sponsorship->name }} </h4>
-                                                </div>
-                                                <div class="card-info">
-                                                    <strong>Durata: {{ $sponsorship->duration }}h</strong>
-                                                    <br>
-                                                    <strong> A soli: {{ $sponsorship->price }} €</strong>
-                                                </div>
-                                                <div class="card-button text-center">
-                                                    
-                                                    <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
-                                                        ACQUISTA
-                                                    </a>
-                                                    
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
 
                     @endif
                     @endauth
                     @else
-                    <h1>Vuoi crearti un profilo da Trainer?</h1>
-                    <button><a href="{{ route('profile.create') }}" class="btn">CREA PROFILO</a></button>
                     @endif
 
                 </div>

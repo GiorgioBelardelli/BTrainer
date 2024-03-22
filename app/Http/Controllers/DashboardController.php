@@ -47,6 +47,20 @@ class DashboardController extends Controller
     return view('usermessages', compact('userProfile', 'sponsorships'));
 }
 
+    public function getUserReviews()
+    {
+        // Ottieni l'ID dell'utente loggato
+        $userId = Auth::id();
+
+        $sponsorships = Sponsorship::all();
+        
+        // Ottieni il profilo dell'utente loggato
+        $userProfile = Profile::where('user_id', $userId)->first();
+
+        // Restituisci la vista 'usermessages' con i dati necessari
+        return view('userreviews', compact('userProfile', 'sponsorships'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

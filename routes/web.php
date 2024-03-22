@@ -30,6 +30,8 @@ Route::get('/dashboard', [DashboardController::class, 'getProfile'])->name('dash
 
 Route::get('/usermessages', [DashboardController::class, 'getUserMessages'])->name('usermessages');
 
+Route::get('/userreviews', [DashboardController::class, 'getUserReviews'])->name('userreviews');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/create', [TrainerProfileController::class, 'create'])
