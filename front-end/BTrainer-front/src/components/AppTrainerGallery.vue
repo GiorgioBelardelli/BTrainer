@@ -88,9 +88,9 @@ export default {
 </script>
 
 <template>
-    <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
 
     <div id="trainer-gallery">
+        <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
         <div class="selection">
             <div class="spec-label">
                 <label>Scegli la specializzazione:</label>
@@ -101,30 +101,35 @@ export default {
                 <label :for="specialization">{{ specialization }}</label>
             </div>
         </div>
-
         <div class="container">
+            <h2>Profili Sponsorizzati:</h2>
             <div class="col-gallery">
                 <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
-                    <img :src="getImagePath(
+                    <div class="style-trainer">
+                        <img :src="getImagePath(
                 `../assets/trainers/${profile.profile.photo}`
             )
                 " :alt="profile.name + ' ' + profile.surname" />
-                    <div class="caption">
-                        <div class="name">
-                            <b>{{ profile.name }} {{ profile.surname }}</b>
-                        </div>
-                        <div v-for="specialization in profile.profile
+                        <figcaption>
+                            <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
+                            <div class="caption">
+                                <div class="name">
+                                    <h3>{{ profile.name }} {{ profile.surname }}</h3>
+                                </div>
+                                <div v-for="specialization in profile.profile
                 .specializations" :key="specialization" class="specializations">
-                            {{ specialization }}
-                        </div>
-                        <div class="social">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-x-twitter"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
+                                    <h4>{{ specialization }}</h4>
+                                </div>
+                                <div class="social">
+                                    <i class="fa-brands fa-facebook"></i>
+                                    <i class="fa-brands fa-instagram"></i>
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                    <i class="fa-brands fa-tiktok"></i>
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                            </div>
+                        </figcaption>
                     </div>
                 </div>
             </div>
@@ -139,7 +144,7 @@ h2 {
     color: $grey;
     font-size: 40px;
     text-align: center;
-    margin-top: 25px;
+    padding-top: 1.5rem;
     margin-bottom: 25px;
 }
 
@@ -151,7 +156,7 @@ button {
 }
 
 .selection {
-    margin: 0 auto 3rem;
+    margin: 0 auto .5rem;
     width: 25%;
 
     .spec-label {
@@ -162,6 +167,38 @@ button {
     button {
         margin-left: 15px;
     }
+}
+
+.style-trainer {
+    border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+    display: grid;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
+}
+
+.style-trainer>* {
+    grid-area: 1/1;
+    transition: .4s;
+}
+
+.style-trainer figcaption {
+    display: grid;
+    position: relative;
+    align-items: end;
+    font-size: 2.3rem;
+    font-weight: bold;
+    padding: .75rem;
+    background: var(--c, #0009);
+    clip-path: inset(0 var(--_i, 100%) 0 0);
+}
+
+.style-trainer:hover figcaption {
+    --_i: 0%;
+}
+
+.style-trainer:hover img {
+    transform: scale(1.2);
 }
 
 #trainer-gallery {
@@ -180,29 +217,30 @@ button {
             justify-content: center;
 
             .card-trainer {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                margin: 1rem .5rem;
+                margin: 1rem 1rem;
+                border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
                 overflow: hidden;
-                width: calc((100% / 3) - 1rem);
+                width: calc((100% / 3) - 2rem);
+                box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
+
+                #sponsor-logo {
+                    width: 20%;
+                    height: auto;
+                    position: absolute;
+                    border: none;
+                    top: .5rem;
+                    right: .5rem;
+                }
 
                 img {
                     height: 500px;
                     object-fit: cover;
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
-                    display: block;
-                    border-radius: 10px;
-                    border: 2px solid black;
                 }
 
                 &:hover {
                     cursor: pointer;
-                    // img {
-                    //     transform: scale(1.1);
-                    //     display: block;
-                    // }
                 }
             }
         }
@@ -213,11 +251,6 @@ button {
             .name {
                 margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
-
-                &:hover {
-                    transform: scale(1.25);
-                    cursor: pointer;
-                }
             }
 
             .title {
@@ -231,7 +264,7 @@ button {
             }
 
             .social {
-                margin: 1rem 0;
+                margin: .25rem 0;
             }
         }
     }
