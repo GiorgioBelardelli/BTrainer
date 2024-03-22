@@ -190,4 +190,59 @@ class ApiController extends Controller
             'vote' => $vote
         ]);
     }
+
+    public function getSponsoredProfiles()
+    {
+        $users = User::with('profile', 'profile.specializations')
+                ->whereHas('profile.sponsorships', function ($query) {
+                    $query->where('expire_date', '>=', now());
+                })
+                ->get();
+
+        // Costruisci un array per il risultato JSON
+        $data = [];
+
+        // Itera su ogni utente per creare una struttura dati per il risultato JSON
+        foreach ($users as $user) {
+            $userData = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'surname' => $user->surname,
+                'email' => $user->email,
+                'profile' => [
+                    'id' => $user->profile->id,
+                    'photo' => $user->profile->photo,
+                    'plan_program' => $user->profile->plan_program,
+                    'specializations' => $user->profile->specializations->pluck('name')->toArray(),
+                    'reviews' => $user->profile->reviews->map(function ($review) {
+                        return [
+                            'id' => $review->id,
+                            'name' => $review->name,
+                            'surname' => $review->surname,
+                            'date' => $review->date,
+                            'content' => $review->content,
+                        ];
+                    }),
+                    'votes' => $user->profile->votes->map(
+                        function ($votes) {
+                            return [
+                                'value' => $votes->value,
+                            ];
+                        }
+                    ),
+
+                ],
+            ];
+
+            // Aggiungi i dati dell'utente all'array risultante
+            $data[] = $userData;
+        }
+
+        // Ritorna la risposta JSON con lo stato di successo e i dati recuperati
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+        ]);
+
+    }
 }

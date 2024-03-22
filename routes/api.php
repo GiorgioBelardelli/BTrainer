@@ -31,6 +31,8 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::post('/votes', [ApiController::class, 'createVote']);
 
+    Route::get('/sponsored/profiles', [ApiController::class, 'getSponsoredProfiles']);
+
     Route::post('/profiles/{profile}/vote', [VoteController::class, 'store'])
     ->name('profiles.vote');
 
