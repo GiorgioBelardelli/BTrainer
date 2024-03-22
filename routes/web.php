@@ -34,6 +34,8 @@ Route::get('/userreviews', [DashboardController::class, 'getUserReviews'])->name
 
 Route::get('/sponsorship', [DashboardController::class, 'getSponsorship'])->name('sponsorship');
 
+Route::get('/userstatistics', [DashboardController::class, 'getStatistics'])->name('statistics');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/create', [TrainerProfileController::class, 'create'])
