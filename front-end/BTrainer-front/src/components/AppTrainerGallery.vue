@@ -28,8 +28,6 @@ export default {
                     this.selectedSpecializations.includes(spec)
                 );
             });
-
-            // Naviga alla pagina Risultati e passa i risultati filtrati come parametro nell'URL
             this.$router.push({
                 name: "Risultati",
             });
@@ -74,15 +72,47 @@ export default {
             .then((res) => {
                 const data = res.data;
                 if (data.status === "success") {
-                    this.specializations = data.specializations.map(
-                        (spec) => spec.name
-                    );
+                    this.specializations = data.specializations.map((spec) => {
+                        const imageName = getImageName(spec.name);
+                        return {
+                            name: spec.name,
+                            imgPath: imageName
+                        };
+                    });
                     // console.log(this.specializations);
                 }
             })
             .catch((err) => {
                 console.error(err);
             });
+
+        function getImageName(specName) {
+            switch (specName) {
+                case "Bodybuilding":
+                    return "bb.png";
+                case "Powerlifting":
+                    return "pl.png";
+                case "CrossFit":
+                    return "crossfit.png";
+                case "Calistenica":
+                    return "cali.png";
+                case "Yoga":
+                    return "yoga.png";
+                case "Pilates":
+                    return "pilates.png";
+                case "Kickboxing":
+                    return "kick.png";
+                case "High-Intensity Interval Training":
+                    return "hi-training.png";
+                case "Recupero post-infortunio":
+                    return "post.png";
+                case "Difesa Personale":
+                    return "personal.png";
+                default:
+                    return "";
+            }
+        }
+
     },
 };
 </script>
@@ -92,13 +122,23 @@ export default {
     <div id="trainer-gallery">
         <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
         <div class="selection">
+            <label>
+                <h2>Scegli la specializzazione:</h2>
+            </label>
             <div class="spec-label">
-                <label>Scegli la specializzazione:</label>
-            </div>
-            <div v-for="specialization in specializations" :key="specialization">
-                <input type="checkbox" :id="specialization" :value="specialization" v-model="selectedSpecializations"
-                    @change="getSelectedSpecializations" />
-                <label :for="specialization">{{ specialization }}</label>
+                <div class="specialization" v-for="(specialization, index) in specializations" :key="specialization.id">
+                    <input type="checkbox" :id="'checkbox_' + index" :value="specialization.name"
+                        v-model="selectedSpecializations" @change="getSelectedSpecializations" style="display: none;" />
+                    <label id="label-spec" :for="'checkbox_' + index">
+                        <div class="img">
+                            <img :src="getImagePath(`../assets/logos/specializations/${specialization.imgPath}`)"
+                                :alt="specialization.name" />
+                        </div>
+                        <div class="text">
+                            {{ specialization.name }}
+                        </div>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -106,19 +146,19 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
+                    <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
                     <div class="style-trainer">
                         <img :src="getImagePath(
-                `../assets/trainers/${profile.profile.photo}`
-            )
-                " :alt="profile.name + ' ' + profile.surname" />
+                    `../assets/trainers/${profile.profile.photo}`
+                )
+                    " :alt="profile.name + ' ' + profile.surname" />
                         <figcaption>
-                            <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
                             <div class="caption">
                                 <div class="name">
                                     <h3>{{ profile.name }} {{ profile.surname }}</h3>
                                 </div>
                                 <div v-for="specialization in profile.profile
-                .specializations" :key="specialization" class="specializations">
+                    .specializations" :key="specialization" class="specializations">
                                     <h4>{{ specialization }}</h4>
                                 </div>
                                 <div class="social">
@@ -157,10 +197,23 @@ button {
 
 .selection {
     margin: 0 auto .5rem;
-    width: 25%;
+    width: 85%;
+
+    img {
+        width: 50%;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 
     .spec-label {
         margin-bottom: .5rem;
+        display: flex;
+
+        #label-spec {
+            text-align: center;
+        }
     }
 
     select,
@@ -170,7 +223,7 @@ button {
 }
 
 .style-trainer {
-    border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+    border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
     display: grid;
     overflow: hidden;
     cursor: pointer;
@@ -217,8 +270,9 @@ button {
             justify-content: center;
 
             .card-trainer {
+                position: relative;
                 margin: 1rem 1rem;
-                border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+                border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
                 overflow: hidden;
                 width: calc((100% / 3) - 2rem);
                 box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);

@@ -182,7 +182,7 @@ select {
 }
 
 .style-trainer {
-    border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+    border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
     display: grid;
     overflow: hidden;
     cursor: pointer;
@@ -230,7 +230,7 @@ select {
             justify-content: center;
 
             .card-trainer {
-                border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+                border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
                 margin: 1rem 1rem;
                 overflow: hidden;
                 width: calc((100% / 3) - 2rem);
