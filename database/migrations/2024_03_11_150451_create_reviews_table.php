@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->date('date');
-            $table->string('content');
+            $table->text('content');
             $table->tinyInteger('vote');
 
             $table->timestamps();

@@ -295,7 +295,6 @@ export default {
                                 </div>
                             </div>
                             <div class="form-container">
-
                                 <!-- Lato Destro  -->
                                 <div class="form-right">
                                     <h3>Scrivi una recensione:</h3>
@@ -385,7 +384,13 @@ export default {
                                 </div>
                                 <div class="votes">
                                     <form>
-                                        <input type="number" min="1" max="5" name="vote" id="vote">
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="5"
+                                            name="vote"
+                                            id="vote"
+                                        />
                                         <button type="submit">
                                             Invia Voto
                                         </button>
