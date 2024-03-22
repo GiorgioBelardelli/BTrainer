@@ -144,25 +144,29 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
-                    <img :src="getImagePath(
+                    <div class="style-trainer">
+                        <img :src="getImagePath(
                 `../assets/trainers/${profile.profile.photo}`
             )
                 " :alt="profile.name + ' ' + profile.surname" />
-                    <div class="caption">
-                        <div class="name">
-                            {{ profile.name }} {{ profile.surname }}
-                        </div>
-                        <div v-for="specialization in profile.profile
+                        <figcaption>
+                            <div class="caption">
+                                <div class="name">
+                                    <h3>{{ profile.name }} {{ profile.surname }}</h3>
+                                </div>
+                                <div v-for="specialization in profile.profile
                 .specializations" :key="specialization" class="specializations">
-                            {{ specialization }}
-                        </div>
-                        <div class="social">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-x-twitter"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
+                                    <h4>{{ specialization }}</h4>
+                                </div>
+                                <div class="social">
+                                    <i class="fa-brands fa-facebook"></i>
+                                    <i class="fa-brands fa-instagram"></i>
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                    <i class="fa-brands fa-tiktok"></i>
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                            </div>
+                        </figcaption>
                     </div>
                 </div>
             </div>
@@ -177,12 +181,35 @@ select {
     margin: 0 10px;
 }
 
-h2 {
-    color: $grey;
-    font-size: 40px;
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
+.style-trainer {
+    border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+    display: grid;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
+}
+
+.style-trainer>* {
+    grid-area: 1/1;
+    transition: .4s;
+}
+
+.style-trainer figcaption {
+    display: grid;
+    align-items: end;
+    font-size: 2.3rem;
+    font-weight: bold;
+    padding: .75rem;
+    background: var(--c, #0009);
+    clip-path: inset(0 var(--_i, 100%) 0 0);
+}
+
+.style-trainer:hover figcaption {
+    --_i: 0%;
+}
+
+.style-trainer:hover img {
+    transform: scale(1.2);
 }
 
 #trainer-gallery {
@@ -203,52 +230,40 @@ h2 {
             justify-content: center;
 
             .card-trainer {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                margin: 1rem .5rem;
+                border-radius: 25% 1rem 15% 2% / 0% 1rem 15% 2%;
+                margin: 1rem 1rem;
                 overflow: hidden;
-                width: calc((100% / 3) - 1rem);
+                width: calc((100% / 3) - 2rem);
+                box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
+
+                #sponsor-logo {
+                    width: 20%;
+                    height: auto;
+                    position: absolute;
+                    border: none;
+                    top: .5rem;
+                    right: .5rem;
+                }
 
                 img {
                     height: 500px;
                     object-fit: cover;
                     object-position: center;
                     transition: filter 1s ease, transform 1s ease;
-                    display: block;
-                    border-radius: 10px;
-                    border: 2px solid black;
                 }
 
                 &:hover {
                     cursor: pointer;
-                    // img {
-                    //     transform: scale(1.1);
-                    //     display: block;
-                    // }
                 }
             }
         }
 
         .caption {
             text-align: center;
-            padding-bottom: 25px;
-            padding-top: 10px;
-
-            .name,
-            .specializations,
-            .social {
-                margin-bottom: 5px;
-            }
 
             .name {
                 margin: 0.5rem 0;
                 transition: filter 0.25s ease, transform 0.25s ease;
-
-                &:hover {
-                    transform: scale(1.25);
-                    cursor: pointer;
-                }
             }
 
             .title {
@@ -262,7 +277,7 @@ h2 {
             }
 
             .social {
-                margin: 1rem 0;
+                margin: .25rem 0;
             }
         }
     }
