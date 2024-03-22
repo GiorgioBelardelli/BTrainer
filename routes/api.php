@@ -32,6 +32,8 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::get('/sponsored/profiles', [ApiController::class, 'getSponsoredProfiles']);
 
+
+
     // Route::get('/profile', [ApiController::class, 'getProfile'])
     //     ->name('api.profile');
     // Route::get('/specialization', [ApiController::class, 'getSpecialization'])

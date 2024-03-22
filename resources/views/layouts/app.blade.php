@@ -75,7 +75,11 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="pad-zero">
                                 <a class="dropdown-item" href="{{ url('dashboard') }}">{{__('Dashboard')}}</a>
-                                <a class="dropdown-item" href="{{ url('profile') }}" onclick="event.preventDefault();">{{__('Il tuo profilo')}}</a>
+                                <a class="dropdown-item" href="{{ route('usermessages') }}">{{__('I tuoi Messaggi')}}</a>
+
+                                <a class="dropdown-item" href="{{ url('reviews') }}" onclick="event.preventDefault();">{{__('Le tue Recensioni')}}</a>
+                                <a class="dropdown-item" href="{{ url('statistics') }}" onclick="event.preventDefault();">{{__('Le tue Statistiche')}}</a>
+                                <a class="dropdown-item" href="{{ url('sponsorship') }}" onclick="event.preventDefault();">{{__('Sponsorship')}}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Esci') }}

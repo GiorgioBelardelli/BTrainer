@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Http\Models\Message;
+use App\Http\Models\Profile;
+
+
 class ProfileController extends Controller
 {
     /**

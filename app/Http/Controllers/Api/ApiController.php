@@ -156,6 +156,7 @@ class ApiController extends Controller
         ]);
     }
 
+
     public function createMessage(Request $request) {
 
         $data = $request -> all();

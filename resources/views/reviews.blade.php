@@ -16,6 +16,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                    {{-- {{ __('Sei Loggato!') }} --}}
 
 
                     @if ($userProfile)
@@ -33,7 +34,6 @@
                         <span>Contenuto: {{ $review->content }}</span>
                         @endforeach
                     </div>
-
                     <div class="messages">
                         <h4>I tuoi Messaggi: </h4>
                         @php

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\TrainerProfileController;
 
 Route::get('/', [TrainerProfileController::class, 'index'])
@@ -27,7 +28,7 @@ Route::get('/sponsorship/{id}', [SponsorshipController::class, 'checkout'])
 
 Route::get('/dashboard', [DashboardController::class, 'getProfile'])->name('dashboard');
 
-
+Route::get('/usermessages', [DashboardController::class, 'getUserMessages'])->name('usermessages');
 
 Route::middleware('auth')->group(function () {
 
