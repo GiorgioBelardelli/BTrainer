@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\SponsorshipController;
+use App\Http\Controllers\VoteController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -29,6 +30,9 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/messages', [ApiController::class, 'createMessage']);
 
     Route::post('/votes', [ApiController::class, 'createVote']);
+
+    Route::post('/profiles/{profile}/vote', [VoteController::class, 'store'])
+    ->name('profiles.vote');
 
     // Route::get('/profile', [ApiController::class, 'getProfile'])
     //     ->name('api.profile');
