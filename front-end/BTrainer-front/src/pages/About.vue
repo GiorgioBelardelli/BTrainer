@@ -141,10 +141,10 @@ export default {
                 // axios.post(...)
                 console.log(
                     this.nameSurname +
-                    "ha recensito questo Trainer:" +
-                    " '" +
-                    this.rece +
-                    "'"
+                        "ha recensito questo Trainer:" +
+                        " '" +
+                        this.rece +
+                        "'"
                 );
             }
             return;
@@ -234,18 +234,29 @@ export default {
                     <div class="card-trainer">
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img v-if="profile" :src="getImagePath(
-                                `../assets/trainers/${profile.profile.photo}`
-                            )
-                                " :alt="profile.name + ' ' + profile.surname" />
+                            <img
+                                v-if="profile"
+                                :src="
+                                    getImagePath(
+                                        `../assets/trainers/${profile.profile.photo}`
+                                    )
+                                "
+                                :alt="profile.name + ' ' + profile.surname"
+                            />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
-                                    <b>{{ profile.name }}
-                                        {{ profile.surname }}</b>
+                                    <b
+                                        >{{ profile.name }}
+                                        {{ profile.surname }}</b
+                                    >
                                 </div>
-                                <div v-for="specialization in profile.profile
-                                .specializations" :key="specialization" class="specializations">
+                                <div
+                                    v-for="specialization in profile.profile
+                                        .specializations"
+                                    :key="specialization"
+                                    class="specializations"
+                                >
                                     {{ specialization }}
                                 </div>
                                 <div class="social">
@@ -268,28 +279,49 @@ export default {
                             </div>
 
                             <div class="form-container">
-
                                 <!-- Lato Sinistro -->
 
                                 <div class="form-right">
                                     <h3>Scrivi una recensione:</h3>
                                     <form @submit.prevent="createNewReview">
                                         <div class="name">
-                                            <input v-model="newReview.name" type="text" required placeholder="Nome">
+                                            <input
+                                                v-model="newReview.name"
+                                                type="text"
+                                                required
+                                                placeholder="Nome"
+                                            />
                                         </div>
                                         <div class="surname">
-                                            <input v-model="newReview.surname" type="text" required
-                                                placeholder="Cognome">
+                                            <input
+                                                v-model="newReview.surname"
+                                                type="text"
+                                                required
+                                                placeholder="Cognome"
+                                            />
                                         </div>
                                         <div class="content">
-                                            <textarea v-model="newReview.content" type="text" required
-                                                placeholder="Contenuto" rows="5"></textarea>
+                                            <textarea
+                                                v-model="newReview.content"
+                                                type="text"
+                                                required
+                                                placeholder="Contenuto"
+                                                rows="5"
+                                            ></textarea>
                                         </div>
                                         <div class="vote">
-                                            <input v-model="newReview.vote" type="number" min="1" max="5" required
-                                                placeholder="Voto">
+                                            <input
+                                                v-model="newReview.vote"
+                                                type="number"
+                                                min="1"
+                                                max="5"
+                                                required
+                                                placeholder="Voto"
+                                            />
                                         </div>
-                                        <button type="submit">Invia recensione</button>
+                                        <button type="submit">
+                                            Invia recensione
+                                        </button>
                                     </form>
                                 </div>
 
@@ -298,21 +330,41 @@ export default {
                                     <h3>Invia un messaggio:</h3>
                                     <form @submit.prevent="createNewMessage">
                                         <div class="name">
-                                            <input v-model="newMessage.name" type="text" required placeholder="Nome">
+                                            <input
+                                                v-model="newMessage.name"
+                                                type="text"
+                                                required
+                                                placeholder="Nome"
+                                            />
                                         </div>
                                         <div class="surname">
-                                            <input v-model="newMessage.surname" type="text" required
-                                                placeholder="Cognome">
+                                            <input
+                                                v-model="newMessage.surname"
+                                                type="text"
+                                                required
+                                                placeholder="Cognome"
+                                            />
                                         </div>
                                         <div class="content">
-                                            <textarea v-model="newMessage.content" type="text" required
-                                                placeholder="Contenuto" rows="5"></textarea>
+                                            <textarea
+                                                v-model="newMessage.content"
+                                                type="text"
+                                                required
+                                                placeholder="Contenuto"
+                                                rows="5"
+                                            ></textarea>
                                         </div>
                                         <div class="email">
-                                            <input v-model="newMessage.email" type="email" required
-                                                placeholder="E-Mail">
+                                            <input
+                                                v-model="newMessage.email"
+                                                type="email"
+                                                required
+                                                placeholder="E-Mail"
+                                            />
                                         </div>
-                                        <button type="submit">Invia messaggio</button>
+                                        <button type="submit">
+                                            Invia messaggio
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -339,7 +391,7 @@ h3 {
     margin-top: 1rem;
 }
 
-form>div {
+form > div {
     margin: 0.5rem 0;
 }
 
@@ -432,8 +484,6 @@ form>div {
                             text-align: center;
                         }
                     }
-
-
 
                     .form {
                         width: 70%;
