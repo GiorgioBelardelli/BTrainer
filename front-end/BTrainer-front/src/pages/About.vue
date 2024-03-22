@@ -319,7 +319,6 @@ export default {
                                 </div>
                             </div>
                             <div class="form-container">
-
                                 <!-- Lato Destro  -->
                                 <div class="form-right">
                                     <h3>Scrivi una recensione:</h3>

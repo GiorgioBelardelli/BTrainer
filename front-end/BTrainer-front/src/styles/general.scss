@@ -17,6 +17,16 @@
     font-style: normal;
 }
 
+h3 {
+    color: $yellow;
+    font-size: 2rem;
+}
+
+h4 {
+    color: $yellow;
+    font-size: 1.25rem;
+}
+
 ul {
     list-style-type: none;
 }
@@ -24,6 +34,7 @@ ul {
 a {
     text-decoration: none;
     color: inherit;
+
     :hover {
         color: $yellow;
     }
@@ -33,10 +44,14 @@ i {
     font-size: 1.25rem;
     margin: 0 .5rem;
     transition: filter .15s ease, transform .15s ease;
+    color: $yellow;
 
     &:hover {
         transform: scale(1.5);
-        color: $yellow;
         cursor: pointer;
     }
+}
+
+img {
+    width: 100%;
 }

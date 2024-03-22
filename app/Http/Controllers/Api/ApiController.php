@@ -69,7 +69,6 @@ class ApiController extends Controller
             'status' => 'success',
             'data' => $data,
         ]);
-
     }
 
     public function getSpecialization()
@@ -92,7 +91,8 @@ class ApiController extends Controller
         ]);
     }
 
-    public function generate(Request $request,Gateway $gateway){
+    public function generate(Request $request, Gateway $gateway)
+    {
 
         $token = $gateway->clientToken()->generate();
         $data = [
@@ -105,7 +105,8 @@ class ApiController extends Controller
         //return 'generate';
     }
 
-    public function makePayment(PaymentRequest $request,Gateway $gateway){
+    public function makePayment(PaymentRequest $request, Gateway $gateway)
+    {
 
         $sponsorship = Sponsorship::find($request->sponsorship);
 
@@ -118,15 +119,14 @@ class ApiController extends Controller
             ]
         ]);
 
-        if($result->success){
+        if ($result->success) {
             $data = [
                 'success' => 'true',
                 'message' => 'Transazione eseguita con successo!',
             ];
 
             return response()->json($data);
-
-        }else{
+        } else {
             $data = [
                 'success' => 'false',
                 'message' => 'Transazione fallita',
@@ -136,19 +136,20 @@ class ApiController extends Controller
         }
     }
 
-    public function createReview(Request $request) {
+    public function createReview(Request $request)
+    {
 
-        $data = $request -> all();
+        $data = $request->all();
         $review = new Review;
 
-        $review -> name = $data['name'];
-        $review -> surname = $data['surname'];
-        $review -> date = $data['date'];
-        $review -> content = $data['content'];
-        $review -> vote = $data['vote'];
-        $review -> profile_id = $data['profile_id'];
+        $review->name = $data['name'];
+        $review->surname = $data['surname'];
+        $review->date = $data['date'];
+        $review->content = $data['content'];
+        $review->vote = $data['vote'];
+        $review->profile_id = $data['profile_id'];
 
-        $review -> save();
+        $review->save();
 
         return response()->json([
             'success' => true,
@@ -156,19 +157,21 @@ class ApiController extends Controller
         ]);
     }
 
-    public function createMessage(Request $request) {
 
-        $data = $request -> all();
+    public function createMessage(Request $request)
+    {
+
+        $data = $request->all();
         $message = new Message;
 
-        $message -> name = $data['name'];
-        $message -> surname = $data['surname'];
-        $message -> date = $data['date'];
-        $message -> content = $data['content'];
-        $message -> email = $data['email'];
-        $message -> profile_id = $data['profile_id'];
+        $message->name = $data['name'];
+        $message->surname = $data['surname'];
+        $message->date = now();
+        $message->content = $data['content'];
+        $message->email = $data['email'];
+        $message->profile_id = $data['profile_id'];
 
-        $message -> save();
+        $message->save();
 
         return response()->json([
             'success' => true,
@@ -176,14 +179,15 @@ class ApiController extends Controller
         ]);
     }
 
-    public function createVote(Request $request) {
+    public function createVote(Request $request)
+    {
 
-        $data = $request -> all();
+        $data = $request->all();
         $vote = new Vote;
 
-        $vote -> value = $data['value'];
+        $vote->value = $data['value'];
 
-        $vote -> save();
+        $vote->save();
 
         return response()->json([
             'success' => true,
@@ -194,10 +198,10 @@ class ApiController extends Controller
     public function getSponsoredProfiles()
     {
         $users = User::with('profile', 'profile.specializations')
-                ->whereHas('profile.sponsorships', function ($query) {
-                    $query->where('expire_date', '>=', now());
-                })
-                ->get();
+            ->whereHas('profile.sponsorships', function ($query) {
+                $query->where('expire_date', '>=', now());
+            })
+            ->get();
 
         // Costruisci un array per il risultato JSON
         $data = [];
@@ -243,6 +247,5 @@ class ApiController extends Controller
             'status' => 'success',
             'data' => $data,
         ]);
-
     }
 }
