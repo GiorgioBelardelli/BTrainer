@@ -145,10 +145,10 @@ export default {
                 // axios.post(...)
                 console.log(
                     this.nameSurname +
-                        "ha recensito questo Trainer:" +
-                        " '" +
-                        this.rece +
-                        "'"
+                    "ha recensito questo Trainer:" +
+                    " '" +
+                    this.rece +
+                    "'"
                 );
             }
             return;
@@ -190,7 +190,7 @@ export default {
             });
             // console.log(tempTot);
 
-            store.mediaVotes = tempTot / votes.length;
+            store.mediaVotes = (tempTot / votes.length).toFixed(1);
         },
 
         createNewReview() {
@@ -241,7 +241,7 @@ export default {
             //console.log('Il voto è:' + this.newVoto);
             axios
                 .post("http://127.0.0.1:8000/api/v1/rate", {
-                    "vote" : this.newVoto,
+                    "vote": this.newVoto,
                     "id": this.$route.params.id
                 })
                 .then((response) => {
@@ -271,30 +271,18 @@ export default {
                     <div class="card-trainer">
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img
-                                v-if="profile"
-                                :src="
-                                    getImagePath(
-                                        `../assets/trainers/${profile.profile.photo}`
-                                    )
-                                "
-                                :alt="profile.name + ' ' + profile.surname"
-                            />
+                            <img v-if="profile" :src="getImagePath(
+                                `../assets/trainers/${profile.profile.photo}`
+                            )
+                                " :alt="profile.name + ' ' + profile.surname" />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
-                                    <b
-                                        >{{ profile.name }}
-                                        {{ profile.surname }}</b
-                                    >
+                                    <h2>{{ profile.name }} {{ profile.surname }}</h2>
                                 </div>
-                                <div
-                                    v-for="specialization in profile.profile
-                                        .specializations"
-                                    :key="specialization"
-                                    class="specializations"
-                                >
-                                    {{ specialization }}
+                                <div v-for="specialization in profile.profile
+                                .specializations" :key="specialization" class="specializations">
+                                    <h3>{{ specialization }}</h3>
                                 </div>
                                 <div class="social">
                                     <i class="fa-brands fa-facebook"></i>
@@ -311,110 +299,69 @@ export default {
                                 <p>"{{ profile.profile.plan_program }}"</p>
                             </div>
 
-                            <div class="votes">
-                                <div>Media voti: {{ store.mediaVotes }}</div>
+                            <div class="votes-reviews">
+                                <div>
+                                    Media voti: {{ store.mediaVotes }}
+                                </div>
                                 <div>
                                     Numero recensioni:
                                     {{ profile.profile.reviews.length }}
                                 </div>
                             </div>
-                            <div class="form-container">
-                                <!-- Lato Destro  -->
-                                <div class="form-right">
-                                    <h3>Scrivi una recensione:</h3>
-                                    <form @submit.prevent="createNewReview">
-                                        <div class="name">
-                                            <input
-                                                v-model="newReview.name"
-                                                type="text"
-                                                required
-                                                placeholder="Nome"
-                                            />
-                                        </div>
-                                        <div class="surname">
-                                            <input
-                                                v-model="newReview.surname"
-                                                type="text"
-                                                required
-                                                placeholder="Cognome"
-                                            />
-                                        </div>
-                                        <div class="content">
-                                            <textarea
-                                                v-model="newReview.content"
-                                                type="text"
-                                                required
-                                                placeholder="Contenuto"
-                                                rows="5"
-                                            ></textarea>
-                                        </div>
-                                        <div class="vote">
-                                            <input
-                                                v-model="newReview.vote"
-                                                type="number"
-                                                min="1"
-                                                max="5"
-                                                required
-                                                placeholder="Voto"
-                                            />
-                                        </div>
-                                        <button type="submit">
-                                            Invia recensione
-                                        </button>
-                                    </form>
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <!-- Recensione  -->
+                        <div class="review">
+                            <h3 id="title-form">Scrivi una recensione:</h3>
+                            <form @submit.prevent="createNewReview">
+                                <div class="name">
+                                    <input v-model="newReview.name" type="text" required placeholder="Nome" />
                                 </div>
-
-                                <!-- Lato Sinistro -->
-                                <div class="form-left">
-                                    <h3>Invia un messaggio:</h3>
-                                    <form @submit.prevent="createNewMessage">
-                                        <div class="name">
-                                            <input
-                                                v-model="newMessage.name"
-                                                type="text"
-                                                required
-                                                placeholder="Nome"
-                                            />
-                                        </div>
-                                        <div class="surname">
-                                            <input
-                                                v-model="newMessage.surname"
-                                                type="text"
-                                                required
-                                                placeholder="Cognome"
-                                            />
-                                        </div>
-                                        <div class="content">
-                                            <textarea
-                                                v-model="newMessage.content"
-                                                type="text"
-                                                required
-                                                placeholder="Contenuto"
-                                                rows="5"
-                                            ></textarea>
-                                        </div>
-                                        <div class="email">
-                                            <input
-                                                v-model="newMessage.email"
-                                                type="email"
-                                                required
-                                                placeholder="E-Mail"
-                                            />
-                                        </div>
-                                        <button type="submit">
-                                            Invia messaggio
-                                        </button>
-                                    </form>
+                                <div class="surname">
+                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome" />
+                                </div>
+                                <div class="content">
+                                    <textarea v-model="newReview.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <div class="votes">
-                                    <form @submit.prevent="createNewVote">
-                                        <input v-model="newVoto" type="number" min="1" max="5" name="newVoto" id="newVoto">
-                                        <button type="submit">
-                                            Invia Voto
-                                        </button>
-                                    </form>
+                                    <input v-model="newReview.vote" type="number" min="1" max="5" required
+                                        placeholder="Voto" />
                                 </div>
-                            </div>
+                                <button type="submit">
+                                    <h4>INVIA</h4>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Messaggio -->
+                        <div class="message">
+                            <h3 id="title-form">Invia un messaggio:</h3>
+                            <form @submit.prevent="createNewMessage">
+                                <div class="name">
+                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
+                                </div>
+                                <div class="surname">
+                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
+                                </div>
+                                <div class="content">
+                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
+                                </div>
+                                <div class="email">
+                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
+                                </div>
+                                <button type="submit">
+                                    <h4>INVIA</h4>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="vote">
+                            <form @submit.prevent="createNewVote">
+                                <input v-model="newVoto" type="number" min="1" max="5" name="newVoto" id="newVoto">
+                                <button type="submit">
+                                    <h4>INVIA</h4>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -428,18 +375,40 @@ export default {
 
 h2 {
     color: $grey;
-    font-size: 40px;
+    font-size: 3rem;
     text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
 }
 
 h3 {
-    margin-top: 1rem;
+    color: $grey;
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0;
 }
 
-form > div {
-    margin: 0.5rem 0;
+#title-form {
+    color: $yellow;
+}
+
+button {
+    margin-top: 1rem;
+    padding: .5rem .85rem;
+    border-radius: 0;
+    border: .1px solid $lightgrey;
+    background-color: $grey;
+    color: $yellow;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+form>div {
+    margin-top: 0.5rem;
 }
 
 #trainer-gallery {
@@ -458,150 +427,46 @@ form > div {
         width: 100%;
 
         .col-gallery {
-            padding: 1rem;
+            padding: 2rem;
+            display: flex;
 
             .card-trainer {
-                display: flex;
-                position: relative;
-                margin: 1rem 0.5rem 0;
-                overflow: hidden;
-                width: 85%;
-                margin: auto;
+                margin: 0 1rem;
+                width: calc(50% - 2rem);
 
                 // Parte sinistra con l'immagine nome cognome ecc..
                 .img-card {
                     flex-basis: 25%;
 
                     img {
-                        width: 400px;
-                        height: 400px;
-                        border-radius: 15px;
-                        border: 1px solid black;
+                        height: 500px;
                         object-fit: cover;
                         object-position: center;
-                        transition: filter 1s ease, transform 1s ease;
-                        display: block;
                     }
                 }
+            }
 
-                // Parte centrale con la descrizione del programma
-                .info {
-                    padding: 20px;
+            .form-container {
+                width: 100%;
+                padding: 0 6rem;
 
-                    .form-container {
-                        padding-top: 25px;
-                        width: 70%;
-                        margin: auto;
-                        display: flex;
-                        justify-content: space-between;
-
-                        .form-right,
-                        .form-left {
-                            flex-basis: 50%;
-                            margin: auto;
-
-                            button {
-                                padding: 8px;
-                            }
-                        }
-                    }
-
-                    p {
-                        font-style: italic;
-                        width: 70%;
-                        margin: auto;
-                    }
-
-                    .votes,
-                    .reviews {
-                        width: 70%;
-                        margin: auto;
-                    }
-
-                    .votes {
-                        margin-top: 10px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10%;
-
-                        .reviews {
-                            text-decoration: underline;
-                            flex-basis: 50%;
-                            text-align: center;
-                        }
-                    }
-
-                    .form {
-                        width: 70%;
-                        padding-top: 12px;
-                        margin: auto;
-
-                        .vote-container {
-                            display: flex;
-                            justify-content: space-between;
-                            margin-bottom: 25px;
-                        }
-
-                        // Form contiene tutti i campi per l'invio di voti, recensioni e messaggi
-
-                        form {
-                            margin: auto;
-
-                            #message {
-                                width: 100%;
-                                min-height: 50px;
-                                border: 1px solid black;
-                                border-radius: 3px;
-                                margin-bottom: 20px;
-                                margin-right: 20px;
-                            }
-
-                            button {
-                                padding: 8px;
-                            }
-
-                            input::placeholder {
-                                margin: auto;
-                            }
-                        }
-                    }
+                input,
+                textarea {
+                    padding: 1rem;
+                    width: 90%;
+                    margin: 0 auto;
+                    resize: vertical;
                 }
 
-                .form-container {
-                    min-height: 200px;
-
-                    .rece {
-                        display: flex;
-                        margin: auto;
-                        justify-content: space-between;
-                        align-items: center;
-
-                        .input-container {
-                            flex-basis: 70%;
-
-                            #rece,
-                            #nameSurname {
-                                width: 100%;
-                                border: 1px solid black;
-                                border-radius: 3px;
-                                margin-bottom: 20px;
-                                margin-right: 20px;
-                            }
-
-                            #rece {
-                                min-height: 120px;
-                                max-height: 200px;
-                            }
-                        }
-                    }
-                }
-
-                &:hover {
-                    // img {
-                    //     transform: scale(1.1);
-                    //     display: block;
-                    // }
+                .review,
+                .message,
+                .vote {
+                    width: 100%;
+                    margin-bottom: 1rem;
+                    padding: 1rem 4rem;
+                    background-color: $grey;
+                    border: 3px solid darkgray;
+                    opacity: .7;
                 }
             }
         }
@@ -614,11 +479,6 @@ form > div {
                 transition: filter 0.25s ease, transform 0.25s ease;
                 text-align: center;
                 font-size: 22px;
-
-                // &:hover {
-                //     transform: scale(1.25);
-                //     cursor: pointer;
-                // }
             }
 
             .title {
@@ -635,10 +495,16 @@ form > div {
             }
 
             .social {
-                // margin: 1rem 0;
-                margin: auto;
-                margin-top: 10px;
+                margin: 1rem 0;
                 text-align: center;
+            }
+
+        }
+
+        .info {
+            .votes-reviews {
+                font-size: 1.2rem;
+                margin-top: 1rem;
             }
         }
     }

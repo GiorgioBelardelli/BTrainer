@@ -185,14 +185,7 @@ h2 {
     font-size: 40px;
     text-align: center;
     padding-top: 1.5rem;
-    margin-bottom: 25px;
-}
-
-button {
-    padding: 8px;
-    background-color: yellow;
-    color: black;
-    border-radius: 8px;
+    margin-bottom: 2rem;
 }
 
 .selection {
