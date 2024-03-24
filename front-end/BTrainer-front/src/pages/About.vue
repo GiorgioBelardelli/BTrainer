@@ -245,6 +245,7 @@ export default {
                     "id": this.$route.params.id
                 })
                 .then((response) => {
+                    alert("Voto inviato con successo");
                     console.log(
                         "Voto creato con successo:",
                         response.data
