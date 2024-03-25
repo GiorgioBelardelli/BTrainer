@@ -86,7 +86,6 @@
     @use '../styles/partials/variables' as *;
 
     footer {
-        height: 300px;
         background-color: black;
 
         .bottom{
@@ -94,7 +93,9 @@
             margin: auto;
             display: flex;
             align-items: center;
+            align-content: center;
             justify-content: space-between;
+            flex-wrap: wrap;
 
             .contacts {
                 flex-basis: 30%;
@@ -163,4 +164,61 @@
             }
         }
     }
+
+
+@media all and (min-width: 769px) {
+
+    footer {
+        height: 400px;
+    }
+    
+
+    #trainer-gallery .container .col-gallery .card-trainer {
+        width: calc((100% / 3) - 2rem);
+    }
+}
+
+// Media Query Tablet
+
+@media all and (max-width: 768px) {
+    footer  {
+        min-height: 500px;
+    }
+    footer .bottom {
+        width: 95%;
+    }
+
+    footer .bottom .contacts {
+        flex-basis: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    footer .bottom .contacts .logo .social-bottom {
+        justify-content: center;
+    }
+
+    footer .bottom .spec {
+        flex-basis: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    footer .bottom .times {
+        flex-basis: 100%;
+        margin: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+
+}
+
+// Media Query Smartphone
+
+// @media all and (max-width: 576px) {
+//     footer .bottom *  {
+//         width: 100%;
+//     }
+
+// }
+
 </style>
