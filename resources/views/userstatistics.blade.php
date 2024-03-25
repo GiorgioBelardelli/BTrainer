@@ -32,6 +32,13 @@
                     <div>
                         <h1>Numero recensioni: {{count($userProfile->reviews)}}</h1>
                         <h1>Numero messaggi: {{count($userProfile->messages)}}</h1>
+                        @foreach ($userProfile->votes as $vote)
+
+                        <h1 >VOTO: {{$vote->value}}</h1>
+                        @endforeach
+
+                        {{-- {{dd($userProfile->votes)}} --}}
+
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
@@ -46,11 +53,11 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['1', '2', '3', '4', '5'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [5, 19, 3, 5, 2, 3],
-                    borderWidth: 1
+                    data: [{{$voto1}}, {{$voto2}}, {{$voto3}}, {{$voto4}}, {{$voto5}}],
+                    borderWidth: 5
                 }]
             },
             options: {
