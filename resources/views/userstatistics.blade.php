@@ -28,14 +28,14 @@
                     <button><a href="{{ route('profile.create') }}" class="btn">CREA PROFILO</a></button>
                     @endif
 
+
+                    <div>
+                        <h1>Numero recensioni: {{count($userProfile->reviews)}}</h1>
+                        <h1>Numero messaggi: {{count($userProfile->messages)}}</h1>
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div>
-            <h1>Numero recensioni: {{count($userProfile->reviews)}}</h1>
-            <h1>Numero messaggi: {{count($userProfile->messages)}}</h1>
-            <canvas id="myChart"></canvas>
         </div>
     </div>
 

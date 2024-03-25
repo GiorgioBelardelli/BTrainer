@@ -11,7 +11,7 @@
     {{-- <title>{{ config('app.name', 'BTrainer') }}</title> --}}
     <title>B-Trainer</title>
 
-    // <!-- Importo Chart.js -->
+    <!-- Importo Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Fonts -->

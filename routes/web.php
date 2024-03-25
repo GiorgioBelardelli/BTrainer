@@ -6,7 +6,6 @@ use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TrainerProfileController;
 
 Route::get('/', [TrainerProfileController::class, 'index'])
