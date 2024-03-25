@@ -435,6 +435,14 @@ form>div {
 
                 .vote-star {
                     display: flex;
+
+                    .fa-star {
+                        color: grey;
+                    }
+
+                    .active {
+                        color: $yellow;
+                    }
                 }
             }
         }
@@ -487,14 +495,6 @@ form>div {
             }
         }
     }
-}
-
-.fa-star {
-    color: grey;
-}
-
-.active {
-    color: $yellow;
 }
 
 @media screen and (max-width: 1200px) {
