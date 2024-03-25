@@ -14,9 +14,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => '/v1'], function () {
     Route::get('/all', [ApiController::class, 'getAll'])
     ->name('api.all');
-    
+
+
     Route::get('/specializations', [ApiController::class, 'getSpecialization']);
-    
+
     Route::get('/sponsorships', [SponsorshipController::class, 'getSponsorships']);
 
     Route::get('/generate', [ApiController::class, 'generate']);

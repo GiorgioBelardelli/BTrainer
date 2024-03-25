@@ -32,6 +32,13 @@
                     <div>
                         <h1>Numero recensioni: {{count($userProfile->reviews)}}</h1>
                         <h1>Numero messaggi: {{count($userProfile->messages)}}</h1>
+                        @foreach ($userProfile->votes as $vote)
+
+                        <h1>VOTO: {{$vote->value}}</h1>
+                        @endforeach
+
+                        <!-- {{-- {{dd($userProfile->votes)}} --}} -->
+
                     </div>
                     <div>
                         <div>
@@ -64,6 +71,46 @@
 
 
     <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [{
+                        {
+                            $voto1
+                        }
+                    }, {
+                        {
+                            $voto2
+                        }
+                    }, {
+                        {
+                            $voto3
+                        }
+                    }, {
+                        {
+                            $voto4
+                        }
+                    }, {
+                        {
+                            $voto5
+                        }
+                    }],
+                    borderWidth: 5
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
 
     @endsection

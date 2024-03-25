@@ -93,7 +93,7 @@
         background-color: black;
 
         .image-logo {
-            width: 80%;
+            width: 75%;
             padding-top:20px;
             padding-left: 15px;
             margin: auto;
@@ -112,20 +112,37 @@
             justify-content: space-between;
             flex-wrap: wrap;
 
+            .contacts,
+            .spec,
+            .times {
+            flex: 1;
+            }
+
             .contacts {
                 flex-basis: 30%;
                 align-self: center;
 
                 p {
                     font-size: 12px;
+                    width: 75%;
                     color: $lightgrey;
                     margin-bottom: 10px;
                     margin-top: 10px;
+                    margin: auto;
+                }
+
+                p:hover {
+                    color: yellow;
+                    transform: scale(1.01);
                 }
 
 
                 .social-bottom {
                     display: flex;
+                    width: 75%;
+                    margin: auto;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
                     justify-content: flex-start;
                     gap: 10px;
 
@@ -150,8 +167,6 @@
                 text-align: center;
                 ul {
 
-                    margin-top: 30px;
-
                     li {
                     padding-top: 5px;
                     color: $lightgrey;
@@ -166,11 +181,11 @@
             }
             .times {
                 align-self: center;
-                margin-top: 30px;
                 text-align: center;
                 flex-basis: 30%;
                 font-size: 15px;
                 color: $lightgrey;
+
                 li {
                     padding-top: 10px;
                 }
@@ -211,11 +226,13 @@
     }
     footer .bottom {
         width: 95%;
+        flex-direction: column;
     }
 
     footer .bottom .contacts {
         flex-basis: 70%;
         margin: auto;
+        order: 3;
         text-align: center;
     }
     footer .bottom .contacts .social-bottom {
