@@ -8,6 +8,7 @@ use App\Http\Resources\SponsorshipResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Specialization;
@@ -30,6 +31,29 @@ class ApiController extends Controller
 
         // Itera su ogni utente per creare una struttura dati per il risultato JSON
         foreach ($users as $user) {
+
+            $isSponsored = false;
+            $nowTimeStamp = Carbon::now()->timestamp;
+            $nowDate = Carbon::createFromTimestamp($nowTimeStamp);
+
+            if ($user->profile->sponsorship) {
+                // Iteriamo su tutte le sponsorizzazioni associate al profilo dell'utente
+
+                foreach ($user->profile->sponsorship as $sponsorship) {
+                    
+                    $expireTimeStamp = $sponsorship->expire_date->timestamp;
+
+                    $expireDate = Carbon::createFromTimestamp($expireTimeStamp);
+
+                    if ($expireDate > $nowDate) {
+                        // Se troviamo almeno una sponsorizzazione attiva, impostiamo $isSponsored su true
+                        $isSponsored = true;
+                        // Possiamo interrompere la ricerca in quanto abbiamo trovato una sponsorizzazione attiva
+                        break;
+                    }
+                }
+            }
+
             $userData = [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -56,7 +80,8 @@ class ApiController extends Controller
                             ];
                         }
                     ),
-
+                    'is_sponsored' => $isSponsored,
+                    
                 ],
             ];
 
