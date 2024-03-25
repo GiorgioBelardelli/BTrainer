@@ -6,6 +6,7 @@ use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TrainerProfileController;
 
 Route::get('/', [TrainerProfileController::class, 'index'])
@@ -29,6 +30,8 @@ Route::post('/sponsorship/link', [SponsorshipController::class, 'linkToProfile']
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/userstatistics', [StatisticController::class, 'getDati'])->name('userstatistics');
 
 Route::get('/dashboard', [DashboardController::class, 'getProfile'])->name('dashboard');
 

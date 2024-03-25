@@ -11,6 +11,8 @@
     {{-- <title>{{ config('app.name', 'BTrainer') }}</title> --}}
     <title>B-Trainer</title>
 
+    // <!-- Importo Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -99,13 +101,16 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 
 </html>
 
+
 <style lang=scss scoped>
-@import "resources/scss/app.scss";    
-    * { 
+    @import "resources/scss/app.scss";
+
+    * {
         background-color: #5a5a5a;
         color: rgb(0, 0, 0);
         padding: 0;
@@ -149,26 +154,25 @@
         padding: 0;
 
         li {
-            padding:0;
+            padding: 0;
         }
     }
-    #pad-zero {
-            padding: 0;
 
-            a:hover {
-                background-color:#5a5a5a;
-                color:yellow;
-            }
+    #pad-zero {
+        padding: 0;
+
+        a:hover {
+            background-color: #5a5a5a;
+            color: yellow;
         }
+    }
 
     #navbarDropdown:hover {
-            color:white;
-        }
-    
+        color: white;
+    }
+
     a {
         text-decoration: none;
         font-weight: 500;
     }
-
-
 </style>
