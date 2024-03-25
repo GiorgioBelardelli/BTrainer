@@ -21,13 +21,12 @@ export default {
         },
 
         getSelectedSpecializations() {
-            // Modifica: Rinomina il metodo per eliminare la "s" alla fine
-            // Filtra i profili in base alle specializzazioni selezionate
             store.arrayFilter = this.profiles.filter((profile) => {
                 return profile.profile.specializations.some((spec) =>
                     this.selectedSpecializations.includes(spec)
                 );
             });
+            localStorage.setItem('arrayFilter', JSON.stringify(store.arrayFilter));
             this.$router.push({
                 name: "Risultati",
             });
@@ -180,19 +179,13 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
 
+
 h2 {
     color: $grey;
     font-size: 40px;
     text-align: center;
     padding-top: 1.5rem;
-    margin-bottom: 25px;
-}
-
-button {
-    padding: 8px;
-    background-color: yellow;
-    color: black;
-    border-radius: 8px;
+    margin-bottom: 2rem;
 }
 
 .selection {
@@ -289,7 +282,7 @@ button {
                 img {
                     height: 500px;
                     object-fit: cover;
-                    object-position: center;
+                    object-position: top;
                     transition: filter 1s ease, transform 1s ease;
                 }
 
@@ -298,6 +291,7 @@ button {
                 }
             }
         }
+
 
         .caption {
             text-align: center;
@@ -322,5 +316,50 @@ button {
             }
         }
     }
+
 }
+
+// Query specifica per le dim delle icone social 
+
+@media all and (min-width: 769px) and (max-width: 900px) {
+    #trainer-gallery .container .col-gallery .card-trainer i {
+        font-size: 0.9rem;
+    }
+}
+
+// Media Query Laptop in su 
+
+@media all and (min-width: 769px) {
+
+    #trainer-gallery .container  {
+        width: 80%;
+    }
+
+    #trainer-gallery .container .col-gallery .card-trainer {
+        width: calc((100% / 3) - 2rem);
+    }
+}
+
+// Media Query Tablet
+
+@media all and (max-width: 768px) {
+    #trainer-gallery .container  {
+        width: 95%;
+    }
+    #trainer-gallery .container .col-gallery .card-trainer {
+        width: calc((50%) - 2rem);
+    }
+}
+
+// Media Query Smartphone
+
+@media all and (max-width: 576px) {
+    #trainer-gallery .container  {
+        width: 100%;
+    }
+    #trainer-gallery .container .col-gallery .card-trainer {
+        width: calc(100% - 2rem);
+    }
+}
+
 </style>

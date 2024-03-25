@@ -23,7 +23,10 @@ export default {
     },
     created() {
         this.specialization = this.$route.query.specialization;
-        this.arrayFilter = store.arrayFilter;
+        const storedArrayFilter = localStorage.getItem('arrayFilter');
+        if (storedArrayFilter) {
+            this.arrayFilter = JSON.parse(storedArrayFilter);
+        }
     },
 
     mounted() {

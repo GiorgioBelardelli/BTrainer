@@ -29,19 +29,12 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-
-
                     {{-- Sostituiamo il logo Laravel con quello di BTrainer --}}
-
                     <div class="logo">
 
                         <img src="{{ asset('img/header.svg') }}" alt="">
 
                     </div>
-
-
-
-
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
 
@@ -49,11 +42,11 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse dropstart" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                         </li>
                     </ul>
 
@@ -76,11 +69,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="pad-zero">
-                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{__('Dashboard')}}</a>
-                                <a class="dropdown-item" href="{{ route('usermessages') }}">{{__('I tuoi Messaggi')}}</a>
-                                <a class="dropdown-item" href="{{ url('userreviews') }}">{{__('Le tue Recensioni')}}</a>
-                                <a class="dropdown-item" href="{{ url('userstatistics') }}">{{__('Le tue Statistiche')}}</a>
-                                <a class="dropdown-item" href="{{ url('sponsorship') }}">{{__('Sponsorship')}}</a>
+                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                                <a class="dropdown-item" href="{{ route('usermessages') }}">{{ __('I tuoi Messaggi') }}</a>
+                                <a class="dropdown-item" href="{{ url('userreviews') }}">{{ __('Le tue Recensioni') }}</a>
+                                <a class="dropdown-item" href="{{ url('userstatistics') }}">{{ __('Le tue Statistiche') }}</a>
+                                <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorship') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Esci') }}
