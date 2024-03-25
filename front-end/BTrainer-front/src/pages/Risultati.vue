@@ -18,6 +18,9 @@ export default {
             voteSelect: 0,
             reviewSelect: 0,
 
+            selectedStar: -1,
+            stars: [1, 2, 3, 4, 5],
+
             arrayMediaVoti: [{ idProfile: "", mediaVoti: 0 }],
         };
     },
@@ -57,6 +60,11 @@ export default {
             });
         },
 
+        selectStar(index) {
+            this.selectedStar = index;
+            this.voteSelect = index + 1;
+            this.filterVote();
+        },
         filterVote() {
             let filteredArray = [];
             // store.mediaVotes >= this.voteSelect;
@@ -74,10 +82,8 @@ export default {
                 if (mediaVoti >= this.voteSelect) {
                     filteredArray.push(this.arrayFilter[i]);
                 }
-                console.log("media voti: " + mediaVoti);
             }
             this.arrayFilter = filteredArray;
-            console.log("voto select: " + this.voteSelect);
         },
 
         filterReview() {
@@ -127,14 +133,13 @@ export default {
 <template>
     <div id="trainer-gallery">
         <form style="text-align: center">
-            <select name="vote" id="vote" v-model="voteSelect" @change="filterVote">
-                <option :value="voteSelect" disabled>Scegli un voto</option>
-                <option v-for="vote in votes" :key="vote.id" :value="vote.value">
-                    {{ vote.value }}
-                </option>
-            </select>
+            <div class="vote-star">
+                <div v-for="(star, index) in stars" :key="index" class="icon-container" @click="selectStar(index)">
+                    <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                </div>
+            </div>
 
-            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview">
+            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview" class="custom-select">
                 <option :value="reviewSelect" disabled>
                     Scegli numero Recensioni
                 </option>
@@ -149,16 +154,16 @@ export default {
                     @click="showDetails(profile.id)">
                     <div class="style-trainer">
                         <img :src="getImagePath(
-                `../assets/trainers/${profile.profile.photo}`
-            )
-                " :alt="profile.name + ' ' + profile.surname" />
+                    `../assets/trainers/${profile.profile.photo}`
+                )
+                    " :alt="profile.name + ' ' + profile.surname" />
                         <figcaption>
                             <div class="caption">
                                 <div class="name">
                                     <h3>{{ profile.name }} {{ profile.surname }}</h3>
                                 </div>
                                 <div v-for="specialization in profile.profile
-                .specializations" :key="specialization" class="specializations">
+                    .specializations" :key="specialization" class="specializations">
                                     <h4>{{ specialization }}</h4>
                                 </div>
                                 <div class="social">
@@ -222,6 +227,45 @@ select {
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
     background-size: cover;
     padding-bottom: 50px;
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .custom-select {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            color: $grey;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .custom-select option {
+            background-color: #fff;
+            color: $grey;
+        }
+
+        /* Aggiungi altri stili personalizzati a seconda delle tue preferenze */
+
+
+        &>div {
+            margin: 0 2rem;
+        }
+
+        .vote-star {
+            display: flex;
+
+            .fa-star {
+                color: grey;
+            }
+
+            .active {
+                color: $yellow;
+            }
+        }
+    }
 
     .container {
         margin: auto;
