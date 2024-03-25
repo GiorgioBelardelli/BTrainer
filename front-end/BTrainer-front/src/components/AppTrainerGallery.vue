@@ -21,13 +21,12 @@ export default {
         },
 
         getSelectedSpecializations() {
-            // Modifica: Rinomina il metodo per eliminare la "s" alla fine
-            // Filtra i profili in base alle specializzazioni selezionate
             store.arrayFilter = this.profiles.filter((profile) => {
                 return profile.profile.specializations.some((spec) =>
                     this.selectedSpecializations.includes(spec)
                 );
             });
+            localStorage.setItem('arrayFilter', JSON.stringify(store.arrayFilter));
             this.$router.push({
                 name: "Risultati",
             });
