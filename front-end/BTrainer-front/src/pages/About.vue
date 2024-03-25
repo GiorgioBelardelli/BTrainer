@@ -19,7 +19,6 @@ export default {
             mediaVotes: 0,
 
             nameSurname: "",
-            // index: -1,
             selectedStar: -1, // Nessuna stella selezionata inizialmente
             stars: [1, 2, 3, 4, 5],
 
@@ -115,57 +114,6 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
-        // Metodo di validazione dei msg
-
-        handleSubmitMsg() {
-            // Convalida dei dati del form
-            if (this.message.trim() === "") {
-                // Mostra un messaggio di errore se il campo del messaggio è vuoto
-                alert("Il campo del messaggio non può essere vuoto.");
-            } else {
-                console.log("Il messaggio che hai inviato è: " + this.message);
-            }
-            return;
-        },
-
-        // Metodo di validazione delle recensioni
-
-        handleSubmitRece() {
-            // Convalida dei dati del form
-            if (this.rece.trim() === "") {
-                alert("La recensione non può essere vuota.");
-            } else if (this.nameSurname.trim() === "") {
-                alert("Non puoi lasciare una recensione anonima");
-            } else if (this.nameSurname.trim().length < 4) {
-                alert(
-                    "Il tuo nome e cognome devono essere almeno di 4 caratteri."
-                );
-            } else {
-                // Chiamata Axios in post
-                // axios.post(...)
-                console.log(
-                    this.nameSurname +
-                    "ha recensito questo Trainer:" +
-                    " '" +
-                    this.rece +
-                    "'"
-                );
-            }
-            return;
-        },
-
-        handleSubmitVote() {
-            // Convalida dei dati del div.vote
-            if (this.selectedStar === -1) {
-                // Se l'utente non ha selezionato nemmeno una stellina:
-                alert("Seleziona un voto");
-            } else {
-                this.vote = this.selectedStar + 1;
-                console.log("Il voto che hai inserito è:" + this.vote);
-            }
-            return;
-        },
-
         // Questo metodo Imposta selectedStar come l'indice dell'icona stella cliccata
         selectStar(index) {
             this.selectedStar = index;
@@ -194,13 +142,15 @@ export default {
         },
 
         createNewReview() {
-            axios
-                .post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
+            if (this.selectedStar === -1) {
+                alert("Seleziona un voto");
+                return;
+            }
+            this.newReview.vote = this.selectedStar + 1;
+
+            axios.post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
                 .then((response) => {
-                    console.log(
-                        "Recensione creata con successo:",
-                        response.data
-                    );
+                    console.log("Recensione creata con successo:", response.data);
                     this.newReview.name = "";
                     this.newReview.surname = "";
                     this.newReview.content = "";
@@ -208,11 +158,9 @@ export default {
                     alert("Recensione creata con successo");
                 })
                 .catch((error) => {
-                    console.error(
-                        "Si è verificato un errore durante la creazione della recensione:",
-                        error
-                    );
+                    console.error("Si è verificato un errore durante la creazione della recensione:", error);
                 });
+
         },
 
         createNewMessage() {
@@ -325,9 +273,11 @@ export default {
                                 <div class="content">
                                     <textarea v-model="newReview.content" type="text" required rows="5"></textarea>
                                 </div>
-                                <div class="votes">
-                                    <input v-model="newReview.vote" type="number" min="1" max="5" required
-                                        placeholder="Voto" />
+                                <div class="vote-star">
+                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
+                                        @click="selectStar(index)">
+                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                                    </div>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
@@ -389,6 +339,7 @@ h3 {
 
 #title-form {
     color: $yellow;
+    text-align: start;
 }
 
 button {
@@ -469,6 +420,10 @@ form>div {
                     border: 3px solid darkgray;
                     opacity: .7;
                 }
+
+                .vote-star {
+                    display: flex;
+                }
             }
         }
 
@@ -511,23 +466,12 @@ form>div {
     }
 }
 
-.vote {
-    display: flex;
-    width: 200px;
-    justify-content: space-between;
-    align-items: center;
+.fa-star {
+    color: grey;
+}
 
-    .icon-star {
-        color: black;
-    }
-
-    .icon-star {
-        color: grey;
-    }
-
-    .active {
-        color: rgba(255, 255, 0, 0.692);
-        /* Colore giallo quando attiva */
-    }
+.active {
+    color: $yellow;
+    /* Colore giallo quando attiva */
 }
 </style>
