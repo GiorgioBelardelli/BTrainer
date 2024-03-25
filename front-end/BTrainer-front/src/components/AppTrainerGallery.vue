@@ -291,6 +291,34 @@ h2 {
             }
         }
 
+        // Query Tablet
+
+        @media all and (min-width: 577px) and (max-width: 768px) {
+            .col-gallery {
+
+                display: flex;
+
+                .card-trainer {
+                width: calc((100% / 2) - 2rem);
+            }
+            }
+
+        }
+
+                // Query Tablet
+
+                @media all and (max-width: 576px) {
+            .col-gallery {
+
+                display: flex;
+
+                .card-trainer {
+                width: calc(100% - 2rem);
+            }
+            }
+
+        }
+
         .caption {
             text-align: center;
 

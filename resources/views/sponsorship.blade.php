@@ -61,41 +61,21 @@
     </div>
     @endsection
 
-
+<script>
+    export default {
+        data() {
+            return {
+              imageUrl: 'public\img\PTrainer2.jpeg'
+            };
+        }
+    };
+</script>
 <style lang=scss scoped>
         .card-header {
             color: white;
         }
 
-        .card {
-            .card-body {
-                color: white;
 
-                .reviews, .messages, .sponsorship {
-                    margin-bottom: 20px;
-                }
-            }
-        }
-
-        .reviews {
-            color: white;
-
-            span {
-                color: white;
-            }
-        }
-
-        .messages {
-            color: white;
-
-            span {
-                color: white;
-            }
-        }
-
-        button {
-            background-color: yellow;
-        }
 
         .card{
 
@@ -117,7 +97,7 @@
                         border: 1px solid yellow;
                         background-color:white;
                         border-radius: 10px;
-                        height: 200px;
+                        height: 300px;
                         width: 300px;
                         display: flex;
                         flex-direction: column;
