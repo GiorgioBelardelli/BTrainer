@@ -108,7 +108,7 @@
 
     .alert-danger  {
         margin: auto;
-        width: 50%;
+        width: 30%;
         background-color: #5a5a5a;
         border: none;
         padding: 0;
@@ -116,12 +116,15 @@
 
             ul {
                 padding:0;
+                margin:0;
                 list-style:none;
                 background-color:#5a5a5a;
 
                 li {
+                    padding: 0;
+                    margin: 0;
                     background-color: white;
-                    font-size: 25px;
+                    font-size: 15px;
                     color: black;
                 }
             }

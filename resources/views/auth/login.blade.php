@@ -77,6 +77,10 @@
 
 @use '../styles/partials/variables' as *;
 
+    strong {
+            color: white;
+    }
+
     form .btn {
             color:black;
             background-color:yellow;
