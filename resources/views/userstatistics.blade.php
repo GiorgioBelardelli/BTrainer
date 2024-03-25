@@ -32,7 +32,37 @@
                     <div>
                         <h1>Numero recensioni: {{count($userProfile->reviews)}}</h1>
                         <h1>Numero messaggi: {{count($userProfile->messages)}}</h1>
-                        <canvas id="myChart"></canvas>
+                        @foreach ($userProfile->votes as $vote)
+
+                        <h1>VOTO: {{$vote->value}}</h1>
+                        @endforeach
+
+                        <!-- {{-- {{dd($userProfile->votes)}} --}} -->
+
+                    </div>
+                    <div>
+                        <div>
+                            <h2>Recensioni per mese:</h2>
+                            <ul>
+                                <?php \Carbon\Carbon::setLocale('it'); ?>
+                                @foreach($userProfile->reviews->groupBy(function($review) {
+                                return \Carbon\Carbon::parse($review->date)->format('F Y');
+                                }) as $month => $reviews)
+                                <li>{{ $month }}: {{ count($reviews) }} recensioni</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div>
+                            <h2>Messaggi per mese:</h2>
+                            <ul>
+                                <?php \Carbon\Carbon::setLocale('it'); ?>
+                                @foreach($userProfile->messages->groupBy(function($message) {
+                                return \Carbon\Carbon::parse($message->date)->locale('it')->format('F Y');
+                                }) as $month => $messages)
+                                <li>{{ $month }}: {{ count($messages) }} messaggi</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,11 +76,31 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['1', '2', '3', '4', '5'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [5, 19, 3, 5, 2, 3],
-                    borderWidth: 1
+                    data: [{
+                        {
+                            $voto1
+                        }
+                    }, {
+                        {
+                            $voto2
+                        }
+                    }, {
+                        {
+                            $voto3
+                        }
+                    }, {
+                        {
+                            $voto4
+                        }
+                    }, {
+                        {
+                            $voto5
+                        }
+                    }],
+                    borderWidth: 5
                 }]
             },
             options: {

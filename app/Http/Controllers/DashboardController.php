@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Sponsorship;
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -23,8 +24,8 @@ class DashboardController extends Controller
         $userId = Auth::id();
 
         $sponsorships = Sponsorship::all();
-    
-        
+
+
 
         // Ottieni il profilo dell'utente loggato
         $userProfile = Profile::where('user_id', $userId)->first();
@@ -39,7 +40,7 @@ class DashboardController extends Controller
     $userId = Auth::id();
 
     $sponsorships = Sponsorship::all();
-    
+
     // Ottieni il profilo dell'utente loggato
     $userProfile = Profile::where('user_id', $userId)->first();
 
@@ -53,7 +54,7 @@ class DashboardController extends Controller
         $userId = Auth::id();
 
         $sponsorships = Sponsorship::all();
-        
+
         // Ottieni il profilo dell'utente loggato
         $userProfile = Profile::where('user_id', $userId)->first();
 
@@ -67,7 +68,7 @@ class DashboardController extends Controller
         $userId = Auth::id();
 
         $sponsorships = Sponsorship::all();
-        
+
         // Ottieni il profilo dell'utente loggato
         $userProfile = Profile::where('user_id', $userId)->first();
 
@@ -81,12 +82,36 @@ class DashboardController extends Controller
         $userId = Auth::id();
 
         $sponsorships = Sponsorship::all();
-        
+        $votes = Vote :: all();
+
+        $voto1 = 0;
+        $voto2 = 0;
+        $voto3 = 0;
+        $voto4 = 0;
+        $voto5 = 0;
+
         // Ottieni il profilo dell'utente loggato
         $userProfile = Profile::where('user_id', $userId)->first();
+        foreach ($userProfile->votes as $vote) {
+            if($vote->value === 1){
+                $voto1++;
+            }
+            if($vote->value === 2){
+                $voto2++;
+            }
+            if($vote->value === 3){
+                $voto3++;
+            }
+            if($vote->value === 4){
+                $voto4++;
+            }
+            if($vote->value === 5){
+                $voto5++;
+            }
+        }
 
         // Restituisci la vista 'usermessages' con i dati necessari
-        return view('userstatistics', compact('userProfile', 'sponsorships'));
+        return view('userstatistics', compact('userProfile', 'sponsorships', 'votes','voto1','voto2','voto3','voto4','voto5' ));
     }
 
     /**

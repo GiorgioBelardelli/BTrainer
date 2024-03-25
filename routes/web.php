@@ -30,7 +30,7 @@ Route::post('/sponsorship/link', [SponsorshipController::class, 'linkToProfile']
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/userstatistics', [StatisticController::class, 'getDati'])->name('userstatistics');
+
 
 Route::get('/dashboard', [DashboardController::class, 'getProfile'])->name('dashboard');
 
