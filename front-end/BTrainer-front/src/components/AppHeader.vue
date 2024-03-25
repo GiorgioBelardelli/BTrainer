@@ -1,27 +1,26 @@
 <template>
     <header>
         <div class="logo">
-            <router-link to="/">  
-                    <img src="../assets/logos/header.svg" alt="">
+            <router-link to="/">
+                <img src="../assets/logos/header.svg" alt="">
             </router-link>
         </div>
-    
+
         <nav>
             <ul>
-                <router-link to="/"><li>Home</li></router-link>
-                <!-- <router-link to="/about"><li>About</li></router-link> -->
-                <!-- <router-link to="/risultati"><li>Risultati</li></router-link> -->
-                <!-- <a href=""><li>Test</li></a> -->
+                <router-link to="/">
+                    <li>Home</li>
+                </router-link>
             </ul>
         </nav>
-    
+
         <div class="header-icons">
             <a href="http://127.0.0.1:8000/login">
                 <i class="fa-regular fa-user"></i>
-            Accedi
+                Accedi
             </a>
             <a href="http://127.0.0.1:8000/register"><i class="fa-solid fa-plus"></i>
-            Registrati
+                Registrati
             </a>
         </div>
     </header>
@@ -46,18 +45,22 @@ header {
     align-items: center;
 
     .logo {
-        height: 100%;
-        margin-top: 30px;
+        display: flex;
+        align-items: center;
+
         img {
-            height: 80%;
+            width: 80%;
+            max-height: 120px;
         }
     }
 
     nav {
         color: $lightgrey;
+
         ul {
             display: flex;
             justify-content: space-between;
+
             li {
                 margin: 0 1.25rem;
             }
@@ -74,8 +77,34 @@ header {
     a {
         color: white;
     }
+
     a:hover {
         color: $yellow;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        .logo {}
+    }
+}
+
+@media screen and (max-width: 576px) {
+    header {
+        .logo {
+            img {
+                width: 70%;
+            }
+        }
+
+        .header-icons {
+            display: flex;
+            flex-direction: column;
+
+            &>* {
+                margin: .5rem 0;
+            }
+        }
     }
 }
 </style>

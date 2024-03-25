@@ -394,14 +394,14 @@ form>div {
                 margin: 0 1rem;
                 width: calc(50% - 2rem);
 
-                // Parte sinistra con l'immagine nome cognome ecc..
                 .img-card {
                     flex-basis: 25%;
 
                     img {
                         height: 500px;
+                        min-width: 300px;
                         object-fit: cover;
-                        object-position: center;
+                        object-position: top;
                     }
                 }
             }
@@ -480,6 +480,138 @@ form>div {
 
 .active {
     color: $yellow;
-    /* Colore giallo quando attiva */
+}
+
+@media screen and (max-width: 1200px) {
+    #trainer-gallery {
+
+        .container {
+            .col-gallery {
+                .form-container {
+                    width: 100%;
+                    padding: 0 3rem;
+
+                    .review,
+                    .message,
+                    .vote {
+                        margin-bottom: 1rem;
+                        padding: 1rem 3rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #trainer-gallery {
+        .container {
+            .col-gallery {
+                padding: 2rem 1rem;
+
+                .form-container {
+                    width: 100%;
+                    padding: 0 2rem;
+
+                    .review,
+                    .message,
+                    .vote {
+                        margin-bottom: 1rem;
+                        padding: 1rem 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #trainer-gallery {
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin: .5rem 0;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        .container {
+            .col-gallery {
+                padding: 2rem .5rem;
+
+                .form-container {
+                    width: 100%;
+                    padding: 0 1rem;
+
+                    .review,
+                    .message,
+                    .vote {
+                        margin-bottom: 1rem;
+                        padding: 1rem 1.25rem;
+                    }
+                }
+
+                .info {
+                    .votes-reviews {
+                        font-size: 1rem;
+                        margin-top: .75rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #trainer-gallery {
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: .35rem 0;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+
+        .container {
+            .col-gallery {
+                padding: 2rem 0;
+                flex-direction: column;
+
+                .card-trainer {
+                    width: calc(80% - 2rem);
+                    margin: 0 auto;
+
+                    .img-card {
+                        img {
+                            object-position: top;
+                        }
+                    }
+                }
+
+                .form-container {
+                    width: 100%;
+                    padding: 1rem;
+
+                    .review,
+                    .message,
+                    .vote {
+                        margin-bottom: 1rem;
+                        padding: .5rem;
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
