@@ -1,117 +1,100 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="fs-4 text-secondary my-4">
-        {{ __('Le tue Statistiche') }}
-    </h2>
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
+    <div class="container">
+        <h2 class="fs-4 text-secondary my-4">
+            {{ __('Le tue Statistiche') }}
+        </h2>
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card">
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
-
-
-                    @if ($userProfile)
-                    @auth
-                    @if (Auth::user()->id === $userProfile->user_id)
-
-                    @endif
-                    @endauth
-                    @else
-                    <h1>Vuoi crearti un profilo da Trainer?</h1>
-                    <button><a href="{{ route('profile.create') }}" class="btn">CREA PROFILO</a></button>
-                    @endif
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
 
-                    <div>
-                        <h1>Numero recensioni: {{count($userProfile->reviews)}}</h1>
-                        <h1>Numero messaggi: {{count($userProfile->messages)}}</h1>
-                        @foreach ($userProfile->votes as $vote)
+                        @if ($userProfile)
+                            @auth
+                                @if (Auth::user()->id === $userProfile->user_id)
+                                @endif
+                            @endauth
+                        @else
+                            <h1>Vuoi crearti un profilo da Trainer?</h1>
+                            <button><a href="{{ route('profile.create') }}" class="btn">CREA PROFILO</a></button>
+                        @endif
 
-                        <h1>VOTO: {{$vote->value}}</h1>
-                        @endforeach
 
-                        <!-- {{-- {{dd($userProfile->votes)}} --}} -->
 
-                    </div>
-                    <div>
                         <div>
-                            <h2>Recensioni per mese:</h2>
-                            <ul>
-                                <?php \Carbon\Carbon::setLocale('it'); ?>
-                                @foreach($userProfile->reviews->groupBy(function($review) {
-                                return \Carbon\Carbon::parse($review->date)->format('F Y');
-                                }) as $month => $reviews)
-                                <li>{{ $month }}: {{ count($reviews) }} recensioni</li>
-                                @endforeach
-                            </ul>
+                            <div>
+                                <h2>Recensioni per mese:</h2>
+                                <ul>
+                                    <?php \Carbon\Carbon::setLocale('it'); ?>
+                                    @foreach ($userProfile->reviews->groupBy(function ($review) {
+            return \Carbon\Carbon::parse($review->date)->format('F Y');
+        }) as $month => $reviews)
+                                        <li>{{ $month }}: {{ count($reviews) }} recensioni</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div>
+                                <h2>Messaggi per mese:</h2>
+                                <ul>
+                                    <?php \Carbon\Carbon::setLocale('it'); ?>
+                                    @foreach ($userProfile->messages->groupBy(function ($message) {
+            return \Carbon\Carbon::parse($message->date)->locale('it')->format('F Y');
+        }) as $month => $messages)
+                                        <li>{{ $month }}: {{ count($messages) }} messaggi</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
+
+
                         <div>
-                            <h2>Messaggi per mese:</h2>
-                            <ul>
-                                <?php \Carbon\Carbon::setLocale('it'); ?>
-                                @foreach($userProfile->messages->groupBy(function($message) {
-                                return \Carbon\Carbon::parse($message->date)->locale('it')->format('F Y');
-                                }) as $month => $messages)
-                                <li>{{ $month }}: {{ count($messages) }} messaggi</li>
-                                @endforeach
-                            </ul>
+                            <h1>Numero recensioni: {{ count($userProfile->reviews) }}</h1>
+                            <h1>Numero messaggi: {{ count($userProfile->messages) }}</h1>
+                            @foreach ($userProfile->votes as $vote)
+                                <h1>VOTO: {{ $vote->value }}</h1>
+                            @endforeach
+
+                            <canvas id="myChart"></canvas>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <script>
-        const ctx = document.getElementById('myChart');
+        <script>
+            const ctx = document.getElementById('myChart');
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['1', '2', '3', '4', '5'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [{
-                        {
-                            $voto1
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['1', '2', '3', '4', '5'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{{ $voto1 }}, {{ $voto2 }}, {{ $voto3 }},
+                            {{ $voto4 }}, {{ $voto5 }}
+                        ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
-                    }, {
-                        {
-                            $voto2
-                        }
-                    }, {
-                        {
-                            $voto3
-                        }
-                    }, {
-                        {
-                            $voto4
-                        }
-                    }, {
-                        {
-                            $voto5
-                        }
-                    }],
-                    borderWidth: 5
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
                     }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
 
     @endsection
 
