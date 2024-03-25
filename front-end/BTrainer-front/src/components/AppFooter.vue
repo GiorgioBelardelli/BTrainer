@@ -7,33 +7,36 @@
 
 <template>
     <footer>
+
+        <div class="image-logo">
+            <router-link to="/">  
+                <img src="../assets/logos/header.svg" alt="logo" id="logo-footer">
+            </router-link>
+        </div>
         <!-- Div Contenitore Bottom  -->
         <div class="bottom">
             <!-- sezione contatti a sinistra  -->
             <div class="contacts">
-                <div class="logo">
-                    <router-link to="/">  
-                    <img src="../assets/logos/header.svg" alt="logo">
-                     </router-link>
-                    <p>
-                        "Push yourself beyond limits, embrace the grind, and witness the transformation. In this arena of dedication, sweat, and perseverance, greatness is forged."
-                    </p>
 
-                    <div class="social-bottom">
-                      <i class="fa-brands fa-facebook"></i>
-                      <i class="fa-brands fa-instagram"></i>
-                      <i class="fa-brands fa-x-twitter"></i>
-                      <i class="fa-brands fa-tiktok"></i>
-                      <i class="fa-regular fa-envelope"></i>
-                    </div>
+                <p>
+                    "Push yourself beyond limits, embrace the grind, and witness the transformation. In this arena of dedication, sweat, and perseverance, greatness is forged."
+                </p>
 
-                    <p>
-                        Privacy Policy | © 2024 BTrainer <br>
-                        Design by Team1 Boolean Classe 112
-                    </p>
-
+                <div class="social-bottom">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                    <i class="fa-brands fa-tiktok"></i>
                 </div>
+
+                <p>
+                    Privacy Policy | © 2024 BTrainer <br>
+                    Design by Team1 Boolean Classe 112
+                </p>
+
             </div>
+
             <!-- Sezione centrale specializzazioni (qui verranno ciclate tutte le specialization) -->
 
             <!-- BONUS: al link su una singola specializzazione inserire un link che mandi alle specifiche della specializzazione -->
@@ -71,7 +74,8 @@
                 </ul>
             </div>
             <div class="times">
-                <ul>ORARI:
+                <ul>
+                    <li>ORARI:</li>
                     <li>LUNEDI-VENERDI: 8:00 - 17:00</li>
                     <li>SABATO: 9:00 - 13:00</li>
                     <li>DOMENICA: CHIUSO</li>
@@ -88,33 +92,57 @@
     footer {
         background-color: black;
 
+        .image-logo {
+            width: 75%;
+            padding-top:20px;
+            padding-left: 15px;
+            margin: auto;
+            img {
+                width: 80px;
+            }
+        }
+
         .bottom{
             width: 80%;
+            padding: 15px;
             margin: auto;
             display: flex;
-            align-items: center;
-            align-content: center;
+            align-items: stretch;
+            min-height: 150px;
             justify-content: space-between;
             flex-wrap: wrap;
 
+            .contacts,
+            .spec,
+            .times {
+            flex: 1;
+            }
+
             .contacts {
                 flex-basis: 30%;
-                .logo {
-                    margin-top: 30px;
-                }
-                img {
-                    width: 100px;
-                }
+                align-self: center;
+
                 p {
                     font-size: 12px;
+                    width: 75%;
                     color: $lightgrey;
                     margin-bottom: 10px;
                     margin-top: 10px;
+                    margin: auto;
+                }
+
+                p:hover {
+                    color: yellow;
+                    transform: scale(1.01);
                 }
 
 
                 .social-bottom {
                     display: flex;
+                    width: 75%;
+                    margin: auto;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
                     justify-content: flex-start;
                     gap: 10px;
 
@@ -135,10 +163,9 @@
             }
             .spec {
                 flex-basis: 30%;
+                align-self: center;
                 text-align: center;
                 ul {
-
-                    margin-top: 30px;
 
                     li {
                     padding-top: 5px;
@@ -153,13 +180,18 @@
 
             }
             .times {
-                margin-top: 30px;
+                align-self: center;
                 text-align: center;
                 flex-basis: 30%;
                 font-size: 15px;
                 color: $lightgrey;
+
                 li {
                     padding-top: 10px;
+                }
+                li:hover, {
+                    color: yellow;
+                    transform: scale(1.01);
                 }
             }
         }
@@ -171,6 +203,10 @@
     footer {
         height: 400px;
     }
+
+    // footer .bottom {
+    //     height: 350px;
+    // }
     
 
     #trainer-gallery .container .col-gallery .card-trainer {
@@ -182,19 +218,26 @@
 
 @media all and (max-width: 768px) {
     footer  {
-        min-height: 500px;
+        min-height: 400px;
+    }
+    .image-logo {
+        display: flex;
+        justify-content: center;
     }
     footer .bottom {
         width: 95%;
+        flex-direction: column;
     }
 
     footer .bottom .contacts {
-        flex-basis: 100%;
+        flex-basis: 70%;
         margin: auto;
+        order: 3;
         text-align: center;
     }
-    footer .bottom .contacts .logo .social-bottom {
+    footer .bottom .contacts .social-bottom {
         justify-content: center;
+        padding: 15px;
     }
 
     footer .bottom .spec {

@@ -203,9 +203,15 @@ h2 {
     .spec-label {
         margin-bottom: .5rem;
         display: flex;
+        flex-wrap: wrap;
 
-        #label-spec {
-            text-align: center;
+        .specialization {
+            width: calc(100% / 10);
+            margin: .5rem 0;
+
+            #label-spec {
+                text-align: center;
+            }
         }
     }
 
@@ -321,31 +327,59 @@ h2 {
 
 // Query specifica per le dim delle icone social 
 
-@media all and (min-width: 769px) and (max-width: 900px) {
-    #trainer-gallery .container .col-gallery .card-trainer i {
-        font-size: 0.9rem;
+@media all and (max-width: 1000px) {
+    #trainer-gallery {
+        .spec-label {
+            .specialization {
+                width: calc(100% / 5);
+
+                #label-spec {
+                    text-align: center;
+                }
+            }
+        }
+
+        .container {
+            width: 95%;
+
+            .col-gallery {
+                .card-trainer {
+                    width: calc((100% / 3) - 2rem);
+
+                    i {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
     }
 }
 
-// Media Query Laptop in su 
+@media all and (max-width: 900px) {
+    #trainer-gallery {
+        .container {
+            width: 95%;
 
-@media all and (min-width: 769px) {
+            .col-gallery {
+                .card-trainer {
+                    width: calc((100% / 3) - 2rem);
 
-    #trainer-gallery .container  {
-        width: 80%;
-    }
-
-    #trainer-gallery .container .col-gallery .card-trainer {
-        width: calc((100% / 3) - 2rem);
+                    i {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
     }
 }
 
 // Media Query Tablet
 
 @media all and (max-width: 768px) {
-    #trainer-gallery .container  {
+    #trainer-gallery .container {
         width: 95%;
     }
+
     #trainer-gallery .container .col-gallery .card-trainer {
         width: calc((50%) - 2rem);
     }
@@ -354,12 +388,32 @@ h2 {
 // Media Query Smartphone
 
 @media all and (max-width: 576px) {
-    #trainer-gallery .container  {
-        width: 100%;
-    }
-    #trainer-gallery .container .col-gallery .card-trainer {
-        width: calc(100% - 2rem);
+    #trainer-gallery {
+        .spec-label {
+            justify-content: space-evenly;
+
+            .text {
+                font-size: .85rem;
+            }
+
+            .specialization {
+                width: calc(100% / 4);
+
+                #label-spec {
+                    text-align: center;
+                }
+            }
+        }
+
+        .container {
+            width: 80%;
+
+            .col-gallery {
+                .card-trainer {
+                    width: calc(100% - 2rem);
+                }
+            }
+        }
     }
 }
-
 </style>

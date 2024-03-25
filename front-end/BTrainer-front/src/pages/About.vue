@@ -333,13 +333,13 @@ export default {
 @use "../styles/partials/variables" as *;
 
 h2 {
-    color: $grey;
+    color: black;
     font-size: 3rem;
     text-align: center;
 }
 
 h3 {
-    color: $grey;
+    color: black;
     font-size: 2rem;
     text-align: center;
     margin: 1rem 0;
@@ -393,6 +393,10 @@ form>div {
             .card-trainer {
                 margin: 0 1rem;
                 width: calc(50% - 2rem);
+                margin-bottom: 1rem;
+                background-color: #5a5a5a;
+                border: 3px solid darkgray;
+                opacity: 0.7;
 
                 .img-card {
                     flex-basis: 25%;
@@ -431,6 +435,14 @@ form>div {
 
                 .vote-star {
                     display: flex;
+
+                    .fa-star {
+                        color: grey;
+                    }
+
+                    .active {
+                        color: $yellow;
+                    }
                 }
             }
         }
@@ -466,20 +478,23 @@ form>div {
         }
 
         .info {
+            padding: 10px;
+
+            .description p{
+                color: black;
+                font-weight: bold;
+                padding: 10px;
+            }
+
             .votes-reviews {
+                color: black;
+                font-weight: bold;
                 font-size: 1.2rem;
                 margin-top: 1rem;
+                padding: 10px;
             }
         }
     }
-}
-
-.fa-star {
-    color: grey;
-}
-
-.active {
-    color: $yellow;
 }
 
 @media screen and (max-width: 1200px) {
@@ -589,7 +604,7 @@ form>div {
                 flex-direction: column;
 
                 .card-trainer {
-                    width: calc(80% - 2rem);
+                    width: calc(100% - 2rem);
                     margin: 0 auto;
 
                     .img-card {
