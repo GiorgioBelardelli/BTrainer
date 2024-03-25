@@ -186,26 +186,28 @@ export default {
         },
 
         createNewVote() {
-            //console.log('Il voto è:' + this.newVoto);
-            axios
-                .post("http://127.0.0.1:8000/api/v1/rate", {
-                    "vote": this.newVoto,
-                    "id": this.$route.params.id
-                })
+            if (this.selectedStar === -1) {
+                alert("Seleziona un voto");
+                return;
+            }
+            const vote = this.selectedStar + 1;
+
+            axios.post("http://127.0.0.1:8000/api/v1/rate", {
+                "vote": vote,
+                "id": this.$route.params.id
+            })
                 .then((response) => {
                     alert("Voto inviato con successo");
-                    console.log(
-                        "Voto creato con successo:",
-                        response.data
-                    );
+                    console.log("Voto creato con successo:", response.data);
                 })
                 .catch((error) => {
                     console.error(
                         "Si è verificato un errore durante la creazione del Voto:",
-                        console.log(this.newVoto)
+                        error
                     );
                 });
-        },
+        }
+
     },
 
     props: ['profileId'], // Ricevi l'ID del profilo come prop
@@ -307,8 +309,14 @@ export default {
                             </form>
                         </div>
                         <div class="vote">
+                            <h3 id="title-form">Invia un voto:</h3>
                             <form @submit.prevent="createNewVote">
-                                <input v-model="newVoto" type="number" min="1" max="5" name="newVoto" id="newVoto">
+                                <div class="vote-star">
+                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
+                                        @click="selectStar(index)">
+                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                                    </div>
+                                </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
