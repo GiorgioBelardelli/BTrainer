@@ -33,23 +33,28 @@ class ApiController extends Controller
         foreach ($users as $user) {
 
             $isSponsored = false;
-            $nowTimeStamp = Carbon::now()->timestamp;
-            $nowDate = Carbon::createFromTimestamp($nowTimeStamp);
+            
+            // $nowTimeStamp = Carbon::now()->timestamp;
+            // $nowDate = Carbon::createFromTimestamp($nowTimeStamp);
+            $nowDate = Carbon::now();
 
-            if ($user->profile->sponsorship) {
+            if ($user->profile->sponsorships()->exists()) {
                 // Iteriamo su tutte le sponsorizzazioni associate al profilo dell'utente
 
-                foreach ($user->profile->sponsorship as $sponsorship) {
+                foreach ($user->profile->sponsorships as $sponsorship) {
                     
-                    $expireTimeStamp = $sponsorship->expire_date->timestamp;
+                    //$expireTimeStamp = $sponsorship->expire_date->timestamp;
 
-                    $expireDate = Carbon::createFromTimestamp($expireTimeStamp);
+                    //$expireDate = Carbon::createFromTimestamp($expireTimeStamp);
+                    $startDate = Carbon::parse($sponsorship->created_at);
+                    $expireDate = Carbon::parse($sponsorship->expire_date);
 
-                    if ($expireDate > $nowDate) {
-                        // Se troviamo almeno una sponsorizzazione attiva, impostiamo $isSponsored su true
+                    if ($startDate <= $nowDate && $expireDate > $nowDate) {
+
                         $isSponsored = true;
-                        // Possiamo interrompere la ricerca in quanto abbiamo trovato una sponsorizzazione attiva
+
                         break;
+                    
                     }
                 }
             }
@@ -86,7 +91,15 @@ class ApiController extends Controller
             ];
 
             // Aggiungi i dati dell'utente all'array risultante
-            $data[] = $userData;
+            $data[] = [
+                'userData' => $userData, // Rimuovi questa riga dopo il debug
+                'debug' => [
+                    'isSponsored' => $isSponsored,
+                    'expireDate' => $expireDate,
+                    'startDate' => $startDate,
+                    'nowDate' => $nowDate,
+                ]
+            ];
         }
 
         // Ritorna la risposta JSON con lo stato di successo e i dati recuperati
