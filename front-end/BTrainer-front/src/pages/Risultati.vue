@@ -26,7 +26,7 @@ export default {
     },
     created() {
         this.specialization = this.$route.query.specialization;
-        const storedArrayFilter = localStorage.getItem('arrayFilter');
+        const storedArrayFilter = localStorage.getItem("arrayFilter");
         if (storedArrayFilter) {
             this.arrayFilter = JSON.parse(storedArrayFilter);
         }
@@ -39,7 +39,16 @@ export default {
                 const data = res.data;
                 if (data.status === "success") {
                     this.votes = data.votes;
-                    // console.log(this.votes);
+                    // Aggiungi la logica per indicare se il profilo è sponsorizzato
+                    this.arrayFilter.forEach((profile) => {
+                        profile.isSponsored = profile.profile.is_sponsored;
+                    });
+                    // Ordina i profili per visualizzare quelli sponsorizzati prima degli altri
+                    this.arrayFilter.sort((a, b) => {
+                        return (
+                            (b.isSponsored ? 1 : 0) - (a.isSponsored ? 1 : 0)
+                        );
+                    });
                 }
             })
             .catch((err) => {
@@ -95,7 +104,7 @@ export default {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
                     if (recensioni >= 0 && recensioni <= 3) {
-                        console.log('dentro recensioni');
+                        console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
                 }
@@ -106,7 +115,7 @@ export default {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
                     if (recensioni > 3 && recensioni <= 7) {
-                        console.log('dentro recensioni');
+                        console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
                 }
@@ -117,7 +126,7 @@ export default {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
                     if (recensioni > 7) {
-                        console.log('dentro recensioni');
+                        console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
                 }
@@ -134,12 +143,26 @@ export default {
     <div id="trainer-gallery">
         <form style="text-align: center">
             <div class="vote-star">
-                <div v-for="(star, index) in stars" :key="index" class="icon-container" @click="selectStar(index)">
-                    <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                <div
+                    v-for="(star, index) in stars"
+                    :key="index"
+                    class="icon-container"
+                    @click="selectStar(index)"
+                >
+                    <i
+                        class="fas fa-star"
+                        :class="{ active: index <= selectedStar }"
+                    ></i>
                 </div>
             </div>
 
-            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview" class="custom-select">
+            <select
+                name="vote"
+                id="vote"
+                v-model="reviewSelect"
+                @change="filterReview"
+                class="custom-select"
+            >
                 <option :value="reviewSelect" disabled>
                     Scegli numero Recensioni
                 </option>
@@ -150,21 +173,41 @@ export default {
         </form>
         <div class="container">
             <div class="col-gallery">
-                <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
-                    @click="showDetails(profile.id)">
-                    <img v-if="profile.profile.is_sponsored" id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
+                <div
+                    v-for="profile in arrayFilter"
+                    :key="profile.id"
+                    class="card-trainer"
+                    @click="showDetails(profile.id)"
+                >
+                    <!-- Mostra un logo di sponsorizzazione se il profilo è sponsorizzato -->
+                    <img
+                        v-if="profile.isSponsored"
+                        id="sponsor-logo"
+                        src="../assets/logos/sponsor.svg"
+                        alt="Sponsor"
+                    />
                     <div class="style-trainer">
-                        <img :src="getImagePath(
-                    `../assets/trainers/${profile.profile.photo}`
-                )
-                    " :alt="profile.name + ' ' + profile.surname" />
+                        <img
+                            :src="
+                                getImagePath(
+                                    `../assets/trainers/${profile.profile.photo}`
+                                )
+                            "
+                            :alt="profile.name + ' ' + profile.surname"
+                        />
                         <figcaption>
                             <div class="caption">
                                 <div class="name">
-                                    <h3>{{ profile.name }} {{ profile.surname }}</h3>
+                                    <h3>
+                                        {{ profile.name }} {{ profile.surname }}
+                                    </h3>
                                 </div>
-                                <div v-for="specialization in profile.profile
-                    .specializations" :key="specialization" class="specializations">
+                                <div
+                                    v-for="specialization in profile.profile
+                                        .specializations"
+                                    :key="specialization"
+                                    class="specializations"
+                                >
                                     <h4>{{ specialization }}</h4>
                                 </div>
                                 <div class="social">
@@ -198,9 +241,9 @@ select {
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
 }
 
-.style-trainer>* {
+.style-trainer > * {
     grid-area: 1/1;
-    transition: .4s;
+    transition: 0.4s;
 }
 
 .style-trainer figcaption {
@@ -208,7 +251,7 @@ select {
     align-items: end;
     font-size: 2.3rem;
     font-weight: bold;
-    padding: .75rem;
+    padding: 0.75rem;
     background: var(--c, #0009);
     clip-path: inset(0 var(--_i, 100%) 0 0);
 }
@@ -218,7 +261,7 @@ select {
 }
 
 .style-trainer:hover img {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 #trainer-gallery {
@@ -250,8 +293,7 @@ select {
 
         /* Aggiungi altri stili personalizzati a seconda delle tue preferenze */
 
-
-        &>div {
+        & > div {
             margin: 0 2rem;
         }
 
@@ -290,14 +332,14 @@ select {
                     height: auto;
                     position: absolute;
                     border: none;
-                    top: .5rem;
-                    right: .5rem;
+                    top: 0.5rem;
+                    right: 0.5rem;
                 }
 
                 img {
                     height: 500px;
                     object-fit: cover;
-                    object-position: center;
+                    object-position: top;
                     transition: filter 1s ease, transform 1s ease;
                 }
 
@@ -326,7 +368,7 @@ select {
             }
 
             .social {
-                margin: .25rem 0;
+                margin: 0.25rem 0;
             }
         }
     }
