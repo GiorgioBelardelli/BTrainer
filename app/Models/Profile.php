@@ -26,7 +26,8 @@ class Profile extends Model
     }
 
     public function sponsorships(){
-        return $this -> belongsToMany(Sponsorship::class);
+        return $this -> belongsToMany(Sponsorship::class)
+                     -> withPivot('expire_date', 'created_at');
     }
 
     public function votes(){

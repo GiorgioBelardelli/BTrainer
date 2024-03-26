@@ -152,6 +152,7 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
+                    <img v-if="profile.profile.is_sponsored" id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
                     <div class="style-trainer">
                         <img :src="getImagePath(
                     `../assets/trainers/${profile.profile.photo}`
@@ -277,6 +278,7 @@ select {
             justify-content: center;
 
             .card-trainer {
+                position: relative;
                 border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
                 margin: 1rem 1rem;
                 overflow: hidden;

@@ -8,6 +8,7 @@ use App\Http\Resources\SponsorshipResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Specialization;
@@ -22,14 +23,26 @@ class ApiController extends Controller
 {
     public function getAll()
     {
-        // Recupera tutti gli utenti con i loro profili e specializzazioni
-        $users = User::with('profile', 'profile.specializations')->get();
+        $users = User::with('profile', 'profile.specializations', 'profile.sponsorships')->get();
 
-        // Costruisci un array per il risultato JSON
         $data = [];
 
-        // Itera su ogni utente per creare una struttura dati per il risultato JSON
         foreach ($users as $user) {
+            $isSponsored = false;
+
+            foreach ($user->profile->sponsorships as $sponsorship) {
+                $expireDate = $sponsorship->pivot->expire_date;
+
+                if (!($expireDate instanceof Carbon)) {
+                    $expireDate = Carbon::parse($expireDate);
+                }
+
+                if ($expireDate->isFuture()) {
+                    $isSponsored = true;
+                    break;
+                }
+            }
+    
             $userData = [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -40,6 +53,16 @@ class ApiController extends Controller
                     'photo' => $user->profile->photo,
                     'plan_program' => $user->profile->plan_program,
                     'specializations' => $user->profile->specializations->pluck('name')->toArray(),
+                    'sponsorships' => $user->profile->sponsorships->map(function ($sponsorship) {
+                        return [
+                            'id' => $sponsorship->id,
+                            'name' => $sponsorship->name,
+                            'price' => $sponsorship->price,
+                            'duration' => $sponsorship->duration,
+                            'expire_date' => $sponsorship->pivot->expire_date,
+                            'created_at' => $sponsorship->pivot->created_at,
+                        ];
+                    }),
                     'reviews' => $user->profile->reviews->map(function ($review) {
                         return [
                             'id' => $review->id,
@@ -49,22 +72,18 @@ class ApiController extends Controller
                             'content' => $review->content,
                         ];
                     }),
-                    'votes' => $user->profile->votes->map(
-                        function ($votes) {
-                            return [
-                                'value' => $votes->value,
-                            ];
-                        }
-                    ),
-
+                    'votes' => $user->profile->votes->map(function ($votes) {
+                        return [
+                            'value' => $votes->value,
+                        ];
+                    }),
+                    'is_sponsored' => $isSponsored,
                 ],
-            ];
-
-            // Aggiungi i dati dell'utente all'array risultante
+            ];                        
+    
             $data[] = $userData;
         }
 
-        // Ritorna la risposta JSON con lo stato di successo e i dati recuperati
         return response()->json([
             'status' => 'success',
             'data' => $data,
