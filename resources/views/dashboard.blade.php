@@ -8,7 +8,6 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('La tua Dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -21,59 +20,107 @@
                     @if ($userProfile)
                     @auth
                     @if (Auth::user()->id === $userProfile->user_id)
-                    <div class="reviews">
-                        <h4>Le tue Recensioni: </h4>
-                        @php
-                        $sortedReviews = $userProfile->reviews->sortByDesc('date');
-                        @endphp
-                        @foreach ($sortedReviews as $review)
-                        <h3>Nome: {{ $review->name }} {{ $review->surname }}</h3>
-                        <span>Data: {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</span>
-                        <br>
-                        <span>Contenuto: {{ $review->content }}</span>
-                        @endforeach
-                    </div>
-
-                    <div class="messages">
-                        <h4>I tuoi Messaggi: </h4>
-                        @php
-                        $sortedMessages = $userProfile->messages->sortByDesc('date');
-                        @endphp
-                        @foreach ($sortedMessages as $message)
-                        <h3>Nome: {{ $message->name }} {{ $message->surname }}</h3>
-                        <span>E-mail: {{ $message->email }}</span>
-                        <br>
-                        <span>Data: {{ \Carbon\Carbon::parse($message->date)->format('d/m/Y H:i') }}</span>
-                        <br>
-                        <span>Contenuto: {{ $message->content }}</span>
-                        @endforeach
-                    </div>
-                    {{-- Verifica se l'utente ha un profilo --}}
-
-                    <div class="sponsorships">
-                        <h4>Accedi alle nostre Sponsorships:</h4>
-                        <div class="card-container">
-                            @foreach ($sponsorships as $sponsorship)
-                            <div class="sponsorship-card">
-                                <div class="card-title">
-                                    <h4> {{ $sponsorship->name }} </h4>
-                                </div>
-                                <div class="card-info">
-                                    <strong>Durata: {{ $sponsorship->duration }}h</strong>
-                                    <br>
-                                    <strong> A soli: {{ $sponsorship->price }} €</strong>
-                                </div>
-                                <div class="card-button text-center">
-
-                                    <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
-                                        ACQUISTA
-                                    </a>
-
-                                </div>
+                    {{-- <div class="offcanvas offcanvas-start" id="demo">
+                        <div class="offcanvas-header">
+                          <h1 class="offcanvas-title">Heading</h1>
+                          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                          <p>Some text lorem ipsum.</p>
+                          <p>Some text lorem ipsum.</p>
+                          <button class="btn btn-secondary" type="button">A Button</button>
+                        </div>
+                      </div>
+                      
+                      <!-- Button to open the offcanvas sidebar -->
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        Open Offcanvas Sidebar
+                      </button>
+                    <div class="img-card">
+                        <img v-if="profile" :src="getImagePath(
+                            `../assets/trainers/${profile.profile.photo}`
+                        )
+                            " :alt="profile.name + ' ' + profile.surname" />
+                        <div class="caption" v-if="profile">
+                            <!-- NOME COGNOME SPEC -->
+                            <div class="name">
+                                <h2>{{ profile.name }} {{ profile.surname }}</h2>
                             </div>
+                            <div v-for="specialization in profile.profile
+                            .specializations" :key="specialization" class="specializations">
+                                <h3>{{ specialization }}</h3>
+                            </div>
+                            <div class="social">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                                <i class="fa-brands fa-x-twitter"></i>
+                                <i class="fa-brands fa-tiktok"></i>
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <div class="dashboard-main">
+                        <div class="messages">
+                            <h4>Ultimi Messaggi</h4>
+                            @php
+                            $sortedMessages = $userProfile->messages->sortByDesc('date')->take(3);
+                            @endphp
+
+                            {{-- Box del Messaggio Singolo --}}
+                            @foreach ($sortedMessages as $message)
+
+                            <div class="single-msg">
+                                
+
+                                <div class="details">
+
+                                    <div class="name"> {{ $message->name }} {{ $message->surname }}</div>
+
+                                    <div class="date"> {{ \Carbon\Carbon::parse($message->date)->format('d/m/Y H:i') }}</div>
+
+                                </div>
+
+                                <div class="email"> {{ $message->email }}</div>
+
+                                <div class="content">{{ $message->content }}</div>
+                                
+                            </div>
+
                             @endforeach
+
+                            <a class="btn" href="{{ route('usermessages') }}">{{ __('Visualizza tutti i tuoi messaggi') }}</a>
+                            
+                        </div>
+                        
+
+                        <div class="reviews">
+                            <h4>Ultime recensioni</h4>
+                            @php
+                            $sortedReviews = $userProfile->reviews->sortByDesc('date')->take(3);
+                            @endphp
+                            @foreach ($sortedReviews as $review)
+
+                            {{-- Box della recensione singola  --}}
+
+                            <div class="single-msg">
+                                <div class="details">
+
+                                    <div class="name"> {{ $review->name }} {{ $review->surname }}</div>
+                                    <div class="date"> {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</div>
+
+                                </div>
+                                
+                                <div class="content"> {{ $review->content }}</div>
+                            </div>
+
+                            @endforeach
+                            
+                            <a class="btn" href="{{ url('userreviews') }}">{{ __('Visualizza tutte le tue recensioni') }}</a>
                         </div>
                     </div>
+
+
 
                     @endif
                     @endauth
@@ -90,35 +137,72 @@
 
 
     <style lang=scss scoped>
-        .card-header {
-            color: white;
-        }
-
         .card {
             .card-body {
                 color: white;
 
                 .reviews,
                 .messages,
-                .sponsorship {
+                 {
                     margin-bottom: 20px;
                 }
-            }
-        }
+                .dashboard-main {
+                    display: flex;
+                    justify-content: space-between;
 
-        .reviews {
-            color: white;
+                    .single-msg {
+                        margin-top: 30px;
+                    }
 
-            span {
-                color: white;
-            }
-        }
+                    .single-msg:hover {
+                        color: yellow;
+                    }
+                    .messages, .reviews {
+                        flex-basis:45%;
+                        color: white;
 
-        .messages {
-            color: white;
+                            .details {
+                                display: flex;
+                                width:75%;
+                                justify-content: space-between;
+                                margin-bottom: 5px;
 
-            span {
-                color: white;
+                                .name ,.date {
+                                    font-size: 16px;
+                                    color: white;
+                                    padding-top: 10px
+                                }
+                                .date {
+                                    
+                                    font-weight: 200
+                                }
+                            }
+
+                        
+                        .email {
+                            font-weight: 200;
+                            font-size: 15px;
+                        }
+                        .email, .content {
+                            color: white;
+                        }
+                        .content {
+                            margin-top: 10px;
+                            width: 75%;
+                        }
+                    }
+
+                    .btn {
+                        margin-top: 50px;
+                        padding: 8px;
+                        border-radius: 5px;
+                        color: black;
+                        background-color: yellow;
+                    }
+                    .btn:hover {
+                        transform: scale(1.01);
+                    }
+                }
             }
         }
 
@@ -162,6 +246,7 @@
 
                             h4 {
                                 background-color: white;
+                                font-size:55px;
                             }
                         }
 
