@@ -283,7 +283,7 @@ class ProfileTableSeeder extends Seeder
                 $votes = Vote::inRandomOrder()->take(rand(1, 5))->get();
                 $voteData = [];
                 foreach ($votes as $vote) {
-                    $randomTimestamp = Carbon::now()->subYears(rand(0, 1))->subSeconds(rand(0, 31536000));
+                    $randomTimestamp = Carbon::now()->subYear()->addSeconds(rand(0, Carbon::now()->subYear()->diffInSeconds())); // Calcoliamo la differenza in secondi tra l'anno scorso e adesso
                     $voteData[$vote->id] = [
                         'created_at' => $randomTimestamp,
                         'updated_at' => $randomTimestamp
