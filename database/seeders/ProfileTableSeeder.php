@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Sponsorship;
 use App\Models\Specialization;
 use App\Models\Vote;
-
+use Carbon\Carbon;
 
 class ProfileTableSeeder extends Seeder
 {
@@ -281,7 +281,16 @@ class ProfileTableSeeder extends Seeder
 
                 // voti
                 $votes = Vote::inRandomOrder()->take(rand(1, 5))->get();
-                $profile->votes()->attach($votes);
+                $voteData = [];
+                foreach ($votes as $vote) {
+                    $randomTimestamp = Carbon::now()->subYears(rand(0, 1))->subSeconds(rand(0, 31536000));
+                    $voteData[$vote->id] = [
+                        'created_at' => $randomTimestamp,
+                        'updated_at' => $randomTimestamp
+                    ];
+                }
+                $profile->votes()->attach($voteData);
+
 
                 // sponsorizzazione (se necessaria)
                 // if (rand(0, 1) == 1) {
