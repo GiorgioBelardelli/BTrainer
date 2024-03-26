@@ -138,9 +138,10 @@
 
     <style lang=scss scoped>
         .card {
+            background-color: rgba(0, 0, 0, 0.76);
             .card-body {
                 color: white;
-
+                background-color: rgba(0, 0, 0, 0.9);
                 .reviews,
                 .messages,
                  {
