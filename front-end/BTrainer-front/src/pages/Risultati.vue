@@ -218,7 +218,7 @@ select {
 }
 
 .style-trainer:hover img {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 #trainer-gallery {
@@ -297,7 +297,7 @@ select {
                 img {
                     height: 500px;
                     object-fit: cover;
-                    object-position: center;
+                    object-position: top;
                     transition: filter 1s ease, transform 1s ease;
                 }
 
