@@ -59,7 +59,9 @@
                             <h1>Numero recensioni: {{ count($userProfile->reviews) }}</h1>
                             <h1>Numero messaggi: {{ count($userProfile->messages) }}</h1>
                             @foreach ($userProfile->votes as $vote)
-                                <h1>VOTO: {{ $vote->value }}</h1>
+                                <h1>VOTO ANNO: {{  substr($vote->pivot->created_at,0, 4);  }}</h1>
+
+                                <h1>VOTO MESE: {{  substr($vote->pivot->created_at,5, 2);  }}</h1>
                             @endforeach
 
                             <canvas id="myChart"></canvas>
