@@ -103,17 +103,17 @@
 <style lang=scss scoped>
     @import "resources/scss/app.scss";
 
-    * {
-        background-color: #5a5a5a;
-        color: rgb(0, 0, 0);
-        padding: 0;
-
+    body {
+        /* da commentare provvisoriamente se non si leggono le scritte  */
+        background: url('{{ URL::asset('img/bg-spec.png') }}');
+        background-size:cover;
+    }
         .logo {
             img {
                 width: 100px;
                 margin-top: 20px;
             }
-        }
+        
 
         .navbar-nav li a {
             color: white;
@@ -126,24 +126,26 @@
         }
 
         .navbar-nav li a {
-            background-color: #5a5a5a;
-
+            color: white;
         }
 
         .card-header {
             color: white;
-            background-color: #5a5a5a;
         }
     }
 
-    li .nav-link:hover {
+    li .nav-link {
         color: white;
+    }
+
+    li .nav-link:hover {
+        color: yellow;
         /* transform: scale(1.1); */
     }
 
     #dropdown-menu {
-        background-color: #5a5a5a;
         color: white;
+        
         padding: 0;
 
         li {
@@ -154,18 +156,27 @@
     #pad-zero {
         padding: 0;
 
+        li {
+            color:white;
+        }
+        a {
+            color: white;
+        }
         a:hover {
-            background-color: #5a5a5a;
             color: yellow;
         }
     }
 
-    #navbarDropdown:hover {
+    #navbarDropdown {
         color: white;
+    }
+    #navbarDropdown:hover {
+        color: yellow;
     }
 
     a {
         text-decoration: none;
         font-weight: 500;
+        background: url('{{ URL::asset('img/bg-spec.png') }}');
     }
 </style>

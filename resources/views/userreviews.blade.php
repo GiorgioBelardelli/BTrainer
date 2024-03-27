@@ -61,7 +61,7 @@
             .reviews {
                 width: 75%;
                 margin: auto;
-                color: white;
+                color: black;
 
                 h4 {
                     font-size:35px;
@@ -70,7 +70,7 @@
 
                 .single-msg {
                     margin-top: 30px;
-                    color: white;
+                    color: black;
                     text-align:center;
                 }
 
@@ -90,7 +90,7 @@
                     .name,
                     .date {
                         font-size: 16px;
-                        color: white;
+                        color: black;
                         padding-top: 10px;
                     }
 
@@ -104,7 +104,7 @@
                     text-align: center;
                     margin-top: 10px;
                     margin: auto;
-                    color: white;
+                    color: black;
                     width: 75%;
                 }
             }
