@@ -18,15 +18,14 @@ class VoteController extends Controller
         $profileId = $request->input('id');
 
 
-    // Trova il voto corrispondente all'ID fornito
-    $vote = Vote::find($voteId);
-    $profile = Profile::find($profileId);
+        // Trova il voto corrispondente all'ID fornito
+        $vote = Vote::find($voteId);
+        $profile = Profile::find($profileId);
 
 
-    // Associare il voto al profilo tramite la tabella pivot
-    $profile->votes()->attach($vote->id);
+        // Associare il voto al profilo tramite la tabella pivot
+        $profile->votes()->attach($vote->id);
 
         return response()->json(['message' => 'Voto inviato con successo'], 200);
     }
-    
 }
