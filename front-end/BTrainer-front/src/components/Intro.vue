@@ -174,19 +174,19 @@
             padding: 1rem 1rem 1.5rem 1.5rem;
 
             p {
-                font-size: 1.15rem;
+                font-size: 1.05rem;
                 width: 95%;
             }
 
             .cards {
                 .card {
                     padding: 1.25rem;
-                    margin: 0 1rem;
-                    width: calc(50% - 2rem);
+                    margin: 0 .5rem;
+                    width: calc(50% - 1rem);
 
                     .title {
                         h3 {
-                            font-size: 1.25rem;
+                            font-size: 1.15rem;
                         }
                     }
                 }

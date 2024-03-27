@@ -405,6 +405,7 @@
 
         .cards {
             #double {
+                aspect-ratio: 1/1;
 
                 p {
                     bottom: -15rem;
@@ -455,15 +456,62 @@
         padding: 0 5%;
         margin: 0 auto 0;
 
-        h1 {
-            text-align: center;
-            padding-top: 3rem;
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
+        .title {
+            padding: 1rem 0;
+
+            h1 {
+                text-align: center;
+                padding: 1rem 0;
+                margin-bottom: 2rem;
+                font-size: 1.5rem;
+            }
         }
 
         h2 {
             font-size: 2rem;
+        }
+
+        p {
+            bottom: -250px;
+            font-size: 1.05rem;
+            padding: .5rem 1rem;
+        }
+
+        #personal {
+            bottom: -260px;
+            font-size: 1.05rem;
+            padding: .5rem 1rem;
+        }
+
+        .cards {
+            #double {
+
+                p {
+                    bottom: -18rem;
+                    font-size: 1.05rem;
+                    padding: 1rem;
+                }
+            }
+        }
+
+        @keyframes slide-top {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-285px);
+            }
+        }
+
+        @keyframes slide-bottom {
+            0% {
+                transform: translateY(-285px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .cards {
@@ -492,6 +540,29 @@
             padding-top: 2rem;
             margin-bottom: 1rem;
             font-size: 1.35rem;
+        }
+
+        p {
+            bottom: -250px;
+            font-size: 1rem;
+            padding: .5rem;
+        }
+
+        #personal {
+            bottom: -260px;
+            font-size: 1rem;
+            padding: .5rem;
+        }
+
+        .cards {
+            #double {
+
+                p {
+                    bottom: -18rem;
+                    font-size: 1rem;
+                    padding: .5rem;
+                }
+            }
         }
 
         .cards {
