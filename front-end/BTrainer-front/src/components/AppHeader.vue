@@ -85,12 +85,16 @@ header {
 
 @media screen and (max-width: 768px) {
     header {
+        padding: 0 1rem;
+
         .logo {}
     }
 }
 
 @media screen and (max-width: 576px) {
     header {
+        padding: 0 .5rem;
+
         .logo {
             img {
                 width: 70%;

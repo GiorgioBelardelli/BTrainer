@@ -143,26 +143,12 @@ export default {
     <div id="trainer-gallery">
         <form style="text-align: center">
             <div class="vote-star">
-                <div
-                    v-for="(star, index) in stars"
-                    :key="index"
-                    class="icon-container"
-                    @click="selectStar(index)"
-                >
-                    <i
-                        class="fas fa-star"
-                        :class="{ active: index <= selectedStar }"
-                    ></i>
+                <div v-for="(star, index) in stars" :key="index" class="icon-container" @click="selectStar(index)">
+                    <i class="fas fa-star" :class="{ active: index <= selectedStar }"></i>
                 </div>
             </div>
 
-            <select
-                name="vote"
-                id="vote"
-                v-model="reviewSelect"
-                @change="filterReview"
-                class="custom-select"
-            >
+            <select name="vote" id="vote" v-model="reviewSelect" @change="filterReview" class="custom-select">
                 <option :value="reviewSelect" disabled>
                     Scegli numero Recensioni
                 </option>
@@ -173,28 +159,15 @@ export default {
         </form>
         <div class="container">
             <div class="col-gallery">
-                <div
-                    v-for="profile in arrayFilter"
-                    :key="profile.id"
-                    class="card-trainer"
-                    @click="showDetails(profile.id)"
-                >
+                <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
+                    @click="showDetails(profile.id)">
                     <!-- Mostra un logo di sponsorizzazione se il profilo è sponsorizzato -->
-                    <img
-                        v-if="profile.isSponsored"
-                        id="sponsor-logo"
-                        src="../assets/logos/sponsor.svg"
-                        alt="Sponsor"
-                    />
+                    <img v-if="profile.isSponsored" id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="Sponsor" />
                     <div class="style-trainer">
-                        <img
-                            :src="
-                                getImagePath(
-                                    `../assets/trainers/${profile.profile.photo}`
-                                )
-                            "
-                            :alt="profile.name + ' ' + profile.surname"
-                        />
+                        <img :src="getImagePath(
+                    `../assets/trainers/${profile.profile.photo}`
+                )
+                    " :alt="profile.name + ' ' + profile.surname" />
                         <figcaption>
                             <div class="caption">
                                 <div class="name">
@@ -202,12 +175,8 @@ export default {
                                         {{ profile.name }} {{ profile.surname }}
                                     </h3>
                                 </div>
-                                <div
-                                    v-for="specialization in profile.profile
-                                        .specializations"
-                                    :key="specialization"
-                                    class="specializations"
-                                >
+                                <div v-for="specialization in profile.profile
+                    .specializations" :key="specialization" class="specializations">
                                     <h4>{{ specialization }}</h4>
                                 </div>
                                 <div class="social">
@@ -234,14 +203,14 @@ select {
 }
 
 .style-trainer {
-    border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
+    border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
     display: grid;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
 }
 
-.style-trainer > * {
+.style-trainer>* {
     grid-area: 1/1;
     transition: 0.4s;
 }
@@ -293,7 +262,7 @@ select {
 
         /* Aggiungi altri stili personalizzati a seconda delle tue preferenze */
 
-        & > div {
+        &>div {
             margin: 0 2rem;
         }
 
@@ -321,7 +290,7 @@ select {
 
             .card-trainer {
                 position: relative;
-                border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
+                border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
                 margin: 1rem 1rem;
                 overflow: hidden;
                 width: calc((100% / 3) - 2rem);
