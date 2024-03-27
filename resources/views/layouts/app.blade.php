@@ -11,6 +11,9 @@
     {{-- <title>{{ config('app.name', 'BTrainer') }}</title> --}}
     <title>B-Trainer</title>
 
+    <!-- Importo Font-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <!-- Importo Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -26,8 +29,8 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm my-container">
+            <div class="container ms-container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     {{-- Sostituiamo il logo Laravel con quello di BTrainer --}}
                     <div class="logo">
@@ -103,17 +106,27 @@
 <style lang=scss scoped>
     @import "resources/scss/app.scss";
 
+
+    .dropdown-item {
+        --bs-dropdown-link-active-bg: #FFCC00;
+    }
+
+    .ms-container {
+        padding-bottom: 15px;
+    }
+
     body {
         /* da commentare provvisoriamente se non si leggono le scritte  */
-        background: url('{{ URL::asset('img/bg-spec.png') }}');
-        background-size:cover;
+        /* background: url('{{ URL::asset('img/bg-spec.png') }}'); */
+        background-size: cover;
     }
-        .logo {
-            img {
-                width: 100px;
-                margin-top: 20px;
-            }
-        
+
+    .logo {
+        img {
+            width: 100px;
+            margin-top: 20px;
+        }
+
 
         .navbar-nav li a {
             color: white;
@@ -134,18 +147,22 @@
         }
     }
 
+    .my-container {
+        background-color: black;
+    }
+
     li .nav-link {
         color: white;
     }
 
     li .nav-link:hover {
-        color: yellow;
+        color: #FFCC00;
         /* transform: scale(1.1); */
     }
 
     #dropdown-menu {
         color: white;
-        
+
         padding: 0;
 
         li {
@@ -157,26 +174,29 @@
         padding: 0;
 
         li {
-            color:white;
-        }
-        a {
             color: white;
         }
+
+        a {
+            color: black;
+        }
+
         a:hover {
-            color: yellow;
+            /* color: yellow; */
         }
     }
 
     #navbarDropdown {
         color: white;
     }
+
     #navbarDropdown:hover {
-        color: yellow;
+        color: #FFCC00;
     }
 
     a {
         text-decoration: none;
         font-weight: 500;
-        background: url('{{ URL::asset('img/bg-spec.png') }}');
+        background: url('{{ URL::asset(' img/bg-spec.png') }}');
     }
 </style>

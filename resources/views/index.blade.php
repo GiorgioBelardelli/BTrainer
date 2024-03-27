@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container my-2-container">
     {{-- <a href="{{ route('profile.create') }}" class="btn mb-3">CREA PROFILO</a> --}}
 
     <h1>I nostri profili:</h1>
@@ -33,44 +33,63 @@
 @endsection
 
 <style lang=scss scoped>
+    .d-flex {
+        padding-bottom: 8px;
+
+    }
+
+    .my-2-container {
+
+        background-color: #FFCC00;
+        padding: 5vh 10vw;
+    }
 
     .container h1 {
-        color:white;
+        color: white;
     }
+
     .list-group {
         .list-group-item {
-        background-color: #5a5a5a;
-        padding-bottom: 0;
+            background-color: #5A5A5A;
+            padding-bottom: 0;
+        }
     }
-    }
+
     .container {
         margin-bottom: 50px;
     }
+
     .container .btn {
-            color:black;
-            background-color: yellow;
-            margin-top: 25px;
-        }
+        color: black;
+        background-color: #FFCC00;
+        margin-top: 25px;
+    }
 
     .container .btn:hover {
-        transform:scale(1.1);
-        color:black;
-        background-color: yellow;
+        transform: scale(1.1);
+        color: black;
+        background-color: #FFCC00;
     }
+
     ul li div a {
-        color: yellow;
+        color: white;
+    }
+
+    ul li div a:hover {
+        color: #FFCC00;
+        transition-duration: 0.5s;
     }
 
     .button-cont {
-        display:flex;
+        display: flex;
         justify-content: flex-end;
         align-items: center;
 
 
 
-            #yellow-button {
-            color:black;
-            background-color: yellow;
+        #yellow-button {
+            color: black;
+            background-color: #FFCC00;
             text-decoration: none;
             padding: 6px;
             margin: 0;
@@ -79,8 +98,7 @@
 
         #yellow-button:hover {
             transform: scale(1.1);
+            transition-duration: 0.5s;
         }
     }
-
-
 </style>

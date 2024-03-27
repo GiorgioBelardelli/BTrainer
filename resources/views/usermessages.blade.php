@@ -1,125 +1,128 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container ms-container-5">
 
-        {{-- <div class="messages">
+    {{-- <div class="messages">
                         <h4>I tuoi Messaggi:</h4>
                         @php
                         $sortedMessages = $userProfile->messages->sortByDesc('date');
                         @endphp
             @foreach ($sortedMessages as $message)
                 <h3>Nome: {{ $message->name }} {{ $message->surname }}</h3>
-                <span>E-mail: {{ $message->email }}</span>
-                <br>
-                <span>Data: {{ $message->date }}</span>
-                <br>
-                <span>Contenuto: {{ $message->content }}</span>
-            @endforeach
-        </div> --}}
+    <span>E-mail: {{ $message->email }}</span>
+    <br>
+    <span>Data: {{ $message->date }}</span>
+    <br>
+    <span>Contenuto: {{ $message->content }}</span>
+    @endforeach
+</div> --}}
 
-        {{-- Tutti i messaggi dell'utente --}}
+{{-- Tutti i messaggi dell'utente --}}
+<h4>I tuoi messaggi: </h4>
+<div class="messages">
 
-        <div class="messages">
-            <h4>Tutti  i tuoi  Messaggi</h4>
-            @php
-            $sortedMessages = $userProfile->messages->sortByDesc('date');
-            @endphp
+    <div class="all-messages">
+        @php
+        $sortedMessages = $userProfile->messages->sortByDesc('date');
+        @endphp
 
-            {{-- Box del Messaggio Singolo --}}
-            @foreach ($sortedMessages as $message)
+        {{-- Box del Messaggio Singolo --}}
+        @foreach ($sortedMessages as $message)
 
-            <div class="single-msg">
-                
+        <div class="single-msg">
 
-                <div class="details">
 
-                    <div class="name"> {{ $message->name }} {{ $message->surname }}</div>
+            <div class="details">
 
-                    <div class="email"> {{ $message->email }}</div>
+                <div class="name-date">
+                    <div class="name"><i class="fa-regular fa-user"></i> {{ $message->name }} {{ $message->surname }}</div>
 
-                    <div class="date"> {{ \Carbon\Carbon::parse($message->date)->format('d/m/Y H:i') }}</div>
-
+                    <p class="date"><i class="fa-solid fa-calendar-days"></i> {{ \Carbon\Carbon::parse($message->date)->format('d/m/Y H:i') }}</p>
                 </div>
 
+                <div class="email"><i class="fa-regular fa-envelope"></i> {{ $message->email }}</div>
 
-                <div class="content">{{ $message->content }}</div>
-                
+
+
             </div>
 
-            @endforeach
-            
+
+            <div class="content"><i class="fa-solid fa-pen-nib"></i> {{ $message->content }}</div>
+
         </div>
-    @endsection
 
-    <style lang="scss" scoped>
+        @endforeach
+    </div>
 
-        .card {
-            text-align: center;
-        
-            .card-body {
+</div>
+@endsection
+
+<style lang="scss" scoped>
+    .all-messages {
+        padding: 5vh;
+    }
+
+    .ms-container-5 {
+        background-color: #FFCC00;
+        padding: 5vh;
+
+        h4 {
+            font-size: 2rem;
+        }
+    }
+
+    .name-date {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card {
+        padding: 5vh;
+    }
+
+    .messages {
+        flex-basis: 48%;
+        color: white;
+        background-color: #5A5A5A;
+
+
+        .single-msg {
+            padding: 3vh 3vw 3vh 1vw;
+            border: #FFCC00 1px solid;
+            border-radius: 15px;
+            margin-bottom: 2vh;
+
+
+            .email {
+                line-height: 34px;
+                font-weight: 100;
+            }
+
+            .email,
+            .content {
                 color: white;
-                text-align: center;
+                margin: auto;
             }
-        }
-        
-        .messages {
-            flex-basis: 48%;
-            color: white;
-            text-align: center;
-            margin-bottom: 50px;
 
-            h4 {
-            font-size: 35px;
-        }
-        
-            .single-msg {
-                margin-top: 50px;
-                
-                
-                .email {
-                    text-align: center;
-                    line-height: 34px;
-                    font-weight:100;
-                }
-        
-                .email, .content {
+            .content {
+                margin-top: 10px;
+                margin: auto;
+            }
+
+            .details {
+                margin: auto;
+
+                .name,
+                .date {
+                    font-size: 16px;
                     color: white;
-                    text-align: center;
-                    margin: auto;
-                }
-        
-                .content {
-                    margin-top: 10px;
-                    width: 60%;
-                    margin: auto;
+                    line-height: 34px;
                 }
 
-                .details {
-                    display: flex;
-                    max-width: 40%;
-                    margin: auto;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 15px;
-                    margin-bottom: 5px;
-                    text-align: center;
-        
-                    .name, .date {
-                        font-size: 16px;
-                        color: white;
-                        text-align: center;
-                        line-height: 34px;
-                    }
+                .name {}
 
-                    .name {
-                        width: fit-content;
-                    
-                    }
-        
             }
         }
-        
-        </style>
-        
-        
+    }
+</style>
