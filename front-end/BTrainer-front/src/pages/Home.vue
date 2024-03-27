@@ -10,7 +10,7 @@ export default {
     Jumbo,
     Intro,
     AppTrainerGallery,
-    Specializations,
+    Specializations
     // AppBmi,
   }
 }
