@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Sponsorship;
+use App\Models\Specialization;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,16 @@ class DashboardController extends Controller
         // Passa $profiles e $userProfile alla vista
         return view('dashboard', compact('userProfile', 'sponsorships'));
     }
+
+    public function editProfile(){
+        $userId = Auth::id();
+
+        $specializations = Specialization::all();
+
+        $profile = Profile::where('user_id', $userId)->first();
+        return view('edit', compact('profile', 'specializations'));
+    }
+
 
     public function getUserMessages()
 {

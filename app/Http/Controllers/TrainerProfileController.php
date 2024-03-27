@@ -20,9 +20,9 @@ class TrainerProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all();
+        $profile = Profile::find($id);
 
-        return view('index', compact('profiles'));
+        return view('show', compact('profile'));
     }
 
     /**
