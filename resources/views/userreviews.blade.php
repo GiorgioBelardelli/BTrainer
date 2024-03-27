@@ -1,113 +1,115 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col">
-                <div class="card">
+<div class="container ms-container-5">
+    <h4>Le tue recensioni: </h4>
+    <div>
+        <div class="card">
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        {{-- {{ __('Sei Loggato!') }} --}}
-
-
-                        @if ($userProfile)
-                            @auth
-                                @if (Auth::user()->id === $userProfile->user_id)
-                                    <div class="reviews">
-                                        <h4>Le tue recensioni</h4>
-                                        @php
-                                        $sortedReviews = $userProfile->reviews->sortByDesc('date');
-                                        @endphp
-                                        @foreach ($sortedReviews as $review)
-            
-                                        {{-- Box della recensione singola  --}}
-            
-                                        <div class="single-msg">
-                                            <div class="details">
-            
-                                                <div class="name"> {{ $review->name }} {{ $review->surname }}</div>
-                                                <div class="date"> {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</div>
-            
-                                            </div>
-                                            
-                                            <div class="content"> {{ $review->content }}</div>
-                                        </div>
-            
-                                        @endforeach
-                                        
-                                    </div>
-                                @endif
-                            @endauth
-                        @else
-                        @endif
-
-                    </div>
+            <div class="card-body">
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
                 </div>
+                @endif
+                {{-- {{ __('Sei Loggato!') }} --}}
+
+
+                @if ($userProfile)
+                @auth
+                @if (Auth::user()->id === $userProfile->user_id)
+                <div class="reviews">
+                    @php
+                    $sortedReviews = $userProfile->reviews->sortByDesc('date');
+                    @endphp
+                    @foreach ($sortedReviews as $review)
+
+                    {{-- Box della recensione singola  --}}
+
+                    <div class="single-review">
+                        <div class="details">
+
+                            <div class="date-name">
+                                <div class="name"><i class="fa-regular fa-user"></i> {{ $review->name }} {{ $review->surname }}</div>
+                                <div class="date"><i class="fa-solid fa-calendar-days"></i> {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</div>
+                            </div>
+                            <p class="email"><i class="fa-regular fa-star"></i> {{ $review -> vote}}/5</p>
+
+                        </div>
+
+                        <div class="content"><i class="fa-solid fa-pen-nib"></i> {{ $review->content }}</div>
+                    </div>
+
+                    @endforeach
+
+                </div>
+                @endif
+                @endauth
+                @else
+                @endif
+
             </div>
         </div>
+    </div>
     @endsection
 
 
     <style lang=scss scoped>
-
-        .card {
-            margin-top: 100px;
+        .date-name {
+            display: flex;
+            justify-content: space-between;
         }
-            .reviews {
-                width: 75%;
-                margin: auto;
-                color: black;
 
-                h4 {
-                    font-size:35px;
-                    text-align:center;
-                }
+        .ms-container-5 {
+            background-color: #FFCC00;
+            padding: 5vh;
+            height: 100vh;
 
-                .single-msg {
-                    margin-top: 30px;
-                    color: black;
-                    text-align:center;
-                }
+            h4 {
+                font-size: 2rem;
+            }
+        }
 
-                .single-msg:hover {
-                    color: yellow;
-                }
+        .card-body {
+            background-color: #5A5A5A;
+        }
 
-                .details {
-                    display: flex;
-                    width: 75%;
-                    justify-content: center;
-                    gap: 25px;
-                    margin-bottom: 5px;
-                    margin: auto;
-                    text-align: center;
+        .reviews {
+            margin: auto;
+            color: black;
 
-                    .name,
-                    .date {
-                        font-size: 16px;
-                        color: black;
-                        padding-top: 10px;
-                    }
 
-                    .date {
-                        font-weight: 200;
-                    }
-                }
+            p {
+                color: white;
+            }
 
-                .content {
-                    font-size: 24px;
-                    text-align: center;
-                    margin-top: 10px;
-                    margin: auto;
-                    color: black;
-                    width: 75%;
-                }
+            .single-review {
+                padding: 3vh 3vw 3vh 1vw;
+                border: #FFCC00 1px solid;
+                border-radius: 15px;
+                margin-bottom: 2vh;
+
             }
 
 
+            .details {
+                margin-bottom: 5px;
+                margin: auto;
+
+                .name,
+                .date {
+                    font-size: 16px;
+                    color: white;
+                }
+
+                .date {
+                    font-weight: 200;
+                }
+            }
+
+            .content {
+                margin: auto;
+                color: white;
+            }
+        }
     </style>

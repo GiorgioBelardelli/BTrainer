@@ -64,8 +64,18 @@
                                 <h1>VOTO MESE: {{ substr($vote->pivot->created_at, 5, 2) }}</h1>
                             @endforeach
 
-                            <canvas id="myChart"></canvas>
-                            <canvas id="myChart2"></canvas>
+                            <div class="text-center">
+                                <button class="p-2" id="btn-anno">ANNO</button>
+                                <button class="p-2" id="btn-mese">MESE</button>
+                            </div>
+
+                            <div class="anno">
+                                <canvas id="myChart"></canvas>
+                            </div>
+
+                            <div class="mese">
+                                <canvas id="myChart2"></canvas>
+                            </div>
 
                         </div>
                     </div>
@@ -75,7 +85,21 @@
 
 
         <script>
-            let flag=true;
+            const buttonAnno = document.getElementById("btn-anno");
+            const buttonMese = document.getElementById("btn-mese");
+
+            const anno = document.querySelector(".anno");
+            const mese = document.querySelector(".mese");
+
+            buttonAnno.addEventListener("click", function() {
+                anno.classList.add('active');
+                console.log("SONO IN ANNO");
+            });
+
+            buttonMese.addEventListener("click", function() {
+                mese.classList.add('active');
+                console.log("SONO IN MESE");
+            });
 
             const ctx = document.getElementById('myChart');
             const ctx2 = document.getElementById('myChart2');
@@ -102,12 +126,15 @@
             new Chart(ctx2, {
                 type: 'bar',
                 data: {
-                    labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+                    labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto',
+                        'Settembre', 'Ottobre', 'Novembre', 'Dicembre'
+                    ],
                     datasets: [{
                         label: '# of Votes',
-                        data: [{{ $votoGennaio }}, {{ $votoFebbraio }}, {{$votoMarzo }},
-                        {{ $votoAprile }}, {{ $votoMaggio }}, {{$votoGiugno }},
-                        {{ $votoLuglio }}, {{ $votoAgosto }}, {{$votoSettembre }},{{ $votoOttobre }}, {{ $votoNovembre }}, {{$votoDicembre }},
+                        data: [{{ $votoGennaio }}, {{ $votoFebbraio }}, {{ $votoMarzo }},
+                            {{ $votoAprile }}, {{ $votoMaggio }}, {{ $votoGiugno }},
+                            {{ $votoLuglio }}, {{ $votoAgosto }}, {{ $votoSettembre }},
+                            {{ $votoOttobre }}, {{ $votoNovembre }}, {{ $votoDicembre }},
                         ],
                         borderWidth: 5
                     }]
@@ -127,6 +154,18 @@
 
 
     <style lang=scss scoped>
+        .anno {
+            display: none;
+        }
+
+        .mese {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
         .card-header {
             color: white;
         }

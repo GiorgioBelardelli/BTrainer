@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="fs-4 text-secondary my-4">
-        {{ __('Sponsorship') }}
+<div class="container ms-sponsorship">
+    <h2 class="">
+        {{ __('Sponsorship: ') }}
     </h2>
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-               
+
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,32 +16,31 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    
+
 
 
                     @if ($userProfile)
                     @auth
                     @if (Auth::user()->id === $userProfile->user_id)
-                                    
+
                     <div class="sponsorships">
-                        <h4>Accedi alle nostre Sponsorships:</h4>
-                        <div class="card-container">
+                        <div class="row card-container">
                             @foreach ($sponsorships as $sponsorship)
-                            <div class="sponsorship-card">
+                            <div class="col-md-4 sponsorship-card">
                                 <div class="card-title">
-                                                    <h4> {{ $sponsorship->name }} </h4>
+                                    <h4> {{ $sponsorship->name }} </h4>
                                 </div>
                                 <div class="card-info">
-                                                    <strong>Durata: {{ $sponsorship->duration }}h</strong>
-                                                    <br>
-                                                    <strong> A soli: {{ $sponsorship->price }} €</strong>
+                                    <p><i class="fa-regular fa-clock"></i> {{ $sponsorship->duration }}h</p>
+                                    <br>
+                                    <p><i class="fa-solid fa-sack-dollar"></i> {{ $sponsorship->price }} €</p>
                                 </div>
-                                <div class="card-button text-center">
-                                                    
+                                <div class="card-button text-center btn">
+
                                     <a href="{{ route('sponsorship.checkout', $sponsorship->id)}}">
-                                                        ACQUISTA
+                                        ACQUISTA
                                     </a>
-                                                    
+
                                 </div>
                             </div>
                             @endforeach
@@ -61,90 +60,104 @@
     </div>
     @endsection
 
-<script>
-    export default {
-        data() {
-            return {
-              imageUrl: 'public\img\PTrainer2.jpeg'
-            };
-        }
-    };
-</script>
-<style lang=scss scoped>
+    <script>
+        export default {
+            data() {
+                return {
+                    imageUrl: 'public\img\PTrainer2.jpeg'
+                };
+            }
+        };
+    </script>
+    <style lang=scss scoped>
         .card-header {
             color: white;
         }
 
 
 
-        .card{
+        .card-body {
+            background-color: #5A5A5A;
+            height: auto;
+        }
 
-            .sponsorships{
+        .ms-sponsorship {
+            background-color: #FFCC00;
+            padding: 10vh;
+            height: auto;
+
+        }
+
+        .btn:hover {
+            transition: 0.5s;
+            transform: scale(1.1);
+        }
+
+        .btn:not(:hover) {
+            transform: scale(1);
+            transition: 0.5s;
+        }
+
+        .card {
+
+            .sponsorships {
 
                 h4 {
                     text-align: center;
                 }
 
-                color: white;
-                .card-container{
+
+                .card-container {
 
                     display: flex;
                     justify-content: space-around;
                     align-items: center;
-                    margin-top: 50px;
+                    margin-top: 30px;
 
-                    .sponsorship-card{
+                    .sponsorship-card {
                         border: 1px solid yellow;
-                        background-color:white;
-                        border-radius: 10px;
+                        background-color: white;
+                        border-radius: 15px;
                         height: 300px;
                         width: 300px;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-around;
                         align-items: center;
+                        margin-bottom: 20px;
                         gap: 10px;
+                        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
-                    .sponsorship-card:hover {
-                        transform:scale(1.1);
-                    }
+                        .sponsorship-card:hover {
+                            transform: scale(1.1);
+                        }
 
-                        .card-title{
-                            background-color: white;
+                        .card-title {
                             font-style: italic;
                             border-bottom: 1px solid black;
-                            
-                            h4 {
-                                background-color:white;
-                            }
+
                         }
-                        .card-info {
-                            background-color: white;
 
-                            strong { 
-                                background-color: white;
+                        .card-button {
+
+                            a {
+                                color: white;
+                                background-color: black;
+                                padding: 8px;
+                                border: 1px solid black;
+                                border-radius: 5px;
+
                             }
-                        }
-                        .card-button  {
 
-                                a {
-                                    color: white;
-                                    background-color: black;
-                                    padding: 8px;
-                                    border: 1px solid black;
-                                    border-radius: 5px;
+                            a:hover {
+                                filter: opacity(0.8);
 
-                                }
-                                a:hover {
-                                    filter: opacity(0.8);
-                                
-                                }
-                            
+                            }
+
                         }
                     }
-                        
+
                 }
             }
         }
-    
-</style>
+    </style>
