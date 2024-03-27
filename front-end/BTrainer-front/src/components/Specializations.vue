@@ -3,7 +3,9 @@
 
 <template>
     <section id="specializations">
-        <h1>I nostri trainer sono specializzati in...</h1>
+        <div class="title">
+            <h1></h1>
+        </div>
         <div class="cards">
             <div class="card" id="double">
                 <div class="overlay"></div>
@@ -93,7 +95,8 @@
                 <div class="overlay"></div>
                 <img src="../assets/specializations/personal.png" alt="">
                 <h2 class="slide-top">Difesa Personale</h2>
-                <p>La difesa personale è un insieme di tecniche e strategie utilizzate per proteggersi da potenziali
+                <p id="personal">La difesa personale è un insieme di tecniche e strategie utilizzate per proteggersi da
+                    potenziali
                     aggressori o situazioni di pericolo. Attraverso l'apprendimento di movimenti di blocco, disarmo e
                     controllo, si mira a sviluppare consapevolezza e capacità di autodifesa. Con un focus
                     sull'efficacia e la sicurezza personale, offre competenze pratiche e fiducia
@@ -110,16 +113,24 @@
 #specializations {
     padding: 0 10%;
     margin: 0 auto 0;
-    // background-color: rgb(37, 37, 37);
-    background-image: url(../assets/bg-spec.png);
+    background-image: url(../assets/bg-spec2.png);
+    display: block;
+    background-size: contain;
+    background-attachment: fixed;
     position: relative;
 
-    h1 {
-        text-align: center;
-        padding-top: 5rem;
-        margin-bottom: 3rem;
-        color: $yellow;
-        font-size: 40px;
+    .title {
+        background-color: #464545;
+        width: 75%;
+        margin: 0 auto;
+        padding: 5rem 0 0;
+
+        h1 {
+            padding: 3rem 0;
+            text-align: center;
+            color: $yellow;
+            font-size: 40px;
+        }
     }
 
     h2 {
@@ -260,7 +271,7 @@
             #double {
 
                 p {
-                    bottom: -13em;
+                    bottom: -13rem;
                     padding: 1rem 4rem;
                 }
             }
@@ -288,13 +299,78 @@
     }
 }
 
+@media screen and (max-width: 1300px) {
+    #specializations {
+        padding: 0 5%;
+        margin: 0 auto 0;
+
+        p {
+            bottom: -250px;
+        }
+
+        #personal {
+            bottom: -300px;
+        }
+
+        .cards {
+            #double {
+
+                p {
+                    bottom: -12rem;
+                }
+            }
+        }
+    }
+}
+
+
 @media screen and (max-width: 1200px) {
     #specializations {
         padding: 0 5%;
         margin: 0 auto 0;
 
+        p {
+            bottom: -250px;
+            font-size: .85rem;
+        }
+
+        #personal {
+            bottom: -260px;
+            font-size: .85rem;
+        }
+
+        .cards {
+            #double {
+
+                p {
+                    bottom: -11rem;
+                    font-size: .85rem;
+                }
+            }
+        }
+
         h2 {
             font-size: 1.5rem;
+        }
+
+        @keyframes slide-top {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-250px);
+            }
+        }
+
+        @keyframes slide-bottom {
+            0% {
+                transform: translateY(-250px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
     }
 }
@@ -313,6 +389,49 @@
 
         h2 {
             font-size: 2rem;
+        }
+
+        p {
+            bottom: -250px;
+            font-size: 1.15rem;
+            padding: 1rem 5rem;
+        }
+
+        #personal {
+            bottom: -260px;
+            font-size: 1.15rem;
+            padding: 1rem 5rem;
+        }
+
+        .cards {
+            #double {
+
+                p {
+                    bottom: -15rem;
+                    font-size: 1.15rem;
+                    padding: 2rem;
+                }
+            }
+        }
+
+        @keyframes slide-top {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-350px);
+            }
+        }
+
+        @keyframes slide-bottom {
+            0% {
+                transform: translateY(-350px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         .cards {
