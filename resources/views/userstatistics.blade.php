@@ -59,12 +59,13 @@
                             <h1>Numero recensioni: {{ count($userProfile->reviews) }}</h1>
                             <h1>Numero messaggi: {{ count($userProfile->messages) }}</h1>
                             @foreach ($userProfile->votes as $vote)
-                                <h1>VOTO ANNO: {{  substr($vote->pivot->created_at,0, 4);  }}</h1>
+                                <h1>VOTO ANNO: {{ substr($vote->pivot->created_at, 0, 4) }}</h1>
 
-                                <h1>VOTO MESE: {{  substr($vote->pivot->created_at,5, 2);  }}</h1>
+                                <h1>VOTO MESE: {{ substr($vote->pivot->created_at, 5, 2) }}</h1>
                             @endforeach
 
                             <canvas id="myChart"></canvas>
+                            <canvas id="myChart2"></canvas>
 
                         </div>
                     </div>
@@ -74,16 +75,39 @@
 
 
         <script>
+            let flag=true;
+
             const ctx = document.getElementById('myChart');
+            const ctx2 = document.getElementById('myChart2');
 
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['1', '2', '3', '4', '5'],
+                    labels: ['2022', '2023', '2024'],
                     datasets: [{
                         label: '# of Votes',
-                        data: [{{ $voto1 }}, {{ $voto2 }}, {{ $voto3 }},
-                            {{ $voto4 }}, {{ $voto5 }}
+                        data: [{{ $voti2022 }}, {{ $voti2023 }}, {{ $voti2024 }}, ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [{{ $votoGennaio }}, {{ $votoFebbraio }}, {{$votoMarzo }},
+                        {{ $votoAprile }}, {{ $votoMaggio }}, {{$votoGiugno }},
+                        {{ $votoLuglio }}, {{ $votoAgosto }}, {{$votoSettembre }},{{ $votoOttobre }}, {{ $votoNovembre }}, {{$votoDicembre }},
                         ],
                         borderWidth: 5
                     }]
