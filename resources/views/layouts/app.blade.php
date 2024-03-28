@@ -31,7 +31,7 @@
 
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm my-container">
             <div class="container ms-container">
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5174/') }}">
                     {{-- Sostituiamo il logo Laravel con quello di BTrainer --}}
                     <div class="logo">
 
@@ -51,7 +51,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ url('http://localhost:5174/') }}">{{ __('Home') }}</a>
                         </li>
                     </ul>
 
