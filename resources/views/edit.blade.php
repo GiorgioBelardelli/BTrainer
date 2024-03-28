@@ -100,7 +100,7 @@
                         </div>
                         <p id="specializationError" style="color: red; display: none;">Seleziona almeno una specializzazione.</p>
                     </div>
-                    <input class="my-1 btn mt-4 mx-auto" type="submit" value="Update" id="yellow">
+                    <input class="my-1 btn mt-4 mx-auto" type="submit" value="Aggiorna" id="yellow">
                 </div>
             </div>
         </div>
