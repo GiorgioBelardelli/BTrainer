@@ -136,7 +136,7 @@ export default {
             });
             // console.log(tempTot);
 
-            store.mediaVotes = (tempTot / votes.length).toFixed(1);
+            store.mediaVotes = Math.ceil((tempTot / votes.length) * 10) / 10;
         },
 
         createNewReview() {
@@ -256,14 +256,11 @@ export default {
                             </div>
 
                             <div class="votes-reviews">
-                                <div>Media voti: {{ store.mediaVotes }}</div>
+                                <div>Media voti: {{ store.mediaVotes }} ({{ profile.profile.reviews.length }}
+                                    Recensioni)</div>
                                 <div>
                                     Numero voti ricevuti:
                                     {{ profile.profile.votes.length }}
-                                </div>
-                                <div>
-                                    Numero recensioni:
-                                    {{ profile.profile.reviews.length }}
                                 </div>
                             </div>
                         </div>
@@ -292,17 +289,17 @@ export default {
                         <div class="message">
                             <h3 id="title-form">Invia un messaggio:</h3>
                             <form @submit.prevent="createNewMessage">
-                                <div class="name">
-                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
-                                </div>
                                 <div class="surname">
                                     <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
                                 </div>
-                                <div class="content">
-                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
+                                <div class="name">
+                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
                                 </div>
                                 <div class="email">
                                     <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
+                                </div>
+                                <div class="content">
+                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>

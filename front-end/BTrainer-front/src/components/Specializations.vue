@@ -532,7 +532,7 @@
 
 @media screen and (max-width: 576px) {
     #specializations {
-        padding: 0 2.5%;
+        padding: 3rem 2.5% 0;
         margin: 0 auto 0;
 
         h1 {
