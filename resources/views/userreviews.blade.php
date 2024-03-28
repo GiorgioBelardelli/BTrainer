@@ -33,7 +33,6 @@
                                 <div class="name"><i class="fa-regular fa-user"></i> {{ $review->name }} {{ $review->surname }}</div>
                                 <div class="date"><i class="fa-solid fa-calendar-days"></i> {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</div>
                             </div>
-                            <p class="email"><i class="fa-regular fa-star"></i> {{ $review -> vote}}/5</p>
 
                         </div>
 

@@ -11,7 +11,6 @@ export default {
             profile: null,
             message: "",
             rece: "",
-            newVoto: 0,
 
             // Votes
             votes: [],
@@ -32,7 +31,6 @@ export default {
                 surname: "",
                 date: "",
                 content: "",
-                vote: 0,
                 profile_id: null,
             },
 
@@ -142,25 +140,30 @@ export default {
         },
 
         createNewReview() {
-            if (this.selectedStar === -1) {
-                alert("Seleziona un voto");
-                return;
-            }
-            this.newReview.vote = this.selectedStar + 1;
+            // if (this.selectedStar === -1) {
+            //     alert("Seleziona un voto");
+            //     return;
+            // }
+            // this.newReview.vote = this.selectedStar + 1;
 
-            axios.post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
+            axios
+                .post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
                 .then((response) => {
-                    console.log("Recensione creata con successo:", response.data);
+                    console.log(
+                        "Recensione creata con successo:",
+                        response.data
+                    );
                     this.newReview.name = "";
                     this.newReview.surname = "";
                     this.newReview.content = "";
-                    this.newReview.vote = 0;
                     alert("Recensione creata con successo");
                 })
                 .catch((error) => {
-                    console.error("Si è verificato un errore durante la creazione della recensione:", error);
+                    console.error(
+                        "Si è verificato un errore durante la creazione della recensione:",
+                        error
+                    );
                 });
-
         },
 
         createNewMessage() {
@@ -192,10 +195,11 @@ export default {
             }
             const vote = this.selectedStar + 1;
 
-            axios.post("http://127.0.0.1:8000/api/v1/rate", {
-                "vote": vote,
-                "id": this.$route.params.id
-            })
+            axios
+                .post("http://127.0.0.1:8000/api/v1/rate", {
+                    vote: vote,
+                    id: this.$route.params.id,
+                })
                 .then((response) => {
                     alert("Voto inviato con successo");
                     console.log("Voto creato con successo:", response.data);
@@ -206,11 +210,10 @@ export default {
                         error
                     );
                 });
-        }
-
+        },
     },
 
-    props: ['profileId'], // Ricevi l'ID del profilo come prop
+    props: ["profileId"], // Ricevi l'ID del profilo come prop
 };
 </script>
 
@@ -222,17 +225,28 @@ export default {
                     <div class="card-trainer">
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img v-if="profile" :src="getImagePath(
-                                `../assets/trainers/${profile.profile.photo}`
-                            )
-                                " :alt="profile.name + ' ' + profile.surname" />
+                            <img
+                                v-if="profile"
+                                :src="
+                                    getImagePath(
+                                        `../assets/trainers/${profile.profile.photo}`
+                                    )
+                                "
+                                :alt="profile.name + ' ' + profile.surname"
+                            />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
-                                    <h2>{{ profile.name }} {{ profile.surname }}</h2>
+                                    <h2>
+                                        {{ profile.name }} {{ profile.surname }}
+                                    </h2>
                                 </div>
-                                <div v-for="specialization in profile.profile
-                                .specializations" :key="specialization" class="specializations">
+                                <div
+                                    v-for="specialization in profile.profile
+                                        .specializations"
+                                    :key="specialization"
+                                    class="specializations"
+                                >
                                     <h3>{{ specialization }}</h3>
                                 </div>
                                 <div class="social">
@@ -251,9 +265,7 @@ export default {
                             </div>
 
                             <div class="votes-reviews">
-                                <div>
-                                    Media voti: {{ store.mediaVotes }}
-                                </div>
+                                <div>Media voti: {{ store.mediaVotes }}</div>
                                 <div>
                                     Numero recensioni:
                                     {{ profile.profile.reviews.length }}
@@ -267,19 +279,28 @@ export default {
                             <h3 id="title-form">Scrivi una recensione:</h3>
                             <form @submit.prevent="createNewReview">
                                 <div class="name">
-                                    <input v-model="newReview.name" type="text" required placeholder="Nome" />
+                                    <input
+                                        v-model="newReview.name"
+                                        type="text"
+                                        required
+                                        placeholder="Nome"
+                                    />
                                 </div>
                                 <div class="surname">
-                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome" />
+                                    <input
+                                        v-model="newReview.surname"
+                                        type="text"
+                                        required
+                                        placeholder="Cognome"
+                                    />
                                 </div>
                                 <div class="content">
-                                    <textarea v-model="newReview.content" type="text" required rows="5"></textarea>
-                                </div>
-                                <div class="vote-star">
-                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
-                                        @click="selectStar(index)">
-                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
-                                    </div>
+                                    <textarea
+                                        v-model="newReview.content"
+                                        type="text"
+                                        required
+                                        rows="5"
+                                    ></textarea>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
@@ -292,16 +313,36 @@ export default {
                             <h3 id="title-form">Invia un messaggio:</h3>
                             <form @submit.prevent="createNewMessage">
                                 <div class="name">
-                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
+                                    <input
+                                        v-model="newMessage.name"
+                                        type="text"
+                                        required
+                                        placeholder="Nome"
+                                    />
                                 </div>
                                 <div class="surname">
-                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
+                                    <input
+                                        v-model="newMessage.surname"
+                                        type="text"
+                                        required
+                                        placeholder="Cognome"
+                                    />
                                 </div>
                                 <div class="content">
-                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
+                                    <textarea
+                                        v-model="newMessage.content"
+                                        type="text"
+                                        required
+                                        rows="5"
+                                    ></textarea>
                                 </div>
                                 <div class="email">
-                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
+                                    <input
+                                        v-model="newMessage.email"
+                                        type="email"
+                                        required
+                                        placeholder="E-Mail"
+                                    />
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
@@ -312,9 +353,18 @@ export default {
                             <h3 id="title-form">Invia un voto:</h3>
                             <form @submit.prevent="createNewVote">
                                 <div class="vote-star">
-                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
-                                        @click="selectStar(index)">
-                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                                    <div
+                                        v-for="(star, index) in stars"
+                                        :key="index"
+                                        class="icon-container"
+                                        @click="selectStar(index)"
+                                    >
+                                        <i
+                                            class="fas fa-star"
+                                            :class="{
+                                                active: index <= selectedStar,
+                                            }"
+                                        ></i>
                                     </div>
                                 </div>
                                 <button type="submit">
@@ -352,9 +402,9 @@ h3 {
 
 button {
     margin-top: 1rem;
-    padding: .5rem .85rem;
+    padding: 0.5rem 0.85rem;
     border-radius: 0;
-    border: .1px solid $lightgrey;
+    border: 0.1px solid $lightgrey;
     background-color: $grey;
     color: $yellow;
 
@@ -367,7 +417,7 @@ p {
     font-size: 1.2rem;
 }
 
-form>div {
+form > div {
     margin-top: 0.5rem;
 }
 
@@ -430,7 +480,7 @@ form>div {
                     padding: 1rem 4rem;
                     background-color: $grey;
                     border: 3px solid darkgray;
-                    opacity: .7;
+                    opacity: 0.7;
                 }
 
                 .vote-star {
@@ -474,13 +524,12 @@ form>div {
                 margin: 1rem 0;
                 text-align: center;
             }
-
         }
 
         .info {
             padding: 10px;
 
-            .description p{
+            .description p {
                 color: black;
                 font-weight: bold;
                 padding: 10px;
@@ -499,7 +548,6 @@ form>div {
 
 @media screen and (max-width: 1200px) {
     #trainer-gallery {
-
         .container {
             .col-gallery {
                 .form-container {
@@ -548,7 +596,7 @@ form>div {
 
         h3 {
             font-size: 1.75rem;
-            margin: .5rem 0;
+            margin: 0.5rem 0;
         }
 
         p {
@@ -557,7 +605,7 @@ form>div {
 
         .container {
             .col-gallery {
-                padding: 2rem .5rem;
+                padding: 2rem 0.5rem;
 
                 .form-container {
                     width: 100%;
@@ -574,7 +622,7 @@ form>div {
                 .info {
                     .votes-reviews {
                         font-size: 1rem;
-                        margin-top: .75rem;
+                        margin-top: 0.75rem;
                     }
                 }
             }
@@ -590,13 +638,12 @@ form>div {
 
         h3 {
             font-size: 1.25rem;
-            margin: .35rem 0;
+            margin: 0.35rem 0;
         }
 
         p {
             font-size: 1rem;
         }
-
 
         .container {
             .col-gallery {
@@ -622,7 +669,7 @@ form>div {
                     .message,
                     .vote {
                         margin-bottom: 1rem;
-                        padding: .5rem;
+                        padding: 0.5rem;
                     }
                 }
             }

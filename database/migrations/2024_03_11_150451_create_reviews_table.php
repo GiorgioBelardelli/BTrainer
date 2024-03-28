@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('surname');
             $table->date('date');
             $table->text('content');
-            $table->tinyInteger('vote');
 
             $table->timestamps();
         });
