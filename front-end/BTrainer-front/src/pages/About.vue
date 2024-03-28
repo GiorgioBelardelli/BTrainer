@@ -258,6 +258,10 @@ export default {
                             <div class="votes-reviews">
                                 <div>Media voti: {{ store.mediaVotes }}</div>
                                 <div>
+                                    Numero voti ricevuti:
+                                    {{ profile.profile.votes.length }}
+                                </div>
+                                <div>
                                     Numero recensioni:
                                     {{ profile.profile.reviews.length }}
                                 </div>
