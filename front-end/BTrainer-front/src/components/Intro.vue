@@ -16,6 +16,7 @@
                     <a href="#sponsor-profile">
                         <div class="title">
                             <h3>I nostri Personal Trainer Sponsorizzati</h3>
+                            <i class="fa-solid fa-arrow-down" style="color: #ffcc00;"></i>
                         </div>
                     </a>
                 </div>
@@ -23,6 +24,7 @@
                     <a href="#trainer-gallery">
                         <div class="title">
                             <h3>Scegli la specializzazione che fa per te!</h3>
+                            <i class="fa-solid fa-arrow-down" style="color: #ffcc00;"></i>
                         </div>
                     </a>
                 </div>
@@ -65,6 +67,11 @@
                 display: flex;
                 align-items: center;
                 text-align: center;
+
+                i {
+                    padding-top: 1rem;
+                    font-size: 3rem;
+                }
             }
 
             #sponsor {
