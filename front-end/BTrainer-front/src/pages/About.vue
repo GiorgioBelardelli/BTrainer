@@ -225,15 +225,13 @@ export default {
                     <div class="card-trainer">
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img
-                                v-if="profile"
-                                :src="
-                                    getImagePath(
-                                        `../assets/trainers/${profile.profile.photo}`
-                                    )
-                                "
-                                :alt="profile.name + ' ' + profile.surname"
-                            />
+                            <img v-if="profile" :src="getImagePath(
+                                `../assets/trainers/${profile.profile.photo}`
+                            )
+                                " :alt="profile.name + ' ' + profile.surname" />
+                        </div>
+
+                        <div class="info">
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
@@ -241,12 +239,8 @@ export default {
                                         {{ profile.name }} {{ profile.surname }}
                                     </h2>
                                 </div>
-                                <div
-                                    v-for="specialization in profile.profile
-                                        .specializations"
-                                    :key="specialization"
-                                    class="specializations"
-                                >
+                                <div v-for="specialization in profile.profile
+                                .specializations" :key="specialization" class="specializations">
                                     <h3>{{ specialization }}</h3>
                                 </div>
                                 <div class="social">
@@ -257,9 +251,6 @@ export default {
                                     <i class="fa-regular fa-envelope"></i>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="info">
                             <div class="description">
                                 <p>"{{ profile.profile.plan_program }}"</p>
                             </div>
@@ -279,28 +270,13 @@ export default {
                             <h3 id="title-form">Scrivi una recensione:</h3>
                             <form @submit.prevent="createNewReview">
                                 <div class="name">
-                                    <input
-                                        v-model="newReview.name"
-                                        type="text"
-                                        required
-                                        placeholder="Nome"
-                                    />
+                                    <input v-model="newReview.name" type="text" required placeholder="Nome" />
                                 </div>
                                 <div class="surname">
-                                    <input
-                                        v-model="newReview.surname"
-                                        type="text"
-                                        required
-                                        placeholder="Cognome"
-                                    />
+                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome" />
                                 </div>
                                 <div class="content">
-                                    <textarea
-                                        v-model="newReview.content"
-                                        type="text"
-                                        required
-                                        rows="5"
-                                    ></textarea>
+                                    <textarea v-model="newReview.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
@@ -313,36 +289,16 @@ export default {
                             <h3 id="title-form">Invia un messaggio:</h3>
                             <form @submit.prevent="createNewMessage">
                                 <div class="name">
-                                    <input
-                                        v-model="newMessage.name"
-                                        type="text"
-                                        required
-                                        placeholder="Nome"
-                                    />
+                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
                                 </div>
                                 <div class="surname">
-                                    <input
-                                        v-model="newMessage.surname"
-                                        type="text"
-                                        required
-                                        placeholder="Cognome"
-                                    />
+                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
                                 </div>
                                 <div class="content">
-                                    <textarea
-                                        v-model="newMessage.content"
-                                        type="text"
-                                        required
-                                        rows="5"
-                                    ></textarea>
+                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <div class="email">
-                                    <input
-                                        v-model="newMessage.email"
-                                        type="email"
-                                        required
-                                        placeholder="E-Mail"
-                                    />
+                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
@@ -353,18 +309,11 @@ export default {
                             <h3 id="title-form">Invia un voto:</h3>
                             <form @submit.prevent="createNewVote">
                                 <div class="vote-star">
-                                    <div
-                                        v-for="(star, index) in stars"
-                                        :key="index"
-                                        class="icon-container"
-                                        @click="selectStar(index)"
-                                    >
-                                        <i
-                                            class="fas fa-star"
-                                            :class="{
-                                                active: index <= selectedStar,
-                                            }"
-                                        ></i>
+                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
+                                        @click="selectStar(index)">
+                                        <i class="fas fa-star" :class="{
+                                active: index <= selectedStar,
+                            }"></i>
                                     </div>
                                 </div>
                                 <button type="submit">
@@ -417,7 +366,7 @@ p {
     font-size: 1.2rem;
 }
 
-form > div {
+form>div {
     margin-top: 0.5rem;
 }
 
@@ -443,10 +392,8 @@ form > div {
             .card-trainer {
                 margin: 0 1rem;
                 width: calc(50% - 2rem);
-                margin-bottom: 1rem;
-                background-color: #5a5a5a;
+                height: 100%;
                 border: 3px solid darkgray;
-                opacity: 0.7;
 
                 .img-card {
                     flex-basis: 25%;
@@ -527,6 +474,8 @@ form > div {
         }
 
         .info {
+            background-color: $grey;
+            opacity: 0.8;
             padding: 10px;
 
             .description p {

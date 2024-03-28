@@ -161,7 +161,6 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
-                    <div class="overlay"></div>
                     <img v-if="profile.isSponsored" id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="Sponsor" />
                     <img :src="getImagePath(
                     `../assets/trainers/${profile.profile.photo}`
@@ -244,16 +243,6 @@ select {
             flex-wrap: wrap;
             justify-content: center;
 
-            .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.6);
-                z-index: 10;
-            }
-
             .card-trainer {
                 position: relative;
                 border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
@@ -287,12 +276,21 @@ select {
         }
 
         .caption {
-            text-align: center;
+            width: 100%;
+            min-height: 30%;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: absolute;
-            bottom: 1rem;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             z-index: 30;
+            background: rgba(40, 40, 40, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
 
             .name {
                 margin: 0.5rem 0;

@@ -145,7 +145,6 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer" id="sponsor-profile"
                     @click="showDetails(profile.id)">
-                    <div class="overlay"></div>
                     <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
                     <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
                         :alt="profile.name + ' ' + profile.surname" />
@@ -178,7 +177,7 @@ h2 {
 
 .selection {
     margin: 0 auto .5rem;
-    width: 85%;
+    width: 95%;
 
     img {
         width: 50%;
@@ -192,18 +191,25 @@ h2 {
         margin-bottom: .5rem;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
 
         .specialization {
-            width: calc(100% / 10);
-            margin: .5rem 0;
+            width: calc(10% - 1rem);
+            margin: .5rem;
 
             #label-spec {
                 text-align: center;
 
                 img {
+                    width: 4.5rem;
+
                     &:hover {
                         scale: 1.1;
                     }
+                }
+
+                .text {
+                    font-size: 1.1rem;
                 }
             }
         }
@@ -229,16 +235,6 @@ h2 {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-
-            .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.6);
-                z-index: 10;
-            }
 
             .card-trainer {
                 position: relative;
@@ -274,12 +270,21 @@ h2 {
 
 
         .caption {
-            text-align: center;
+            width: 100%;
+            min-height: 30%;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: absolute;
-            bottom: 1rem;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             z-index: 30;
+            background: rgba(40, 40, 40, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
 
             .name {
                 margin: 0.5rem 0;
@@ -308,6 +313,10 @@ h2 {
 
                 #label-spec {
                     text-align: center;
+
+                    .text {
+                        font-size: 1.25rem;
+                    }
                 }
             }
         }
@@ -366,7 +375,7 @@ h2 {
             }
 
             .specialization {
-                width: calc(100% / 4);
+                width: calc(100% / 3);
 
                 #label-spec {
                     text-align: center;
