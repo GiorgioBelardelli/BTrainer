@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container ms-container-5">
+<div class="container-fluid ms-container-5">
     <h4>Le tue recensioni: </h4>
     <div>
         <div class="card">

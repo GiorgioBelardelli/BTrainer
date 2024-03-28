@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container ms-sponsorship">
+<div class="container-fluid ms-sponsorship">
     <h2 class="">
         {{ __('Sponsorship: ') }}
     </h2>
@@ -84,7 +84,7 @@
         .ms-sponsorship {
             background-color: #FFCC00;
             padding: 10vh;
-            height: auto;
+            height: 100vh;
 
         }
 

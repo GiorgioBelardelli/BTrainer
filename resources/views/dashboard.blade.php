@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container ms-container-4">
+<div class="container-fluid ms-container-4">
     <h2>
         {{ __('Dashboard') }}
     </h2>
@@ -163,7 +163,7 @@
     .ms-container-4 {
         background-color: #FFCC00;
         padding: 5vh;
-        height: 85vh;
+        height: auto;
     }
 
     .card {

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container ms-container-login">
+<div class="container-fluid ms-container-login">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -78,7 +78,7 @@
 
     .ms-container-login {
         background-color: #FFCC00;
-        height: 80vh;
+        height: 100vh;
         padding-top: 5vh;
     }
 
