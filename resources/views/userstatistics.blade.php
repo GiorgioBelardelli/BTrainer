@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg">
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Le tue Statistiche') }}
         </h2>
@@ -31,8 +31,8 @@
 
                         <div>
                             <div>
-                                <h2>Recensioni per mese:</h2>
-                                <ul>
+                                <h2 style="color: black">Recensioni per mese:</h2>
+                                <ul style="color: black">
                                     <?php \Carbon\Carbon::setLocale('it'); ?>
                                     @foreach ($userProfile->reviews->groupBy(function ($review) {
             return \Carbon\Carbon::parse($review->date)->format('F Y');
@@ -42,8 +42,8 @@
                                 </ul>
                             </div>
                             <div>
-                                <h2>Messaggi per mese:</h2>
-                                <ul>
+                                <h2 style="color: black">Messaggi per mese:</h2>
+                                <ul style="color: black">
                                     <?php \Carbon\Carbon::setLocale('it'); ?>
                                     @foreach ($userProfile->messages->groupBy(function ($message) {
             return \Carbon\Carbon::parse($message->date)->locale('it')->format('F Y');
@@ -56,26 +56,28 @@
 
 
                         <div>
-                            <h1>Numero recensioni: {{ count($userProfile->reviews) }}</h1>
-                            <h1>Numero messaggi: {{ count($userProfile->messages) }}</h1>
-                            @foreach ($userProfile->votes as $vote)
+                            <h1 style="color: black">Numero recensioni: {{ count($userProfile->reviews) }}</h1>
+                            <h1 style="color: black">Numero messaggi: {{ count($userProfile->messages) }}</h1>
+                            {{-- @foreach ($userProfile->votes as $vote)
                                 <h1>VOTO ANNO: {{ substr($vote->pivot->created_at, 0, 4) }}</h1>
 
                                 <h1>VOTO MESE: {{ substr($vote->pivot->created_at, 5, 2) }}</h1>
-                            @endforeach
+                            @endforeach --}}
 
-                            <div class="text-center">
+                            {{-- <div class="text-center">
                                 <button class="p-2" id="btn-anno">ANNO</button>
                                 <button class="p-2" id="btn-mese">MESE</button>
-                            </div>
+                            </div> --}}
 
-                            <div class="anno">
-                                <canvas id="myChart"></canvas>
-                            </div>
+                            {{-- <div class="anno"> --}}
+                            <canvas id="myChart"></canvas>
+                            {{-- </div> --}}
 
-                            <div class="mese">
-                                <canvas id="myChart2"></canvas>
-                            </div>
+                            {{-- <div class="mese"> --}}
+                            <br>
+                            <br>
+                            <canvas id="myChart2"></canvas>
+                            {{-- </div> --}}
 
                         </div>
                     </div>
@@ -85,21 +87,21 @@
 
 
         <script>
-            const buttonAnno = document.getElementById("btn-anno");
-            const buttonMese = document.getElementById("btn-mese");
+            // const buttonAnno = document.getElementById("btn-anno");
+            // const buttonMese = document.getElementById("btn-mese");
 
-            const anno = document.querySelector(".anno");
-            const mese = document.querySelector(".mese");
+            // const anno = document.querySelector(".anno");
+            // const mese = document.querySelector(".mese");
 
-            buttonAnno.addEventListener("click", function() {
-                anno.classList.add('active');
-                console.log("SONO IN ANNO");
-            });
+            // buttonAnno.addEventListener("click", function() {
+            //     anno.classList.add('active');
+            //     console.log("SONO IN ANNO");
+            // });
 
-            buttonMese.addEventListener("click", function() {
-                mese.classList.add('active');
-                console.log("SONO IN MESE");
-            });
+            // buttonMese.addEventListener("click", function() {
+            //     mese.classList.add('active');
+            //     console.log("SONO IN MESE");
+            // });
 
             const ctx = document.getElementById('myChart');
             const ctx2 = document.getElementById('myChart2');
@@ -111,7 +113,9 @@
                     datasets: [{
                         label: '# of Votes',
                         data: [{{ $voti2022 }}, {{ $voti2023 }}, {{ $voti2024 }}, ],
-                        borderWidth: 5
+                        backgroundColor: 'rgba(255, 204, 0, 0.6)',
+                        borderColor: '#FFCC00',
+                        borderWidth: 3,
                     }]
                 },
                 options: {
@@ -136,7 +140,9 @@
                             {{ $votoLuglio }}, {{ $votoAgosto }}, {{ $votoSettembre }},
                             {{ $votoOttobre }}, {{ $votoNovembre }}, {{ $votoDicembre }},
                         ],
-                        borderWidth: 5
+                        backgroundColor: 'rgba(255, 204, 0, 0.6)',
+                        borderColor: '#FFCC00',
+                        borderWidth: 3,
                     }]
                 },
                 options: {
@@ -154,6 +160,12 @@
 
 
     <style lang=scss scoped>
+        .bg {
+            background-color: #FFCC00;
+            border-radius: 10px;
+
+        }
+
         .anno {
             display: none;
         }
@@ -165,6 +177,7 @@
         .active {
             display: block;
         }
+
 
         .card-header {
             color: white;
