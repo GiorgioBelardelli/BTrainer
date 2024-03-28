@@ -119,10 +119,10 @@ export default {
 <template>
 
     <div id="trainer-gallery">
-        <h2>SCEGLI IL TUO PERSONAL TRAINER IDEALE</h2>
+        <h2></h2>
         <div class="selection">
             <label>
-                <h2>Scegli la specializzazione:</h2>
+                <h2>Specializzazioni</h2>
             </label>
             <div class="spec-label">
                 <div class="specialization" v-for="(specialization, index) in specializations" :key="specialization.id">
@@ -143,7 +143,7 @@ export default {
         <div class="container">
             <h2>Profili Sponsorizzati:</h2>
             <div class="col-gallery">
-                <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer"
+                <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer" id="sponsor-profile"
                     @click="showDetails(profile.id)">
                     <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
                     <div class="style-trainer">
@@ -211,6 +211,12 @@ h2 {
 
             #label-spec {
                 text-align: center;
+
+                img {
+                    &:hover {
+                        scale: 1.1;
+                    }
+                }
             }
         }
     }
@@ -222,7 +228,7 @@ h2 {
 }
 
 .style-trainer {
-    border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
+    border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
     display: grid;
     overflow: hidden;
     cursor: pointer;
@@ -250,7 +256,7 @@ h2 {
 }
 
 .style-trainer:hover img {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 #trainer-gallery {
@@ -271,7 +277,7 @@ h2 {
             .card-trainer {
                 position: relative;
                 margin: 1rem 1rem;
-                border-radius: 25% 1rem 15% 0 / 0% 1rem 15% 0;
+                border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
                 overflow: hidden;
                 width: calc((100% / 3) - 2rem);
                 box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);

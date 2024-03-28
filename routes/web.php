@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\TrainerProfileController;
 
-Route::get('/', [TrainerProfileController::class, 'index'])
+Route::get('profiles/{id}', [TrainerProfileController::class, 'index'])
     ->name('index');
 
 Route::get('/profiles/{id}', [TrainerProfileController::class, 'show'])
@@ -41,6 +41,8 @@ Route::get('/userreviews', [DashboardController::class, 'getUserReviews'])->name
 Route::get('/sponsorship', [DashboardController::class, 'getSponsorship'])->name('sponsorship');
 
 Route::get('/userstatistics', [DashboardController::class, 'getStatistics'])->name('statistics');
+
+Route::get('/editprofile', [DashboardController::class, 'editProfile'])->name('editprofile');
 
 Route::middleware('auth')->group(function () {
 

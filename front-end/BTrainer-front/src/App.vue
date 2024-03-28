@@ -1,12 +1,14 @@
 <script setup>
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
+// import ArrowUp from './components/ArrowUp.vue'
 </script>
 
 <template>
-    <AppHeader/>
+    <AppHeader />
     <router-view></router-view>
-    <AppFooter/>
+    <!-- <ArrowUp /> -->
+    <AppFooter />
 </template>
 
 <style lang="scss">

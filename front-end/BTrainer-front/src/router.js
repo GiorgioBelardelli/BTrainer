@@ -26,12 +26,4 @@ const router = createRouter({
     routes
 });
 
-// Aggiungi una guardia di navigazione per gestire il comportamento dello scroll
-router.beforeEach((to, from, next) => {
-    // Fai scorrere la finestra fino all'inizio della pagina
-    window.scrollTo(0, 0);
-    // Prosegui con la navigazione
-    next();
-});
-
 export default router;

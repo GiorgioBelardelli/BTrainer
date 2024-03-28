@@ -20,9 +20,9 @@ class TrainerProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all();
+        $profile = Profile::find($id);
 
-        return view('index', compact('profiles'));
+        return view('show', compact('profile'));
     }
 
     /**
@@ -66,7 +66,7 @@ class TrainerProfileController extends Controller
         $newProfile->save();
         
         $newProfile -> specializations() -> attach($data['specialization_id']);
-        return redirect()->route('index', $newProfile->id);
+        return redirect()->route('dashboard', $newProfile->id);
     }
 
     /**

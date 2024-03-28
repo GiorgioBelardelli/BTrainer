@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class SponsorshipController extends Controller
 {
-    public function getSponsorships(){
-        
+    public function getSponsorships(Request $request){
+
        $sponsorships = Sponsorship::all();
 
        return SponsorshipResource::collection($sponsorships);

@@ -2,7 +2,7 @@
     <header>
         <div class="logo">
             <router-link to="/">
-                <img src="../assets/logos/header.svg" alt="">
+                <img src="../assets/logos/header.svg" alt="" />
             </router-link>
         </div>
 
@@ -19,25 +19,25 @@
                 <i class="fa-regular fa-user"></i>
                 Accedi
             </a>
-            <a href="http://127.0.0.1:8000/register"><i class="fa-solid fa-plus"></i>
+            <a href="http://127.0.0.1:8000/register"
+                ><i class="fa-solid fa-plus"></i>
                 Registrati
             </a>
         </div>
     </header>
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style lang="scss" scoped>
-@use '../styles/partials/mixins' as *;
-@use '../styles/partials/variables' as *;
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/variables" as *;
 
 header {
     position: fixed;
     z-index: 100;
     width: 100%;
-    background-color: rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0.6);
     height: 120px;
     padding: 0 3rem;
     display: flex;
@@ -85,12 +85,17 @@ header {
 
 @media screen and (max-width: 768px) {
     header {
-        .logo {}
+        padding: 0 1rem;
+
+        .logo {
+        }
     }
 }
 
 @media screen and (max-width: 576px) {
     header {
+        padding: 0 0.5rem;
+
         .logo {
             img {
                 width: 70%;
@@ -101,8 +106,8 @@ header {
             display: flex;
             flex-direction: column;
 
-            &>* {
-                margin: .5rem 0;
+            & > * {
+                margin: 0.5rem 0;
             }
         }
     }

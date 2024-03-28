@@ -11,6 +11,9 @@
     {{-- <title>{{ config('app.name', 'BTrainer') }}</title> --}}
     <title>B-Trainer</title>
 
+    <!-- Importo Font-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <!-- Importo Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -26,9 +29,9 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-            <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm my-container">
+            <div class="container ms-container">
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5174/') }}">
                     {{-- Sostituiamo il logo Laravel con quello di BTrainer --}}
                     <div class="logo">
 
@@ -38,7 +41,9 @@
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -46,7 +51,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ url('http://localhost:5174/') }}">{{ __('Home') }}</a>
                         </li>
                     </ul>
 
@@ -54,36 +59,44 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Effettua il Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
-                        </li>
-                        @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Effettua il Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrati') }}</a>
+                                </li>
+                            @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="pad-zero">
-                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
-                                <a class="dropdown-item" href="{{ route('usermessages') }}">{{ __('I tuoi Messaggi') }}</a>
-                                <a class="dropdown-item" href="{{ url('userreviews') }}">{{ __('Le tue Recensioni') }}</a>
-                                <a class="dropdown-item" href="{{ url('userstatistics') }}">{{ __('Le tue Statistiche') }}</a>
-                                <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorship') }}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Esci') }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                                    id="pad-zero">
+                                    <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('editprofile') }}">{{ __('Modifica il profilo') }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('usermessages') }}">{{ __('I tuoi Messaggi') }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{ url('userreviews') }}">{{ __('Le tue Recensioni') }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{ url('userstatistics') }}">{{ __('Le tue Statistiche') }}</a>
+                                    <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorship') }}</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Esci') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                         @endguest
                     </ul>
                 </div>
@@ -103,17 +116,27 @@
 <style lang=scss scoped>
     @import "resources/scss/app.scss";
 
-    * {
-        background-color: #5a5a5a;
-        color: rgb(0, 0, 0);
-        padding: 0;
 
-        .logo {
-            img {
-                width: 100px;
-                margin-top: 20px;
-            }
+    .dropdown-item {
+        --bs-dropdown-link-active-bg: #FFCC00;
+    }
+
+    .ms-container {
+        padding-bottom: 15px;
+    }
+
+    body {
+        /* da commentare provvisoriamente se non si leggono le scritte  */
+        /* background: url('{{ URL::asset('img/bg-spec.png') }}'); */
+        background-size: cover;
+    }
+
+    .logo {
+        img {
+            width: 100px;
+            margin-top: 20px;
         }
+
 
         .navbar-nav li a {
             color: white;
@@ -126,24 +149,30 @@
         }
 
         .navbar-nav li a {
-            background-color: #5a5a5a;
-
+            color: white;
         }
 
         .card-header {
             color: white;
-            background-color: #5a5a5a;
         }
     }
 
-    li .nav-link:hover {
+    .my-container {
+        background-color: black;
+    }
+
+    li .nav-link {
         color: white;
+    }
+
+    li .nav-link:hover {
+        color: #FFCC00;
         /* transform: scale(1.1); */
     }
 
     #dropdown-menu {
-        background-color: #5a5a5a;
         color: white;
+
         padding: 0;
 
         li {
@@ -154,18 +183,30 @@
     #pad-zero {
         padding: 0;
 
+        li {
+            color: white;
+        }
+
+        a {
+            color: black;
+        }
+
         a:hover {
-            background-color: #5a5a5a;
-            color: yellow;
+            /* color: yellow; */
         }
     }
 
-    #navbarDropdown:hover {
+    #navbarDropdown {
         color: white;
+    }
+
+    #navbarDropdown:hover {
+        color: #FFCC00;
     }
 
     a {
         text-decoration: none;
         font-weight: 500;
+        background: url('{{ URL::asset(' img/bg-spec.png') }}');
     }
 </style>

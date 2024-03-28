@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\Sponsorship;
+use App\Models\Specialization;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,16 @@ class DashboardController extends Controller
         // Passa $profiles e $userProfile alla vista
         return view('dashboard', compact('userProfile', 'sponsorships'));
     }
+
+    public function editProfile(){
+        $userId = Auth::id();
+
+        $specializations = Specialization::all();
+
+        $profile = Profile::where('user_id', $userId)->first();
+        return view('edit', compact('profile', 'specializations'));
+    }
+
 
     public function getUserMessages()
 {
@@ -84,34 +95,69 @@ class DashboardController extends Controller
         $sponsorships = Sponsorship::all();
         $votes = Vote :: all();
 
-        $voto1 = 0;
-        $voto2 = 0;
-        $voto3 = 0;
-        $voto4 = 0;
-        $voto5 = 0;
+        $voti2022 = 0;
+        $voti2023 = 0;
+        $voti2024 = 0;
+
 
         // Ottieni il profilo dell'utente loggato
         $userProfile = Profile::where('user_id', $userId)->first();
         foreach ($userProfile->votes as $vote) {
-            if($vote->value === 1){
-                $voto1++;
+            if(substr($vote->pivot->created_at,0, 4) === '2022'){
+                $voti2022++;
             }
-            if($vote->value === 2){
-                $voto2++;
+            if(substr($vote->pivot->created_at,0, 4) === '2023'){
+                $voti2023++;
             }
-            if($vote->value === 3){
-                $voto3++;
+            if(substr($vote->pivot->created_at,0, 4) === '2024'){
+                $voti2024++;
             }
-            if($vote->value === 4){
-                $voto4++;
-            }
-            if($vote->value === 5){
-                $voto5++;
+        }
+
+        $votoGennaio = 0;
+        $votoFebbraio = 0;
+        $votoMarzo = 0;
+        $votoAprile = 0;
+        $votoMaggio = 0;
+        $votoGiugno = 0;
+        $votoLuglio = 0;
+        $votoAgosto = 0;
+        $votoSettembre = 0;
+        $votoOttobre = 0;
+        $votoNovembre = 0;
+        $votoDicembre = 0;
+
+        $userProfile = Profile::where('user_id', $userId)->first();
+        foreach ($userProfile->votes as $vote) {
+            if(substr($vote->pivot->created_at,5, 2) === '01'){
+                $votoGennaio++;
+            }if(substr($vote->pivot->created_at,5, 2) === '02'){
+                $votoFebbraio++;
+            }if(substr($vote->pivot->created_at,5, 2) === '03'){
+                $votoMarzo++;
+            }if(substr($vote->pivot->created_at,5, 2) === '04'){
+                $votoAprile++;
+            }if(substr($vote->pivot->created_at,5, 2) === '05'){
+                $votoMaggio++;
+            }if(substr($vote->pivot->created_at,5, 2) === '06'){
+                $votoGiugno++;
+            }if(substr($vote->pivot->created_at,5, 2) === '07'){
+                $votoLuglio++;
+            }if(substr($vote->pivot->created_at,5, 2) === '08'){
+                $votoAgosto++;
+            }if(substr($vote->pivot->created_at,5, 2) === '09'){
+                $votoSettembre++;
+            }if(substr($vote->pivot->created_at,5, 2) === '10'){
+                $votoOttobre++;
+            }if(substr($vote->pivot->created_at,5, 2) === '11'){
+                $votoNovembre++;
+            }if(substr($vote->pivot->created_at,5, 2) === '12'){
+                $votoDicembre++;
             }
         }
 
         // Restituisci la vista 'usermessages' con i dati necessari
-        return view('userstatistics', compact('userProfile', 'sponsorships', 'votes','voto1','voto2','voto3','voto4','voto5' ));
+        return view('userstatistics', compact('userProfile', 'sponsorships', 'votes','voti2022','voti2023','voti2024', 'votoGennaio', 'votoFebbraio', 'votoMarzo', 'votoAprile', 'votoMaggio', 'votoGiugno', 'votoLuglio', 'votoAgosto', 'votoSettembre', 'votoOttobre', 'votoNovembre', 'votoDicembre',));
     }
 
     /**
