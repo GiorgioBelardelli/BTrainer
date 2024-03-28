@@ -161,33 +161,22 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in arrayFilter" :key="profile.id" class="card-trainer"
                     @click="showDetails(profile.id)">
-                    <!-- Mostra un logo di sponsorizzazione se il profilo è sponsorizzato -->
+                    <div class="overlay"></div>
                     <img v-if="profile.isSponsored" id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="Sponsor" />
-                    <div class="style-trainer">
-                        <img :src="getImagePath(
+                    <img :src="getImagePath(
                     `../assets/trainers/${profile.profile.photo}`
                 )
                     " :alt="profile.name + ' ' + profile.surname" />
-                        <figcaption>
-                            <div class="caption">
-                                <div class="name">
-                                    <h3>
-                                        {{ profile.name }} {{ profile.surname }}
-                                    </h3>
-                                </div>
-                                <div v-for="specialization in profile.profile
+                    <div class="caption">
+                        <div class="name">
+                            <h3>
+                                {{ profile.name }} {{ profile.surname }}
+                            </h3>
+                        </div>
+                        <div v-for="specialization in profile.profile
                     .specializations" :key="specialization" class="specializations">
-                                    <h4>{{ specialization }}</h4>
-                                </div>
-                                <div class="social">
-                                    <i class="fa-brands fa-facebook"></i>
-                                    <i class="fa-brands fa-instagram"></i>
-                                    <i class="fa-brands fa-x-twitter"></i>
-                                    <i class="fa-brands fa-tiktok"></i>
-                                    <i class="fa-regular fa-envelope"></i>
-                                </div>
-                            </div>
-                        </figcaption>
+                            <h4>{{ specialization }}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -200,37 +189,6 @@ export default {
 
 select {
     margin: 0 10px;
-}
-
-.style-trainer {
-    border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
-    display: grid;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
-}
-
-.style-trainer>* {
-    grid-area: 1/1;
-    transition: 0.4s;
-}
-
-.style-trainer figcaption {
-    display: grid;
-    align-items: end;
-    font-size: 2.3rem;
-    font-weight: bold;
-    padding: 0.75rem;
-    background: var(--c, #0009);
-    clip-path: inset(0 var(--_i, 100%) 0 0);
-}
-
-.style-trainer:hover figcaption {
-    --_i: 0%;
-}
-
-.style-trainer:hover img {
-    transform: scale(1.1);
 }
 
 #trainer-gallery {
@@ -260,8 +218,6 @@ select {
             color: $grey;
         }
 
-        /* Aggiungi altri stili personalizzati a seconda delle tue preferenze */
-
         &>div {
             margin: 0 2rem;
         }
@@ -288,10 +244,20 @@ select {
             flex-wrap: wrap;
             justify-content: center;
 
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.6);
+                z-index: 10;
+            }
+
             .card-trainer {
                 position: relative;
                 border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
-                margin: 1rem 1rem;
+                margin: 1rem;
                 overflow: hidden;
                 width: calc((100% / 3) - 2rem);
                 box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
@@ -303,9 +269,11 @@ select {
                     border: none;
                     top: 0.5rem;
                     right: 0.5rem;
+                    z-index: 30;
                 }
 
                 img {
+                    display: block;
                     height: 500px;
                     object-fit: cover;
                     object-position: top;
@@ -320,6 +288,11 @@ select {
 
         .caption {
             text-align: center;
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
 
             .name {
                 margin: 0.5rem 0;
@@ -335,9 +308,102 @@ select {
                     cursor: pointer;
                 }
             }
+        }
+    }
+}
 
-            .social {
-                margin: 0.25rem 0;
+@media all and (max-width: 1000px) {
+    #trainer-gallery {
+        .spec-label {
+            .specialization {
+                width: calc(100% / 5);
+
+                #label-spec {
+                    text-align: center;
+                }
+            }
+        }
+
+        .container {
+            width: 95%;
+
+            .col-gallery {
+                .card-trainer {
+                    width: calc((100% / 3) - 2rem);
+
+                    i {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width: 900px) {
+    #trainer-gallery {
+        .container {
+            width: 95%;
+
+            .col-gallery {
+                .card-trainer {
+                    width: calc((50%) - 2rem);
+
+                    i {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width: 768px) {
+    #trainer-gallery {
+        form {
+            display: flex;
+            flex-direction: column;
+
+            &>div {
+                margin: 1rem 0;
+            }
+        }
+
+        .container {
+            width: 95%;
+        }
+    }
+
+    #trainer-gallery .container .col-gallery .card-trainer {
+        width: calc((50%) - 2rem);
+    }
+}
+
+@media all and (max-width: 576px) {
+    #trainer-gallery {
+        .spec-label {
+            justify-content: space-evenly;
+
+            .text {
+                font-size: .85rem;
+            }
+
+            .specialization {
+                width: calc(100% / 4);
+
+                #label-spec {
+                    text-align: center;
+                }
+            }
+        }
+
+        .container {
+            width: 80%;
+
+            .col-gallery {
+                .card-trainer {
+                    width: calc(100% - 2rem);
+                }
             }
         }
     }

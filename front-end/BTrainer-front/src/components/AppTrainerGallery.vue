@@ -145,30 +145,18 @@ export default {
             <div class="col-gallery">
                 <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer" id="sponsor-profile"
                     @click="showDetails(profile.id)">
+                    <div class="overlay"></div>
                     <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
-                    <div class="style-trainer">
-                        <img :src="getImagePath(
-                    `../assets/trainers/${profile.profile.photo}`
-                )
-                    " :alt="profile.name + ' ' + profile.surname" />
-                        <figcaption>
-                            <div class="caption">
-                                <div class="name">
-                                    <h3>{{ profile.name }} {{ profile.surname }}</h3>
-                                </div>
-                                <div v-for="specialization in profile.profile
+                    <img :src="getImagePath(`../assets/trainers/${profile.profile.photo}`)"
+                        :alt="profile.name + ' ' + profile.surname" />
+                    <div class="caption">
+                        <div class="name">
+                            <h3>{{ profile.name }} {{ profile.surname }}</h3>
+                        </div>
+                        <div v-for="specialization in profile.profile
                     .specializations" :key="specialization" class="specializations">
-                                    <h4>{{ specialization }}</h4>
-                                </div>
-                                <div class="social">
-                                    <i class="fa-brands fa-facebook"></i>
-                                    <i class="fa-brands fa-instagram"></i>
-                                    <i class="fa-brands fa-x-twitter"></i>
-                                    <i class="fa-brands fa-tiktok"></i>
-                                    <i class="fa-regular fa-envelope"></i>
-                                </div>
-                            </div>
-                        </figcaption>
+                            <h4>{{ specialization }}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -227,38 +215,6 @@ h2 {
     }
 }
 
-.style-trainer {
-    border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
-    display: grid;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
-}
-
-.style-trainer>* {
-    grid-area: 1/1;
-    transition: .4s;
-}
-
-.style-trainer figcaption {
-    display: grid;
-    position: relative;
-    align-items: end;
-    font-size: 2.3rem;
-    font-weight: bold;
-    padding: .75rem;
-    background: var(--c, #0009);
-    clip-path: inset(0 var(--_i, 100%) 0 0);
-}
-
-.style-trainer:hover figcaption {
-    --_i: 0%;
-}
-
-.style-trainer:hover img {
-    transform: scale(1.1);
-}
-
 #trainer-gallery {
     width: 100%;
     background-image: url(../assets/Lightgrey-Wallpaper.webp);
@@ -274,10 +230,20 @@ h2 {
             flex-wrap: wrap;
             justify-content: center;
 
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.6);
+                z-index: 10;
+            }
+
             .card-trainer {
                 position: relative;
-                margin: 1rem 1rem;
                 border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
+                margin: 1rem;
                 overflow: hidden;
                 width: calc((100% / 3) - 2rem);
                 box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
@@ -287,11 +253,13 @@ h2 {
                     height: auto;
                     position: absolute;
                     border: none;
-                    top: .5rem;
-                    right: .5rem;
+                    top: 0.5rem;
+                    right: 0.5rem;
+                    z-index: 30;
                 }
 
                 img {
+                    display: block;
                     height: 500px;
                     object-fit: cover;
                     object-position: top;
@@ -307,6 +275,11 @@ h2 {
 
         .caption {
             text-align: center;
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
 
             .name {
                 margin: 0.5rem 0;
@@ -322,16 +295,10 @@ h2 {
                     cursor: pointer;
                 }
             }
-
-            .social {
-                margin: .25rem 0;
-            }
         }
     }
 
 }
-
-// Query specifica per le dim delle icone social 
 
 @media all and (max-width: 1000px) {
     #trainer-gallery {
@@ -368,7 +335,7 @@ h2 {
 
             .col-gallery {
                 .card-trainer {
-                    width: calc((100% / 3) - 2rem);
+                    width: calc((50%) - 2rem);
 
                     i {
                         font-size: 0.9rem;
@@ -379,8 +346,6 @@ h2 {
     }
 }
 
-// Media Query Tablet
-
 @media all and (max-width: 768px) {
     #trainer-gallery .container {
         width: 95%;
@@ -390,8 +355,6 @@ h2 {
         width: calc((50%) - 2rem);
     }
 }
-
-// Media Query Smartphone
 
 @media all and (max-width: 576px) {
     #trainer-gallery {
