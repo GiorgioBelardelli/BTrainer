@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
+<div id="new-container" class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -42,7 +42,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         {{-- Qui l'utente inserisce l'e-mail  --}}
 
                         <div class="mb-4 row">
@@ -84,7 +84,7 @@
 
                         <div class="mb-4 row">
                             <label for="password-confirm" required class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
-                        
+
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 <span id="password-confirm-error" class="invalid-feedback" role="alert" style="display: none;">
@@ -92,7 +92,7 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn">
@@ -175,34 +175,36 @@
 </script>
 
 <style lang=scss scoped>
-
-    * {
-        background-color: #5a5a5a;
-        color: white;
+    #new-container {
+        background-color: #FFCC00;
+        padding-top: 50px;
+        height: 80vh;
+        padding-bottom: 50px;
     }
 
     .nav-item .nav-link:hover {
-            color: white;
-        }
+        color: white;
+    }
 
     form .btn {
-        color:black;
-        background-color: yellow;
+        color: black;
+        background-color: #FFCC00;
     }
 
     form .btn:hover {
-        transform:scale(1.2);
-        color:black;
-        background-color: yellow;
+        transform: scale(1.1);
+        color: black;
+        background-color: #FFCC00;
+        transition: 0.5s;
     }
 
-    label {
-        color:white;
+    form .btn:not(:hover) {
+        transform: scale(1);
+        transition: 0.5s;
     }
+
 
     strong {
         color: white;
     }
-
-
 </style>

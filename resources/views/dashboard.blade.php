@@ -131,7 +131,7 @@
         @endauth
         @else
         <h1>Vuoi crearti un profilo da Trainer?</h1>
-        <button><a href="{{ route('profile.create') }}" class="btn">CREA PROFILO</a></button>
+        <a id="create-button" class="btn" href="{{ route('profile.create') }}">Crea profilo</a>
         @endif
 
     </div>
@@ -142,9 +142,28 @@
 
 
 <style lang=scss scoped>
+    #create-button {
+        padding: 8px;
+        border-radius: 5px;
+        color: black;
+        background-color: #FFCC00;
+        margin-top: 50px;
+    }
+
+    #create-button:hover {
+        transition: 0.5s;
+        transform: scale(1.1);
+    }
+
+    #create-button:not(:hover) {
+        transform: scale(1);
+        transition: 0.5s;
+    }
+
     .ms-container-4 {
         background-color: #FFCC00;
         padding: 5vh;
+        height: 85vh;
     }
 
     .card {
