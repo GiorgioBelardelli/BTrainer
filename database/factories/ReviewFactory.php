@@ -21,7 +21,6 @@ class ReviewFactory extends Factory
             'surname' => fake()->lastName(), //da fixare con il cognome
             'date' => fake()->dateTimeBetween('-1 year', 'now'),
             'content' => fake()->sentence(),
-            'vote' => fake()->numberBetween(1, 5),
         ];
     }
 }

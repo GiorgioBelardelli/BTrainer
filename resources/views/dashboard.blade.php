@@ -107,7 +107,6 @@
                     <div class="details">
 
                         <div class="name"><i class="fa-regular fa-user"></i> {{ $review->name }} {{ $review->surname }}
-                            <p class="email"><i class="fa-regular fa-star"></i> {{ $review -> vote}}/5</p>
                         </div>
 
 
