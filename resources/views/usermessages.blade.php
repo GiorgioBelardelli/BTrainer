@@ -88,7 +88,7 @@
 
 
         .single-msg {
-            padding: 3vh 3vw 3vh 1vw;
+            padding: 20px;
             border: #FFCC00 1px solid;
             border-radius: 15px;
             margin-bottom: 2vh;

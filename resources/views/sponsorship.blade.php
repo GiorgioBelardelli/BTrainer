@@ -84,7 +84,7 @@
         .ms-sponsorship {
             background-color: #FFCC00;
             padding: 10vh;
-            height: 100vh;
+            height: auto;
 
         }
 
