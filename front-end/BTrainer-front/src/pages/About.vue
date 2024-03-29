@@ -504,7 +504,7 @@ form > div {
 
             .form-container {
                 width: 100%;
-                padding: 0 6rem;
+                padding: 0 3rem;
 
                 input,
                 textarea {
@@ -582,7 +582,7 @@ form > div {
             .votes-reviews {
                 color: black;
                 font-weight: bold;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 margin-top: 1rem;
                 padding: 10px;
 
@@ -591,6 +591,7 @@ form > div {
                 }
 
                 .review-list {
+                    // font-size: 1.1rem;
                     margin: 1rem 0;
                 }
             }
