@@ -80,12 +80,12 @@
                                     <a class="dropdown-item"
                                         href="{{ route('editprofile') }}">{{ __('Modifica il profilo') }}</a>
                                     <a class="dropdown-item"
-                                        href="{{ route('usermessages') }}">{{ __('I tuoi Messaggi') }}</a>
+                                        href="{{ route('usermessages') }}">{{ __('Messaggi') }}</a>
                                     <a class="dropdown-item"
-                                        href="{{ url('userreviews') }}">{{ __('Le tue Recensioni') }}</a>
+                                        href="{{ url('userreviews') }}">{{ __('Recensioni') }}</a>
                                     <a class="dropdown-item"
-                                        href="{{ url('userstatistics') }}">{{ __('Le tue Statistiche') }}</a>
-                                    <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorship') }}</a>
+                                        href="{{ url('userstatistics') }}">{{ __('Statistiche') }}</a>
+                                    <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorizzazione') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
