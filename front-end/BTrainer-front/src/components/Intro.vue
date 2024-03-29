@@ -35,7 +35,7 @@
     background-size: cover;
 
     .container {
-        min-height: 400px;
+        min-height: 425px;
         position: relative;
         font-family: "Montserrat Alternates", sans-serif;
         padding: 3rem 2rem 5rem 4rem;
@@ -105,6 +105,8 @@
         .container {
             p {
                 font-size: 1.5rem;
+                text-align: end;
+                width: 75%;
             }
 
             .card {
@@ -124,8 +126,9 @@
     #intro {
         .container {
             p {
-                font-size: 1.5rem;
-                width: 80%;
+                font-size: 1.75rem;
+                width: 85%;
+                text-align: center;
             }
 
             .card {
@@ -146,7 +149,7 @@
 @media screen and (max-width: 576px) {
     #intro {
         .container {
-            padding: 1rem 1rem 3rem 1rem;
+            padding: 3rem 1rem 3rem 1rem;
 
             p {
                 font-size: 1.25rem;
