@@ -60,8 +60,8 @@
             </div>
         </div> --}}
 
-        <div class="dashboard-main">
-            <div class="messages">
+        <div class="row dashboard-main">
+            <div class="col-md-12 messages">
                 <h4>Ultimi Messaggi</h4>
                 @php
                 $sortedMessages = $userProfile->messages->sortByDesc('date')->take(3);
@@ -93,7 +93,7 @@
             </div>
 
 
-            <div class="reviews">
+            <div class="col-md-12 reviews">
                 <h4>Ultime recensioni</h4>
                 @php
                 $sortedReviews = $userProfile->reviews->sortByDesc('date')->take(3);
@@ -106,7 +106,6 @@
                     <div class="details">
 
                         <div class="name"><i class="fa-regular fa-user"></i> {{ $review->name }} {{ $review->surname }}
-                            <p class="email"><i class="fa-regular fa-star"></i> {{ $review -> vote}}/5</p>
                         </div>
 
 
@@ -175,14 +174,9 @@
 
 
             .reviews,
-            .messages,
-            {
-            margin-bottom: 20px;
-        }
-
-        .dashboard-main {
-            display: flex;
-            justify-content: space-between;
+            .messages {
+                margin-bottom: 20px;
+            }
 
             .single-msg {
                 margin-top: 10px;
@@ -191,69 +185,73 @@
                 border-radius: 15px;
             }
 
-            .single-msg:hover {
-                color: #FFCC00;
-            }
+            .dashboard-main {
+                display: flex;
+                justify-content: space-between;
 
-            .messages,
-            .reviews {
-                flex-basis: 45%;
-                color: white;
-
-                .details {
-                    display: flex;
-                    width: 100%;
-                    justify-content: space-between;
-
-                    .name,
-                    .date {
-                        font-size: 16px;
-                        color: white;
-                        padding-top: 10px
-                    }
-
-                    .date {
-
-                        font-weight: 200
-                    }
+                .single-msg:hover {
+                    color: #FFCC00;
                 }
 
-
-                .email {
-                    font-weight: 200;
-                    font-size: 15px;
-                }
-
-                .email,
-                .content {
+                .messages,
+                .reviews {
                     color: white;
+
+                    .details {
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+
+                        .name,
+                        .date {
+                            font-size: 16px;
+                            color: white;
+                            padding-top: 10px
+                        }
+
+                        .date {
+
+                            font-weight: 200
+                        }
+                    }
+
+
+                    .email {
+                        font-weight: 200;
+                        font-size: 15px;
+                    }
+
+                    .email,
+                    .content {
+                        color: white;
+                    }
+
+                    .content {
+                        margin-top: 10px;
+                        width: 75%;
+                    }
                 }
 
-                .content {
-                    margin-top: 10px;
-                    width: 75%;
+                .btn {
+                    margin-top: 20px;
+                    padding: 8px;
+                    border-radius: 5px;
+                    color: black;
+                    background-color: #FFCC00;
+                    margin-bottom: 50px;
                 }
-            }
 
-            .btn {
-                margin-top: 50px;
-                padding: 8px;
-                border-radius: 5px;
-                color: black;
-                background-color: #FFCC00;
-            }
+                .btn:hover {
+                    transition: 0.5s;
+                    transform: scale(1.1);
+                }
 
-            .btn:hover {
-                transition: 0.5s;
-                transform: scale(1.1);
-            }
-
-            .btn:not(:hover) {
-                transform: scale(1);
-                transition: 0.5s;
+                .btn:not(:hover) {
+                    transform: scale(1);
+                    transition: 0.5s;
+                }
             }
         }
-    }
     }
 
     button {

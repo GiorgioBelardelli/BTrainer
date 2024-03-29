@@ -1,15 +1,15 @@
 <script>
 
-    export default {
-      name: "AppFooter",
-    }
+export default {
+    name: "AppFooter",
+}
 </script>
 
 <template>
     <footer>
 
         <div class="image-logo">
-            <router-link to="/">  
+            <router-link to="/">
                 <img src="../assets/logos/header.svg" alt="logo" id="logo-footer">
             </router-link>
         </div>
@@ -19,7 +19,8 @@
             <div class="contacts">
 
                 <p>
-                    "Push yourself beyond limits, embrace the grind, and witness the transformation. In this arena of dedication, sweat, and perseverance, greatness is forged."
+                    "Push yourself beyond limits, embrace the grind, and witness the transformation. In this arena of
+                    dedication, sweat, and perseverance, greatness is forged."
                 </p>
 
                 <div class="social-bottom">
@@ -87,128 +88,175 @@
 </template>
 
 <style lang="scss" scoped>
-    @use '../styles/partials/variables' as *;
+@use '../styles/partials/variables' as *;
+
+footer {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+
+    .image-logo {
+
+        img {
+            width: 100px;
+        }
+    }
+
+    .bottom {
+        width: 80%;
+        margin: auto;
+        display: flex;
+
+        .contacts,
+        .spec,
+        .times {
+            flex: 1;
+        }
+
+        .contacts {
+            flex-basis: 30%;
+            align-self: center;
+
+            p {
+                text-align: center;
+                font-size: 18px;
+                color: $lightgrey;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+
+            p:hover {
+                color: $yellow;
+                transform: scale(1.01);
+            }
+
+            .social-bottom {
+                display: flex;
+                width: 75%;
+                margin: auto;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                justify-content: center;
+                gap: 10px;
+
+                i {
+                    color: $grey;
+                    margin-right: 5px;
+                    font-size: 20px;
+                }
+
+                i:hover {
+                    color: $yellow;
+                    transform: scale(1.5);
+                }
+
+                p {
+                    font-size: 18px;
+                }
+            }
+
+        }
+
+        .spec {
+            flex-basis: 30%;
+            align-self: center;
+            text-align: center;
+
+            ul {
+
+                li {
+                    padding-top: 5px;
+                    color: $lightgrey;
+                    font-size: 18px;
+                }
+
+                li:hover {
+                    color: $yellow;
+                }
+            }
+
+        }
+
+        .times {
+            align-self: center;
+            text-align: center;
+            flex-basis: 30%;
+            font-size: 18px;
+            color: $lightgrey;
+
+            li {
+                padding-top: 10px;
+            }
+
+            li:hover {
+                color: $yellow;
+                transform: scale(1.01);
+            }
+        }
+    }
+}
+
+@media all and (max-width: 992px) {
 
     footer {
-        background-color: black;
+        padding: 1.85rem;
+        flex-direction: column;
 
         .image-logo {
-            width: 75%;
-            padding-top:20px;
-            padding-left: 15px;
-            margin: auto;
+
             img {
-                width: 80px;
+                width: 150px;
             }
         }
 
-        .bottom{
-            width: 80%;
-            padding: 15px;
-            margin: auto;
-            display: flex;
-            align-items: stretch;
-            min-height: 150px;
-            justify-content: space-between;
-            flex-wrap: wrap;
+        &>div {
+            margin: 2rem 0;
+        }
 
-            .contacts,
-            .spec,
-            .times {
-            flex: 1;
+        .bottom {
+            width: 75%;
+            flex-direction: column;
+
+            &>div {
+                margin: 1rem 0;
             }
 
             .contacts {
-                flex-basis: 30%;
-                align-self: center;
-
                 p {
-                    font-size: 12px;
-                    width: 75%;
-                    color: $lightgrey;
-                    margin-bottom: 10px;
-                    margin-top: 10px;
-                    margin: auto;
+                    font-size: 22px;
                 }
-
-                p:hover {
-                    color: yellow;
-                    transform: scale(1.01);
-                }
-
 
                 .social-bottom {
+                    margin: 1rem 0;
+                    width: 100%;
                     display: flex;
-                    width: 75%;
-                    margin: auto;
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                    justify-content: flex-start;
-                    gap: 10px;
+                    justify-content: center;
 
                     i {
-                        width: 20px;
-                        color: $grey;
-                        margin-right: 5px;
-                    }
-                    i:hover {
-                          color: $yellow;
-                          transform: scale(1.5); 
-                        }
-                    p {
-                        font-size: 10px;
+                        font-size: 2rem;
                     }
                 }
-
             }
+
             .spec {
-                flex-basis: 30%;
-                align-self: center;
-                text-align: center;
                 ul {
-
                     li {
-                    padding-top: 5px;
-                    color: $lightgrey;
-                    font-size: 12px;
-                }
-
-                    li:hover {
-                        color: $yellow;
+                        font-size: 22px;
                     }
                 }
-
             }
-            .times {
-                align-self: center;
-                text-align: center;
-                flex-basis: 30%;
-                font-size: 15px;
-                color: $lightgrey;
 
-                li {
-                    padding-top: 10px;
-                }
-                li:hover, {
-                    color: yellow;
-                    transform: scale(1.01);
-                }
+            .times {
+                font-size: 22px;
             }
         }
     }
+}
 
 
 @media all and (min-width: 769px) {
-
-    footer {
-        height: 400px;
-    }
-
-    // footer .bottom {
-    //     height: 350px;
-    // }
-    
-
     #trainer-gallery .container .col-gallery .card-trainer {
         width: calc((100% / 3) - 2rem);
     }
@@ -217,51 +265,58 @@
 // Media Query Tablet
 
 @media all and (max-width: 768px) {
-    footer  {
-        min-height: 400px;
-    }
-    .image-logo {
-        display: flex;
-        justify-content: center;
-    }
-    footer .bottom {
-        width: 95%;
+    footer {
         flex-direction: column;
-    }
+        padding: 1rem;
 
-    footer .bottom .contacts {
-        flex-basis: 70%;
-        margin: auto;
-        order: 3;
-        text-align: center;
-    }
-    footer .bottom .contacts .social-bottom {
-        justify-content: center;
-        padding: 15px;
-    }
+        .image-logo {
 
-    footer .bottom .spec {
-        flex-basis: 100%;
-        margin: auto;
-        text-align: center;
-    }
-    footer .bottom .times {
-        flex-basis: 100%;
-        margin: auto;
-        padding-top: 50px;
-        padding-bottom: 50px;
-        text-align: center;
-    }
+            img {
+                width: 150px;
+            }
+        }
 
+        &>div {
+            margin: 1rem 0;
+        }
+
+        .bottom {
+            width: 95%;
+            flex-direction: column;
+
+            &>div {
+                margin: 1rem 0;
+            }
+
+            .contacts {
+                p {
+                    font-size: 18px;
+                }
+
+                .social-bottom {
+                    margin: 1rem 0;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+
+                    i {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+
+            .spec {
+                ul {
+                    li {
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .times {
+                font-size: 18px;
+            }
+        }
+    }
 }
-
-// Media Query Smartphone
-
-// @media all and (max-width: 576px) {
-//     footer .bottom *  {
-//         width: 100%;
-//     }
-
-// }
-
 </style>

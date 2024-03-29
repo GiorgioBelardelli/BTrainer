@@ -42,7 +42,7 @@ class ApiController extends Controller
                     break;
                 }
             }
-    
+
             $userData = [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -79,8 +79,8 @@ class ApiController extends Controller
                     }),
                     'is_sponsored' => $isSponsored,
                 ],
-            ];                        
-    
+            ];
+
             $data[] = $userData;
         }
 
@@ -165,7 +165,6 @@ class ApiController extends Controller
         $review->surname = $data['surname'];
         $review->date = $data['date'];
         $review->content = $data['content'];
-        $review->vote = $data['vote'];
         $review->profile_id = $data['profile_id'];
 
         $review->save();

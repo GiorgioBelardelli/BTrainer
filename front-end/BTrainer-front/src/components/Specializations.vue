@@ -3,9 +3,6 @@
 
 <template>
     <section id="specializations">
-        <div class="title">
-            <h1></h1>
-        </div>
         <div class="cards">
             <div class="card" id="double">
                 <div class="overlay"></div>
@@ -111,27 +108,14 @@
 @use '../styles/partials/variables' as *;
 
 #specializations {
-    padding: 0 10%;
+    padding: 8rem 10% 3rem;
     margin: 0 auto 0;
-    background-image: url(../assets/bg-spec2.png);
+    // background-image: url(../assets/bg-spec2.png);
+    background-color: $darkgrey;
     display: block;
     background-size: contain;
     background-attachment: fixed;
     position: relative;
-
-    .title {
-        background-color: #464545;
-        width: 75%;
-        margin: 0 auto;
-        padding: 5rem 0 0;
-
-        h1 {
-            padding: 3rem 0;
-            text-align: center;
-            color: $yellow;
-            font-size: 40px;
-        }
-    }
 
     h2 {
         filter: grayscale(100%);
@@ -301,7 +285,7 @@
 
 @media screen and (max-width: 1300px) {
     #specializations {
-        padding: 0 5%;
+        padding: 8rem 5% 0;
         margin: 0 auto 0;
 
         p {
@@ -326,7 +310,7 @@
 
 @media screen and (max-width: 1200px) {
     #specializations {
-        padding: 0 5%;
+        padding: 8rem 5% 0;
         margin: 0 auto 0;
 
         p {
@@ -377,7 +361,7 @@
 
 @media screen and (max-width: 992px) {
     #specializations {
-        padding: 0 5%;
+        padding: 8rem 5% 0;
         margin: 0 auto 0;
 
         h1 {
@@ -388,19 +372,20 @@
         }
 
         h2 {
-            font-size: 2rem;
+            font-size: 3rem;
+            padding: .5rem;
         }
 
         p {
-            bottom: -250px;
-            font-size: 1.15rem;
-            padding: 1rem 5rem;
+            bottom: -325px;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
         }
 
         #personal {
-            bottom: -260px;
-            font-size: 1.15rem;
-            padding: 1rem 5rem;
+            bottom: -300px;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
         }
 
         .cards {
@@ -408,9 +393,9 @@
                 aspect-ratio: 1/1;
 
                 p {
-                    bottom: -15rem;
-                    font-size: 1.15rem;
-                    padding: 2rem;
+                    bottom: -385px;
+                    font-size: 1.5rem;
+                    padding: 1rem 2rem;
                 }
             }
         }
@@ -421,13 +406,13 @@
             }
 
             100% {
-                transform: translateY(-350px);
+                transform: translateY(-450px);
             }
         }
 
         @keyframes slide-bottom {
             0% {
-                transform: translateY(-350px);
+                transform: translateY(-450px);
             }
 
             100% {
@@ -453,7 +438,7 @@
 
 @media screen and (max-width: 768px) {
     #specializations {
-        padding: 0 5%;
+        padding: 8rem 5% 0;
         margin: 0 auto 0;
 
         .title {
@@ -532,7 +517,7 @@
 
 @media screen and (max-width: 576px) {
     #specializations {
-        padding: 0 2.5%;
+        padding: 9rem 2.5% 0;
         margin: 0 auto 0;
 
         h1 {
