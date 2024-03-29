@@ -38,8 +38,8 @@ class ReviewTableSeeder extends Seeder
     {
         $faker = FakerFactory::create();
 
-        $startDate = strtotime('-1 year');
-        $endDate = time();
+        $startDate = strtotime('2023-01-01');
+        $endDate = strtotime('2023-12-31');
 
         $profiles = Profile::inRandomOrder()->limit(100)->get();
 
