@@ -89,8 +89,7 @@
 
                 @endforeach
 
-                <a class="btn" href="{{ route('usermessages') }}">{{ __('Visualizza tutti i tuoi messaggi') }}</a>
-
+                
             </div>
 
 
@@ -121,7 +120,6 @@
 
                 @endforeach
 
-                <a class="btn" href="{{ url('userreviews') }}">{{ __('Visualizza tutte le tue recensioni') }}</a>
             </div>
         </div>
 

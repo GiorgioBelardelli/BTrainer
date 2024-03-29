@@ -53,6 +53,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('http://localhost:5174/') }}">{{ __('Home') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('usermessages') }}">{{ __('Messaggi') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('userreviews') }}">{{ __('Recensioni') }}</a>
+                        </li>
+                        <li>
+                            <a class="nav-link"
+                            href="{{ url('userstatistics') }}">{{ __('Statistiche') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -79,13 +89,8 @@
                                     <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
                                     <a class="dropdown-item"
                                         href="{{ route('editprofile') }}">{{ __('Modifica il profilo') }}</a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('usermessages') }}">{{ __('I tuoi Messaggi') }}</a>
-                                    <a class="dropdown-item"
-                                        href="{{ url('userreviews') }}">{{ __('Le tue Recensioni') }}</a>
-                                    <a class="dropdown-item"
-                                        href="{{ url('userstatistics') }}">{{ __('Le tue Statistiche') }}</a>
-                                    <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorship') }}</a>
+
+                                    <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorizzazioni') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -125,6 +130,15 @@
         padding-bottom: 15px;
     }
 
+/* .navbar .navbar-collapse ul.navbar-nav.me-auto {
+    justify-content: center; 
+} */
+#navbarSupportedContent {
+    justify-content: center;
+}
+
+
+
     body {
         /* da commentare provvisoriamente se non si leggono le scritte  */
         /* background: url('{{ URL::asset('img/bg-spec.png') }}'); */
@@ -136,8 +150,6 @@
             width: 100px;
             margin-top: 20px;
         }
-
-
         .navbar-nav li a {
             color: white;
         }
