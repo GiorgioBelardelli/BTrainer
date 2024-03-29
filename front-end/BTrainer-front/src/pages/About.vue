@@ -256,15 +256,20 @@ export default {
                             </div>
 
                             <div class="votes-reviews">
-                                <div>Media voti: {{ store.mediaVotes }} ({{ profile.profile.reviews.length }}
-                                    Recensioni)
-                                </div>
-                                <div>
-
-                                </div>
-                                <div>
+                                <div class="votes">
                                     Numero voti ricevuti:
                                     {{ profile.profile.votes.length }}
+                                    <br>
+                                    Media voti: {{ store.mediaVotes }} ({{ profile.profile.reviews.length }} Recensioni)
+                                </div>
+
+                                <div v-for="review in profile.profile.reviews" class="review-list">
+                                    <div class="content">
+                                        {{ review.content }}
+                                    </div>
+                                    <div class="surname-name">
+                                        {{ review.surname }} {{ review.name }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -499,6 +504,14 @@ form>div {
                 font-size: 1.2rem;
                 margin-top: 1rem;
                 padding: 10px;
+
+                .votes {
+                    margin-bottom: 2rem;
+                }
+
+                .review-list {
+                    margin: 1rem 0;
+                }
             }
         }
     }
