@@ -385,7 +385,6 @@ h2 {
 }
 
 @media all and (max-width: 576px) {
-
     h3 {
         font-size: 2.5rem;
     }

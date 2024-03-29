@@ -229,6 +229,7 @@ select {
 
             .fa-star {
                 color: grey;
+                font-size: 1.25rem;
             }
 
             .active {
@@ -342,7 +343,30 @@ select {
 }
 
 @media all and (max-width: 900px) {
+    h3 {
+        font-size: 2.25rem;
+    }
+
+    h4 {
+        font-size: 1.85rem;
+    }
+
     #trainer-gallery {
+        form {
+            .custom-select {
+                font-size: 1.5rem;
+            }
+
+            .vote-star {
+                display: flex;
+
+                .fa-star {
+                    color: grey;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
         .container {
             width: 95%;
 
@@ -365,6 +389,19 @@ select {
             display: flex;
             flex-direction: column;
 
+            .custom-select {
+                font-size: 1.25rem;
+            }
+
+            .vote-star {
+                display: flex;
+
+                .fa-star {
+                    color: grey;
+                    font-size: 1.25rem;
+                }
+            }
+
             &>div {
                 margin: 1rem 0;
             }
@@ -381,6 +418,14 @@ select {
 }
 
 @media all and (max-width: 576px) {
+    h3 {
+        font-size: 2rem;
+    }
+
+    h4 {
+        font-size: 1.5rem;
+    }
+
     #trainer-gallery {
         .spec-label {
             justify-content: space-evenly;
