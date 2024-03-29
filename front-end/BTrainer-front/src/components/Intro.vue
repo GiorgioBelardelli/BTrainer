@@ -11,23 +11,13 @@
             <div class="img">
                 <img src="../assets/style/fancy1.svg" alt="">
             </div>
-            <div class="cards">
-                <div class="card" id="sponsor">
-                    <a href="#sponsor-profile">
-                        <div class="title">
-                            <h3>I nostri Personal Trainer Sponsorizzati</h3>
-                            <i class="fa-solid fa-arrow-down" style="color: #ffcc00;"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="card" id="trainer">
-                    <a href="#trainer-gallery">
-                        <div class="title">
-                            <h3>Scegli la specializzazione che fa per te!</h3>
-                            <i class="fa-solid fa-arrow-down" style="color: #ffcc00;"></i>
-                        </div>
-                    </a>
-                </div>
+            <div class="card" id="special">
+                <a href="#trainer-gallery">
+                    <div class="title">
+                        <h3>Scegli la specializzazione che fa per te!</h3>
+                        <i class="fa-solid fa-arrow-down" style="color: #ffcc00;"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -45,41 +35,31 @@
     background-size: cover;
 
     .container {
-        height: 400px;
+        min-height: 425px;
         position: relative;
         font-family: "Montserrat Alternates", sans-serif;
-        padding: 3rem 2rem 3rem 4rem;
+        padding: 3rem 2rem 5rem 4rem;
 
-        .cards {
-            display: flex;
-            width: 100%;
+        .card {
+            padding: 2.5rem 1.5rem;
+            position: absolute;
+            right: 50%;
+            bottom: -25%;
+            transform: translate(50%);
+            z-index: 300;
+            background-color: $grey;
+            border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
 
-            .card {
-                background-color: $grey;
-                padding: 2rem;
-                margin: 0 7rem;
-                width: calc(50% - 14rem);
-                border-radius: 0% 2rem 0% 2rem / 0% 2rem 0% 2rem;
-                z-index: 30;
-                bottom: 0;
-                transform: translateY(50%);
-                position: absolute;
+            .title {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 text-align: center;
 
                 i {
-                    padding-top: 1rem;
-                    font-size: 3rem;
+                    margin-top: 1.5rem;
+                    font-size: 2rem;
                 }
-            }
-
-            #sponsor {
-                left: 0;
-            }
-
-            #trainer {
-                right: 0;
             }
         }
 
@@ -107,17 +87,14 @@
 @media screen and (max-width: 1200px) {
     #intro {
         .container {
-            padding: 2rem;
+            padding: 1rem 1rem 5rem 1rem;
 
             p {
                 font-size: 1.35rem;
             }
 
-            .cards {
-                .card {
-                    margin: 0 5rem;
-                    width: calc(50% - 10rem);
-                }
+            .card {
+                padding: 2rem 1.25rem;
             }
         }
     }
@@ -126,21 +103,18 @@
 @media screen and (max-width: 992px) {
     #intro {
         .container {
-            padding: 2rem;
-
             p {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
+                text-align: end;
+                width: 75%;
             }
 
-            .cards {
-                .card {
-                    margin: 0 2rem;
-                    width: calc(50% - 4rem);
+            .card {
+                padding: 2rem;
 
-                    .title {
-                        h3 {
-                            font-size: 1.25rem;
-                        }
+                .title {
+                    h3 {
+                        font-size: 1.75rem;
                     }
                 }
             }
@@ -151,23 +125,20 @@
 @media screen and (max-width: 768px) {
     #intro {
         .container {
-            padding: 2rem;
-
             p {
-                font-size: 1.15rem;
-                width: 80%;
+                font-size: 1.75rem;
+                width: 85%;
+                text-align: center;
             }
 
-            .cards {
-                .card {
-                    padding: 1.25rem;
-                    margin: 0 1rem;
-                    width: calc(50% - 2rem);
+            .card {
+                padding: 1.25rem;
+                margin: 0 1rem;
+                width: 65%;
 
-                    .title {
-                        h3 {
-                            font-size: 1.25rem;
-                        }
+                .title {
+                    h3 {
+                        font-size: 1.25rem;
                     }
                 }
             }
@@ -178,23 +149,26 @@
 @media screen and (max-width: 576px) {
     #intro {
         .container {
-            padding: 1rem 1rem 1.5rem 1.5rem;
+            padding: 3rem 1rem 3rem 1rem;
 
             p {
-                font-size: 1.05rem;
-                width: 95%;
+                font-size: 1.25rem;
+                width: 100%;
             }
 
-            .cards {
-                .card {
-                    padding: 1.25rem;
-                    margin: 0 .5rem;
-                    width: calc(50% - 1rem);
+            .card {
+                padding: 1.25rem;
+                margin: 0 .5rem;
+                width: 75%;
 
-                    .title {
-                        h3 {
-                            font-size: 1.15rem;
-                        }
+                .title {
+                    h3 {
+                        font-size: 1.5rem;
+                    }
+
+                    i {
+                        margin-top: .75rem;
+                        font-size: 2rem;
                     }
                 }
             }
