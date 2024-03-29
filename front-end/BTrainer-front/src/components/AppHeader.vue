@@ -61,15 +61,20 @@ header {
             justify-content: space-between;
 
             li {
+                font-size: 1.35rem;
                 margin: 0 1.25rem;
             }
         }
     }
 
     .header-icons {
+        a {
+            font-size: 1.25rem;
+        }
+
         i {
             color: $yellow;
-            margin: 0 1.25rem;
+            margin: 0 .5rem 0 1.5rem;
         }
     }
 
