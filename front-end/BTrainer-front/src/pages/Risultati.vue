@@ -256,12 +256,12 @@ select {
                 box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.7);
 
                 #sponsor-logo {
-                    width: 20%;
+                    width: 25%;
                     height: auto;
                     position: absolute;
                     border: none;
-                    top: 0.5rem;
-                    right: 0.5rem;
+                    top: 0;
+                    left: 0;
                     z-index: 30;
                 }
 

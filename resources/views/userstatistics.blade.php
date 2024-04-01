@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="container bg">
-        <h2 class="fs-4 text-secondary my-4">
-            {{ __('Le tue Statistiche') }}
-        </h2>
+        <h4 style="font-size: 2rem; padding-top: 5vh">Statistiche</h4>
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">

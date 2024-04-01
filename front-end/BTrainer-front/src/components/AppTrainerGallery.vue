@@ -350,11 +350,11 @@ h2 {
 
 @media all and (max-width: 900px) {
     h3 {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     h4 {
-        font-size: 2.5rem;
+        font-size: 2.05rem;
     }
 
     #trainer-gallery {
@@ -386,7 +386,7 @@ h2 {
 
 @media all and (max-width: 576px) {
     h3 {
-        font-size: 2.5rem;
+        font-size: 2.35rem;
     }
 
     h4 {
