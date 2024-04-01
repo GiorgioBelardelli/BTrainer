@@ -263,10 +263,7 @@ export default {
                                     Numero voti ricevuti:
                                     {{ profile.profile.votes.length }}
                                     <br />
-                                    Media voti: {{ store.mediaVotes }} ({{
-                                profile.profile.reviews.length
-                            }}
-                                    Recensioni)
+                                    Media voti: {{ store.mediaVotes }} ({{ profile.profile.reviews.length }} Totali)
                                 </div>
 
                                 <div v-for="review in profile.profile.reviews" class="review-list">

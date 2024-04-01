@@ -1,9 +1,13 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
+import SelectSpec from '../components/SelectSpec.vue';
 
 export default {
     name: "AppTrainerGallery",
+    components: {
+        SelectSpec
+    },
     data() {
         return {
             store,
@@ -121,24 +125,7 @@ export default {
     <div id="trainer-gallery">
         <h2></h2>
         <div class="selection">
-            <label>
-                <h2>Specializzazioni</h2>
-            </label>
-            <div class="spec-label">
-                <div class="specialization" v-for="(specialization, index) in specializations" :key="specialization.id">
-                    <input type="checkbox" :id="'checkbox_' + index" :value="specialization.name"
-                        v-model="selectedSpecializations" @change="getSelectedSpecializations" style="display: none;" />
-                    <label id="label-spec" :for="'checkbox_' + index">
-                        <div class="img">
-                            <img :src="getImagePath(`../assets/logos/specializations/${specialization.imgPath}`)"
-                                :alt="specialization.name" />
-                        </div>
-                        <div class="text">
-                            {{ specialization.name }}
-                        </div>
-                    </label>
-                </div>
-            </div>
+            <SelectSpec />
         </div>
         <div class="container">
             <h2>Profili Sponsorizzati:</h2>
@@ -312,7 +299,7 @@ h2 {
     #trainer-gallery {
         .spec-label {
             .specialization {
-                width: calc(100% / 4);
+                width: 25%;
 
                 #label-spec {
                     text-align: center;
