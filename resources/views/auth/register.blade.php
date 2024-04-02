@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Form di registrazione') }}</div>
+                <div id="form-register" class="card-header">{{ __('Form di registrazione') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -53,7 +53,7 @@
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong style="color: white"> </strong>
+                                    <strong style="color: black"> </strong>
                                 </span>
                                 @enderror
                             </div>
@@ -67,7 +67,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 <span id="password-length-error" class="invalid-feedback" role="alert" style="display: none;">
-                                    <strong style="color: white;">La password deve essere lunga almeno 8 caratteri.</strong>
+                                    <strong style="color: black;">La password deve essere lunga almeno 8 caratteri.</strong>
                                 </span>
 
                                 {{-- Qui viene verificata la corrispondenza delle due password richiamando il metodo che c'è nello script --}}
@@ -88,7 +88,7 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 <span id="password-confirm-error" class="invalid-feedback" role="alert" style="display: none;">
-                                    <strong style="color: white;">Le password devono corrispondere</strong>
+                                    <strong style="color: black;">Le password devono corrispondere</strong>
                                 </span>
                             </div>
                         </div>
@@ -175,6 +175,10 @@
 </script>
 
 <style lang=scss scoped>
+    #form-register {
+        color: black;
+    }
+
     #new-container {
         background-color: #FFCC00;
         padding-top: 50px;
