@@ -32,6 +32,10 @@
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
                 </button> --}}
+
+                
+                @auth
+                
                 <div id="modified">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" id="left-nav">
@@ -60,6 +64,8 @@
 
                     </ul>
                 </div>
+               
+                @endauth
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
