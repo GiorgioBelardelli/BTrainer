@@ -25,13 +25,13 @@ export default {
         },
 
         getProfileImagePath(profile) {
-                // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
-                if (profile.profile.photo.startsWith('images/')) {
-                    return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
+            // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
+            if (profile.profile.photo.startsWith('images/')) {
+                return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
             } else {
                 return `http://localhost:5174/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
             }
-        }, 
+        },
 
         getSelectedSpecializations() {
             store.arrayFilter = this.profiles.filter((profile) => {
@@ -73,7 +73,7 @@ export default {
                 const data = res.data;
                 if (data.status === "success") this.filteredProfiles = data.data;
 
-                // console.log("profiles: ", this.profiles);
+                console.log("profiles: ", this.filteredProfiles);
             })
             .catch((err) => {
                 console.error(err);
@@ -142,25 +142,21 @@ export default {
                 <div v-for="profile in filteredProfiles" :key="profile.id" class="card-trainer" id="sponsor-profile"
                     @click="showDetails(profile.id)">
                     <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
-                    <div class="style-trainer">
-                        <img :src="getProfileImagePath(profile)" :alt="profile.name + ' ' + profile.surname" />
-                        <figcaption>
-                            <div class="caption">
-                                <div class="name">
-                                    <h3>{{ profile.name }} {{ profile.surname }}</h3>
-                                </div>
-                                <div v-for="specialization in profile.profile
-                                    .specializations" :key="specialization" class="specializations">
-                                </div>
+                    <img :src="getProfileImagePath(profile)" :alt="profile.name + ' ' + profile.surname" />
+                    <div class="caption">
+                        <div class="name">
+                            <h3>{{ profile.name }} {{ profile.surname }}</h3>
+                        </div>
+                        <div v-for="specialization in profile.profile.specializations" :key="specialization"
+                            class="specializations">
                             <h4>{{ specialization }}</h4>
-                            </div>
-                        </figcaption>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </template>
 
 <style lang="scss" scoped>

@@ -149,16 +149,16 @@ export default {
         },
 
         getProfileImagePath(profile) {
-                // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
-                if (profile.profile.photo.startsWith('images/')) {
-                    return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
+            // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
+            if (profile.profile.photo.startsWith('images/')) {
+                return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
             } else {
                 return `http://localhost:5174/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
             }
-        }, 
+        },
 
 
-    //return `http://127.0.0.1:8000/storage/${profile.photo}`; // Percorso completo dell'immagine
+        //return `http://127.0.0.1:8000/storage/${profile.photo}`; // Percorso completo dell'immagine
 
         showDetails(id) {
             // console.log('ID Profilo:', id);
@@ -202,7 +202,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni >= 0 && recensioni <= 3) {
+                    if (recensioni >= 2) {
                         console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -213,7 +213,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni > 3 && recensioni <= 7) {
+                    if (recensioni >= 4) {
                         console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -224,7 +224,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni > 7) {
+                    if (recensioni >= 6) {
                         console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -268,10 +268,11 @@ export default {
                 <option :value="reviewSelect" disabled>
                     Scegli numero Recensioni
                 </option>
-                <option value="1">0-3</option>
-                <option value="2">4-7</option>
-                <option value="3">8+</option>
+                <option value="1">Almeno 2</option>
+                <option value="2">Almeno 4</option>
+                <option value="3">Almeno 6</option>
             </select>
+
         </form>
         <h1 style="text-align: center; padding-top: 2rem;">Risultati: {{ arrayFilter.length }}</h1>
         <div class="container">
@@ -289,9 +290,9 @@ export default {
                                     </h3>
                                 </div>
                                 <div v-for="specialization in profile.profile
-                                    .specializations" :key="specialization" class="specializations">
+                    .specializations" :key="specialization" class="specializations">
+                                    <h4>{{ specialization }}</h4>
                                 </div>
-                            <h4>{{ specialization }}</h4>
                             </div>
                         </figcaption>
                     </div>

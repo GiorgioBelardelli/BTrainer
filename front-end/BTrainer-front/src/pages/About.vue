@@ -116,13 +116,13 @@ export default {
         },
 
         getProfileImagePath(profile) {
-                // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
-                if (profile.profile.photo.startsWith('images/')) {
-                    return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
+            // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
+            if (profile.profile.photo.startsWith("images/")) {
+                return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
             } else {
                 return `http://localhost:5174/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
             }
-        }, 
+        },
 
         // Questo metodo Imposta selectedStar come l'indice dell'icona stella cliccata
         selectStar(index) {
@@ -239,44 +239,52 @@ export default {
                         <div class="img-card">
                             <img :src="getProfileImagePath(profile)" :alt="profile.name + ' ' + profile.surname" />
                             <div class="info">
-
                                 <div class="caption" v-if="profile">
                                     <!-- NOME COGNOME SPEC -->
                                     <div class="name">
                                         <h2>
-                                            {{ profile.name }} {{ profile.surname }}
+                                            {{ profile.name }}
+                                            {{ profile.surname }}
                                         </h2>
                                     </div>
                                     <div v-for="specialization in profile.profile
                                 .specializations" :key="specialization" class="specializations">
-                                    <h3>{{ specialization }}</h3>
-                                </div>
-                                <div class="social">
-                                    <i class="fa-brands fa-facebook"></i>
-                                    <i class="fa-brands fa-instagram"></i>
-                                    <i class="fa-brands fa-x-twitter"></i>
-                                    <i class="fa-brands fa-tiktok"></i>
-                                    <i class="fa-regular fa-envelope"></i>
-                                </div>
-                            </div>
-                            <div class="description">
-                                <p>"{{ profile.profile.plan_program }}"</p>
-                            </div>
-                            
-                            <div class="votes-reviews">
-                                <div class="votes">
-                                    <h5>Media voti: {{ store.mediaVotes }} ({{
-                                        profile.profile.votes.length
-                                    }}
-                                        Totali)</h5>
+                                        <h3>{{ specialization }}</h3>
                                     </div>
-                                    <h5>Recensioni:</h5>
-                                    <div v-for="review in profile.profile.reviews" class="review-list">
+                                    <div class="social">
+                                        <i class="fa-brands fa-facebook"></i>
+                                        <i class="fa-brands fa-instagram"></i>
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                        <i class="fa-brands fa-tiktok"></i>
+                                        <i class="fa-regular fa-envelope"></i>
+                                    </div>
+                                </div>
+                                <div class="description">
+                                    <p>"{{ profile.profile.plan_program }}"</p>
+                                </div>
+
+                                <div class="votes-reviews">
+                                    <div class="votes">
+                                        <h5 v-if="store.mediaVotes">
+                                            Media voti:
+                                            {{ store.mediaVotes }} ({{
+                                profile.profile.votes.length
+                            }}
+                                            Totali)
+                                        </h5>
+                                        <h5 v-else>
+                                            Media voti: 0
+                                        </h5>
+                                    </div>
+                                    <h5>Recensioni: {{ profile.profile.reviews.length }}</h5>
+                                    <div v-for="review in profile.profile
+                                .reviews" class="review-list">
                                         <div class="content">
                                             {{ review.content }}
                                         </div>
                                         <div class="surname-name">
-                                            {{ review.surname }} {{ review.name }}
+                                            {{ review.surname }}
+                                            {{ review.name }}
                                         </div>
                                     </div>
                                 </div>
@@ -572,7 +580,6 @@ form>div {
             font-size: 1.95rem;
             margin: 0.5rem 0;
         }
-
 
         h5 {
             color: black;

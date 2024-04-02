@@ -45,6 +45,30 @@
                             </div>
                             @endforeach
                         </div>
+
+                        @php
+                            $nextActiveSponsorship = $userProfile->sponsorships()->max('expire_date');
+                            // Verifica se la data di scadenza è nel futuro
+                            $isFuture = \Carbon\Carbon::parse($nextActiveSponsorship)->isFuture();
+                            // Formatta la data di scadenza
+                            $expireDate = \Carbon\Carbon::parse($nextActiveSponsorship)->format('d/m/Y');
+                        @endphp
+                        
+                        <div class="text-center">
+                            <br>
+
+                            @if ($nextActiveSponsorship)
+                            @if ($isFuture)
+                            <h3>La tua sponsorizzazione é in scadenza il:</h3>
+                            <h3>{{ $expireDate }}</h3>
+                            @else
+                            <h3>Non hai attualmente sponsorizzazioni attive.</h3>
+                            @endif
+                            @else
+                            <h3>Attualmente non hai sponsorizzazioni attive.</h3>
+                            @endif
+                        </div>
+                            
                     </div>
 
                     @endif

@@ -32,6 +32,8 @@
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
                 </button> --}}
+
+                @auth
                 <div id="modified">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" id="left-nav">
@@ -52,7 +54,7 @@
                             <a class="nav-link" href="{{ url('userstatistics') }}">{{ __('Statistiche') }}</a>
                         </li>
                         <li class="nav-item desktop">
-                            <a class="nav-link" href="{{ url('editprofile') }}">{{ __('Modifica il profilo') }}</a>
+                            <a class="nav-link" href="{{ url('editprofile') }}">{{ __('Modifica profilo') }}</a>
                         </li>
                         <li class="nav-item desktop">
                             <a class="nav-link" href="{{ url('sponsorship') }}">{{ __('Sponsor') }}</a>
@@ -63,6 +65,7 @@
 
                     </ul>
                 </div>
+                @endauth
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
@@ -216,9 +219,9 @@
     }
     }
 
-@media all and (max-width: 900px) {
-    #modified {
-        width: 50px;
+    @media all and (max-width: 900px) {
+        #modified {
+            width: 50px;
 
         .desktop {
             display: none;
@@ -247,7 +250,7 @@
     }
     }
 
-@media all and (max-width: 576px) {
+    @media all and (max-width: 576px) {
 
     #modified {
         width: 1px;
