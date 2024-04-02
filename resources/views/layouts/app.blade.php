@@ -57,6 +57,9 @@
                         <li class="nav-item desktop">
                             <a class="nav-link" href="{{ url('sponsorship') }}">{{ __('Sponsor') }}</a>
                         </li>
+                        <li class="nav-item desktop">
+                            <a class="nav-link" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                        </li>
 
                     </ul>
                 </div>
@@ -78,15 +81,17 @@
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="pad-zero">
-                            <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
-                            <a class="dropdown-item" href="{{ route('editprofile') }}">{{ __('Modifica il profilo') }}</a>
+
 
                             {{-- Visibili solo in modalità smartphone --}}
+
+                            <a class="dropdown-item smartphone" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                            <a class="dropdown-item smartphone" href="{{ route('editprofile') }}">{{ __('Modifica il profilo') }}</a>
                             <a class="dropdown-item smartphone" href="{{ url('usermessages') }}">{{ __('Messaggi') }}</a>
                             <a class="dropdown-item smartphone" href="{{ url('userreviews') }}">{{ __('Recensioni') }}</a>
                             <a class="dropdown-item smartphone" href="{{ url('userstatistics') }}">{{ __('Statistiche') }}</a>
-
-                            <a class="dropdown-item" href="{{ url('sponsorship') }}">{{ __('Sponsorizzazioni') }}</a>
+                            <a class="dropdown-item smartphone" href="{{ url('sponsorship') }}">{{ __('Sponsorizzazioni') }}</a>
+                            
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Esci') }}
@@ -134,12 +139,20 @@
         flex-basis: 100%;
     }
 
+    .navbar-nav, .dropdown-item, #pad-zero {
+        margin-right: 100px;
+    }
+
     #desktop {
         display: block;
     }
 
+    .smartphone {
+        display:none;
+    }
+
     #left-nav li {
-        padding: 30px;
+        padding: 10px;
     }
 
     body {
@@ -163,6 +176,7 @@
     /* Stili dei link in alto nella nav-bar  */
     li .nav-link {
         color: white;
+        white-space: nowrap;
     }
 
     li .nav-link:hover {
@@ -179,6 +193,12 @@
         background: url('{{ URL::asset(' img/bg-spec.png') }}');
     }
 
+    @media all and (max-width:1050px){
+        #left-nav li {
+        padding: 0;
+    }
+    }
+
     @media all and (max-width: 900px) {
         #modified {
             flex-basis: 40%;
@@ -191,6 +211,9 @@
         .navbar-nav {
             flex-basis: 25%;
         }
+        li .nav-link {
+        white-space: nowrap;
+    }
     }
 
 @media all and (max-width: 900px) {
@@ -204,7 +227,25 @@
             margin: auto;
         }
     }
+    #pad-zero .smartphone {
+        display: block;
+    }
 }
+
+@media all and (max-width:768px){
+        #modified {
+            display: none;
+        }
+        .navbar-nav.ml-auto .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+        top: 100%;
+    }
+    .navbar-nav, .dropdown-item, #pad-zero {
+        margin-right: 10px;
+    }
+    }
 
 @media all and (max-width: 576px) {
 
@@ -213,7 +254,7 @@
         display: none;
     }
     #pad-zero {
-        /* overflow: hidden; */
+        margin: 0;
     }
     .desktop {
         display:none; 
@@ -230,6 +271,9 @@
     }
     #pad-zero .smartphone {
         display: block;
+    }
+    .navbar-nav, .dropdown-item, #pad-zero {
+        margin-right: 10px;
     }
 }
 
