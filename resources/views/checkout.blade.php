@@ -145,10 +145,10 @@
     background-color: white;
 
     #checkout-message {
-      color: white;
+      color: black;
 
       p {
-        color: white;
+        color: black;
       }
     }
 
