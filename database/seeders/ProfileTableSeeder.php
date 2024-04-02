@@ -20,7 +20,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '123 Main Street, Anytown, CA 12345',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer2.jpeg',
             'phone_number' => '(234) 567-8901',
@@ -28,7 +28,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '456 Oak Avenue, Springfield, NY 67890',
             'curriculum' => 'CVprofile.png'
         ],
-    
+
         [
             'photo' => 'PTrainer3.jpg',
             'phone_number' => '(345) 678-9012',
@@ -36,7 +36,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '789 Maple Lane, Lakeside, TX 54321',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer4.webp',
             'phone_number' => '(456) 789-0123',
@@ -44,7 +44,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '101 Elm Street, Riverdale, FL 98765',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer5.jpeg',
             'phone_number' => '(567) 890-1234',
@@ -52,15 +52,15 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '234 Pine Street, Hillcrest, WA 43210',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer6.webp',
             'phone_number' => '(678) 901-2345',
-            'plan_program' => "a mia missione è aiutarti a raggiungere e mantenere un peso corporeo sano. Con un approccio personalizzato che include sia l'allenamento che la consulenza nutrizionale, ti aiuterò a trasformare il tuo stile di vita.",
+            'plan_program' => "La mia missione è aiutarti a raggiungere e mantenere un peso corporeo sano. Con un approccio personalizzato che include sia l'allenamento che la consulenza nutrizionale, ti aiuterò a trasformare il tuo stile di vita.",
             'work_address' => '567 Cedar Avenue, Brookside, CO 24680',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer7.webp',
             'phone_number' => '(789) 012-3456',
@@ -68,7 +68,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '890 Birch Lane, Woodville, MI 13579',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer8.webp',
             'phone_number' => '(890) 123-4567',
@@ -76,7 +76,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '112 Oakwood Drive, Sunset Beach, NC 97531',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer9.webp',
             'phone_number' => '(901) 234-5678',
@@ -84,7 +84,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '345 Maple Avenue, Pinecrest, GA 86420',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
         [
             'photo' => 'PTrainer10.jpeg',
             'phone_number' => '(012) 345-6789',
@@ -100,7 +100,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '123 Oak Street, Springfield, IL 62701',
             'curriculum' => 'CVprofile.pdf'
         ],
-            
+
         [
             'photo' => 'PTrainer12.jpg',
             'phone_number' => '(921) 564-5678',
@@ -108,7 +108,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '456 Elm Avenue, Riverside, CA 92501',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer13.jpg',
             'phone_number' => '(212) 555-6789',
@@ -116,7 +116,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '789 Pine Road, Greenville, SC 29601',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer14.jpg',
             'phone_number' => '(415) 789-0123',
@@ -124,7 +124,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '1011 Cedar Lane, Portland, OR 97201',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer15.jpg',
             'phone_number' => '(617) 234-5678',
@@ -132,7 +132,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '1213 Maple Court, Austin, TX 78701',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer16.png',
             'phone_number' => '(786) 555-4321',
@@ -140,7 +140,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '1415 Birch Street, Denver, CO 80201',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer17.PNG',
             'phone_number' => '(303) 987-6543',
@@ -148,7 +148,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '1617 Walnut Avenue, Atlanta, GA 30301',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer18.png',
             'phone_number' => '(512) 345-6789',
@@ -156,7 +156,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '1819 Oak Street, Miami, FL 33101',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer19.png',
             'phone_number' => '(609) 890-1234',
@@ -164,7 +164,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '2021 Pineview Drive, Nashville, TN 37201',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer20.webp',
             'phone_number' => '(804) 456-7890',
@@ -172,7 +172,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '2223 Cedar Lane, Seattle, WA 98101',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer21.webp',
             'phone_number' => '(702) 678-9012',
@@ -180,7 +180,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '2425 Elm Avenue, Boston, MA 02101',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer22.jpg',
             'phone_number' => '(305) 987-6543',
@@ -188,7 +188,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '2627 Maple Street, Chicago, IL 60601',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer23.png',
             'phone_number' => '(917) 234-5678',
@@ -196,7 +196,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '2829 Birch Road, New York, NY 10001',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer24.png',
             'phone_number' => '(312) 345-6789',
@@ -204,7 +204,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '3031 Oak Lane, Los Angeles, CA 90001',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer25.png',
             'phone_number' => '(206) 456-7890',
@@ -212,7 +212,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '3233 Pine Street, Philadelphia, PA 19101',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer26.png',
             'phone_number' => '(713) 567-8901',
@@ -220,7 +220,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '3435 Walnut Avenue, Houston, TX 77001',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer27.png',
             'phone_number' => '(404) 678-9012',
@@ -228,7 +228,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '3637 Maple Drive, San Francisco, CA 94101',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer28.jpg',
             'phone_number' => '(214) 789-0123',
@@ -236,7 +236,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '3839 Elm Street, Dallas, TX 75201',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer29.jpg',
             'phone_number' => '(817) 890-1234',
@@ -244,7 +244,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '4041 Birch Avenue, Washington, DC 20001',
             'curriculum' => 'CVprofile.pdf'
         ],
-        
+
         [
             'photo' => 'PTrainer30.png',
             'phone_number' => '(241) 238-8688',
@@ -252,7 +252,7 @@ class ProfileTableSeeder extends Seeder
             'work_address' => '4243 Pineview Drive, Orlando, FL 32801',
             'curriculum' => 'CVprofile.pdf'
         ],
-    
+
     ];
     /**
      * Run the database seeds.
