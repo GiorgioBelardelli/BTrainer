@@ -33,9 +33,7 @@
                 <span class="navbar-toggler-icon"></span>
                 </button> --}}
 
-                
                 @auth
-                
                 <div id="modified">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" id="left-nav">
@@ -56,7 +54,7 @@
                             <a class="nav-link" href="{{ url('userstatistics') }}">{{ __('Statistiche') }}</a>
                         </li>
                         <li class="nav-item desktop">
-                            <a class="nav-link" href="{{ url('editprofile') }}">{{ __('Modifica il profilo') }}</a>
+                            <a class="nav-link" href="{{ url('editprofile') }}">{{ __('Modifica profilo') }}</a>
                         </li>
                         <li class="nav-item desktop">
                             <a class="nav-link" href="{{ url('sponsorship') }}">{{ __('Sponsor') }}</a>
@@ -64,7 +62,6 @@
 
                     </ul>
                 </div>
-               
                 @endauth
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -199,46 +196,48 @@
         }
     }
 
-@media all and (max-width: 900px) {
-    #modified {
-        width: 50px;
+    @media all and (max-width: 900px) {
+        #modified {
+            width: 50px;
+
+            .desktop {
+                display: none;
+            }
+
+            li {
+                margin: auto;
+            }
+        }
+    }
+
+    @media all and (max-width: 576px) {
+
+        #modified {
+            width: 1px;
+            display: none;
+        }
+
+        #pad-zero {
+            /* overflow: hidden; */
+        }
 
         .desktop {
             display: none;
         }
-        li {
-            margin: auto;
-        }
-    }
-}
 
-@media all and (max-width: 576px) {
-
-    #modified {
-        width: 1px;
-        display: none;
-    }
-    #pad-zero {
-        /* overflow: hidden; */
-    }
-    .desktop {
-        display:none; 
-    }
-    /* .smartphone {
+        /* .smartphone {
         display:block;
     } */
 
-    .navbar-nav.ml-auto .dropdown-menu {
-        position: absolute;
-        right: 0;
-        left: auto;
-        top: 100%;
+        .navbar-nav.ml-auto .dropdown-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: 100%;
+        }
+
+        #pad-zero .smartphone {
+            display: block;
+        }
     }
-    #pad-zero .smartphone {
-        display: block;
-    }
-}
-
-
-
 </style>

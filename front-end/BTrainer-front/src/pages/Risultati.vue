@@ -149,16 +149,16 @@ export default {
         },
 
         getProfileImagePath(profile) {
-                // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
-                if (profile.profile.photo.startsWith('images/')) {
-                    return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
+            // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
+            if (profile.profile.photo.startsWith('images/')) {
+                return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
             } else {
                 return `http://localhost:5174/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
             }
-        }, 
+        },
 
 
-    //return `http://127.0.0.1:8000/storage/${profile.photo}`; // Percorso completo dell'immagine
+        //return `http://127.0.0.1:8000/storage/${profile.photo}`; // Percorso completo dell'immagine
 
         showDetails(id) {
             // console.log('ID Profilo:', id);
@@ -289,9 +289,9 @@ export default {
                                     </h3>
                                 </div>
                                 <div v-for="specialization in profile.profile
-                                    .specializations" :key="specialization" class="specializations">
+                    .specializations" :key="specialization" class="specializations">
+                                    <h4>{{ specialization }}</h4>
                                 </div>
-                            <h4>{{ specialization }}</h4>
                             </div>
                         </figcaption>
                     </div>
