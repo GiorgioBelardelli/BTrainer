@@ -20,6 +20,15 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
+        getProfileImagePath(profile) {
+                // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
+                if (profile.profile.photo.startsWith('images/')) {
+                    return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
+            } else {
+                return `http://localhost:5173/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
+            }
+        }, 
+
         getSelectedSpecializations() {
             store.arrayFilter = this.profiles.filter((profile) => {
                 return profile.profile.specializations.some((spec) =>
@@ -147,10 +156,7 @@ export default {
                     @click="showDetails(profile.id)">
                     <img id="sponsor-logo" src="../assets/logos/sponsor.svg" alt="">
                     <div class="style-trainer">
-                        <img :src="getImagePath(
-                    `../assets/trainers/${profile.profile.photo}`
-                )
-                    " :alt="profile.name + ' ' + profile.surname" />
+                        <img :src="getProfileImagePath(profile)" :alt="profile.name + ' ' + profile.surname" />
                         <figcaption>
                             <div class="caption">
                                 <div class="name">
