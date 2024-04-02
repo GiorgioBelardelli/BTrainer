@@ -228,15 +228,10 @@ export default {
                     <div class="card-trainer">
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img
-                                v-if="profile"
-                                :src="
-                                    getImagePath(
-                                        `../assets/trainers/${profile.profile.photo}`
-                                    )
-                                "
-                                :alt="profile.name + ' ' + profile.surname"
-                            />
+                            <img v-if="profile" :src="getImagePath(
+                                `../assets/trainers/${profile.profile.photo}`
+                            )
+                                " :alt="profile.name + ' ' + profile.surname" />
                         </div>
 
                         <div class="info">
@@ -247,12 +242,8 @@ export default {
                                         {{ profile.name }} {{ profile.surname }}
                                     </h2>
                                 </div>
-                                <div
-                                    v-for="specialization in profile.profile
-                                        .specializations"
-                                    :key="specialization"
-                                    class="specializations"
-                                >
+                                <div v-for="specialization in profile.profile
+                                .specializations" :key="specialization" class="specializations">
                                     <h3>{{ specialization }}</h3>
                                 </div>
                                 <div class="social">
@@ -269,19 +260,13 @@ export default {
 
                             <div class="votes-reviews">
                                 <div class="votes">
-                                    Numero voti ricevuti:
-                                    {{ profile.profile.votes.length }}
-                                    <br />
-                                    Media voti: {{ store.mediaVotes }} ({{
-                                        profile.profile.reviews.length
-                                    }}
-                                    Totali)
+                                    <h5>Media voti: {{ store.mediaVotes }} ({{
+                                profile.profile.votes.length
+                            }}
+                                        Totali)</h5>
                                 </div>
-
-                                <div
-                                    v-for="review in profile.profile.reviews"
-                                    class="review-list"
-                                >
+                                <h5>Recensioni:</h5>
+                                <div v-for="review in profile.profile.reviews" class="review-list">
                                     <div class="content">
                                         {{ review.content }}
                                     </div>
@@ -298,38 +283,19 @@ export default {
                             <h3 id="title-form">Scrivi una recensione:</h3>
                             <form @submit.prevent="createNewReview">
                                 <div class="name">
-                                    <input
-                                        v-model="newReview.name"
-                                        type="text"
-                                        required
-                                        placeholder="Nome"
-                                    />
+                                    <input v-model="newReview.name" type="text" required placeholder="Nome" />
                                 </div>
                                 <div class="surname">
-                                    <input
-                                        v-model="newReview.surname"
-                                        type="text"
-                                        required
-                                        placeholder="Cognome"
-                                    />
+                                    <input v-model="newReview.surname" type="text" required placeholder="Cognome" />
                                 </div>
                                 <div class="content">
-                                    <textarea
-                                        v-model="newReview.content"
-                                        type="text"
-                                        required
-                                        rows="5"
-                                    ></textarea>
+                                    <textarea v-model="newReview.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
                             </form>
-                            <v-alert
-                                v-if="reviewAlertVisible"
-                                type="success"
-                                outlined
-                            >
+                            <v-alert v-if="reviewAlertVisible" type="success" outlined>
                                 <h1>Recensione inviata con successo!</h1>
                             </v-alert>
                         </div>
@@ -339,46 +305,22 @@ export default {
                             <h3 id="title-form">Invia un messaggio:</h3>
                             <form @submit.prevent="createNewMessage">
                                 <div class="name">
-                                    <input
-                                        v-model="newMessage.name"
-                                        type="text"
-                                        required
-                                        placeholder="Nome"
-                                    />
+                                    <input v-model="newMessage.name" type="text" required placeholder="Nome" />
                                 </div>
                                 <div class="surname">
-                                    <input
-                                        v-model="newMessage.surname"
-                                        type="text"
-                                        required
-                                        placeholder="Cognome"
-                                    />
+                                    <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
                                 </div>
                                 <div class="email">
-                                    <input
-                                        v-model="newMessage.email"
-                                        type="email"
-                                        required
-                                        placeholder="E-Mail"
-                                    />
+                                    <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
                                 </div>
                                 <div class="content">
-                                    <textarea
-                                        v-model="newMessage.content"
-                                        type="text"
-                                        required
-                                        rows="5"
-                                    ></textarea>
+                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
                             </form>
-                            <v-alert
-                                v-if="messageAlertVisible"
-                                type="success"
-                                outlined
-                            >
+                            <v-alert v-if="messageAlertVisible" type="success" outlined>
                                 <h1>Messaggio inviato con successo!</h1>
                             </v-alert>
                         </div>
@@ -386,29 +328,18 @@ export default {
                             <h3 id="title-form">Invia un voto:</h3>
                             <form @submit.prevent="createNewVote">
                                 <div class="vote-star">
-                                    <div
-                                        v-for="(star, index) in stars"
-                                        :key="index"
-                                        class="icon-container"
-                                        @click="selectStar(index)"
-                                    >
-                                        <i
-                                            class="fas fa-star"
-                                            :class="{
-                                                active: index <= selectedStar,
-                                            }"
-                                        ></i>
+                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
+                                        @click="selectStar(index)">
+                                        <i class="fas fa-star" :class="{
+                                active: index <= selectedStar,
+                            }"></i>
                                     </div>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
                             </form>
-                            <v-alert
-                                v-if="voteAlertVisible"
-                                type="success"
-                                outlined
-                            >
+                            <v-alert v-if="voteAlertVisible" type="success" outlined>
                                 <h1>Voto inviato con successo!</h1>
                             </v-alert>
                         </div>
@@ -435,6 +366,12 @@ h3 {
     margin: 1rem 0;
 }
 
+h5 {
+    color: black;
+    font-size: 1.35rem;
+    font-weight: bold;
+}
+
 #title-form {
     color: $yellow;
     text-align: start;
@@ -457,7 +394,7 @@ p {
     font-size: 1.2rem;
 }
 
-form > div {
+form>div {
     margin-top: 0.5rem;
 }
 
@@ -592,7 +529,7 @@ form > div {
 
                 .review-list {
                     // font-size: 1.1rem;
-                    margin: 1rem 0;
+                    margin: 1rem 0 1.5rem;
                 }
             }
         }
@@ -621,6 +558,26 @@ form > div {
 
 @media screen and (max-width: 992px) {
     #trainer-gallery {
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.95rem;
+            margin: 0.5rem 0;
+        }
+
+
+        h5 {
+            color: black;
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.25rem;
+        }
+
         .container {
             .col-gallery {
                 padding: 2rem 1rem;
@@ -641,14 +598,14 @@ form > div {
                     .description p {
                         color: black;
                         font-weight: bold;
-                        font-size: 1.5rem;
+                        font-size: 1.65rem;
                         padding: 10px;
                     }
 
                     .votes-reviews {
                         color: black;
                         font-weight: bold;
-                        font-size: 1.35rem;
+                        font-size: 1.5rem;
                         margin-top: 1rem;
                         padding: 10px;
 
@@ -658,7 +615,7 @@ form > div {
 
                         .review-list {
                             // font-size: 1.1rem;
-                            margin: 1rem 0;
+                            margin: 1rem 0 1.5rem;
                         }
                     }
                 }
