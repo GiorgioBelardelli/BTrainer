@@ -509,7 +509,7 @@ select {
     }
 
     h4 {
-        font-size: 1.85rem;
+        font-size: 1.55rem;
     }
 
     #trainer-gallery {
@@ -584,7 +584,7 @@ select {
     }
 
     h4 {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
     }
 
     #trainer-gallery {

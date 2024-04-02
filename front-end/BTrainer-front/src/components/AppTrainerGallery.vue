@@ -337,11 +337,11 @@ h2 {
 
 @media all and (max-width: 900px) {
     h3 {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
 
     h4 {
-        font-size: 2.05rem;
+        font-size: 1.55rem;
     }
 
     #trainer-gallery {
@@ -373,11 +373,11 @@ h2 {
 
 @media all and (max-width: 576px) {
     h3 {
-        font-size: 2.35rem;
+        font-size: 2rem;
     }
 
     h4 {
-        font-size: 2rem;
+        font-size: 1.35rem;
     }
 
     #trainer-gallery {
