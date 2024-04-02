@@ -206,15 +206,14 @@
     }
 }
 
-
-
 @media all and (max-width: 576px) {
 
     #modified {
+        width: 1px;
         display: none;
     }
     #pad-zero {
-        overflow: hidden;
+        /* overflow: hidden; */
     }
     .desktop {
         display:none; 
@@ -222,9 +221,18 @@
     /* .smartphone {
         display:block;
     } */
-    }
 
+    .navbar-nav.ml-auto .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+        top: 100%;
+    }
     #pad-zero .smartphone {
         display: block;
     }
+}
+
+
+
 </style>
