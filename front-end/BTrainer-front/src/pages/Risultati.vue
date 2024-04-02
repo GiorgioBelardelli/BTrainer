@@ -202,7 +202,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni >= 0 && recensioni <= 3) {
+                    if (recensioni >= 2) {
                         console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -213,7 +213,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni > 3 && recensioni <= 7) {
+                    if (recensioni >= 4) {
                         console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -224,7 +224,7 @@ export default {
                 for (let i = 0; i < this.arrayFilter.length; i++) {
                     let recensioni = this.arrayFilter[i].profile.reviews.length;
                     console.log("n° recensioni: " + recensioni);
-                    if (recensioni > 7) {
+                    if (recensioni >= 6) {
                         console.log("dentro recensioni");
                         filteredArray.push(this.arrayFilter[i]);
                     }
@@ -268,10 +268,11 @@ export default {
                 <option :value="reviewSelect" disabled>
                     Scegli numero Recensioni
                 </option>
-                <option value="1">0-3</option>
-                <option value="2">4-7</option>
-                <option value="3">8+</option>
+                <option value="1">Almeno 2</option>
+                <option value="2">Almeno 4</option>
+                <option value="3">Almeno 6</option>
             </select>
+
         </form>
         <h1 style="text-align: center; padding-top: 2rem;">Risultati: {{ arrayFilter.length }}</h1>
         <div class="container">
