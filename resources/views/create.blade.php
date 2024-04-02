@@ -80,7 +80,7 @@
     #form-create {}
 
     #createProfileForm {
-        background-color: #5a5a5a;
+        background-color: #FFCC00;
         padding-top: 50px;
         padding-bottom: 50px;
         height: auto;
