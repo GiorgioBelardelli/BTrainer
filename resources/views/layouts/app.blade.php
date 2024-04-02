@@ -38,7 +38,7 @@
 
                         {{-- Visibili solo in modalità Desktop  --}}
 
-                        <li class="nav-item desktop">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('http://localhost:5174/') }}">{{ __('Home') }}</a>
                         </li>
 
@@ -193,14 +193,33 @@
         }
     }
 
-    @media all and (max-width: 768px) {}
+@media all and (max-width: 900px) {
+    #modified {
+        width: 50px;
 
-    @media all and (max-width: 576px) {
         .desktop {
             display: none;
         }
+        li {
+            margin: auto;
+        }
+    }
+}
 
-        /* .smartphone {
+
+
+@media all and (max-width: 576px) {
+
+    #modified {
+        display: none;
+    }
+    #pad-zero {
+        overflow: hidden;
+    }
+    .desktop {
+        display:none; 
+    }
+    /* .smartphone {
         display:block;
     } */
     }
