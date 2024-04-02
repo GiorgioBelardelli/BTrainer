@@ -280,7 +280,7 @@ class ProfileTableSeeder extends Seeder
                 $profile->specializations()->attach($specializations);
 
                 // voti
-                $votes = Vote::inRandomOrder()->take(rand(1, 5))->get();
+                $votes = Vote::inRandomOrder()->take(5)->get();
                 $voteData = [];
                 foreach ($votes as $vote) {
                     $randomTimestamp = Carbon::now()->subYear()->addSeconds(rand(0, Carbon::now()->subYear()->diffInSeconds())); // Calcoliamo la differenza in secondi tra l'anno scorso e adesso
