@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="new-container" class="container">
+<div id="new-container" class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -178,7 +178,7 @@
     #new-container {
         background-color: #FFCC00;
         padding-top: 50px;
-        height: 80vh;
+        height: auto;
         padding-bottom: 50px;
     }
 

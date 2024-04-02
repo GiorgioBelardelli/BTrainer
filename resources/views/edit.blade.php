@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
 
     @if ($errors->any())
@@ -25,7 +25,7 @@
 
         <div class="row new-row">
             <h1>Modifica il tuo Profilo: </h1>
-            <div class="col-md-6 mx-auto ms-col-edit">
+            <div class="mx-auto ms-col-edit">
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="phone_number" class="form-label"><strong>Numero di Telefono</strong></label>
@@ -131,6 +131,7 @@
 <style lang=scss scoped>
     .new-row {
         background-color: #FFCC00;
+        padding: 5vh;
     }
 
     .ms-col-edit {

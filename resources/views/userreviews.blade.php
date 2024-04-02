@@ -1,56 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container ms-container-5">
-    <h4>Le tue recensioni: </h4>
-    <div>
-        <div class="card">
+    <div class="container-fluid ms-container-5">
+        <h4>Recensioni: </h4>
+        <div>
+            <div class="card">
 
-            <div class="card-body">
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
-                {{-- {{ __('Sei Loggato!') }} --}}
-
-
-                @if ($userProfile)
-                @auth
-                @if (Auth::user()->id === $userProfile->user_id)
-                <div class="reviews">
-                    @php
-                    $sortedReviews = $userProfile->reviews->sortByDesc('date');
-                    @endphp
-                    @foreach ($sortedReviews as $review)
-
-                    {{-- Box della recensione singola  --}}
-
-                    <div class="single-review">
-                        <div class="details">
-
-                            <div class="date-name">
-                                <div class="name"><i class="fa-regular fa-user"></i> {{ $review->name }} {{ $review->surname }}</div>
-                                <div class="date"><i class="fa-solid fa-calendar-days"></i> {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</div>
-                            </div>
-                            <p class="email"><i class="fa-regular fa-star"></i> {{ $review -> vote}}/5</p>
-
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
                         </div>
+                    @endif
+                    {{-- {{ __('Sei Loggato!') }} --}}
 
-                        <div class="content"><i class="fa-solid fa-pen-nib"></i> {{ $review->content }}</div>
-                    </div>
 
-                    @endforeach
+                    @if ($userProfile)
+                        @auth
+                            @if (Auth::user()->id === $userProfile->user_id)
+                                <div class="reviews">
+                                    @php
+                                        $sortedReviews = $userProfile->reviews->sortByDesc('date');
+                                    @endphp
+                                    @foreach ($sortedReviews as $review)
+                                        {{-- Box della recensione singola  --}}
+
+                                        <div class="single-review">
+                                            <div class="details">
+
+                                                <div class="date-name">
+                                                    <div class="name"><i class="fa-regular fa-user"></i> {{ $review->name }}
+                                                        {{ $review->surname }}</div>
+                                                    <div class="date"><i class="fa-solid fa-calendar-days"></i>
+                                                        {{ \Carbon\Carbon::parse($review->date)->format('d/m/Y') }}</div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="content"><i class="fa-solid fa-pen-nib"></i> {{ $review->content }}
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            @endif
+                        @endauth
+                    @else
+                    @endif
 
                 </div>
-                @endif
-                @endauth
-                @else
-                @endif
-
             </div>
         </div>
-    </div>
     @endsection
 
 

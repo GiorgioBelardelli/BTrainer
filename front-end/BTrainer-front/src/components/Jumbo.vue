@@ -14,4 +14,17 @@
         display: block;
     }
 }
+
+@media all and (max-width: 768px) {
+    .container {
+        padding-top: 2.25rem;
+
+        img {
+            background-size: cover;
+            scale: 1.28;
+
+        }
+    }
+
+}
 </style>

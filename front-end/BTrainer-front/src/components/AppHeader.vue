@@ -19,8 +19,7 @@
                 <i class="fa-regular fa-user"></i>
                 Accedi
             </a>
-            <a href="http://127.0.0.1:8000/register"
-                ><i class="fa-solid fa-plus"></i>
+            <a href="http://127.0.0.1:8000/register"><i class="fa-solid fa-plus"></i>
                 Registrati
             </a>
         </div>
@@ -35,9 +34,9 @@
 
 header {
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.75);
     height: 120px;
     padding: 0 3rem;
     display: flex;
@@ -62,15 +61,20 @@ header {
             justify-content: space-between;
 
             li {
+                font-size: 1.35rem;
                 margin: 0 1.25rem;
             }
         }
     }
 
     .header-icons {
+        a {
+            font-size: 1.25rem;
+        }
+
         i {
             color: $yellow;
-            margin: 0 1.25rem;
+            margin: 0 .5rem 0 1.5rem;
         }
     }
 
@@ -83,11 +87,16 @@ header {
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
     header {
         padding: 0 1rem;
+        font-size: 1.75rem;
 
-        .logo {
+        .header-icons {
+            i {
+                font-size: 1.85rem;
+                margin: 0 1rem;
+            }
         }
     }
 }
@@ -95,10 +104,11 @@ header {
 @media screen and (max-width: 576px) {
     header {
         padding: 0 0.5rem;
+        font-size: 1.25rem;
 
         .logo {
             img {
-                width: 70%;
+                width: 90%;
             }
         }
 
@@ -106,7 +116,12 @@ header {
             display: flex;
             flex-direction: column;
 
-            & > * {
+            i {
+                font-size: 1.35rem;
+                margin: 0 1rem;
+            }
+
+            &>* {
                 margin: 0.5rem 0;
             }
         }

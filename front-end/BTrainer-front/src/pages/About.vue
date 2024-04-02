@@ -11,7 +11,9 @@ export default {
             profile: null,
             message: "",
             rece: "",
-            newVoto: 0,
+            voteAlertVisible: false,
+            messageAlertVisible: false,
+            reviewAlertVisible: false,
 
             // Votes
             votes: [],
@@ -32,7 +34,6 @@ export default {
                 surname: "",
                 date: "",
                 content: "",
-                vote: 0,
                 profile_id: null,
             },
 
@@ -147,29 +148,34 @@ export default {
             });
             // console.log(tempTot);
 
-            store.mediaVotes = (tempTot / votes.length).toFixed(1);
+            store.mediaVotes = Math.ceil((tempTot / votes.length) * 10) / 10;
         },
 
         createNewReview() {
-            if (this.selectedStar === -1) {
-                alert("Seleziona un voto");
-                return;
-            }
-            this.newReview.vote = this.selectedStar + 1;
+            // if (this.selectedStar === -1) {
+            //     alert("Seleziona un voto");
+            //     return;
+            // }
+            // this.newReview.vote = this.selectedStar + 1;
 
-            axios.post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
+            axios
+                .post("http://127.0.0.1:8000/api/v1/reviews", this.newReview)
                 .then((response) => {
-                    console.log("Recensione creata con successo:", response.data);
+                    console.log(
+                        "Recensione creata con successo:",
+                        response.data
+                    );
                     this.newReview.name = "";
                     this.newReview.surname = "";
                     this.newReview.content = "";
-                    this.newReview.vote = 0;
-                    alert("Recensione creata con successo");
+                    this.reviewAlertVisible = true;
                 })
                 .catch((error) => {
-                    console.error("Si è verificato un errore durante la creazione della recensione:", error);
+                    console.error(
+                        "Si è verificato un errore durante la creazione della recensione:",
+                        error
+                    );
                 });
-
         },
 
         createNewMessage() {
@@ -184,7 +190,7 @@ export default {
                     this.newMessage.surname = "";
                     this.newMessage.content = "";
                     this.newMessage.email = "";
-                    alert("Messaggio inviato con successo");
+                    this.messageAlertVisible = true;
                 })
                 .catch((error) => {
                     console.error(
@@ -201,13 +207,14 @@ export default {
             }
             const vote = this.selectedStar + 1;
 
-            axios.post("http://127.0.0.1:8000/api/v1/rate", {
-                "vote": vote,
-                "id": this.$route.params.id
-            })
+            axios
+                .post("http://127.0.0.1:8000/api/v1/rate", {
+                    vote: vote,
+                    id: this.$route.params.id,
+                })
                 .then((response) => {
-                    alert("Voto inviato con successo");
                     console.log("Voto creato con successo:", response.data);
+                    this.voteAlertVisible = true;
                 })
                 .catch((error) => {
                     console.error(
@@ -215,11 +222,10 @@ export default {
                         error
                     );
                 });
-        }
-
+        },
     },
 
-    props: ['profileId'], // Ricevi l'ID del profilo come prop
+    props: ["profileId"], // Ricevi l'ID del profilo come prop
 };
 </script>
 
@@ -235,7 +241,9 @@ export default {
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">
-                                    <h2>{{ profile.name }} {{ profile.surname }}</h2>
+                                    <h2>
+                                        {{ profile.name }} {{ profile.surname }}
+                                    </h2>
                                 </div>
                                 <div v-for="specialization in profile.profile
                                 .specializations" :key="specialization" class="specializations">
@@ -249,20 +257,25 @@ export default {
                                     <i class="fa-regular fa-envelope"></i>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="info">
                             <div class="description">
                                 <p>"{{ profile.profile.plan_program }}"</p>
                             </div>
 
                             <div class="votes-reviews">
-                                <div>
-                                    Media voti: {{ store.mediaVotes }}
+                                <div class="votes">
+                                    <h5>Media voti: {{ store.mediaVotes }} ({{
+                                profile.profile.votes.length
+                            }}
+                                        Totali)</h5>
                                 </div>
-                                <div>
-                                    Numero recensioni:
-                                    {{ profile.profile.reviews.length }}
+                                <h5>Recensioni:</h5>
+                                <div v-for="review in profile.profile.reviews" class="review-list">
+                                    <div class="content">
+                                        {{ review.content }}
+                                    </div>
+                                    <div class="surname-name">
+                                        {{ review.surname }} {{ review.name }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -281,16 +294,13 @@ export default {
                                 <div class="content">
                                     <textarea v-model="newReview.content" type="text" required rows="5"></textarea>
                                 </div>
-                                <div class="vote-star">
-                                    <div v-for="(star, index) in stars" :key="index" class="icon-container"
-                                        @click="selectStar(index)">
-                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
-                                    </div>
-                                </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
                             </form>
+                            <v-alert v-if="reviewAlertVisible" type="success" outlined>
+                                <h1>Recensione inviata con successo!</h1>
+                            </v-alert>
                         </div>
 
                         <!-- Messaggio -->
@@ -303,16 +313,19 @@ export default {
                                 <div class="surname">
                                     <input v-model="newMessage.surname" type="text" required placeholder="Cognome" />
                                 </div>
-                                <div class="content">
-                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
-                                </div>
                                 <div class="email">
                                     <input v-model="newMessage.email" type="email" required placeholder="E-Mail" />
+                                </div>
+                                <div class="content">
+                                    <textarea v-model="newMessage.content" type="text" required rows="5"></textarea>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
                             </form>
+                            <v-alert v-if="messageAlertVisible" type="success" outlined>
+                                <h1>Messaggio inviato con successo!</h1>
+                            </v-alert>
                         </div>
                         <div class="vote">
                             <h3 id="title-form">Invia un voto:</h3>
@@ -320,13 +333,18 @@ export default {
                                 <div class="vote-star">
                                     <div v-for="(star, index) in stars" :key="index" class="icon-container"
                                         @click="selectStar(index)">
-                                        <i class="fas fa-star" :class="{ 'active': index <= selectedStar }"></i>
+                                        <i class="fas fa-star" :class="{
+                                active: index <= selectedStar,
+                            }"></i>
                                     </div>
                                 </div>
                                 <button type="submit">
                                     <h4>INVIA</h4>
                                 </button>
                             </form>
+                            <v-alert v-if="voteAlertVisible" type="success" outlined>
+                                <h1>Voto inviato con successo!</h1>
+                            </v-alert>
                         </div>
                     </div>
                 </div>
@@ -351,6 +369,12 @@ h3 {
     margin: 1rem 0;
 }
 
+h5 {
+    color: black;
+    font-size: 1.35rem;
+    font-weight: bold;
+}
+
 #title-form {
     color: $yellow;
     text-align: start;
@@ -358,9 +382,9 @@ h3 {
 
 button {
     margin-top: 1rem;
-    padding: .5rem .85rem;
+    padding: 0.5rem 0.85rem;
     border-radius: 0;
-    border: .1px solid $lightgrey;
+    border: 0.1px solid $lightgrey;
     background-color: $grey;
     color: $yellow;
 
@@ -380,7 +404,11 @@ form>div {
 #trainer-gallery {
     width: 100%;
     min-height: calc(100vh - 300px);
-    background-image: url(../assets/Lightgrey-Wallpaper.webp);
+    // background-image: url(../assets/Lightgrey-Wallpaper.webp);
+    // background-size: cover;
+    background-color: #eeebeb;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3Crect stroke='%23EEEBEB' stroke-width='0.1' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='3' height='3' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cuse fill='%23ece9e9' href='%23s' y='2'/%3E%3Cuse fill='%23ece9e9' href='%23s' x='1' y='2'/%3E%3Cuse fill='%23e9e6e6' href='%23s' x='2' y='2'/%3E%3Cuse fill='%23e9e6e6' href='%23s'/%3E%3Cuse fill='%23e7e4e4' href='%23s' x='2'/%3E%3Cuse fill='%23e7e4e4' href='%23s' x='1' y='1'/%3E%3C/pattern%3E%3Cpattern id='b' width='7' height='11' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23e4e1e1'%3E%3Cuse href='%23s'/%3E%3Cuse href='%23s' y='5' /%3E%3Cuse href='%23s' x='1' y='10'/%3E%3Cuse href='%23s' x='2' y='1'/%3E%3Cuse href='%23s' x='2' y='4'/%3E%3Cuse href='%23s' x='3' y='8'/%3E%3Cuse href='%23s' x='4' y='3'/%3E%3Cuse href='%23s' x='4' y='7'/%3E%3Cuse href='%23s' x='5' y='2'/%3E%3Cuse href='%23s' x='5' y='6'/%3E%3Cuse href='%23s' x='6' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='h' width='5' height='13' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23e4e1e1'%3E%3Cuse href='%23s' y='5'/%3E%3Cuse href='%23s' y='8'/%3E%3Cuse href='%23s' x='1' y='1'/%3E%3Cuse href='%23s' x='1' y='9'/%3E%3Cuse href='%23s' x='1' y='12'/%3E%3Cuse href='%23s' x='2'/%3E%3Cuse href='%23s' x='2' y='4'/%3E%3Cuse href='%23s' x='3' y='2'/%3E%3Cuse href='%23s' x='3' y='6'/%3E%3Cuse href='%23s' x='3' y='11'/%3E%3Cuse href='%23s' x='4' y='3'/%3E%3Cuse href='%23s' x='4' y='7'/%3E%3Cuse href='%23s' x='4' y='10'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='17' height='13' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23e2dfdf'%3E%3Cuse href='%23s' y='11'/%3E%3Cuse href='%23s' x='2' y='9'/%3E%3Cuse href='%23s' x='5' y='12'/%3E%3Cuse href='%23s' x='9' y='4'/%3E%3Cuse href='%23s' x='12' y='1'/%3E%3Cuse href='%23s' x='16' y='6'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='19' height='17' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23EEEBEB'%3E%3Cuse href='%23s' y='9'/%3E%3Cuse href='%23s' x='16' y='5'/%3E%3Cuse href='%23s' x='14' y='2'/%3E%3Cuse href='%23s' x='11' y='11'/%3E%3Cuse href='%23s' x='6' y='14'/%3E%3C/g%3E%3Cg fill='%23dfdcdc'%3E%3Cuse href='%23s' x='3' y='13'/%3E%3Cuse href='%23s' x='9' y='7'/%3E%3Cuse href='%23s' x='13' y='10'/%3E%3Cuse href='%23s' x='15' y='4'/%3E%3Cuse href='%23s' x='18' y='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='53' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23FFCC00'%3E%3Cuse href='%23s' x='2' y='5'/%3E%3Cuse href='%23s' x='16' y='38'/%3E%3Cuse href='%23s' x='46' y='42'/%3E%3Cuse href='%23s' x='29' y='20'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='59' height='71' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23FFCC00'%3E%3Cuse href='%23s' x='33' y='13'/%3E%3Cuse href='%23s' x='27' y='54'/%3E%3Cuse href='%23s' x='55' y='55'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='g' width='139' height='97' patternUnits='userSpaceOnUse' patternTransform='scale(20.4) translate(-950.98 -713.24)'%3E%3Cg fill='%23FFCC00'%3E%3Cuse href='%23s' x='11' y='8'/%3E%3Cuse href='%23s' x='51' y='13'/%3E%3Cuse href='%23s' x='17' y='73'/%3E%3Cuse href='%23s' x='99' y='57'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23b)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23h)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23c)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23d)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23e)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23f)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23g)' width='100%25' height='100%25'/%3E%3C/svg%3E");
+    background-attachment: fixed;
     background-size: cover;
     padding-top: 120px;
 
@@ -398,11 +426,9 @@ form>div {
 
             .card-trainer {
                 margin: 0 1rem;
-                width: calc(50% - 2rem);
-                margin-bottom: 1rem;
-                background-color: #5a5a5a;
+                width: calc(75% - 2rem);
+                height: 100%;
                 border: 3px solid darkgray;
-                opacity: 0.7;
 
                 .img-card {
                     flex-basis: 25%;
@@ -418,7 +444,7 @@ form>div {
 
             .form-container {
                 width: 100%;
-                padding: 0 6rem;
+                padding: 0 3rem;
 
                 input,
                 textarea {
@@ -436,7 +462,7 @@ form>div {
                     padding: 1rem 4rem;
                     background-color: $grey;
                     border: 3px solid darkgray;
-                    opacity: .7;
+                    opacity: 0.7;
                 }
 
                 .vote-star {
@@ -480,13 +506,14 @@ form>div {
                 margin: 1rem 0;
                 text-align: center;
             }
-
         }
 
         .info {
+            background-color: $grey;
+            opacity: 0.8;
             padding: 10px;
 
-            .description p{
+            .description p {
                 color: black;
                 font-weight: bold;
                 padding: 10px;
@@ -495,9 +522,18 @@ form>div {
             .votes-reviews {
                 color: black;
                 font-weight: bold;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 margin-top: 1rem;
                 padding: 10px;
+
+                .votes {
+                    margin-bottom: 2rem;
+                }
+
+                .review-list {
+                    // font-size: 1.1rem;
+                    margin: 1rem 0 1.5rem;
+                }
             }
         }
     }
@@ -505,7 +541,6 @@ form>div {
 
 @media screen and (max-width: 1200px) {
     #trainer-gallery {
-
         .container {
             .col-gallery {
                 .form-container {
@@ -526,19 +561,78 @@ form>div {
 
 @media screen and (max-width: 992px) {
     #trainer-gallery {
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.95rem;
+            margin: 0.5rem 0;
+        }
+
+
+        h5 {
+            color: black;
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.25rem;
+        }
+
         .container {
             .col-gallery {
                 padding: 2rem 1rem;
+                flex-direction: column;
+
+                .card-trainer {
+                    width: calc(90% - 2rem);
+                    margin: 0 auto 3rem;
+
+                    .caption {
+                        .social {
+                            i {
+                                font-size: 1.75rem;
+                            }
+                        }
+                    }
+
+                    .description p {
+                        color: black;
+                        font-weight: bold;
+                        font-size: 1.65rem;
+                        padding: 10px;
+                    }
+
+                    .votes-reviews {
+                        color: black;
+                        font-weight: bold;
+                        font-size: 1.5rem;
+                        margin-top: 1rem;
+                        padding: 10px;
+
+                        .votes {
+                            margin-bottom: 2rem;
+                        }
+
+                        .review-list {
+                            // font-size: 1.1rem;
+                            margin: 1rem 0 1.5rem;
+                        }
+                    }
+                }
 
                 .form-container {
-                    width: 100%;
-                    padding: 0 2rem;
+                    width: calc(90% - 2rem);
+                    margin: 0 auto;
+                    padding: 0;
 
                     .review,
                     .message,
                     .vote {
                         margin-bottom: 1rem;
-                        padding: 1rem 2rem;
+                        padding: 1rem;
                     }
                 }
             }
@@ -554,7 +648,7 @@ form>div {
 
         h3 {
             font-size: 1.75rem;
-            margin: .5rem 0;
+            margin: 0.5rem 0;
         }
 
         p {
@@ -563,7 +657,7 @@ form>div {
 
         .container {
             .col-gallery {
-                padding: 2rem .5rem;
+                padding: 2rem 0.5rem;
 
                 .form-container {
                     width: 100%;
@@ -580,7 +674,7 @@ form>div {
                 .info {
                     .votes-reviews {
                         font-size: 1rem;
-                        margin-top: .75rem;
+                        margin-top: 0.75rem;
                     }
                 }
             }
@@ -596,13 +690,12 @@ form>div {
 
         h3 {
             font-size: 1.25rem;
-            margin: .35rem 0;
+            margin: 0.35rem 0;
         }
 
         p {
             font-size: 1rem;
         }
-
 
         .container {
             .col-gallery {
@@ -618,6 +711,30 @@ form>div {
                             object-position: top;
                         }
                     }
+
+                    .description p {
+                        color: black;
+                        font-weight: bold;
+                        font-size: 1.25rem;
+                        padding: 10px;
+                    }
+
+                    .votes-reviews {
+                        color: black;
+                        font-weight: bold;
+                        font-size: 1.15rem;
+                        margin-top: 1rem;
+                        padding: 10px;
+
+                        .votes {
+                            margin-bottom: 2rem;
+                        }
+
+                        .review-list {
+                            // font-size: 1.1rem;
+                            margin: 1rem 0;
+                        }
+                    }
                 }
 
                 .form-container {
@@ -628,7 +745,7 @@ form>div {
                     .message,
                     .vote {
                         margin-bottom: 1rem;
-                        padding: .5rem;
+                        padding: 0.5rem;
                     }
                 }
             }

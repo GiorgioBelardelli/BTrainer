@@ -12,7 +12,7 @@
 </div>
 @endif
 
-<form action="{{ route('profile.store') }}" method="POST" class="container text-center" enctype="multipart/form-data" id="createProfileForm">
+<form action="{{ route('profile.store') }}" method="POST" class="container-fluid text-center" enctype="multipart/form-data" id="createProfileForm">
 
     @csrf
     @method('POST')
@@ -83,6 +83,7 @@
         background-color: #5a5a5a;
         padding-top: 50px;
         padding-bottom: 50px;
+        height: auto;
     }
 
     #spec-white {
