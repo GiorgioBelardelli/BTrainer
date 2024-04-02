@@ -114,6 +114,15 @@ export default {
             return new URL(imgPath, import.meta.url).href;
         },
 
+        getProfileImagePath(profile) {
+                // Controlla se il percorso dell'immagine esiste nella directory pubblica 'storage'
+                if (profile.profile.photo.startsWith('images/')) {
+                    return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
+            } else {
+                return `http://localhost:5174/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
+            }
+        }, 
+
         // Questo metodo Imposta selectedStar come l'indice dell'icona stella cliccata
         selectStar(index) {
             this.selectedStar = index;
@@ -222,10 +231,7 @@ export default {
                     <div class="card-trainer">
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
-                            <img v-if="profile" :src="getImagePath(
-                                `../assets/trainers/${profile.profile.photo}`
-                            )
-                                " :alt="profile.name + ' ' + profile.surname" />
+                            <img :src="getProfileImagePath(profile)" :alt="profile.name + ' ' + profile.surname" />
                             <div class="caption" v-if="profile">
                                 <!-- NOME COGNOME SPEC -->
                                 <div class="name">

@@ -66,7 +66,7 @@ export default {
                 if (profile.profile.photo.startsWith('images/')) {
                     return `http://127.0.0.1:8000/storage/${profile.profile.photo}`; // Percorso completo dell'immagine
             } else {
-                return `http://localhost:5173/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
+                return `http://localhost:5174/src/assets/trainers/${profile.profile.photo}`; // Percorso dell'immagine predefinita
             }
         }, 
 
