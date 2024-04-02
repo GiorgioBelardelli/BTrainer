@@ -150,14 +150,17 @@ export default {
                                     <h3>{{ profile.name }} {{ profile.surname }}</h3>
                                 </div>
                                 <div v-for="specialization in profile.profile
-                    .specializations" :key="specialization" class="specializations">
+                                    .specializations" :key="specialization" class="specializations">
+                                </div>
                             <h4>{{ specialization }}</h4>
-                        </div>
+                            </div>
+                        </figcaption>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </template>
 
 <style lang="scss" scoped>
