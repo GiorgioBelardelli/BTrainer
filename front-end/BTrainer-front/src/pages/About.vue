@@ -238,14 +238,16 @@ export default {
                         <!-- Card che contiene l'img -->
                         <div class="img-card">
                             <img :src="getProfileImagePath(profile)" :alt="profile.name + ' ' + profile.surname" />
-                            <div class="caption" v-if="profile">
-                                <!-- NOME COGNOME SPEC -->
-                                <div class="name">
-                                    <h2>
-                                        {{ profile.name }} {{ profile.surname }}
-                                    </h2>
-                                </div>
-                                <div v-for="specialization in profile.profile
+                            <div class="info">
+
+                                <div class="caption" v-if="profile">
+                                    <!-- NOME COGNOME SPEC -->
+                                    <div class="name">
+                                        <h2>
+                                            {{ profile.name }} {{ profile.surname }}
+                                        </h2>
+                                    </div>
+                                    <div v-for="specialization in profile.profile
                                 .specializations" :key="specialization" class="specializations">
                                     <h3>{{ specialization }}</h3>
                                 </div>
@@ -260,21 +262,22 @@ export default {
                             <div class="description">
                                 <p>"{{ profile.profile.plan_program }}"</p>
                             </div>
-
+                            
                             <div class="votes-reviews">
                                 <div class="votes">
                                     <h5>Media voti: {{ store.mediaVotes }} ({{
-                                profile.profile.votes.length
-                            }}
+                                        profile.profile.votes.length
+                                    }}
                                         Totali)</h5>
-                                </div>
-                                <h5>Recensioni:</h5>
-                                <div v-for="review in profile.profile.reviews" class="review-list">
-                                    <div class="content">
-                                        {{ review.content }}
                                     </div>
-                                    <div class="surname-name">
-                                        {{ review.surname }} {{ review.name }}
+                                    <h5>Recensioni:</h5>
+                                    <div v-for="review in profile.profile.reviews" class="review-list">
+                                        <div class="content">
+                                            {{ review.content }}
+                                        </div>
+                                        <div class="surname-name">
+                                            {{ review.surname }} {{ review.name }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
